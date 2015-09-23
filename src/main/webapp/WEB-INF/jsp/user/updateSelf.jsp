@@ -35,7 +35,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box purple">
+		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-gift"></i>修改用户 --> ${userDto.username}
