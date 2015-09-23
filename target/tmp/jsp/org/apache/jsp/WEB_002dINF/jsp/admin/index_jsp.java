@@ -817,7 +817,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       out.print(request.getContextPath() );
       out.write("/admin/role/roles\">\n");
       out.write("\t\t\t\t\t\t\t<i class=\"icon-wallet\"></i>\n");
-      out.write("\t\t\t\t\t\t\t用户角色管理</a>\n");
+      out.write("\t\t\t\t\t\t\t角色管理</a>\n");
       out.write("\t\t\t\t\t\t</li>\n");
       out.write("\t\t\t\t\t</ul>\n");
       out.write("\t\t\t\t</li>\n");
