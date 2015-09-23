@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+span.errorContainer {
+  background:url("images/unchecked.gif") no-repeat 0px 0px;
+  padding-left: 16px;
+  padding-bottom:0px;
+  margin-left:2px;
+  color: red;
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+	
+	<!-- 使用springMVC注解 -->
+	<mvc:annotation-driven/>
+	
+	<!-- 将静态文件指定到某个特殊的文件夹中统一处理
+		 /resources/** 一个*指文件夹中的内容，两个*指文件夹中并且包括子文件的内容
+	 -->
+	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	
+	<!-- 配置springMVC的拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 拦截所有以/admin开头的路径 -->
+			<mvc:mapping path="/admin/**"/>
+			<bean class="org.wxh.basic.filter.AuthInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 注解扫描范围 -->
+	<context:component-scan base-package="org.wxh..*.controller"/>
+	
+	<!-- 配置springMVC的视图层 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 指定去哪个文件夹下找视图 -->
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<!-- 指定要找的视图文件的类型 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 用springMVC配置全局异常处理 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.wxh.basic.exception.CmsException">error</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 用springMVC设置文件上传大小 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="500000000"></property>
+	</bean>	
+	
+	<!-- dwr相关配置 -->
+	<!-- 关闭debug模式 -->
+	<dwr:controller id="dwrController" debug="false" />
+	<!-- 引入自定义视图 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	  <property value="true" name="alwaysUseFullPath"></property> 
+	  <property name="mappings">
+	    <props> 
+	      <prop key="/dwr/**/*">dwrController</prop>
+	    </props>
+	 </property> 
+	</bean>
+	<!-- 实例化使用dwr的bean -->
+	<bean id="dwrService" class="org.wxh.topic.dwr.DwrService">
+		<dwr:remote javascript="dwrService">
+		   <dwr:include method="addGroupChannel" />
+		   <dwr:include method="deleteGroupChannel" />
+		   <dwr:include method="updateIndexPic" />
+		   <dwr:include method="updateAttachInfo" />
+		   <dwr:include method="deleteAttach" />
+		   <dwr:include method="updatePicPos" />
+		   <dwr:include method="updateLinkPos" />
+		</dwr:remote>
+	</bean>
+</beans>

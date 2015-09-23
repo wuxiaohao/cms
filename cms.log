@@ -1,0 +1,59 @@
+[INFO][2015-09-02 15:26:15,743][org.springframework.web.context.ContextLoader]Root WebApplicationContext: initialization started
+[INFO][2015-09-02 15:26:15,797][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing Root WebApplicationContext: startup date [Wed Sep 02 15:26:15 CST 2015]; root of context hierarchy
+[INFO][2015-09-02 15:26:15,834][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from URL [file:/G:/javawebCode/cms/target/classes/beans.xml]
+[INFO][2015-09-02 15:26:15,980][org.springframework.context.annotation.ClassPathBeanDefinitionScanner]JSR-250 'javax.annotation.ManagedBean' found and supported for component scanning
+[INFO][2015-09-02 15:26:15,980][org.springframework.context.annotation.ClassPathBeanDefinitionScanner]JSR-330 'javax.inject.Named' annotation found and supported for component scanning
+[INFO][2015-09-02 15:26:16,295][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO][2015-09-02 15:26:16,302][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO][2015-09-02 15:26:16,343][org.springframework.beans.factory.support.DefaultListableBeanFactory]Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@40a15619: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,channelController,attachmentDao,channelDao,topicDao,attachmentService,channelService,topicService,adminController,groupController,loginController,roleController,userController,groupDao,roleDao,userDao,groupService,roleService,userService,org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0,dataSource,sessionFactory,txManager,txAdvice,org.springframework.aop.config.internalAutoProxyCreator,serviceOperation,org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO][2015-09-02 15:26:16,784][org.hibernate.annotations.common.Version]HCANN000001: Hibernate Commons Annotations {4.0.2.Final}
+[INFO][2015-09-02 15:26:16,793][org.hibernate.Version]HHH000412: Hibernate Core {4.2.2.Final}
+[INFO][2015-09-02 15:26:16,796][org.hibernate.cfg.Environment]HHH000206: hibernate.properties not found
+[INFO][2015-09-02 15:26:16,798][org.hibernate.cfg.Environment]HHH000021: Bytecode provider name : javassist
+[INFO][2015-09-02 15:26:17,225][org.hibernate.dialect.Dialect]HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+[INFO][2015-09-02 15:26:17,399][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator]HHH000399: Using default transaction strategy (direct JDBC transactions)
+[INFO][2015-09-02 15:26:17,404][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory]HHH000397: Using ASTQueryTranslatorFactory
+[INFO][2015-09-02 15:26:17,452][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 4.3.1.Final
+[INFO][2015-09-02 15:26:17,846][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000228: Running hbm2ddl schema update
+[INFO][2015-09-02 15:26:17,846][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000102: Fetching database metadata
+[INFO][2015-09-02 15:26:17,848][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000396: Updating schema
+[INFO][2015-09-02 15:26:17,869][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_attachment
+[INFO][2015-09-02 15:26:17,869][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, is_index_pic, is_attach, tid, new_name, type, suffix, old_name, size, is_img]
+[INFO][2015-09-02 15:26:17,870][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: [fk_lalijwufongyebtt0cywu5dm4]
+[INFO][2015-09-02 15:26:17,870][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary, fk_lalijwufongyebtt0cywu5dm4]
+[INFO][2015-09-02 15:26:17,882][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_channel
+[INFO][2015-09-02 15:26:17,882][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [nav_order, id, status, is_top_nav, name, custom_link, pid, orders, type, custom_link_url, recommend, is_index]
+[INFO][2015-09-02 15:26:17,882][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: [fk_8xberajm2i2c97rwrellh0eqk]
+[INFO][2015-09-02 15:26:17,882][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary, fk_8xberajm2i2c97rwrellh0eqk]
+[INFO][2015-09-02 15:26:17,890][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_group
+[INFO][2015-09-02 15:26:17,890][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, name, descr]
+[INFO][2015-09-02 15:26:17,890][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: []
+[INFO][2015-09-02 15:26:17,890][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary]
+[INFO][2015-09-02 15:26:17,898][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_group_channel
+[INFO][2015-09-02 15:26:17,898][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, g_id, c_id]
+[INFO][2015-09-02 15:26:17,898][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: [fk_t99wvp6hj7fgi3oexkb4ogeyp, fk_24eett7giwwdgdjmras9awwyg]
+[INFO][2015-09-02 15:26:17,899][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary, fk_t99wvp6hj7fgi3oexkb4ogeyp, fk_24eett7giwwdgdjmras9awwyg]
+[INFO][2015-09-02 15:26:17,907][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_role
+[INFO][2015-09-02 15:26:17,907][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, name, role_type]
+[INFO][2015-09-02 15:26:17,907][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: []
+[INFO][2015-09-02 15:26:17,907][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary]
+[INFO][2015-09-02 15:26:17,917][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_topic
+[INFO][2015-09-02 15:26:17,918][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [uid, summary, publish_date, status, keyword, cid, recommend, id, content, author, title, create_date, channel_pic_id, cname]
+[INFO][2015-09-02 15:26:17,918][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: [fk_m3hlahy6pc6ywlp3601me865s, fk_59g28og282jx0yiqcrk8kayre]
+[INFO][2015-09-02 15:26:17,918][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [fk_m3hlahy6pc6ywlp3601me865s, primary, fk_59g28og282jx0yiqcrk8kayre]
+[INFO][2015-09-02 15:26:17,930][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_user
+[INFO][2015-09-02 15:26:17,930][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, username, phone, create_date, status, nickname, email, password]
+[INFO][2015-09-02 15:26:17,930][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: []
+[INFO][2015-09-02 15:26:17,930][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary]
+[INFO][2015-09-02 15:26:17,940][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_user_group
+[INFO][2015-09-02 15:26:17,940][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, g_id, u_id]
+[INFO][2015-09-02 15:26:17,940][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: [fk_q36nttf8633cf61sjj7sk215m, fk_fpvv55wrj5hjvujeq1sichxx7]
+[INFO][2015-09-02 15:26:17,940][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [primary, fk_fpvv55wrj5hjvujeq1sichxx7, fk_q36nttf8633cf61sjj7sk215m]
+[INFO][2015-09-02 15:26:17,948][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000261: Table found: cms.t_user_role
+[INFO][2015-09-02 15:26:17,948][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000037: Columns: [id, r_id, u_id]
+[INFO][2015-09-02 15:26:17,949][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000108: Foreign keys: [fk_3fofkg6qftsisdskrt3bor23w, fk_4ncarre027svsmpjoq8eexrgj]
+[INFO][2015-09-02 15:26:17,949][org.hibernate.tool.hbm2ddl.TableMetadata]HHH000126: Indexes: [fk_3fofkg6qftsisdskrt3bor23w, fk_4ncarre027svsmpjoq8eexrgj, primary]
+[INFO][2015-09-02 15:26:17,951][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000232: Schema update complete
+[INFO][2015-09-02 15:26:18,157][org.springframework.orm.hibernate4.HibernateTransactionManager]Using DataSource [org.apache.commons.dbcp.BasicDataSource@27293c42] of Hibernate SessionFactory for HibernateTransactionManager
+[INFO][2015-09-02 15:26:18,330][org.springframework.web.context.ContextLoader]Root WebApplicationContext: initialization completed in 2586 ms
+[INFO][2015-09-02 15:26:18,391][org.wxh.basic.filter.AuthInterceptor]------------------------系统初始化成功:{base=[org.wxh.user.controller.UserController.updatePwd, org.wxh.user.controller.UserController.showSelf, org.wxh.user.controller.AdminController.index, org.wxh.user.controller.UserController.updateSelf]}-----------------------------
