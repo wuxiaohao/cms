@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.exception.MyException;
 import org.wxh.util.EnumUtils;
 import org.wxh.util.JsonUtil;
 import org.wxh.topic.model.Channel;
@@ -44,13 +45,12 @@ public class ChannelController {
 		this.channelService = channelService;
 	}
 	
-	@RequestMapping("/channels")
+	@RequestMapping(value = "/channels",method=RequestMethod.POST)
 	public String list(Model model) {
 		//model.addAttribute("treeDatas", JsonUtil.getInstance().obj2json(channelService.generateTree()));
 		//return "channel/list_async";
 		return "channel/list";
 	}
-	
 	/**
 	 * 获取整颗ztree（通过@ResponseBody注解自动封装成json对象）
 	 * @return
@@ -59,12 +59,11 @@ public class ChannelController {
 	public @ResponseBody List<ChannelTree> tree() {
 		return channelService.generateTree();
 	}
-	
 	/**
 	 * 异步加载示例
 	 * @return
 	 */
-	@RequestMapping("/treeAs")
+	@RequestMapping(value="/treeAs",method=RequestMethod.POST)
 	public @ResponseBody List<TreeDto> tree(@Param Integer pid) {
 		List<TreeDto> tds = new ArrayList<TreeDto>();
 		if(pid==null||pid<=0) {
@@ -77,7 +76,6 @@ public class ChannelController {
 		}
 		return tds;
 	}
-	
 	/**
 	 * 根据父id获取子栏目的列表
 	 */
@@ -113,7 +111,6 @@ public class ChannelController {
 		model.addAttribute("pc", pc);
 		model.addAttribute("types", EnumUtils.enumProp2NameMap(ChannelType.class, "name"));
 	}
-	
 	/**
 	 * 添加栏目的界面
 	 */
@@ -123,7 +120,6 @@ public class ChannelController {
 		model.addAttribute(new Channel());
 		return "channel/add";
 	}
-	
 	/**
 	 * 添加栏目
 	 */
@@ -133,21 +129,36 @@ public class ChannelController {
 			initAdd(model, pid);
 			return "channel/add";
 		}
-		channelService.add(channel, pid);
-		//indexService.generateTop();
-		return "redirect:/admin/channel/channels/"+pid+"?refresh=1";
+		try {
+			channelService.add(channel, pid);
+			model.addAttribute("success", "栏目已添加成功!");	
+		} catch (MyException e) {
+			model.addAttribute("error", e.getMessage());	
+		} finally {
+			return listChild(pid,1,model);
+		}
 	}
-	
 	/**
 	 * 删除栏目
 	 */
-	@RequestMapping("/delete/{pid}/{id}")
+	@RequestMapping(value = "/delete/{pid}/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Integer pid,@PathVariable Integer id,Model model) {
-		channelService.delete(id);
-		//indexService.generateTop();
-		return "redirect:/admin/channel/channels/"+pid+"?refresh=1";
+		try {
+			channelService.delete(id);
+			//indexService.generateTop();
+			model.addAttribute("success", "栏目已删除成功!");	
+		} catch (MyException e) {
+			model.addAttribute("error", e.getMessage());	
+		} finally {
+			return listChild(pid,1,model);
+		}
 	}
-	
+	/**
+	 * 修改栏目的页面
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.GET)
 	public String update(@PathVariable Integer id,Model model) {
 		Channel c = channelService.load(id);
@@ -164,7 +175,14 @@ public class ChannelController {
 		model.addAttribute("types", EnumUtils.enumProp2NameMap(ChannelType.class, "name"));
 		return "channel/update";
 	}
-	
+	/**
+	 * 修改栏目
+	 * @param id
+	 * @param channel
+	 * @param br
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
 	public String update(@PathVariable Integer id,Channel channel,BindingResult br,Model model) {
 		if(br.hasErrors()) {
@@ -185,13 +203,14 @@ public class ChannelController {
 		tc.setNavOrder(channel.getNavOrder());
 		channelService.update(tc);
 		//indexService.generateTop();
-		return "redirect:/admin/channel/channels/"+pid+"?refresh=1";
+		model.addAttribute("success", "栏目更新成功!");	
+		return listChild(pid,1,model);
 	}
 	
 	/**
 	 * 存储拖动后保存的排序
 	 */
-	@RequestMapping("/channels/updateSort")
+	@RequestMapping(value="/channels/updateSort",method=RequestMethod.POST)
 	public @ResponseBody AjaxObj updateSort(@Param Integer[] ids) {
 		try {
 			channelService.updateSort(ids);

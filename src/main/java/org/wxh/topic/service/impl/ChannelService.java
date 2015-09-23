@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wxh.basic.exception.CmsException;
+import org.wxh.basic.exception.MyException;
 import org.wxh.topic.dao.IChannelDao;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelTree;
@@ -42,7 +42,7 @@ public class ChannelService implements IChannelService {
 		Integer orders = channelDao.getMaxOrderByParent(pid);
 		if(pid!=null&&pid>0) {
 			Channel pc = channelDao.load(pid);
-			if(pc==null) throw new CmsException("要添加栏目的父类对象不正确!");
+			if(pc==null) throw new MyException("要添加栏目的父类对象不正确!");
 			channel.setParent(pc);
 		}
 		channel.setOrders(orders+1);
@@ -56,11 +56,11 @@ public class ChannelService implements IChannelService {
 	public void delete(int id) {
 		//1、需要判断是否存在子栏目
 		List<Channel> cs = channelDao.listByParent(id);
-		if(cs!=null&&cs.size()>0) throw new CmsException("要删除的栏目还有子栏目，无法删除");
+		if(cs!=null&&cs.size()>0) throw new MyException("要删除的栏目还有子栏目，无法删除");
 		//2、需要判断是否存在文章
 		List<Topic> ts = topicService.listTopicByChannel(id);
 		if(ts.size()>0) {
-			throw new CmsException("该栏目还有相应的文章信息，不能删除");
+			throw new MyException("该栏目还有相应的文章信息，不能删除");
 		}
 		//3、需要删除和组的关联关系
 		channelDao.deleteChannelGroups(id);

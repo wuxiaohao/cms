@@ -28,8 +28,7 @@
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-			角色设置
-			<small> <i class="fa fa-shopping-cart"></i> 增加删除修改角色 </small>
+			栏目信息管理
 		</h3>
 		<ul class="page-breadcrumb breadcrumb">
 			<li>
@@ -38,11 +37,11 @@
 				>>
 			</li>
 			<li>
-				<a>组织机构管理</a>
+				<a>文章管理</a>
 				>>
 			</li>
 			<li>
-				<a href="admin/role/roles" class="ajaxify">角色管理</a>
+				<a>栏目信息管理</a>
 			</li>
 		</ul>
 		<!-- END PAGE TITLE & BREADCRUMB-->
@@ -54,6 +53,6 @@
 		<TD width=190px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
 			<ul id="tree" class="ztree" style="width:190px; overflow:auto;"></ul>
 		</TD>
-		<TD width=100% align=left valign=top><IFRAME ID="cc" Name="testIframe" FRAMEBORDER=0 SCROLLING="auto" width=90%  height=420px style="margin-left: 30px" ></IFRAME></TD>
+		<TD width=100% align=left valign=top><IFRAME ID="cc" Name="testIframe" FRAMEBORDER=0 SCROLLING="auto" width=90%  height=500px style="margin-left: 30px" ></IFRAME></TD>
 	</TR>
 </TABLE>

@@ -3,81 +3,149 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
+<style>
+html { overflow-x:hidden; }
+</style>
+<link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.servletContext.contextPath }/resources/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
+<!-- 表单校验 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.validate.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/validate-methods.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.validate.js"></script>
 <script type="text/javascript">
-$(function(){
-	$("#addForm").cmsvalidate();
-});
+	$(function(){
+		$("#addForm").cmsvalidate();
+	});
+	
 </script>
-</head>
-<body>
-<div id="content">
-	<h3 class="admin_link_bar">
-		<jsp:include page="inc.jsp"></jsp:include>
-	</h3>
-	<sf:form method="post" modelAttribute="channel" id="addForm">
-	<table width="550px" cellspacing="0" cellPadding="0">
-		<thead><tr><td colspan="2">添加[${pc.name}]子栏目功能</td></tr></thead>
-		<tr>
-			<td class="rightTd" width="96px">栏目名称:</td><td class="leftTd"><sf:input path="name" size="30"/><sf:errors cssClass="errorContainer" path="name"/></td>
-		</tr>
-		<tr>
-			<td class="rightTd">是否指定链接</td>
-			<td class="leftTd">
-				<sf:radiobutton path="customLink" value="0"/>不指定
-				<sf:radiobutton path="customLink" value="1"/>指定
-			</td>
-		</tr>
-		<tr>
-			<td class="rightTd">链接地址:</td>
-			<td><sf:input path="customLinkUrl" size="50"/></td>
-		</tr>
-		<tr>
-			<td class="rightTd">栏目类型:</td>
-			<td><sf:select path="type">
-				<sf:options items="${types}"/>
-			</sf:select></td>
-		</tr>
-		<tr>
-			<td class="rightTd">是否在主页显示:</td>
-			<td><sf:radiobutton path="isIndex" value="0"/>不显示
-				<sf:radiobutton path="isIndex" value="1"/>显示</td>
-		</tr>
-		<tr>
-			<td class="rightTd">导航顶部栏目:</td>
-			<td><sf:radiobutton path="isTopNav" value="0"/>不是
-				<sf:radiobutton path="isTopNav" value="1"/>是</td>
-		</tr>
-		<tr>
-			<td class="rightTd">是否是推荐栏目:</td>
-			<td><sf:radiobutton path="recommend" value="0"/>不是
-				<sf:radiobutton path="recommend" value="1"/>是</td>
-		</tr>
-		<tr>
-			<td class="rightTd">状态:</td>
-			<td>
-				<sf:radiobutton path="status" value="0"/>启用
-				<sf:radiobutton path="status" value="1"/>停用
-			</td>
-		</tr>
-		<tr>
-			<td class="rightTd">导航序号:</td>
-			<td>
-				<sf:input path="navOrder" size="50"/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="centerTd"><input type="submit" value="添加栏目"/><input type="reset"/></td>
-		</tr>
-	</table>
-	</sf:form>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN VALIDATION STATES-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift"></i>添加[${pc.name}]子栏目功能
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<!-- BEGIN FORM-->
+				<sf:form id="addForm" method="post" modelAttribute="channel" class="form-horizontal">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-3">栏目名称 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:input path="name" class="form-control" />
+									<sf:errors path="name" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">是否指定链接 <span class="required">
+							* </span>
+							</label>
+							
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:radiobutton path="customLink" value="0" class="make-switch switch-radio1"/>不指定
+									<sf:radiobutton path="customLink" value="1" class="make-switch switch-radio1"/>指定
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">链接地址 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:input path="customLinkUrl" class="form-control"/>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">栏目类型 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:select path="type" class="bs-select form-control">
+										<sf:options items="${types}"/>
+									</sf:select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">是否在主页显示 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:radiobutton path="isIndex" value="0" class="make-switch switch-radio1"/>不显示
+									<sf:radiobutton path="isIndex" value="1" class="make-switch switch-radio1"/>显示
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">导航顶部栏目 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:radiobutton path="isTopNav" value="0" class="make-switch switch-radio1"/>不是
+									<sf:radiobutton path="isTopNav" value="1" class="make-switch switch-radio1"/>是
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">是否是推荐栏目 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+									<sf:radiobutton path="recommend" value="0" class="make-switch switch-radio1" />不是
+									<sf:radiobutton path="recommend" value="1" class="make-switch switch-radio1" />是
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">状态<span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:radiobutton path="status" value="0" class="make-switch switch-radio1" />启用
+									<sf:radiobutton path="status" value="1" class="make-switch switch-radio1" />停用
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">导航序号<span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:input path="navOrder" class="form-control" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="submit" class="btn green">添加</button>
+							</div>
+						</div>
+					</div>
+				</sf:form>
+				<!-- END FORM-->
+			</div>
+		</div>
+		<!-- END VALIDATION STATES-->
+	</div>
 </div>
-</body>
-</html>

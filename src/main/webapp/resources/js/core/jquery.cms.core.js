@@ -41,7 +41,7 @@
 			if(!_isSort) {
 				$(_that).find("thead tr").append("<th>序号</th>");
 				setOrders();
-				$(_that).find("tfoot tr").append("<td>拖动排序</td>");
+				$(_that).find("tfoot tr").append("<td>请拖动排序</td>");
 				sortEle.sortable("enable");
 				_isSort = true;
 			} else {

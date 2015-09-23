@@ -21,6 +21,16 @@ html { overflow-x:hidden; }
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.sortable.js"></script>
 <script type="text/javascript">
 $(function(){
+	$("a.delete").confirmOperator();
+	var success='<%=request.getAttribute("success")%>';
+	var error='<%=request.getAttribute("error")%>';
+	if (success != 'null') {
+		toastr.success(success);
+	}
+	if (error != 'null') {
+		toastr.error(error);
+	}
+	
 	if($("#refresh").val()=="1") {
 		parent.refreshTree();  //调用父类的refreshTree
 	}
@@ -46,7 +56,7 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green ajaxify" href="<%=request.getContextPath() %>/admin/channel/addUI/${pid}" >添加子栏目</a>
+						<a class="btn green" href="<%=request.getContextPath() %>/admin/channel/add/${pid}" >添加子栏目</a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered listTable">
@@ -81,8 +91,8 @@ $(function(){
 									&nbsp;
 								</td>
 								<td>
-									<a href="<%=request.getContextPath() %>/admin/channel/delete/${pid}/${c.id}" class="btn btn-sm red ajaxify delete"> 删除 </a>
-									<a href="<%=request.getContextPath() %>/admin/channel/updateUI/${c.id}" class="btn btn-sm blue ajaxify"> 更新 </a>
+									<a href="<%=request.getContextPath() %>/admin/channel/delete/${pid}/${c.id}" class="btn btn-sm red delete"> 删除 </a>
+									<a href="<%=request.getContextPath() %>/admin/channel/update/${c.id}" class="btn btn-sm blue"> 更新 </a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -92,7 +102,9 @@ $(function(){
 						<tr>
 						<td colspan="6" style="text-align:right;">
 								<a id="beginOrder" href="#" class="btn default">开始排序</a>
-								<a id="saveOrder" href="#" class="btn default">存储排序</a>&nbsp;</td>
+								<a id="saveOrder" href="#" class="btn default">存储排序</a>
+								&nbsp;
+						</td>
 						</tr>
 					</tfoot>
 					</c:if>
