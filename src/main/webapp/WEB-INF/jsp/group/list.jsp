@@ -95,6 +95,7 @@ $(function(){
 				var c = cs[i];
 				if(c.id>0) {
 					dwrService.addGroupChannel(gid,c.id);
+					toastr.success("添加成功!");
 				}
 			}
 			
@@ -106,6 +107,7 @@ $(function(){
 				var c = cs[i];
 				if(c.id>0) {
 					dwrService.deleteGroupChannel(gid,c.id);
+					toastr.success("删除成功!");
 				}
 			}
 			

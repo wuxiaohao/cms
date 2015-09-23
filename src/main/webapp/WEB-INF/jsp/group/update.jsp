@@ -40,7 +40,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box green">
+		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-gift"></i>修改用户组
