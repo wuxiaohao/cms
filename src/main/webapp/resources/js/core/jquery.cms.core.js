@@ -21,9 +21,9 @@
 				var _original = ele.children();
 				var _helper = ele.clone();
 				_helper.children().each(function(index){
-					$(this).width(_original.eq(index).width());
+					$(this).width(_original.eq(index).width()+20);
 				});
-				_helper.css("background","#aaf");
+				_helper.addClass("danger");
 				return _helper;
 			},
 			update:function(e,ui) {
@@ -39,13 +39,13 @@
 		
 		function beginOrders() {
 			if(!_isSort) {
-				$(_that).find("thead tr").append("<td>序号</td>");
+				$(_that).find("thead tr").append("<th>序号</th>");
 				setOrders();
 				$(_that).find("tfoot tr").append("<td>拖动排序</td>");
 				sortEle.sortable("enable");
 				_isSort = true;
 			} else {
-				alert("已经处于排序状态");
+				toastr.error("已经处于排序状态!");
 			}
 		}
 		
@@ -59,10 +59,13 @@
 						});
 						sortEle.sortable("disable");
 						_isSort = false;
+						toastr.success("设置排序成功!");
+					} else {
+						toastr.error("设置排序失败!");
 					}
 				});
 			} else {
-				alert("还不是排序状态");
+				toastr.error("还不是排序状态!");
 			}
 		}
 		
@@ -116,7 +119,7 @@
 		}
 		
 		function listChild(event,treeId,treeNode) {
-			$(_mine.srcElement).attr("src","channels/"+treeNode.id);
+			$(_mine.srcElement).attr("src","/cms/admin/channel/channels/"+treeNode.id);
 		}
 		
 		//获取被选中的节点的父节点

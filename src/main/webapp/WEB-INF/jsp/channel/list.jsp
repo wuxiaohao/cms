@@ -2,37 +2,58 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/zTree/zTreeStyle.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/tree/jquery.ztree.core-3.5.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
 <script type="text/javascript">
-var mt;
-$(function(){
-	mt = $("#tree").mytree();
-});
-function refreshTree() {
-	mt.reAsyncChildNodes(null,"refresh");  //重新加载全部子节点
-}
+	var mt;
+	$(function(){
+		$("a.delete").confirmOperator();
+		var success='<%=request.getAttribute("success")%>';
+		var error='<%=request.getAttribute("error")%>';
+		if (success != 'null') {
+			toastr.success(success);
+		}
+		if (error != 'null') {
+			toastr.error(error);
+		}
+		
+		mt = $("#tree").mytree({
+			url:$("#setTreePath").val()
+		});
+	});
+	function refreshTree() {
+		mt.reAsyncChildNodes(null,"refresh");  //重新加载全部子节点
+	}
 </script>
-</head>
-<body>
-<div id="content">
-	<h3 class="admin_link_bar">
-		<span>正在使用栏目管理功能</span>
-	</h3>
-	<TABLE border=0 align=left height="600px">
-		<TR>
-			<TD width=150px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
-				<ul id="tree" class="ztree" style="width:150px; overflow:auto;"></ul>
-			</TD>
-			<TD width=650px align=left valign=top><IFRAME ID="cc" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=600px ></IFRAME></TD>
-		</TR>
-	</TABLE>
+<input type="hidden" id="setTreePath" value="<%=request.getContextPath()%>/admin/channel/treeAll"/>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			角色设置
+			<small> <i class="fa fa-shopping-cart"></i> 增加删除修改角色 </small>
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>组织机构管理</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/role/roles" class="ajaxify">角色管理</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
 </div>
-</body>
-</html>
+
+<TABLE border=0 align=left>
+	<TR>
+		<TD width=190px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
+			<ul id="tree" class="ztree" style="width:190px; overflow:auto;"></ul>
+		</TD>
+		<TD width=100% align=left valign=top><IFRAME ID="cc" Name="testIframe" FRAMEBORDER=0 SCROLLING="auto" width=90%  height=420px style="margin-left: 30px" ></IFRAME></TD>
+	</TR>
+</TABLE>

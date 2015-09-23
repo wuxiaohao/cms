@@ -5,16 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
+<style>
+html { overflow-x:hidden; }
+</style>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery.ui.all.css"/>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.css"/>
+<link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.servletContext.contextPath }/resources/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
+<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.mouse.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.sortable.js"></script>
-
 <script type="text/javascript">
 $(function(){
 	if($("#refresh").val()=="1") {
@@ -24,57 +28,96 @@ $(function(){
 });
 </script>
 </head>
-<body>
-<div id="content">
-	<h3 class="admin_link_bar">
-		<jsp:include page="inc.jsp"></jsp:include>
-	</h3>
-	<input type="hidden" id="refresh" value="${refresh}"/>
-	<table width="580" cellspacing="0" cellPadding="0" class="listTable">
-		<thead>
-		<tr>
-			<td>栏目名称</td>
-			<td>栏目类型</td>
-			<td>是否推荐</td>
-			<td>主页栏目</td>
-			<td>栏目状态</td>
-			<Td>操作</Td>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${channels }" var="c">
-			<tr id="id_${c.id }">
-				<td>
-				${c.name }
-				&nbsp;</td>
-				<td class="ctype">${c.type.name }</td>
-				<td>
-				<c:if test="${c.recommend eq 0 }"><span class="emp">不推荐</span></c:if>
-				<c:if test="${c.recommend eq 1 }">推荐</c:if>
-				&nbsp;</td>
-				<td>
-				<c:if test="${c.isIndex eq 0 }"><span class="emp">不是</span></c:if>
-				<c:if test="${c.isIndex eq 1 }">是</c:if>
-				&nbsp;
-				</td>
-				<td><c:if test="${c.status eq 0 }">启用</c:if>
-				<c:if test="${c.status eq 1 }"><span class="emp">停用</span></c:if>
-				&nbsp;</td>
-				<td class="centerTd">
-					<a href="<%=request.getContextPath() %>/admin/channel/update/${c.id}" class="list_op">
-					更新</a>
-					<a href="<%=request.getContextPath() %>/admin/channel/delete/${pid}/${c.id}"  class="list_op delete">删除</a>
-				</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-		<tfoot>
-		<tr>
-		<td colspan="6" class="rightTd"><a id="beginOrder" href="#" title="#" class="list_op">开始排序</a>
-				&nbsp;<a id="saveOrder" href="#" title="#" class="list_op">存储排序</a>&nbsp;</td>
-		</tr>
-		</tfoot>
-	</table>
+<input type="hidden" id="refresh" value="${refresh}"/>
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-edit"></i>
+					当前栏目:${pc.name }[${pc.id }]
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"> </a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="btn-group">
+						<a class="btn green ajaxify" href="<%=request.getContextPath() %>/admin/channel/addUI/${pid}" >添加子栏目</a>
+					</div>
+				</div>
+				<table class="table table-striped table-hover table-bordered listTable">
+					<thead>
+						<tr>
+							<th width="150px">栏目名称</th>
+							<th width="140px">栏目类型</th>
+							<th>是否推荐</th>
+							<th>主页栏目</th>
+							<th>栏目状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${channels }" var="c">
+							<tr id="id_${c.id }">
+								<td>${c.name }&nbsp;</td>
+								<td>${c.type.name }&nbsp;</td>
+								<td>
+									<c:if test="${c.recommend eq 0 }"><span class="emp">不推荐</span></c:if>
+									<c:if test="${c.recommend eq 1 }">推荐</c:if>
+									&nbsp;
+								</td>
+								<td>
+									<c:if test="${c.isIndex eq 0 }"><span class="emp">不是</span></c:if>
+									<c:if test="${c.isIndex eq 1 }">是</c:if>
+									&nbsp;
+								</td>
+								<td>
+									<c:if test="${c.status eq 0 }">启用</c:if>
+									<c:if test="${c.status eq 1 }"><span class="emp">停用</span></c:if>
+									&nbsp;
+								</td>
+								<td>
+									<a href="<%=request.getContextPath() %>/admin/channel/delete/${pid}/${c.id}" class="btn btn-sm red ajaxify delete"> 删除 </a>
+									<a href="<%=request.getContextPath() %>/admin/channel/updateUI/${c.id}" class="btn btn-sm blue ajaxify"> 更新 </a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					<c:if test="${!empty(channels) }">
+					<tfoot>
+						<tr>
+						<td colspan="6" style="text-align:right;">
+								<a id="beginOrder" href="#" class="btn default">开始排序</a>
+								<a id="saveOrder" href="#" class="btn default">存储排序</a>&nbsp;</td>
+						</tr>
+					</tfoot>
+					</c:if>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
 </div>
-</body>
 </html>
+<script>
+	jQuery(document).ready(function() {     
+		//初始化配置toastr
+		toastr.options = {
+		        "closeButton": true, //是否显示关闭按钮
+		        "debug": false, //是否使用debug模式
+		        "positionClass": "toast-top-right",//弹出窗的位置
+		        "showDuration": "300",//显示的动画时间
+		        "hideDuration": "1000",//消失的动画时间
+		        "timeOut": "4000", //展现时间
+		        "extendedTimeOut": "1000",//加长展示时间
+		        "showEasing": "swing",//显示时的动画缓冲方式
+		        "hideEasing": "linear",//消失时的动画缓冲方式
+		        "showMethod": "fadeIn",//显示时的动画方式
+		        "hideMethod": "fadeOut" //消失时的动画方式
+		        };
+		});
+</script>
