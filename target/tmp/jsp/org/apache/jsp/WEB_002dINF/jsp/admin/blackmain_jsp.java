@@ -42,38 +42,37 @@ public final class blackmain_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write('\r');
       out.write('\n');
 
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\r\n");
-      out.write("<html>\r\n");
-      out.write("  <head>\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n");
+      out.write("<html>\n");
+      out.write("  <head>\n");
       out.write("    <base href=\"");
       out.print(basePath);
-      out.write("\">\r\n");
-      out.write("\t<meta http-equiv=\"pragma\" content=\"no-cache\">\r\n");
-      out.write("\t<meta http-equiv=\"cache-control\" content=\"no-cache\">\r\n");
-      out.write("\t<meta http-equiv=\"expires\" content=\"0\">    \r\n");
-      out.write("\t<meta http-equiv=\"keywords\" content=\"keyword1,keyword2,keyword3\">\r\n");
-      out.write("\t<meta http-equiv=\"description\" content=\"This is my page\">\r\n");
-      out.write("\t<!--\r\n");
-      out.write("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\r\n");
-      out.write("\t-->\r\n");
-      out.write("<script type=\"text/javascript\">\r\n");
+      out.write("\">\n");
+      out.write("\t<meta http-equiv=\"pragma\" content=\"no-cache\">\n");
+      out.write("\t<meta http-equiv=\"cache-control\" content=\"no-cache\">\n");
+      out.write("\t<meta http-equiv=\"expires\" content=\"0\">    \n");
+      out.write("\t<meta http-equiv=\"keywords\" content=\"keyword1,keyword2,keyword3\">\n");
+      out.write("\t<meta http-equiv=\"description\" content=\"This is my page\">\n");
+      out.write("\t<!--\n");
+      out.write("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\n");
+      out.write("\t-->\n");
+      out.write("<script type=\"text/javascript\">\n");
       out.write("window.location.href=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("/admin\";//这是直接在当前页跳转\r\n");
-      out.write("</script>\r\n");
-      out.write("  </head>\r\n");
-      out.write("  \r\n");
-      out.write("  <body>\r\n");
-      out.write("  </body>\r\n");
-      out.write("</html>\r\n");
+      out.write("/admin\";//这是直接在当前页跳转\n");
+      out.write("</script>\n");
+      out.write("  </head>\n");
+      out.write("  \n");
+      out.write("  <body>\n");
+      out.write("  </body>\n");
+      out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

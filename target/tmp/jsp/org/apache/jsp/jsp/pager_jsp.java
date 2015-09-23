@@ -76,11 +76,11 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n");
+      out.write("\n");
+      out.write("\n");
       //  pg:pager
       com.jsptags.navigation.pager.PagerTag _jspx_th_pg_pager_0 = (com.jsptags.navigation.pager.PagerTag) _jspx_tagPool_pg_pager_url_maxPageItems_items_export.get(com.jsptags.navigation.pager.PagerTag.class);
       _jspx_th_pg_pager_0.setPageContext(_jspx_page_context);
@@ -94,9 +94,9 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
         java.lang.Integer curPage = null;
         curPage = (java.lang.Integer) _jspx_page_context.findAttribute("curPage");
         do {
-          out.write("\r\n");
-          out.write("\t<span style=\"float:left;padding:6px;\">\r\n");
-          out.write("\t共\r\n");
+          out.write("\n");
+          out.write("\t<span style=\"float:left;padding:6px;\">\n");
+          out.write("\t共\n");
           out.write("\t");
           //  pg:last
           com.jsptags.navigation.pager.LastTag _jspx_th_pg_last_0 = (com.jsptags.navigation.pager.LastTag) _jspx_tagPool_pg_last.get(com.jsptags.navigation.pager.LastTag.class);
@@ -109,14 +109,14 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
             pageNumber = (java.lang.Integer) _jspx_page_context.findAttribute("pageNumber");
             do {
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t");
               out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageNumber }", java.lang.String.class, (PageContext)_jspx_page_context, null));
               out.write(" 页[");
               out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.totalRecord }", java.lang.String.class, (PageContext)_jspx_page_context, null));
               out.write("条记录],每页显示");
               out.print(SystemContext.getPageSize() );
-              out.write("条数据\r\n");
+              out.write("条数据\n");
               out.write("\t");
               int evalDoAfterBody = _jspx_th_pg_last_0.doAfterBody();
               pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
@@ -130,13 +130,13 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             return;
           }
           _jspx_tagPool_pg_last.reuse(_jspx_th_pg_last_0);
-          out.write("\r\n");
-          out.write("\t");
+          out.write('\n');
+          out.write('	');
           if (_jspx_meth_c_forEach_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_pg_pager_0, _jspx_page_context))
             return;
-          out.write("\r\n");
-          out.write("\t</span>\r\n");
-          out.write("\t<div class=\"btn-group\">\r\n");
+          out.write("\n");
+          out.write("\t</span>\n");
+          out.write("\t<div class=\"btn-group\">\n");
           out.write("\t\t");
           //  pg:first
           com.jsptags.navigation.pager.FirstTag _jspx_th_pg_first_0 = (com.jsptags.navigation.pager.FirstTag) _jspx_tagPool_pg_first.get(com.jsptags.navigation.pager.FirstTag.class);
@@ -149,10 +149,10 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
             pageNumber = (java.lang.Integer) _jspx_page_context.findAttribute("pageNumber");
             do {
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t\t<a href=\"");
               out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageUrl }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-              out.write("\" class=\"btn btn-default ajaxify\">首页</a>\r\n");
+              out.write("\" class=\"btn btn-default ajaxify\">首页</a>\n");
               out.write("\t\t");
               int evalDoAfterBody = _jspx_th_pg_first_0.doAfterBody();
               pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
@@ -166,7 +166,7 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             return;
           }
           _jspx_tagPool_pg_first.reuse(_jspx_th_pg_first_0);
-          out.write("\r\n");
+          out.write("\n");
           out.write("\t\t");
           //  pg:prev
           com.jsptags.navigation.pager.PrevTag _jspx_th_pg_prev_0 = (com.jsptags.navigation.pager.PrevTag) _jspx_tagPool_pg_prev.get(com.jsptags.navigation.pager.PrevTag.class);
@@ -179,10 +179,10 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
             pageNumber = (java.lang.Integer) _jspx_page_context.findAttribute("pageNumber");
             do {
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t\t<a href=\"");
               out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageUrl }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-              out.write("\" class=\"btn btn-default ajaxify\">上一页</a>\r\n");
+              out.write("\" class=\"btn btn-default ajaxify\">上一页</a>\n");
               out.write("\t\t");
               int evalDoAfterBody = _jspx_th_pg_prev_0.doAfterBody();
               pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
@@ -196,7 +196,7 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             return;
           }
           _jspx_tagPool_pg_prev.reuse(_jspx_th_pg_prev_0);
-          out.write("\r\n");
+          out.write("\n");
           out.write("\t\t");
           //  pg:pages
           com.jsptags.navigation.pager.PagesTag _jspx_th_pg_pages_0 = (com.jsptags.navigation.pager.PagesTag) _jspx_tagPool_pg_pages.get(com.jsptags.navigation.pager.PagesTag.class);
@@ -214,15 +214,15 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
             pageNumber = (java.lang.Integer) _jspx_page_context.findAttribute("pageNumber");
             do {
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t\t");
               if (_jspx_meth_c_if_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_pg_pages_0, _jspx_page_context))
                 return;
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t\t");
               if (_jspx_meth_c_if_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_pg_pages_0, _jspx_page_context))
                 return;
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t");
               int evalDoAfterBody = _jspx_th_pg_pages_0.doAfterBody();
               pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
@@ -238,7 +238,7 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             return;
           }
           _jspx_tagPool_pg_pages.reuse(_jspx_th_pg_pages_0);
-          out.write("\r\n");
+          out.write("\n");
           out.write("\t\t");
           //  pg:next
           com.jsptags.navigation.pager.NextTag _jspx_th_pg_next_0 = (com.jsptags.navigation.pager.NextTag) _jspx_tagPool_pg_next.get(com.jsptags.navigation.pager.NextTag.class);
@@ -251,10 +251,10 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
             pageNumber = (java.lang.Integer) _jspx_page_context.findAttribute("pageNumber");
             do {
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t\t<a href=\"");
               out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageUrl }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-              out.write("\" class=\"btn btn-default ajaxify\">下一页</a>\r\n");
+              out.write("\" class=\"btn btn-default ajaxify\">下一页</a>\n");
               out.write("\t\t");
               int evalDoAfterBody = _jspx_th_pg_next_0.doAfterBody();
               pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
@@ -268,7 +268,7 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             return;
           }
           _jspx_tagPool_pg_next.reuse(_jspx_th_pg_next_0);
-          out.write("\r\n");
+          out.write("\n");
           out.write("\t\t");
           //  pg:last
           com.jsptags.navigation.pager.LastTag _jspx_th_pg_last_1 = (com.jsptags.navigation.pager.LastTag) _jspx_tagPool_pg_last.get(com.jsptags.navigation.pager.LastTag.class);
@@ -281,10 +281,10 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
             pageNumber = (java.lang.Integer) _jspx_page_context.findAttribute("pageNumber");
             do {
-              out.write("\r\n");
+              out.write("\n");
               out.write("\t\t\t<a href=\"");
               out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageUrl }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-              out.write("\" class=\"btn btn-default ajaxify\">尾页</a>\r\n");
+              out.write("\" class=\"btn btn-default ajaxify\">尾页</a>\n");
               out.write("\t\t");
               int evalDoAfterBody = _jspx_th_pg_last_1.doAfterBody();
               pageUrl = (java.lang.String) _jspx_page_context.findAttribute("pageUrl");
@@ -298,8 +298,8 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
             return;
           }
           _jspx_tagPool_pg_last.reuse(_jspx_th_pg_last_1);
-          out.write("\r\n");
-          out.write("\t</div>\r\n");
+          out.write("\n");
+          out.write("\t</div>\n");
           int evalDoAfterBody = _jspx_th_pg_pager_0.doAfterBody();
           curPage = (java.lang.Integer) _jspx_page_context.findAttribute("curPage");
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
@@ -339,12 +339,12 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
       int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
       if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
-          out.write("\r\n");
+          out.write("\n");
           out.write("\t\t");
           if (_jspx_meth_pg_param_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
-          out.write("\r\n");
-          out.write("\t");
+          out.write('\n');
+          out.write('	');
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -394,12 +394,12 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_0 = _jspx_th_c_if_0.doStartTag();
     if (_jspx_eval_c_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\r\n");
+        out.write("\n");
         out.write("\t\t\t\t<a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageUrl }", java.lang.String.class, (PageContext)_jspx_page_context, null));
         out.write("\" class=\"btn blue-hoki\">");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageNumber }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("</a>\r\n");
+        out.write("</a>\n");
         out.write("\t\t\t");
         int evalDoAfterBody = _jspx_th_c_if_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
@@ -426,12 +426,12 @@ public final class pager_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_1 = _jspx_th_c_if_1.doStartTag();
     if (_jspx_eval_c_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\r\n");
+        out.write("\n");
         out.write("\t\t\t\t<a href=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageUrl }", java.lang.String.class, (PageContext)_jspx_page_context, null));
         out.write("\" class=\"btn btn-default ajaxify\">");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageNumber }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("</a>\r\n");
+        out.write("</a>\n");
         out.write("\t\t\t");
         int evalDoAfterBody = _jspx_th_c_if_1.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
