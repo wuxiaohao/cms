@@ -55,7 +55,7 @@
 						<li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/role/roles">
 							<i class="icon-wallet"></i>
-							用户角色管理</a>
+							角色管理</a>
 						</li>
 					</ul>
 				</li>
