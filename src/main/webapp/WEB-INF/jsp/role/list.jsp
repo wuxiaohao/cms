@@ -10,13 +10,7 @@
 		$("a.delete").confirmOperator();
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
-		if (success != 'null') {
-			toastr.success(success);
-		}
-		if (error != 'null') {
-			toastr.error(error);
-		}
-			
+		showMessage(success,error);			
 	});
 	
 </script>

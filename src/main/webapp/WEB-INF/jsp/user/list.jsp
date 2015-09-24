@@ -11,12 +11,7 @@
 		$("a.delete").confirmOperator();
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
-		if (success != 'null') {
-			toastr.success(success);
-		}
-		if (error != 'null') {
-			toastr.error(error);
-		}
+		showMessage(success,error);
 		/**
 		 * 显示树
 		 */
@@ -26,13 +21,11 @@
 				toastr.error("请选中其中一行!");
 				return false;
 			}
-			
 			var t = $("#tree").mytree({
 				url:$("#treePath").val()+selectedIds.val(),
 				mine:{listChild:0,expandAll:true}
 			});			
 			$("#addmodel").modal();
-			
 		});
 	});
 </script>

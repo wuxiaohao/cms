@@ -112,6 +112,15 @@
 		        "hideMethod": "fadeOut" //消失时的动画方式
 		        };
 		});
+	
+function showMessage(success,error){
+	if (success != 'null' && success != "") {
+		toastr.success(success);
+	}
+	if (error != 'null' && error != "") {
+		toastr.error(error);
+	}
+}
 </script>
 <!-- END JAVASCRIPTS -->
 <script>

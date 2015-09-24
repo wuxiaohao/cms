@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,15 +25,9 @@ $(function(){
 	$("a.delete").confirmOperator();
 	var success='<%=request.getAttribute("success")%>';
 	var error='<%=request.getAttribute("error")%>';
-	if (success != 'null') {
-		toastr.success(success);
-	}
-	if (error != 'null') {
-		toastr.error(error);
-	}
-	
 	if($("#refresh").val()=="1") {
 		parent.refreshTree();  //调用父类的refreshTree
+		parent.showMessage(success,error);  //调用父类回显信息的方法
 	}
 	$(".listTable").mysorttable();
 });
@@ -56,7 +51,7 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green" href="<%=request.getContextPath() %>/admin/channel/add/${pid}" >添加子栏目</a>
+						<a class="btn green" href="<%=request.getContextPath() %>/admin/channel/add/${pc.id}" >添加子栏目</a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered listTable">
@@ -91,18 +86,18 @@ $(function(){
 									&nbsp;
 								</td>
 								<td>
-									<a href="<%=request.getContextPath() %>/admin/channel/delete/${pid}/${c.id}" class="btn btn-sm red delete"> 删除 </a>
+									<a href="<%=request.getContextPath() %>/admin/channel/delete/${pc.id}/${c.id}" class="btn btn-sm red delete"> 删除 </a>
 									<a href="<%=request.getContextPath() %>/admin/channel/update/${c.id}" class="btn btn-sm blue"> 更新 </a>
 								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
-					<c:if test="${!empty(channels) }">
+					<c:if test="${fn:length(channels)>1 }">
 					<tfoot>
 						<tr>
 						<td colspan="6" style="text-align:right;">
 								<a id="beginOrder" href="#" class="btn default">开始排序</a>
-								<a id="saveOrder" href="#" class="btn default">存储排序</a>
+								<a id="saveOrder" aa="/cms" href="#" class="btn default">存储排序</a>
 								&nbsp;
 						</td>
 						</tr>

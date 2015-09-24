@@ -30,7 +30,10 @@
 				maxlength: 16
 			},
 			password:"required",
-			name:"required",
+			name:{
+				required: true,
+				maxlength: 16
+			},
 			confirmPwd:{
 				equalTo:"#password"
 			},
@@ -67,7 +70,10 @@
 				required:"邮箱不能为空",
 				email:"邮件格式不正确",
 			},
-			name:"名称不能为空",
+			name:{
+				required: "名称不能为空",
+				maxlength: "名称长度不能大于16个字符"
+			},
 			cid:"文章必须选择所属栏目",
 			title:"文章的标题必须输入",
 			newName:"首页图片必须上传",

@@ -45,27 +45,41 @@
 				sortEle.sortable("enable");
 				_isSort = true;
 			} else {
-				toastr.error("已经处于排序状态!");
+				//toastr.error("已经处于排序状态!");
+				var error = "已经处于排序状态!";
+				parent.showMessage("",error);
 			}
 		}
 		
 		function saveOrders() {
 			if(_isSort) {
 				var idArg = sortEle.sortable("serialize",{key:"ids"});
-				$.post("updateSort?"+idArg,function(data){
-					if($.ajaxCheck(data)) {
-						$(_that).find("tr").each(function(){
-							$(this).children().last().remove();
-						});
-						sortEle.sortable("disable");
-						_isSort = false;
-						toastr.success("设置排序成功!");
-					} else {
-						toastr.error("设置排序失败!");
+				var url_ ="/cms/admin/channel/channels/updateSort?"+idArg;
+				$.ajax({
+					type: "POST",
+					url: url_,
+					success: function(data){
+						if($.ajaxCheck(data)) {
+							$(_that).find("tr").each(function(){
+								$(this).children().last().remove();
+							});
+							sortEle.sortable("disable");
+							_isSort = false;
+							//toastr.success("设置排序成功!");
+							var success = "设置排序成功!";
+							parent.showMessage(success,"");
+							parent.refreshTree();  //刷新树
+						} else {
+							//toastr.error("设置排序失败!");
+							var error = "设置排序失败!";
+							parent.showMessage("",error);
+						}
 					}
 				});
 			} else {
-				toastr.error("还不是排序状态!");
+				//toastr.error("还不是排序状态!");
+				var error = "还不是排序状态!";
+				parent.showMessage("",error);
 			}
 		}
 		
@@ -119,7 +133,7 @@
 		}
 		
 		function listChild(event,treeId,treeNode) {
-			$(_mine.srcElement).attr("src","/cms/admin/channel/channels/"+treeNode.id);
+			$(_mine.srcElement).attr("src","admin/channel/channels/"+treeNode.id);
 		}
 		
 		//获取被选中的节点的父节点

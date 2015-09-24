@@ -56,11 +56,11 @@ public class ChannelService implements IChannelService {
 	public void delete(int id) {
 		//1、需要判断是否存在子栏目
 		List<Channel> cs = channelDao.listByParent(id);
-		if(cs!=null&&cs.size()>0) throw new MyException("要删除的栏目还有子栏目，无法删除");
+		if(cs!=null&&cs.size()>0) throw new MyException("要删除的栏目还有子栏目，请先删除子栏目");
 		//2、需要判断是否存在文章
 		List<Topic> ts = topicService.listTopicByChannel(id);
 		if(ts.size()>0) {
-			throw new MyException("该栏目还有相应的文章信息，不能删除");
+			throw new MyException("该栏目还有相应的文章信息，请先删除文章");
 		}
 		//3、需要删除和组的关联关系
 		channelDao.deleteChannelGroups(id);

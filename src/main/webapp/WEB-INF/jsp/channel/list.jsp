@@ -8,20 +8,14 @@
 		$("a.delete").confirmOperator();
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
-		if (success != 'null') {
-			toastr.success(success);
-		}
-		if (error != 'null') {
-			toastr.error(error);
-		}
-		
+		showMessage(success,error);
 		mt = $("#tree").mytree({
 			url:$("#setTreePath").val()
 		});
 	});
 	function refreshTree() {
 		mt.reAsyncChildNodes(null,"refresh");  //重新加载全部子节点
-	}
+	}	
 </script>
 <input type="hidden" id="setTreePath" value="<%=request.getContextPath()%>/admin/channel/treeAll"/>
 <div class="row">
