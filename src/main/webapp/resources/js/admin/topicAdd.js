@@ -11,8 +11,9 @@ $(function(){
 		url:$("#ctx").val()+"/admin/topic/treeAll"
 	});
 	
-	//日期插件
 	$("#cname").click(showMenu);
+	
+	//日期插件
 	$( "#publishDate" ).datepicker({
 		dateFormat:"yy-mm-dd",//设置日期的格式
 		maxDate:0,//最大日期为1年后（2013-2-2具体日期）
@@ -76,7 +77,7 @@ $(function(){
 		node+="<td><input type='checkbox' value='"+attach.id+"' name='isAttach' class='isAttach'>" +
 				"<input type='hidden' name='aids' value='"+attach.id+"'/></td>";
 		node+="<td><a href='#' class='list_op insertAttach' title='"+attach.id+"' isImg='"+attach.isImg+"' name='"+attach.newName+"' oldName='"+attach.oldName+"'>插入附件</a>" +
-				"&nbsp;<a href='#' title='"+attach.id+"' class='list_op deleteAttach delete'>删除附件</a></td>";
+				"&nbsp;<a href='#' title='"+attach.id+"' class='list_op deleteAttach'>删除附件</a></td>";
 		node+="</tr>";
 		return node;
 	}
@@ -107,7 +108,6 @@ $(function(){
 		if(isImg==1) {
 			node = "<img height='400' src='"+uploadPath+$(this).attr("name")+"' id='attach_"+$(this).attr("title")+"'/>"
 		} else {
-			//alert("abc");
 			node = "<a href='"+uploadPath+$(this).attr("name")+"' id='attach_"+$(this).attr("title")+"'>"+$(this).attr("oldName")+"</a>"
 		}
 		editor.pasteHTML(node);

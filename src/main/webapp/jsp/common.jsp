@@ -54,15 +54,17 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+<%-- <script src="${pageContext.servletContext.contextPath }/resources/assets/myjs/table-managed.js" ></script> --%>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jstree/dist/jstree.min.js"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jstree/dist/jstree.js"></script>
 
  
 <!-- END PAGE LEVEL SCRIPTS -->
+<%-- <script src="${pageContext.servletContext.contextPath }/resources/assets/myjs/jquery.form.js" ></script> --%>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
-
+<%-- <script src="${pageContext.servletContext.contextPath }/resources/assets/myjs/AjaxForm.js" ></script> --%>
 <!-- 表单校验 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.validate.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
@@ -85,6 +87,7 @@
 
 <!-- 自定义插件 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/inc.js"></script>
 <!-- 必须引入dwr的engine.js -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/engine.js"></script>
 <!-- 将java的类引入 -->

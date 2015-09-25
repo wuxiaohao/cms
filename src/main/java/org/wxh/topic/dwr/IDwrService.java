@@ -1,5 +1,7 @@
 package org.wxh.topic.dwr;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 /**
  * dwr相关的业务类
  * 每新增一个业务方法，要在cms-servlet.xml中配置该方法

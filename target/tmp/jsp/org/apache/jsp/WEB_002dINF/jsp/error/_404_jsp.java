@@ -201,6 +201,7 @@ public final class _404_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<script type=\"text/javascript\" src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/resources/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js\"></script>\n");
+      out.write("\n");
       out.write("<script src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/resources/assets/global/plugins/jstree/dist/jstree.min.js\"></script>\n");
@@ -210,6 +211,7 @@ public final class _404_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write(" \n");
       out.write("<!-- END PAGE LEVEL SCRIPTS -->\n");
+      out.write("\n");
       out.write("<script src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/resources/assets/global/scripts/metronic.js\" type=\"text/javascript\"></script>\n");
@@ -270,6 +272,9 @@ public final class _404_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<script type=\"text/javascript\" src=\"");
       out.print(request.getContextPath() );
       out.write("/resources/js/core/jquery.cms.core.js\"></script>\n");
+      out.write("<script type=\"text/javascript\" src=\"");
+      out.print(request.getContextPath() );
+      out.write("/resources/js/admin/inc.js\"></script>\n");
       out.write("<!-- 必须引入dwr的engine.js -->\n");
       out.write("<script type=\"text/javascript\" src=\"");
       out.print(request.getContextPath());
@@ -301,6 +306,15 @@ public final class _404_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t        \"hideMethod\": \"fadeOut\" //消失时的动画方式\n");
       out.write("\t\t        };\n");
       out.write("\t\t});\n");
+      out.write("\t\n");
+      out.write("function showMessage(success,error){\n");
+      out.write("\tif (success != 'null' && success != \"\") {\n");
+      out.write("\t\ttoastr.success(success);\n");
+      out.write("\t}\n");
+      out.write("\tif (error != 'null' && error != \"\") {\n");
+      out.write("\t\ttoastr.error(error);\n");
+      out.write("\t}\n");
+      out.write("}\n");
       out.write("</script>\n");
       out.write("<!-- END JAVASCRIPTS -->\n");
       out.write("<script>\n");

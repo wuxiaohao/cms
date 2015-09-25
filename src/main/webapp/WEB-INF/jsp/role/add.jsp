@@ -7,7 +7,6 @@
 	$(function(){
 		$("#addForm").cmsvalidate();
 	});
-	
 </script>
 <div class="row">
 	<div class="col-md-12">
@@ -52,7 +51,7 @@
 			</div>
 			<div class="portlet-body">
 				<!-- BEGIN FORM-->
-				<sf:form id="addForm" method="post" modelAttribute="role" action="admin/role/add" class="form-horizontal ajaxiform">
+				<sf:form onkeydown="if(event.keyCode==13){return false;}" id="addForm" method="post" modelAttribute="role" action="admin/role/add" class="form-horizontal ajaxiform">
 					<div class="form-body">
 						<div class="form-group">
 							<label class="control-label col-md-3">角色名称 <span class="required">
@@ -75,7 +74,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-actions">
+					<div class="form-actions fluid">
 						<div class="row">
 							<div class="col-md-offset-3 col-md-9">
 								<button type="submit" class="btn green">提交</button>

@@ -26,18 +26,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 /* if(navigator.userAgent.indexOf("MSIE")!=-1){
         window.location.href="${pageContext.servletContext.contextPath }/brower.oa";//这是直接在当前页跳转
 } */
-if (window != top){
-top.location.href = location.href; 
-}
+	if (window != top){
+	top.location.href = location.href; 
+	}
 
-function updatecode() {
+	function updatecode() {
 		window.location.reload();
 	}
+
 	
-function exitSystem() {
-	//alert($("#contextPath").val()+"/admin/logout");
-	window.parent.location.href = $("#contextPath").val()+"/admin/logout";
-}
+	function exitSystem() {
+		//alert($("#contextPath").val()+"/admin/logout");
+		window.parent.location.href = $("#contextPath").val()+"/admin/logout";
+	}
+	
+	$(function(){
+		//文章添加或修改成功后的跳转
+		if($("#message").val() == "1"){
+			 $("#a").click();
+		}
+	});
 	
 </script>
 </head>
@@ -47,6 +55,7 @@ function exitSystem() {
 
 <body class="page-header-fixed page-quick-sidebar-push-content">
 <input type="hidden" id="contextPath" value="<%=request.getContextPath()%>"/>
+<input type="hidden" id="message" value="${message }"/>
 
 <!-- 获取头 -->
 <%@ include file="head.jsp"%>
@@ -62,7 +71,7 @@ function exitSystem() {
 	<div class="page-content-wrapper">
 		<div class="page-content">
 			<!-- BEGIN STYLE CUSTOMIZER -->
-			
+			<a id="a" href="<%=request.getContextPath()%>/admin/topic/audits" class="ajaxify"></a>
 			<!-- END STYLE CUSTOMIZER -->
 			
 			<div class="page-content-body">

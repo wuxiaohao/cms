@@ -5,7 +5,9 @@ import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.wxh.sys.service.ICmsLinkService;
 import org.wxh.sys.service.IIndexPicService;
+import org.wxh.topic.model.Topic;
 import org.wxh.topic.service.IAttachmentService;
+import org.wxh.topic.service.ITopicService;
 import org.wxh.user.service.IGroupService;
 
 

@@ -110,6 +110,7 @@ public class TopicController {
 		SystemContext.removeSort();
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
+		model.addAttribute("status",status);
 		model.addAttribute("cs",channelService.listPublishChannel());
 	}
 	/**
@@ -123,6 +124,7 @@ public class TopicController {
 	@RequestMapping("/audits")
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
+		session.removeAttribute("message");
 		initList(con, cid, model, session,1);
 		return "topic/list";
 	}
@@ -141,6 +143,17 @@ public class TopicController {
 		return "topic/list";
 	}
 	/**
+	 * 跳转到首页，再从首页跳转到文章列表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/returnAuditList")
+	public String returnAuditList(HttpSession session){
+		session.setAttribute("message","1");
+		return "redirect:/admin";
+	}
+	
+	/**
 	 * 处理取消发布或发布
 	 * @param id
 	 * @param status
@@ -148,16 +161,16 @@ public class TopicController {
 	 */
 	@RequestMapping("/changeStatus/{id}")
 	@AuthMethod(role="ROLE_AUDIT")
-	public String changeStatus(@PathVariable int id,Integer status) {
+	public String changeStatus(@PathVariable int id,Integer status,Model model,HttpSession session) {
 		topicService.updateStatus(id);
 		Topic t = topicService.load(id);
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
 			//indexService.generateBody();
 		}
 		if(status==0) {
-			return "redirect:/admin/topic/unaudits";
+			return unauditList(null,null,model,session);
 		} else {
-			return "redirect:/admin/topic/audits";
+			return auditList(null,null,model,session);
 		}
 	}
 	/**
@@ -166,18 +179,19 @@ public class TopicController {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping("/delete/{id}")
+	@RequestMapping(value = "/delete/{id}" ,method = RequestMethod.POST)
 	@AuthMethod(role="ROLE_PUBLISH")
-	public String delete(@PathVariable int id,Integer status) {
+	public String delete(@PathVariable int id,Integer status,Model model,HttpSession session) {
 		Topic t = topicService.load(id);
 		topicService.delete(id);
+		model.addAttribute("success","文章删除成功!");
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
 			//indexService.generateBody();
 		}
 		if(status==0) {
-			return "redirect:/admin/topic/unaudits";
+			return unauditList(null, null, model, session);
 		} else {
-			return "redirect:/admin/topic/audits";
+			return auditList(null, null, model, session);
 		}
 	}
 	/**

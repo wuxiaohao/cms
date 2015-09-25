@@ -73,7 +73,7 @@
 						<li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
 							<i class="icon-wallet"></i>
-							文章信息管理</a>
+							文章内容管理</a>
 						</li>
 					</ul>
 				</li>

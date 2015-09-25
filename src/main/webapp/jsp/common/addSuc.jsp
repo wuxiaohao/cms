@@ -6,10 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
 <title>添加记录成功</title>
 <script type="text/javascript">
+//刷新父页面
+var href = "http://localhost:8888/cms/admin/topic/returnAuditList";
+window.opener.location.href=href;
 function closewindow(){
 	if(window.opener){
-		//刷新父页面
-		window.opener.location.reload(true);
 		//关闭当前窗口
 		window.close();
 	}

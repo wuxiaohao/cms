@@ -48,7 +48,7 @@
 	}
 	function inputKeyword(event) {
 		var code = event.keyCode;
-		if(code==188||code==13) {
+		if(code==17) {
 			var c = $(this).val();
 			if(c!="") {
 				if($(".keyword-in").length>=setting.number) {

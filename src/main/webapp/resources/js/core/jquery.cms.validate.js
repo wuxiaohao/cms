@@ -45,8 +45,8 @@
 				isMobile:true
 			},
 			title:"required",
-			cid:{
-				min:1
+			cname:{
+				required: true
 			},
 			newName:"required",
 			checkcode:"required"
@@ -74,7 +74,7 @@
 				required: "名称不能为空",
 				maxlength: "名称长度不能大于16个字符"
 			},
-			cid:"文章必须选择所属栏目",
+			cname:"文章必须选择所属栏目",
 			title:"文章的标题必须输入",
 			newName:"首页图片必须上传",
 			checkcode:"验证码不能为空"

@@ -82,7 +82,6 @@
 						<div class="row">
 							<div class="col-md-offset-3 col-md-9">
 								<button type="submit" class="btn green">修改</button>
-								<a type="button" class="btn default ajaxify" href="admin/user/showMySelf">取消</a>
 							</div>
 						</div>
 					</div>

@@ -5,146 +5,169 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery.ui.all.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/article.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/zTree/zTreeStyle.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/core/jquery.cms.keywordinput.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.keywordinput.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/tree/jquery.ztree.core-3.5.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery-ui-1.10.0.custom.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/i18n/jquery.ui.datepicker-zh-CN.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
-<!-- 文章内容插件 -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
-<!-- 引入文件上传插件uploadify -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/uploadify/uploadify.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/uploadify/jquery.uploadify.min.js"></script>
-<!-- 引入jq校验 -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.validate.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.validate.js"></script>
-<!-- 引入dwr -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/dwr/engine.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
-<!-- 引入外部js文件 -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/topicAdd.js"></script>
+<%@ include file="/jsp/commonTopic.jsp"%>
 </head>
 <body>
 <input type="hidden" id="sid" value="<%=session.getId()%>"/>
+<input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
 <div id="menuContent" class="menuContent" style="display:none; position: absolute;background:#eee;z-index: 999;border:1px solid #999">
 	<ul id="mytree" class="ztree" style="margin-top:0;"></ul>
 </div>
-<div id="container">
-<jsp:include page="/jsp/admin/top_inc.jsp"></jsp:include>
-<div id="contents">
-<input type="hidden" id="ctx" value="<%=request.getContextPath() %>"/>
-	<h3 class="admin_link_bar" style="text-align:center">
-	<span>添加文章功能</span>
-	</h3>
-	<sf:form method="post" modelAttribute="topicDto" id="addForm">
-	<table width="980" cellspacing="0" cellPadding="0" id="addTable">
-		<tr>
-			<td class="rightTd" width="120px">文章标题:</td>
-			<td class="leftTd">
-			<sf:input path="title" size="80"/><sf:errors cssClass="errorContainer" path="title"/></td>
-		</tr>
-		<tr>
-			<td class="rightTd">文章栏目:</td>
-			<td class="leftTd">
-				<input type="text" readonly="readonly" name="cname" id="cname"/>
-				<input type="text" readonly="readonly" id="cid" name="cid" value="0"/><sf:errors cssClass="errorContainer" path="cid"/>
-			</td>
-		</tr>
-		<c:choose>
-			<c:when test="${isAudit||isAdmin }">
-			<tr>
-				<td class="rightTd">文章状态:</td>
-				<td class="leftTd">
-					<sf:radiobutton path="status" value="0"/>未发布
-					<sf:radiobutton path="status" value="1"/>已发布
-				</td>
-			</tr>
-			</c:when>
-			<c:otherwise>
-			<sf:hidden path="status"/>
-			</c:otherwise>
-		</c:choose>
-		<tr>
-			<td class="rightTd">是否推荐该文章:</td>
-			<td class="leftTd">
-				<sf:radiobutton path="recommend" value="0"/>不推荐
-				<sf:radiobutton path="recommend" value="1"/>推荐
-			</td>
-		</tr>
-		<tr>
-			<td class="rightTd">发布时间:</td>
-			<td class="leftTd">
-				<sf:input path="publishDate"/>
-			</td>
-		</tr>
-		<tr>
-			<td class="rightTd">文章关键字:</td>
-			<td class="leftTd">
-				<sf:input path="keyword"/>
-			</td>
-		</tr>
-		<tr>
-			<td class="rightTd">文章附件</td>
-			<td class="leftTd">
-				<div id="attachs"></div>
-				<input type="file" id="attach" name="attach"/>
-				<input type="button" id="uploadFile" value="上传文件"/>
-			</td>
-		</tr>
-		<tr>
-		<td colspan="2">已传附件</td>
-		</tr>
-		<tr>
-		<td colspan="2">
-		<table id="ok_attach" width="890px" cellpadding="0" cellspacing="0">
-			<thead>
-				<tr>
-				<Td>文件名缩略图</Td>
-				<td width="180">文件名</td>
-				<td>文件大小</td>
-				<td>主页图片</td>
-				<td>栏目图片</td>
-				<td>附件信息</td>
-				<td width="160">操作</td>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-		</td>
-		</tr>
-		<tr>
-			<td colspan="2">文章内容</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<sf:textarea path="content" rows="25" cols="110"/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">文章摘要</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<sf:textarea path="summary" rows="5" cols="110"/>
-			
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="centerTd"><input type="button" id="addBtn" value="添加文章"/><input type="reset"/></td>
-		</tr>
-	</table>
-	</sf:form>
+<!-- BEGIN PAGE CONTENT-->
+<div style="margin-left: 210px">
+	<div class="col-md-10">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box red">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-edit"></i>
+					文章编辑
+				</div>
+			</div>
+			<div class="portlet-body">
+				<sf:form id="addForm" method="post" modelAttribute="topicDto" class="form-horizontal ajaxiform">
+				<table class="table table-striped table-hover table-bordered">
+					<tbody>
+						<tr>
+							<td width="150px" align="right">文章标题：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<sf:input path="title" class="form-control" />
+										<sf:errors cssClass="errorContainer" path="title"/></td>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td width="150px" align="right">文章栏目：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<input type="text" readonly="readonly" name="cname" id="cname" class="form-control" />
+										<input type="hidden" readonly="readonly" id="cid" name="cid" value="0"/>
+										<sf:errors cssClass="errorContainer" path="cid"/>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<c:choose>
+							<c:when test="${isAudit||isAdmin }">
+								<tr>
+									<td width="150px" align="right">文章状态：</td>
+									<td>
+										<div class="col-md-4">
+											<div class="input-icon right">
+												<sf:radiobutton path="status" value="0"/>未发布
+												<sf:radiobutton path="status" value="1"/>已发布
+											</div>
+										</div>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<sf:hidden path="status"/>
+							</c:otherwise>
+							</c:choose>
+						</tr>
+						<tr>
+							<td width="150px" align="right">是否推荐该文章：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<sf:radiobutton path="recommend" value="0"/>不推荐
+										<sf:radiobutton path="recommend" value="1"/>推荐		
+									</div>
+								</div>	
+							</td>
+						</tr>
+						<tr>
+							<td width="150px" align="right">发布时间：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<sf:input path="publishDate" class="form-control" />
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td width="150px" align="right">文章关键字：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<sf:input path="keyword" class="form-control" />
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td width="150px" align="right">文章附件：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<div id="attachs"></div>
+										<input type="file" id="attach" name="attach" class="form-control" />
+										<a class="btn green-meadow" id="uploadFile" >上传文件</a>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">已传附件</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<table id="ok_attach" width="890px" class="table table-striped table-hover table-bordered">
+									<thead>
+										<tr>
+										<Td>文件名缩略图</Td>
+										<td width="150">文件名</td>
+										<td>文件大小</td>
+										<td>主页图片</td>
+										<td>栏目图片</td>
+										<td>附件信息</td>
+										<td width="190">操作</td>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">文章内容：</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<sf:textarea path="content" class="form-control" rows="25" cols="110"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">文章摘要：</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							<sf:textarea path="summary" class="form-control" rows="5" cols="110"/>
+							</td>
+						</tr>
+						
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2" align="center">
+								<a id="addBtn" class="btn green" >添加文章</a>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+				</sf:form>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
 </div>
-</div>
+<!-- END PAGE CONTENT -->
 </body>
 </html>

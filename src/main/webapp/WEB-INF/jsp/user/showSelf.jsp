@@ -101,7 +101,6 @@
 						<tr>
 							<td colspan="2" align="center">
 								<a href="admin/user/updateSelfUI" class="btn green ajaxify">修改个人信息</a>
-								<a class="btn default ajaxify" href="layout_ajax_content_1.html">取消</a>
 							</td>
 						</tr>
 					</tfoot>
