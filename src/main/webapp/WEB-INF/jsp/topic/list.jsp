@@ -5,12 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 阻止自动换行 -->
-<style>
-.c{
-display:inline;
-}
-</style>
 <script type="text/javascript">
 	$(function(){
 		$("a.delete").confirmOperator();
@@ -29,37 +23,20 @@ display:inline;
 	});
 </script>
 </head>
-
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
 			文章内容管理
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>文章管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/topic/audits" class="ajaxify">文章内容管理</a>
-			</li>
-		</ul>
-		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box blue">
+		<div class="portlet gren">
 			<div class="portlet-title">
-				<div class="caption">
+				<div class="caption" style="float: right;">
 					<c:if test="${status eq 0 }">
 						<a href="admin/topic/audits" class="btn btn-default red-stripe ajaxify">已发布文章列表</a>
 						<a href="admin/topic/unaudits" class="btn red ajaxify">未发布文章列表</a>
@@ -99,7 +76,7 @@ display:inline;
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="600" align="center">文章标题</td>
+							<td width="30%" align="center">文章标题</td>
 							<td>文章作者</td>
 							<td>是否推荐</td>
 							<td>所属频道</td>

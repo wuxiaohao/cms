@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<sf:form id="addForm" method="post" modelAttribute="topicDto" class="form-horizontal ajaxiform">
+				<sf:form id="addForm" method="post" modelAttribute="topicDto" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}" >
 				<table class="table table-striped table-hover table-bordered">
 					<tbody>
 						<tr>
@@ -162,8 +162,8 @@
 												<td>&nbsp;</td>
 											</c:if>
 											<td><input type='checkbox' value="${att.id }" name='isAttach' class='isAttach' <c:if test="${att.isAttach eq 1 }">checked="checked"</c:if>></td>
-											<td><a href='#' class='list_op insertAttach' title='${att.id}' isImg="${att.isImg }" 
-												name="${att.newName }" oldName="${att.oldName }">插入附件</a>&nbsp;<a href='#' title="${att.id }" class='list_op deleteAttach delete'>删除附件</a></td>
+											<td><a href='#' class='btn btn-xs btn-info insertAttach' title='${att.id}' isImg="${att.isImg }" 
+												name="${att.newName }" oldName="${att.oldName }">插入附件</a>&nbsp;<a href='#' title="${att.id }" class='btn btn-xs btn-danger deleteAttach delete'>删除附件</a></td>
 										</tr>
 										</c:forEach>
 									</tbody>

@@ -6,8 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
 <title>添加记录成功</title>
 <script type="text/javascript">
+//获取当前访问路径
+var href = window.location.href;
+//截取字符串
+href = href.substring(href.indexOf("h"),href.lastIndexOf("/j"));
+var href = href+"/admin/topic/returnAuditList";
 //刷新父页面
-var href = "http://localhost:8888/cms/admin/topic/returnAuditList";
 window.opener.location.href=href;
 function closewindow(){
 	if(window.opener){

@@ -11,6 +11,10 @@
 </script>
 <div class="row">
 	<div class="col-md-12">
+		<h3 class="page-title">
+			个人中心
+			<small> <i class="fa fa-shopping-cart"></i> 修改个人信息 </small>
+		</h3>
 		<ul class="page-breadcrumb breadcrumb">
 			<li>
 				<i class="fa fa-home"></i>

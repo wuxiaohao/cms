@@ -55,7 +55,7 @@ public class SystemController {
 	 * @return
 	 */
 	@RequestMapping("/baseinfo")
-	public String showBaseInfo() {
+	public String showBaseInfo(Model model) {
 		return "system/showBaseInfo";
 	}
 	/**
@@ -64,7 +64,7 @@ public class SystemController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/baseinfo/update",method=RequestMethod.GET)
+	@RequestMapping(value="/baseinfo/updateUI",method=RequestMethod.POST)
 	public String updateBaseInfo(HttpSession session,Model model) {
 		model.addAttribute("baseInfo", session.getServletContext().getAttribute("baseInfo"));
 		return "system/updateBaseInfo";
@@ -77,7 +77,7 @@ public class SystemController {
 	 * @return
 	 */
 	@RequestMapping(value="/baseinfo/update",method=RequestMethod.POST)
-	public String updateBaseInfo(@Validated BaseInfo baseInfo,BindingResult br,HttpSession session) {
+	public String updateBaseInfo(@Validated BaseInfo baseInfo,BindingResult br,HttpSession session,Model model) {
 		if(br.hasErrors()) {
 			return "system/updateBaseInfo";
 		}
@@ -85,7 +85,8 @@ public class SystemController {
 		session.getServletContext().setAttribute("baseInfo", bi);
 		//indexService.generateBottom();
 		//indexService.generateTop();
-		return "redirect:/admin/system/baseinfo";
+		model.addAttribute("success", "修改成功!");
+		return showBaseInfo(model);
 	}
 	/**
 	 * 显示未引用的垃圾附件和首页图片的页面

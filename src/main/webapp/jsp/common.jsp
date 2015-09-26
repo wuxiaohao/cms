@@ -54,7 +54,7 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
-<%-- <script src="${pageContext.servletContext.contextPath }/resources/assets/myjs/table-managed.js" ></script> --%>
+<script src="${pageContext.servletContext.contextPath }/resources/assets/myjs/table-managed.js" ></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jstree/dist/jstree.min.js"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jstree/dist/jstree.js"></script>
 
@@ -80,10 +80,13 @@
 <script src="${pageContext.servletContext.contextPath }/resources/assets/bootbox.js"></script>
 <!-- jqueryUI -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery.ui.all.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery-ui.css"/>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.core.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.button.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.mouse.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.sortable.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.spinner.js"></script>
 
 <!-- 自定义插件 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
@@ -93,6 +96,12 @@
 <!-- 将java的类引入 -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
 
+<!-- 阻止自动换行 -->
+<style>
+.c{
+display:inline;
+}
+</style>
 
 <script>
 	jQuery(document).ready(function() {     
@@ -104,7 +113,7 @@
 		toastr.options = {
 		        "closeButton": true, //是否显示关闭按钮
 		        "debug": false, //是否使用debug模式
-		        "positionClass": "toast-top-right",//弹出窗的位置
+		        "positionClass": "toast-bottom-right",//弹出窗的位置
 		        "showDuration": "300",//显示的动画时间
 		        "hideDuration": "1000",//消失的动画时间
 		        "timeOut": "4000", //展现时间

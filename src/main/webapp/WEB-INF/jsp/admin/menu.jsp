@@ -71,7 +71,7 @@
 							栏目信息管理</a>
 						</li>
 						<li>
-							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
+							<a id="wenzhang" class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
 							<i class="icon-wallet"></i>
 							文章内容管理</a>
 						</li>
@@ -85,7 +85,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/cmsLink/links">
+							<a id="lianjie" class="ajaxify" href="<%=request.getContextPath() %>/admin/cmsLink/links">
 							<i class="icon-wallet"></i>
 							超级链接管理</a>
 						</li>

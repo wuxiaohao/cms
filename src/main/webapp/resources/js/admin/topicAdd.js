@@ -76,8 +76,8 @@ $(function(){
 		}
 		node+="<td><input type='checkbox' value='"+attach.id+"' name='isAttach' class='isAttach'>" +
 				"<input type='hidden' name='aids' value='"+attach.id+"'/></td>";
-		node+="<td><a href='#' class='list_op insertAttach' title='"+attach.id+"' isImg='"+attach.isImg+"' name='"+attach.newName+"' oldName='"+attach.oldName+"'>插入附件</a>" +
-				"&nbsp;<a href='#' title='"+attach.id+"' class='list_op deleteAttach'>删除附件</a></td>";
+		node+="<td><a href='#' class='btn btn-xs btn-info insertAttach' title='"+attach.id+"' isImg='"+attach.isImg+"' name='"+attach.newName+"' oldName='"+attach.oldName+"'>插入附件</a>" +
+				"&nbsp;<a href='#' title='"+attach.id+"' class='btn btn-xs btn-danger deleteAttach'>删除附件</a></td>";
 		node+="</tr>";
 		return node;
 	}

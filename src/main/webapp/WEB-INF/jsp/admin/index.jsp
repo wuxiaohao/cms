@@ -43,8 +43,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(function(){
 		//文章添加或修改成功后的跳转
 		if($("#message").val() == "1"){
-			 $("#a").click();
+			 $("#wenzhang").click();
 		}
+		
+		if($("#message2").val() == "2"){
+			var type = $("#type").val()
+			var href = $("#lianjie").attr("href");
+			if(type != null){
+				hrefNew = href +"?type="+type;
+				$("#lianjie").attr("href",hrefNew);
+			}
+			$("#lianjie").click();
+			$("#lianjie").attr("href",href);
+		}
+		
 	});
 	
 </script>
@@ -56,7 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body class="page-header-fixed page-quick-sidebar-push-content">
 <input type="hidden" id="contextPath" value="<%=request.getContextPath()%>"/>
 <input type="hidden" id="message" value="${message }"/>
-
+<input type="hidden" id="message2" value="${message2 }"/>
+<input type="hidden" id="type" value="${type }"/>
 <!-- 获取头 -->
 <%@ include file="head.jsp"%>
  <div class="clearfix">
@@ -71,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="page-content-wrapper">
 		<div class="page-content">
 			<!-- BEGIN STYLE CUSTOMIZER -->
-			<a id="a" href="<%=request.getContextPath()%>/admin/topic/audits" class="ajaxify"></a>
+			<%-- <a id="a" href="<%=request.getContextPath()%>/admin/topic/audits" class="ajaxify"></a> --%>
 			<!-- END STYLE CUSTOMIZER -->
 			
 			<div class="page-content-body">

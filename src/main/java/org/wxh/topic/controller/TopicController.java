@@ -124,7 +124,11 @@ public class TopicController {
 	@RequestMapping("/audits")
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		session.removeAttribute("message");
+		//清空session残留
+		if(session.getAttribute("message") != null){
+			session.removeAttribute("message");
+			logger.info("文章残留的session已清除干净");
+		}
 		initList(con, cid, model, session,1);
 		return "topic/list";
 	}
@@ -168,8 +172,10 @@ public class TopicController {
 			//indexService.generateBody();
 		}
 		if(status==0) {
+			model.addAttribute("success", "文章发布成功!");
 			return unauditList(null,null,model,session);
 		} else {
+			model.addAttribute("success", "文章已取消发布!");
 			return auditList(null,null,model,session);
 		}
 	}

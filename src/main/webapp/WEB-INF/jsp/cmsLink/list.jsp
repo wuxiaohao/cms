@@ -5,20 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery-ui.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/inc.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.button.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.spinner.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/dwr/engine.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
 <script type="text/javascript">
 $(function(){
+	$("a.delete").confirmOperator();
+	var success='<%=request.getAttribute("success")%>';
+	var error='<%=request.getAttribute("error")%>';
+	showMessage(success,error);
+	
 	$(".setPos").click(setPos);
 	function setPos(event) {
 		event.preventDefault();//设置<a></a>标签不执行超链接的操作
@@ -62,72 +55,114 @@ $(function(){
 	//选择超链接类型事件
 	$("#selectType").change(function(){
 		var v = $(this).val();
+		var href = window.location.href;
+		href = href + "/cmsLink/returnAuditList"; //先跳转到首页
 		if(v=="-1") {
-			window.location.href="links"; //根据指定的类型，刷新页面
+			window.location.href = href;
 		} else {
-			window.location.href="links?type="+v //根据指定的类型，刷新页面
+			window.location.href=href+"?type="+v //根据指定的类型，刷新页面
 		}
 	})
 }) 
 </script>
 </head>
-<body>
-<div id="content">
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			超级链接管理
+			<small> <i class="fa fa-shopping-cart"></i> 增加删除修改超级链接 </small>
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>首页管理</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/cmsLink/links" class="ajaxify">超级链接管理</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
+</div>
+
 <input type="hidden" id="maxPos" value="${max }"/>
 <input type="hidden" id="minPos" value="${min }"/>
-	<h3 class="admin_link_bar">
-		<jsp:include page="inc.jsp"></jsp:include>
-	</h3>
-	<table width="800" cellspacing="0" cellPadding="0" id="listTable">
-		<thead>
-		<tr><td colspan="6">选择类别:
-			<select id="selectType">
-			<option value="-1">请选择类别筛选</option>
-			<c:forEach items="${ types}" var="t">
-				<option value="${t }" <c:if test="${param.type eq t}">selected</c:if>>${t }</option>
-			</c:forEach>
-			</select></td></tr>
-		<tr>
-			<td>标题</td>
-			<td width="240">超链接</td>
-			<td>类型</td>
-			<td>打开方式</td>
-			<td>位置</td>
-			<td>用户操作</td>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${datas.datas }" var="cl">
-			<tr>
-				<td><a href="${cl.id }" class="list_link">${cl.title }</a></td>
-				<td><a href="${cl.url }" class="list_link">${cl.url }</a></td>
-				<td>${cl.type }</td>
-				<td>
-				<c:if test="${cl.newWin eq 0}">本窗口</c:if>
-				<c:if test="${cl.newWin eq 1}">新窗口</c:if>
-				</td>
-				<td class="posCon">
-				${pic.pos }&nbsp;<a href="#" class="list_opg setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
-				</td>
-				<td>
-					<a href="delete/${cl.id }" class="list_op delete">删除</a>
-					<a href="<%=request.getContextPath() %>/admin/cmsLink/update/${cl.id }" class="list_op">更新</a>
-				&nbsp;
-				</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-		<tfoot>
-		<tr>
-			<td colspan="6" style="text-align:right;margin-right:10px;">
-			<jsp:include page="/jsp/pager.jsp">
-				<jsp:param value="${datas.total }" name="totalRecord"/>
-				<jsp:param value="links" name="url"/>
-			</jsp:include>
-			</td>
-		</tr>
-		</tfoot>
-	</table>
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet gren">
+			<div class="portlet-title">
+				<div class="caption">
+					链接列表
+				</div>
+				<div class="caption" style="float: right;">
+					<select id="selectType" class="bs-select form-control">
+					<option value="-1">请选择类别筛选</option>
+					<c:forEach items="${ types}" var="t">
+						<option value="${t }" <c:if test="${param.type eq t}">selected</c:if>>${t }</option>
+					</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="btn-group">
+						<a class="btn green ajaxify" href="admin/cmsLink/addUI">添加超链接</a>
+					</div>
+				</div>
+				<table class="table table-striped table-hover table-bordered" id="sample_1">
+					<thead>
+						<tr>
+							<th>标题</th>
+							<th width="240">超链接</th>
+							<th>类型</th>
+							<th>打开方式</th>
+							<th>位置</th>
+							<th>用户操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${datas.datas }" var="cl">
+							<tr>
+								<td><a href="admin/cmsLink/${cl.id }" class="ajaxify">${cl.title }</a></td>
+								<td><a href="${cl.url }" target="_blank">${cl.url }</a></td>
+								<td>${cl.type }</td>
+								<td>
+									<c:if test="${cl.newWin eq 0}">本窗口</c:if>
+									<c:if test="${cl.newWin eq 1}">新窗口</c:if>
+								</td>
+								<td class="posCon">
+									${pic.pos }&nbsp;<a href="#" class="list_opg setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
+								</td>
+								
+								<td><a href="admin/cmsLink/delete/${cl.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
+									<a href="admin/cmsLink/updateUI/${cl.id }" class="btn btn-sm blue ajaxify"> 更新 </a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					<tfoot>
+					<tr>
+						<td colspan="6" style="text-align:right;margin-right:10px;">
+						<jsp:include page="/jsp/pager.jsp">
+							<jsp:param value="${datas.total }" name="totalRecord"/>
+							<jsp:param value="admin/cmsLink/links" name="url"/>
+						</jsp:include>
+						</td>
+					</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
 </div>
-</body>
+<!-- END PAGE CONTENT -->
 </html>

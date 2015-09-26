@@ -3,7 +3,7 @@
 	$.fn.keywordinput = function(opts) {
 		setting = $.extend({
 			number:5,
-			msg:"请输入关键字，通过逗号或者回车确认",
+			msg:"请输入关键字，通过回车键确认",
 			autocomplete:{
 				enable:false,
 				url:"#",
@@ -43,12 +43,12 @@
 			$(this).val("");
 		});
 		$(input).blur(function(){
-			$(this).val("请输入关键字，通过逗号或者回车确认");
+			$(this).val("请输入关键字，通过回车键确认");
 		});
 	}
 	function inputKeyword(event) {
 		var code = event.keyCode;
-		if(code==17) {
+		if(code==13) {
 			var c = $(this).val();
 			if(c!="") {
 				if($(".keyword-in").length>=setting.number) {

@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<sf:form id="addForm" method="post" modelAttribute="topicDto" class="form-horizontal ajaxiform">
+				<sf:form id="addForm" method="post" modelAttribute="topicDto" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}" >
 				<table class="table table-striped table-hover table-bordered">
 					<tbody>
 						<tr>
