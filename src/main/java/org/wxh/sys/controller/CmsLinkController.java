@@ -54,7 +54,7 @@ public class CmsLinkController {
 		Map<String,Integer> m = cmsLinkService.getMinAndMaxPos();
 		model.addAttribute("min", m.get("min"));
 		model.addAttribute("max",m.get("max"));
-		
+		model.addAttribute("type",type);
 		//清空session残留
 		if(session.getAttribute("type") != null || session.getAttribute("message2") !=null ){
 			session.removeAttribute("type");

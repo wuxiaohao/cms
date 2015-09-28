@@ -17,13 +17,13 @@ $(function(){
 		event.preventDefault();//设置<a></a>标签不执行超链接的操作
 		var pos = $(this).attr("pos");
 		var id = $(this).attr("objid");
-		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3'/>&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='list_opg confirmPos'>确定</a>&nbsp;<a href='' class='list_opg cancelPos'>取消</a></span>");
+		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3'/>&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='btn btn-sm blue confirmPos'>确定</a>&nbsp;<a href='' class='btn btn-sm red cancelPos'>取消</a></span>");
 		$(this).next("span").children("input:text").spinner({
 			min:$("#minPos").val(),
 			max:$("#maxPos").val(),
 			spin:function(event,ui){
 				$("#pos"+id).val(ui.value);
-			}
+			} 
 		});
 		//取消点击事件
 		$(this).off("click");
@@ -45,7 +45,9 @@ $(function(){
 		if(op!=np) {
 			//通过dwr更新节点
 			dwrService.updateLinkPos(id,op,np,function(){
-				window.location.reload();//刷新页面
+				var href = window.location.href;
+				href = href + "/cmsLink/returnAuditList"; //先跳转到首页
+				window.location.href = href;
 			});
 		}
 		$(this).parent("span").prev("a.setPos").on("click",setPos);//重新绑定点击事件
@@ -106,7 +108,7 @@ $(function(){
 					<select id="selectType" class="bs-select form-control">
 					<option value="-1">请选择类别筛选</option>
 					<c:forEach items="${ types}" var="t">
-						<option value="${t }" <c:if test="${param.type eq t}">selected</c:if>>${t }</option>
+						<option value="${t }" <c:if test="${type eq t}">selected</c:if>>${t }</option>
 					</c:forEach>
 					</select>
 				</div>
@@ -120,12 +122,12 @@ $(function(){
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<th>标题</th>
-							<th width="240">超链接</th>
+							<th width="15%">标题</th>
+							<th width="25%">超链接</th>
 							<th>类型</th>
-							<th>打开方式</th>
-							<th>位置</th>
-							<th>用户操作</th>
+							<th width="8%">打开方式</th>
+							<th width="30%">位置</th>
+							<th width="13%">用户操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -138,8 +140,13 @@ $(function(){
 									<c:if test="${cl.newWin eq 0}">本窗口</c:if>
 									<c:if test="${cl.newWin eq 1}">新窗口</c:if>
 								</td>
+								
+										<!-- <button type="button" class="btn red">Left</button>
+										<button type="button" class="btn green">Middle</button>
+										<button type="button" class="btn blue">Right</button> -->
+									
 								<td class="posCon">
-									${pic.pos }&nbsp;<a href="#" class="list_opg setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
+									${pic.pos }&nbsp;<a class="btn btn-sm green setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
 								</td>
 								
 								<td><a href="admin/cmsLink/delete/${cl.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>

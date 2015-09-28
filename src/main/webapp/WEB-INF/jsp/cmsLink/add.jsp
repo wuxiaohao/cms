@@ -9,12 +9,12 @@ $(function(){
 	$("#urlType").change(function(){
 		var v = $(this).val();
 		if(v=="-1") {
-			$("#type").removeAttr("readonly");
-			$("#type").select();
-			$("#type").focus();
+			$(".type").removeAttr("readonly");
+			$(".type").select();
+			$(".type").focus();
 		} else if(v!="0"){
-			$("#type").val(v);
-			$("#type").attr("readonly","true");
+			$(".type").val(v);
+			$(".type").attr("readonly","true");
 		}
 	})
 });
@@ -98,7 +98,7 @@ $(function(){
 									</c:forEach>
 									<option value="-1">选择其他</option>
 									</select>
-									<sf:input path="type" readonly="true" class="form-control" />
+									<sf:input path="type" readonly="true" class="form-control type" />
 								</div>
 							</div>
 						</div>
