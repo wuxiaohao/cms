@@ -5,30 +5,61 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/inc.js"></script>
 </head>
-<body>
-<div id="content">
-	<table width="800" cellspacing="0" cellPadding="0" id="listTable">
-		<thead>
-		<tr>
-			<td>缩略图</td>
-			<td>名称</td>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${datas }" var="pic">
-			<tr>
-				<td><img src="<%=request.getContextPath()%>/resources/indexPic/thumbnail/${pic}"/></td>
-				<td>${pic }</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			系统清理
+			<small> <i class="fa fa-shopping-cart"></i> 清理无用的数据、图片、文件 </small>
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>系统配置</a>
+			</li>
+			<li>
+				<a href="admin/system/cleans" class="ajaxify">系统清理管理</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/system/cleanList/pics" class="ajaxify">未引用的首页图片</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
 </div>
-</body>
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet gren">
+			<div class="portlet-body">
+				<table class="table table-striped table-hover table-bordered" id="sample_1">
+					<thead>
+						<tr>
+							<th>缩略图</th>
+							<th>名称</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${datas }" var="pic">
+							<tr>
+								<td><img src="<%=request.getContextPath()%>/resources/indexPic/thumbnail/${pic}"/></td>
+								<td>${pic }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT -->
 </html>

@@ -65,17 +65,6 @@ public class CmsLinkController {
 		return "cmsLink/list";
 	}
 	/**
-	 * 跳转到首页，再从首页跳转到超链接列表
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/redirectIndex")
-	public String redirectIndex(@RequestParam(required=false) String type,HttpSession session){
-		session.setAttribute("type",type);
-		session.setAttribute("message2","2");
-		return "redirect:/admin";
-	}
-	/**
 	 * 返回添加超链接的界面
 	 * @param model
 	 * @return

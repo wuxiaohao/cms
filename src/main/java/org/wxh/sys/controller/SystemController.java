@@ -173,7 +173,8 @@ public class SystemController {
 		} else if(name.equals("pics")) {
 			indexPicService.cleanNoUseIndexPic(listNoUseIndexPic(indexPicService.listAllIndexPicName()));
 		}
-		return "redirect:/admin/system/cleans";
+		model.addAttribute("success", "清理完成!");
+		return listCleans(model);
 	}
 	
 }

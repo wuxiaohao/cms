@@ -3,14 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.validate.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.validate.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#beginBackup").click(function(){
@@ -27,24 +19,64 @@ $(function(){
 	});
 });
 </script>
-</head>
-<body>
-<div id="content">
-	<h3 class="admin_link_bar">
-		<jsp:include page="inc.jsp"></jsp:include>
-	</h3>
-	<sf:form method="post" modelAttribute="userDto" id="addForm">
-	<table width="800" cellspacing="0" cellPadding="0">
-		<thead><tr><td colspan="2">备份数据功能</td></tr></thead>
-		<tr>
-			<td class="rightTd" width="200px">输入备份的文件名:</td>
-			<td class="leftTd"><input type="text" name="backupFilename" id="backupFilename"/></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="centerTd"><span id="backupCon"><input type="button" value="进行备份" id="beginBackup"/><input type="reset"/></span></td>
-		</tr>
-	</table>
-	</sf:form>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			网站数据备份
+			<small> <i class="fa fa-shopping-cart"></i> 备份和恢复数据、文件 </small>
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>系统配置</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/backups" class="ajaxify">网站数据备份</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/backup/addUI" class="ajaxify">添加备份</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
 </div>
-</body>
-</html>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN VALIDATION STATES-->
+		<div class="portlet gren">
+			<div class="portlet-body">
+				<!-- BEGIN FORM-->
+				<sf:form id="addForm" method="post" action="admin/backup/add" class="form-horizontal ajaxiform">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-3">输入备份的文件名:</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<input type="text" name="backupFilename" id="backupFilename" class="form-control" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions fluid">
+						<div class="row">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="button" class="btn green" id="beginBackup">备份</button>
+								<a type="button" class="btn default ajaxify" href="admin/backups">取消</a>
+								<span id="backupCon"></span>
+							</div>
+						</div>
+					</div>
+				</sf:form>
+				<!-- END FORM-->
+			</div>
+		</div>
+		<!-- END VALIDATION STATES-->
+	</div>
+</div>

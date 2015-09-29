@@ -27,7 +27,22 @@
 	<div class="col-md-12">
 		<h3 class="page-title">
 			文章内容管理
+			<small> <i class="fa fa-shopping-cart"></i> 发布、添加、更新、删除文章 </small>
 		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>文章管理</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/topic/audits" class="ajaxify">文章内容管理</a>
+			</li>
+		</ul>
 	</div>
 </div>
 <!-- BEGIN PAGE CONTENT-->

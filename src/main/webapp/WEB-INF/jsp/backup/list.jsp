@@ -6,55 +6,92 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
 <script type="text/javascript">
 $(function(){
+	$("a.delete").confirmOperator();
+	var success='<%=request.getAttribute("success")%>';
+	var error='<%=request.getAttribute("error")%>';
+	showMessage(success,error);		
+	
 	$("a.resumeDatabase").click(function() {
 		if(!confirm("覆盖之后不可恢复，确定要覆盖吗？建议先进行备份")) {
 			event.preventDefault();
 		} else {
-			$("a.resumeDatabase").parent("td").html("恢复中,请稍等...");
+			$("#info").text("恢复中,请稍等...");
 		}
 	})
 })
 </script>
 </head>
-<body>
-<div id="content">
-	<h3 class="admin_link_bar">
-		<jsp:include page="inc.jsp"></jsp:include>
-	</h3>
-	<table width="800" cellspacing="0" cellPadding="0" id="listTable">
-		<thead>
-		<tr>
-			<td>备份文件名称</td>
-			<td>文件大小</td>
-			<td>备份时间</td>
-			<td>文件类型</td>
-			<td>用户操作</td>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${backups }" var="b">
-			<tr>
-				<td>${b.name }</td>
-				<td>${b.size }K</td>
-				<td><fmt:formatDate value="${b.time }" pattern="yyyy-MM-dd HH:mm"/></td>
-				<td>
-					${b.filetype }
-				</td>
-				<td>
-					<a href="delete/${b.name }?type=${b.filetype}"  class="list_op delete">删除</a>
-					<a href="resume/${b.name}?type=${b.filetype}" class="list_op resumeDatabase">恢复数据库</a>
-				&nbsp;
-				</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			网站数据备份
+			<small> <i class="fa fa-shopping-cart"></i> 备份和恢复数据、文件 </small>
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>系统配置</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/backups" class="ajaxify">网站数据备份</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
 </div>
-</body>
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet gren">
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="btn-group">
+						<a class="btn green ajaxify" href="admin/backup/addUI">备份数据库</a>
+					</div>
+					<div style="float: right;color: red; font-size: 18px;" id="info"></div>
+				</div>
+				<table class="table table-striped table-hover table-bordered" id="sample_1">
+					<thead>
+						<tr>
+							<th>备份文件名称</th>
+							<th>文件大小</th>
+							<th>备份时间</th>
+							<th>文件类型</th>
+							<th>用户操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${backups }" var="b">
+							<tr>
+								<td>${b.name }</td>
+								<td>${b.size }K</td>
+								<td><fmt:formatDate value="${b.time }" pattern="yyyy-MM-dd HH:mm"/></td>
+								<td>
+									${b.filetype }
+								</td>
+								<td>
+									<a href="admin/delete/${b.name }?type=${b.filetype}"  class="btn btn-sm red ajaxify delete">删除</a>
+									<a href="admin/resume/${b.name}?type=${b.filetype}" class="btn btn-sm blue ajaxify resumeDatabase">恢复数据库</a>
+								&nbsp;
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT -->
 </html>

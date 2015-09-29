@@ -5,44 +5,66 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/inc.js"></script>
 </head>
-<body>
-<div id="content">
-	<table width="800" cellspacing="0" cellPadding="0" id="listTable">
-		<thead>
-		<tr>
-			<td>原始文件名</td>
-			<td>新文件名</td>
-			<td>大小</td>
-			<td>类型</td>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${datas.datas }" var="att">
-			<tr>
-				<td>${att.oldName }</td>
-				<td>${att.newName }</td>
-				<td>${att.size/1024 }K</td>
-				<td>${att.type }</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-		<tfoot>
-		<tr>
-			<td colspan="6" style="text-align:right;margin-right:10px;">
-			<jsp:include page="/jsp/pager.jsp">
-				<jsp:param value="${datas.total }" name="totalRecord"/>
-				<jsp:param value="atts" name="url"/>
-			</jsp:include>
-			</td>
-		</tr>
-		</tfoot>
-	</table>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			系统清理
+			<small> <i class="fa fa-shopping-cart"></i> 清理无用的数据、图片、文件 </small>
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>系统配置</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/system/cleans" class="ajaxify">系统清理管理</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/system/cleanList/atts" class="ajaxify">未引用的垃圾附件</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
 </div>
-</body>
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet gren">
+			<div class="portlet-body">
+				<table class="table table-striped table-hover table-bordered" id="sample_1">
+					<thead>
+						<tr>
+							<th>原始文件名</th>
+							<th>新文件名</th>
+							<th>大小</th>
+							<th>类型</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${datas.datas }" var="att">
+							<tr>
+								<td>${att.oldName }</td>
+								<td>${att.newName }</td>
+								<td>${att.size/1024 }K</td>
+								<td>${att.type }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT -->
 </html>

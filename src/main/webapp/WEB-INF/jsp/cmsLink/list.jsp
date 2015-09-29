@@ -46,7 +46,8 @@ $(function(){
 			//通过dwr更新节点
 			dwrService.updateLinkPos(id,op,np,function(){
 				var href = window.location.href;
-				href = href + "/cmsLink/redirectIndex"; //先跳转到首页
+				href = href.substring(href.indexOf("h"),href.lastIndexOf("/"));
+				href = href + "/redirectIndexByLink"; //先跳转到首页
 				window.location.href = href;
 			});
 		}
@@ -58,7 +59,8 @@ $(function(){
 	$("#selectType").change(function(){
 		var v = $(this).val();
 		var href = window.location.href;
-		href = href + "/cmsLink/returnAuditList"; //先跳转到首页
+		href = href.substring(href.indexOf("h"),href.lastIndexOf("/"));
+		href = href + "/redirectIndexByLink"; //先跳转到首页
 		if(v=="-1") {
 			window.location.href = href;
 		} else {

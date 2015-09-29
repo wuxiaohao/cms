@@ -42,11 +42,6 @@
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
 		<div class="portlet gren">
-			<div class="portlet-title">
-				<div class="caption">
-					首页新闻图片列表
-				</div>
-			</div>
 			<div class="portlet-body">
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>

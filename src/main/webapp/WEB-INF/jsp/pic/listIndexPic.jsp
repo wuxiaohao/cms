@@ -39,32 +39,19 @@ $(function(){
 	//确定事件
 	$(".posCon").on("click",".confirmPos",function(e){
 		e.preventDefault();
-		var id = $(this).parent("span").prev("a").attr("objid");
-		var op = $(this).parent("span").prev("a").attr("pos");
-		var np = $(this).prev("input").val();
+		var id = $(this).parent("span").prev("a").attr("picid"); //当前首页图片的id
+		var op = $(this).parent("span").prev("a").attr("pos"); //原位置
+		var np = $(this).prev("input").val(); //新位置
 		if(op!=np) {
 			//通过dwr更新节点
-			dwrService.updateLinkPos(id,op,np,function(){
-				var href = window.location.href;
-				href = href + "/cmsLink/returnAuditList"; //先跳转到首页
-				window.location.href = href;
+			dwrService.updatePicPos(id,op,np,function(){
+				window.location.reload(); //刷新页面
 			});
 		}
 		$(this).parent("span").prev("a.setPos").on("click",setPos);//重新绑定点击事件
 		$(this).parent("span").remove();
 	});
 	
-	//选择超链接类型事件
-	$("#selectType").change(function(){
-		var v = $(this).val();
-		var href = window.location.href;
-		href = href + "/cmsLink/returnAuditList"; //先跳转到首页
-		if(v=="-1") {
-			window.location.href = href;
-		} else {
-			window.location.href=href+"?type="+v //根据指定的类型，刷新页面
-		}
-	})
 }) 
 </script>
 </head>
@@ -99,11 +86,6 @@ $(function(){
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
 		<div class="portlet gren">
-			<div class="portlet-title">
-				<div class="caption">
-					宣传图片列表
-				</div>
-			</div>
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">

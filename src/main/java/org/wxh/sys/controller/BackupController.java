@@ -36,7 +36,7 @@ public class BackupController {
 	 * 返回备份的页面
 	 * @return
 	 */
-	@RequestMapping(value="/backup/add",method=RequestMethod.GET)
+	@RequestMapping(value="/backup/addUI",method=RequestMethod.POST)
 	public String backup() {
 		return "backup/add";
 	}
@@ -46,10 +46,11 @@ public class BackupController {
 	 * @return
 	 */
 	@RequestMapping(value="/backup/add",method=RequestMethod.POST)
-	public String backup(String backupFilename) {
+	public String backup(String backupFilename ,Model model) {
 		BackupFileUtil bfu = BackupFileUtil.getInstance(SystemContext.getRealPath());
 		bfu.backup(backupFilename);
-		return "redirect:/admin/backups";
+		model.addAttribute("success", "备份成功!");
+		return list(model);
 	}
 	/**
 	 * 显示所有的备份文件
@@ -68,11 +69,12 @@ public class BackupController {
 	 * @param type
 	 * @return
 	 */
-	@RequestMapping("delete/{name}")
-	public String delete(@PathVariable String name,String type) {
+	@RequestMapping(value= "delete/{name}" ,method=RequestMethod.POST)
+	public String delete(@PathVariable String name,String type,Model model) {
 		BackupFileUtil bfu = BackupFileUtil.getInstance(SystemContext.getRealPath());
 		bfu.delete(name+"."+type);
-		return "redirect:/admin/backups";
+		model.addAttribute("success", "删除成功!");
+		return list(model);
 	}
 	/**
 	 * 根据备份文件恢复数据
@@ -81,13 +83,14 @@ public class BackupController {
 	 * @return
 	 */
 	@RequestMapping("resume/{name}")
-	public String resume(@PathVariable String name,String type) {
+	public String resume(@PathVariable String name,String type,Model model) {
 		BackupFileUtil bfu = BackupFileUtil.getInstance(SystemContext.getRealPath());
 		bfu.resume(name+"."+type);
 		//indexService.generateTop();
 		//indexService.generateBody();
 		//indexService.generateBottom();
-		return "redirect:/admin/backups";
+		model.addAttribute("success", "系统数据已恢复!");
+		return list(model);
 	}
 	
 }
