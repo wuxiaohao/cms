@@ -1,0 +1,8 @@
+root
+wxhroot
+
+wxh2
+wxhwxh
+
+/etc/init.d/smb status ¼ì²ésambaÆô¶¯×´Ì¬
+/etc/init.d/smb start  Æô¶¯samba
