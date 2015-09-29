@@ -69,8 +69,8 @@ public class CmsLinkController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/returnAuditList")
-	public String returnAuditList(@RequestParam(required=false) String type,HttpSession session){
+	@RequestMapping("/redirectIndex")
+	public String redirectIndex(@RequestParam(required=false) String type,HttpSession session){
 		session.setAttribute("type",type);
 		session.setAttribute("message2","2");
 		return "redirect:/admin";

@@ -46,7 +46,7 @@ $(function(){
 			//通过dwr更新节点
 			dwrService.updateLinkPos(id,op,np,function(){
 				var href = window.location.href;
-				href = href + "/cmsLink/returnAuditList"; //先跳转到首页
+				href = href + "/cmsLink/redirectIndex"; //先跳转到首页
 				window.location.href = href;
 			});
 		}
@@ -146,7 +146,7 @@ $(function(){
 										<button type="button" class="btn blue">Right</button> -->
 									
 								<td class="posCon">
-									${pic.pos }&nbsp;<a class="btn btn-sm green setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
+									${cl.pos }&nbsp;<a class="btn btn-sm green setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
 								</td>
 								
 								<td><a href="admin/cmsLink/delete/${cl.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>

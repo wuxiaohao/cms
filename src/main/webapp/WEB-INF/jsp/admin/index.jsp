@@ -42,12 +42,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	$(function(){
 		//文章添加或修改成功后的跳转
-		if($("#message").val() == "1"){
+		if($("#messageByTopic").val() == "1"){
+			 $("#messageByTopic").val("");
 			 $("#wenzhang").click();
 		}
 		
+		//首页宣传图片添加或修改成功后的跳转
+		if($("#messageByImg").val() == "1"){
+			$("#messageByImg").val("");
+			$("#HeadImg").click();
+		}
+		
 		if($("#message2").val() == "2"){
-			var type = $("#type").val()
+			$("#message2").val("");
+			var type = $("#type").val();
 			var href = $("#lianjie").attr("href");
 			if(type != null){
 				hrefNew = href +"?type="+type;
@@ -67,7 +75,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body class="page-header-fixed page-quick-sidebar-push-content">
 <input type="hidden" id="contextPath" value="<%=request.getContextPath()%>"/>
-<input type="hidden" id="message" value="${message }"/>
+<input type="hidden" id="messageByTopic" value="${messageByTopic }"/>
+<input type="hidden" id="messageByImg" value="${messageByImg }"/>
 <input type="hidden" id="message2" value="${message2 }"/>
 <input type="hidden" id="type" value="${type }"/>
 <!-- 获取头 -->

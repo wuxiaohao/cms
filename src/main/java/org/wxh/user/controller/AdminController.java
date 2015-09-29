@@ -35,4 +35,25 @@ public class AdminController {
 		session.invalidate();
 		return "redirect:/login";
 	}
+	
+	/**
+	 * 跳转到首页，再从首页跳转到文章列表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/redirectIndexByTopic")
+	public String redirectIndexByTopic(HttpSession session){
+		session.setAttribute("messageByTopic","1");
+		return "redirect:/admin";
+	}
+	/**
+	 * 跳转到首页，再从首页跳转到首页图片宣传列表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/redirectIndexByImg")
+	public String redirectIndexByImg(HttpSession session){
+		session.setAttribute("messageByImg","1");
+		return "redirect:/admin";
+	}
 }

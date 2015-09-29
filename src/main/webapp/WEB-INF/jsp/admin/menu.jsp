@@ -90,14 +90,19 @@
 							超级链接管理</a>
 						</li>
 						<li>
+							<a id="HeadImg" class="ajaxify" href="<%=request.getContextPath() %>/admin/pic/indexPics">
+							<i class="icon-wallet"></i>
+							首页宣传图片管理</a>
+						</li>
+						<li>
+							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/pic/newPics">
+							<i class="icon-wallet"></i>
+							首页新闻图片管理</a>
+						</li>
+						<li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/system/baseinfo">
 							<i class="icon-wallet"></i>
 							网站信息管理</a>
-						</li>
-						<li>
-							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/pic/indexPics">
-							<i class="icon-wallet"></i>
-							首页图片管理</a>
 						</li>
 					</ul>
 				</li>

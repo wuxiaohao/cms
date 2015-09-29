@@ -125,8 +125,8 @@ public class TopicController {
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
 		//清空session残留
-		if(session.getAttribute("message") != null){
-			session.removeAttribute("message");
+		if(session.getAttribute("messageByTopic") != null){
+			session.removeAttribute("messageByTopic");
 			logger.info("文章残留的session已清除干净");
 		}
 		initList(con, cid, model, session,1);
@@ -146,16 +146,7 @@ public class TopicController {
 		initList(con, cid, model, session,0);
 		return "topic/list";
 	}
-	/**
-	 * 跳转到首页，再从首页跳转到文章列表
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/returnAuditList")
-	public String returnAuditList(HttpSession session){
-		session.setAttribute("message","1");
-		return "redirect:/admin";
-	}
+	
 	
 	/**
 	 * 处理取消发布或发布
@@ -242,7 +233,7 @@ public class TopicController {
 		if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
 			//indexService.generateBody();
 		}
-		return "redirect:/jsp/common/addSuc.jsp";
+		return "redirect:/jsp/common/addSucByTopic.jsp";
 	}
 	/**
 	 * 修改文章信息的页面
@@ -299,7 +290,7 @@ public class TopicController {
 		if(topicService.isUpdateIndex(topicDto.getCid())) {
 			//indexService.generateBody();
 		}
-		return "redirect:/jsp/common/addSuc.jsp";
+		return "redirect:/jsp/common/updateSucByTopic.jsp";
 	}
 	/**
 	 * 显示某个文章信息

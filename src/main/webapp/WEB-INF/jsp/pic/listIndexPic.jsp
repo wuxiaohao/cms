@@ -5,32 +5,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery-ui.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/main.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/inc.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.core.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.button.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/ui/jquery.ui.spinner.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/dwr/engine.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
 <script type="text/javascript">
 $(function(){
+	$("a.delete").confirmOperator();
+	var success='<%=request.getAttribute("success")%>';
+	var error='<%=request.getAttribute("error")%>';
+	showMessage(success,error);
+	
 	$(".setPos").click(setPos);
 	function setPos(event) {
-		event.preventDefault(); //设置<a></a>标签不执行超链接的操作
+		event.preventDefault();//设置<a></a>标签不执行超链接的操作
 		var pos = $(this).attr("pos");
-		var id = $(this).attr("picid"); 
-		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3'/>&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='list_opg confirmPos'>确定</a>&nbsp;<a href='' class='list_opg cancelPos'>取消</a></span>");
+		var id = $(this).attr("objid");
+		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3'/>&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='btn btn-sm blue confirmPos'>确定</a>&nbsp;<a href='' class='btn btn-sm red cancelPos'>取消</a></span>");
 		$(this).next("span").children("input:text").spinner({
 			min:$("#minPos").val(),
 			max:$("#maxPos").val(),
 			spin:function(event,ui){
 				$("#pos"+id).val(ui.value);
-			}
+			} 
 		});
 		//取消点击事件
 		$(this).off("click");
@@ -46,74 +39,132 @@ $(function(){
 	//确定事件
 	$(".posCon").on("click",".confirmPos",function(e){
 		e.preventDefault();
-		var id = $(this).parent("span").prev("a").attr("picid"); //当前首页图片的id
-		var op = $(this).parent("span").prev("a").attr("pos"); //原位置
-		var np = $(this).prev("input").val(); //新位置
+		var id = $(this).parent("span").prev("a").attr("objid");
+		var op = $(this).parent("span").prev("a").attr("pos");
+		var np = $(this).prev("input").val();
 		if(op!=np) {
 			//通过dwr更新节点
-			dwrService.updatePicPos(id,op,np,function(){
-				window.location.reload(); //刷新页面
+			dwrService.updateLinkPos(id,op,np,function(){
+				var href = window.location.href;
+				href = href + "/cmsLink/returnAuditList"; //先跳转到首页
+				window.location.href = href;
 			});
 		}
 		$(this).parent("span").prev("a.setPos").on("click",setPos);//重新绑定点击事件
 		$(this).parent("span").remove();
 	});
+	
+	//选择超链接类型事件
+	$("#selectType").change(function(){
+		var v = $(this).val();
+		var href = window.location.href;
+		href = href + "/cmsLink/returnAuditList"; //先跳转到首页
+		if(v=="-1") {
+			window.location.href = href;
+		} else {
+			window.location.href=href+"?type="+v //根据指定的类型，刷新页面
+		}
+	})
 }) 
 </script>
 </head>
-<body>
-<div id="content">
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			首页宣传图片管理
+		</h3>
+		<ul class="page-breadcrumb breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+				>>
+			</li>
+			<li>
+				<a>首页管理</a>
+				>>
+			</li>
+			<li>
+				<a href="admin/pic/indexPics" class="ajaxify">首页宣传图片管理</a>
+			</li>
+		</ul>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
+</div>
+
 <input type="hidden" id="maxPos" value="${max }"/>
 <input type="hidden" id="minPos" value="${min }"/>
-	<h3 class="admin_link_bar">
-		<jsp:include page="inc.jsp"></jsp:include>
-	</h3>
-	<table width="800" cellspacing="0" cellPadding="0" id="listTable">
-		<thead>
-		<tr>
-			<td>缩略图</td>
-			<td width="240">图片标题</td>
-			<td>状态</td>
-			<td>链接类型</td>
-			<td>位置</td>
-			<td>用户操作</td>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${datas.datas }" var="pic">
-			<tr>
-				<td><img src='<%=request.getContextPath()%>/resources/indexPic/thumbnail/${pic.newName}'/></td>
-				<td><a href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/indexPic/${pic.id }','showPic')" class="list_link">${pic.title }</a></td>
-				<td>
-				<c:if test="${pic.status eq 0}"><span class="emp">未启用</span><a href="updateIndexPicStatus/${pic.id }"  class="list_op">启用</a></c:if>
-				<c:if test="${pic.status eq 1}"><span>启用</span><a href="updateIndexPicStatus/${pic.id }"  class="list_op">停用</a></c:if>
-				</td>
-				<td>
-				<c:if test="${pic.linkType eq 0}">站内链接</c:if>
-				<c:if test="${pic.linkType eq 1}"><a href='${pic.linkUrl }' class="list_link">站外链接</a></c:if>
-				</td>
-				<td class="posCon">
-				${pic.pos }&nbsp;<a href="#" class="list_opg setPos" pos="${pic.pos }" picid="${pic.id }">排序</a>
-				</td>
-				<td>
-					<a href="deleteIndexPic/${pic.id }" class="list_op delete">删除</a>
-					<a href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/updateIndexPic/${pic.id }','updatePic')" class="list_op">更新</a>
-				&nbsp;
-				</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-		<tfoot>
-		<tr>
-			<td colspan="6" style="text-align:right;margin-right:10px;">
-			<jsp:include page="/jsp/pager.jsp">
-				<jsp:param value="${datas.total }" name="totalRecord"/>
-				<jsp:param value="indexPics" name="url"/>
-			</jsp:include>
-			</td>
-		</tr>
-		</tfoot>
-	</table>
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet gren">
+			<div class="portlet-title">
+				<div class="caption">
+					宣传图片列表
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="btn-group">
+						<a class="btn green" href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/addIndexPic','addPic')">添加宣传图片</a>
+					</div>
+				</div>
+				<table class="table table-striped table-hover table-bordered" id="sample_1">
+					<thead>
+						<tr>
+							<th width="15%">缩略图</th>
+							<th width="25%">图片标题</th>
+							<th>状态</th>
+							<th width="8%">链接类型</th>
+							<th width="30%">位置</th>
+							<th width="13%">用户操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${datas.datas }" var="pic">
+							<tr>
+								<td><img src='<%=request.getContextPath()%>/resources/indexPic/thumbnail/${pic.newName}'/></td>
+								<td><a href="admin/pic/indexPic/${pic.id }" class="ajaxify">${pic.title }</a></td>
+								<td>
+									<c:if test="${pic.status eq 0}">
+										<span style="color: red">停用</span>
+										<a href="admin/pic/updateIndexPicStatus/${pic.id }"  class="btn btn-sm btn-info ajaxify">启用</a>
+									</c:if>
+									<c:if test="${pic.status eq 1}">
+										<span>启用</span>
+										<a href="admin/pic/updateIndexPicStatus/${pic.id }"  class="btn btn-sm btn-danger ajaxify">停用</a>
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${pic.linkType eq 0}">站内链接</c:if>
+									<c:if test="${pic.linkType eq 1}"><a href='${pic.linkUrl }' target="_blank">站外链接</a></c:if>
+								</td>
+								<td class="posCon">
+									${pic.pos }&nbsp;<a class="btn btn-sm green setPos" pos="${pic.pos }" objid="${pic.id }">排序</a>
+								</td>
+								
+								<td><a href="admin/pic/deleteIndexPic/${pic.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/updateIndexPic/${pic.id }','updatePic')" class="btn btn-sm blue"> 更新 </a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					<tfoot>
+					<tr>
+						<td colspan="6" style="text-align:right;margin-right:10px;">
+						<jsp:include page="/jsp/pager.jsp">
+							<jsp:param value="${datas.total }" name="totalRecord"/>
+							<jsp:param value="admin/pic/indexPics" name="url"/>
+						</jsp:include>
+						</td>
+					</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
 </div>
-</body>
+<!-- END PAGE CONTENT -->
 </html>
