@@ -17,6 +17,14 @@
 	<!-- 设定Spring 去哪些包中找Annotation -->
 	<context:component-scan base-package="org.wxh" />
 	
+	<!-- 注入属性 -->
+	<bean id="ftlPath" class="java.lang.String">
+		<constructor-arg value="/ftl" />
+	</bean>
+	<bean id="outPath" class="java.lang.String">
+		<constructor-arg value="/jsp/template" />
+	</bean>
+	
 	<!-- 导入Src目录下的jdbc.properties文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 

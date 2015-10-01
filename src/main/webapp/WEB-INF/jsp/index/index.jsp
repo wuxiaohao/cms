@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>欢迎访问${baseInfo.name }</title>
+<!-- 设置关键字，方便被搜索引擎搜索到 -->
 <meta http-equiv="keywords" content="昭通师专,昭通学院,昭通学院附中,昭通师专附中">   
 <meta http-equiv="description" content="昭通学院附中网站,昭通师专附中网站">   
 <!-- Date: 2013-09-04 -->

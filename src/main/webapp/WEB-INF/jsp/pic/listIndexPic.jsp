@@ -100,7 +100,7 @@ $(function(){
 							<th>状态</th>
 							<th width="8%">链接类型</th>
 							<th width="30%">位置</th>
-							<th width="13%">用户操作</th>
+							<th width="12%">用户操作</th>
 						</tr>
 					</thead>
 					<tbody>

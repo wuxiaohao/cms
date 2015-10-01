@@ -41,6 +41,7 @@ display:inline;
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/topicAdd.js"></script>
 <script type="text/javascript">
 	$(function(){		
+		$("a.delete").confirmOperator();
 		//初始化配置toastr
 		toastr.options = {
 		        "closeButton": true, //是否显示关闭按钮

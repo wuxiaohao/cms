@@ -35,112 +35,133 @@ html { overflow-x:hidden; }
 			<div class="portlet-body">
 				<!-- BEGIN FORM-->
 				<sf:form id="addForm" method="post" modelAttribute="channel" class="form-horizontal">
-					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-3">栏目名称 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="name" class="form-control" />
-									<sf:errors path="name" />
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">是否指定链接 <span class="required">
-							* </span>
-							</label>
-							
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:radiobutton path="customLink" value="0" class="make-switch switch-radio1"/>不指定
-									<sf:radiobutton path="customLink" value="1" class="make-switch switch-radio1"/>指定
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">链接地址 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="customLinkUrl" class="form-control"/>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">栏目类型 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:select path="type" class="bs-select form-control">
-										<sf:options items="${types}"/>
-									</sf:select>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">是否在主页显示 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:radiobutton path="isIndex" value="0" class="make-switch switch-radio1"/>不显示
-									<sf:radiobutton path="isIndex" value="1" class="make-switch switch-radio1"/>显示
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">导航顶部栏目 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:radiobutton path="isTopNav" value="0" class="make-switch switch-radio1"/>不是
-									<sf:radiobutton path="isTopNav" value="1" class="make-switch switch-radio1"/>是
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">是否是推荐栏目 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-									<sf:radiobutton path="recommend" value="0" class="make-switch switch-radio1" />不是
-									<sf:radiobutton path="recommend" value="1" class="make-switch switch-radio1" />是
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">状态<span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:radiobutton path="status" value="0" class="make-switch switch-radio1" />启用
-									<sf:radiobutton path="status" value="1" class="make-switch switch-radio1" />停用
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">导航序号<span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="navOrder" class="form-control" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-actions">
-						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
-								<button type="submit" class="btn green">添加</button>
-							</div>
-						</div>
-					</div>
+					<table class="table table-striped table-hover table-bordered">
+						<tbody>
+							<tr>
+								<td width="150px" align="right">
+									栏目名称：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:input path="name" class="form-control" />
+											<sf:errors path="name" />
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									是否指定链接：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:radiobutton path="customLink" value="0" class="make-switch switch-radio1"/>不指定
+											<sf:radiobutton path="customLink" value="1" class="make-switch switch-radio1"/>指定
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									链接地址：<span >&nbsp; </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:input path="customLinkUrl" class="form-control"/>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									栏目类型：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:select path="type" class="bs-select form-control">
+											<sf:options items="${types}"/>
+											</sf:select>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									是否在主页显示：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:radiobutton path="isIndex" value="0" class="make-switch switch-radio1"/>不显示
+											<sf:radiobutton path="isIndex" value="1" class="make-switch switch-radio1"/>显示
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									导航顶部栏目：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:radiobutton path="isTopNav" value="0" class="make-switch switch-radio1"/>不是
+											<sf:radiobutton path="isTopNav" value="1" class="make-switch switch-radio1"/>是
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									是否是推荐栏目：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:radiobutton path="recommend" value="0" class="make-switch switch-radio1" />不是
+											<sf:radiobutton path="recommend" value="1" class="make-switch switch-radio1" />是
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									状态：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:radiobutton path="status" value="0" class="make-switch switch-radio1" />启用
+											<sf:radiobutton path="status" value="1" class="make-switch switch-radio1" />停用
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td width="150px" align="right">
+									导航序号：<span style="color: red;">* </span>
+								</td>
+								<td>
+									<div class="col-md-4">
+										<div class="input-icon right">
+											<sf:input path="navOrder" class="form-control" />
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="2" align="center">
+									<button type="submit" class="btn green">添加</button>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
 				</sf:form>
 				<!-- END FORM-->
 			</div>

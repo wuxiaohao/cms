@@ -13,9 +13,10 @@ $(function(){
 	var error='<%=request.getAttribute("error")%>';
 	showMessage(success,error);		
 	
-	$("a.resumeDatabase").click(function() {
+	$("a.resumeDatabase").click(function(event) {
 		if(!confirm("覆盖之后不可恢复，确定要覆盖吗？建议先进行备份")) {
 			event.preventDefault();
+			return false;
 		} else {
 			$("#info").text("恢复中,请稍等...");
 		}
