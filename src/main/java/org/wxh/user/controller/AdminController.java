@@ -64,7 +64,6 @@ public class AdminController {
 	 */
 	@RequestMapping("/redirectIndexByLink")
 	public String redirectIndexByLink(@RequestParam(required=false) String type,HttpSession session){
-		System.out.println("过来了");
 		session.setAttribute("type",type);
 		session.setAttribute("message2","2");
 		return "redirect:/admin";

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.util.JsonUtil;
 import org.wxh.topic.model.Attachment;
@@ -95,21 +96,18 @@ public class TopicController {
 		this.groupService = groupService;
 	}
 	
-	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
+	private void initList(Model model,HttpSession session,Integer status) {
 		SystemContext.setSort("t.publishDate");
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
 		if(isAdmin) { //如果是超级管理员，则返回所有的文章
-			model.addAttribute("datas",topicService.find(cid, con, status));
+			model.addAttribute("datas",topicService.find(status));
 		} else {	//如果不是超级管理员，则返回该用户所有的文章
 			User loginUser = (User)session.getAttribute("loginUser");
-			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
+			model.addAttribute("datas", topicService.find(loginUser.getId(),status));
 		}
-		if(con==null) con="";
 		SystemContext.removeOrder();
 		SystemContext.removeSort();
-		model.addAttribute("con",con);
-		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);
 		model.addAttribute("cs",channelService.listPublishChannel());
 	}
@@ -123,13 +121,13 @@ public class TopicController {
 	 */
 	@RequestMapping("/audits")
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
-	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
+	public String auditList(Model model,HttpSession session) {
 		//清空session残留
 		if(session.getAttribute("messageByTopic") != null){
 			session.removeAttribute("messageByTopic");
 			logger.info("文章残留的session已清除干净");
 		}
-		initList(con, cid, model, session,1);
+		initList(model,session,1);
 		return "topic/list";
 	}
 	/**
@@ -142,12 +140,10 @@ public class TopicController {
 	 */
 	@RequestMapping("/unaudits")
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
-	public String unauditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		initList(con, cid, model, session,0);
+	public String unauditList(Model model,HttpSession session) {
+		initList(model,session,0);
 		return "topic/list";
 	}
-	
-	
 	/**
 	 * 处理取消发布或发布
 	 * @param id
@@ -164,10 +160,10 @@ public class TopicController {
 		}
 		if(status==0) {
 			model.addAttribute("success", "文章发布成功!");
-			return unauditList(null,null,model,session);
+			return unauditList(model,session);
 		} else {
 			model.addAttribute("success", "文章已取消发布!");
-			return auditList(null,null,model,session);
+			return auditList(model,session);
 		}
 	}
 	/**
@@ -186,9 +182,9 @@ public class TopicController {
 			//indexService.generateBody();
 		}
 		if(status==0) {
-			return unauditList(null, null, model, session);
+			return unauditList(model, session);
 		} else {
-			return auditList(null, null, model, session);
+			return auditList(model, session);
 		}
 	}
 	/**
@@ -349,6 +345,34 @@ public class TopicController {
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 	}
 	/**
+	 * 根据条件检索文章
+	 * @param con 文章标题
+	 * @param cid 栏目id
+	 * @param status 文章的状态
+	 * @throws IOException 
+	 */
+	@RequestMapping(value = "/queryTopic" ,method = RequestMethod.POST)
+	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
+	public String queryTopic(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,@RequestParam Integer status,HttpServletResponse response,Model model,HttpSession session) throws IOException{
+		response.setContentType("text/plain;charset=utf-8");
+		AjaxObj ao = null;
+		List<Topic> list = null;
+		try {
+			 boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
+			 if(isAdmin) { //如果是超级管理员，则返回所有符合检索条件的文章
+				list = topicService.list(cid, con, status); 
+			 } else {	//如果不是超级管理员，则返回该用户的文章
+				User loginUser = (User)session.getAttribute("loginUser");
+				list = topicService.list(loginUser.getId(),cid, con, status); 
+			 }
+			ao = new AjaxObj(1,null,list);
+		} catch (Exception e) {
+			ao = new AjaxObj(0,e.getMessage());
+		}
+		response.getWriter().write(JsonUtil.getInstance().obj2json(ao));
+		return null;
+	}
+	/**
 	 * 返回ztree的json数据
 	 * @param session
 	 * @return
@@ -363,5 +387,4 @@ public class TopicController {
 		else
 			return groupService.generateUserChannelTree(loginUser.getId());
 	}	
-	
 }

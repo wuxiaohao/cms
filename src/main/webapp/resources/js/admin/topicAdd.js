@@ -93,13 +93,15 @@ $(function(){
 	});
 	//点击删除附件的事件委派对象
 	$("#ok_attach").on("click",".deleteAttach",function(){
-		var ad = this;
-		var id = $(this).attr("title");
-		dwrService.deleteAttach(id,function(data) {
-			$(ad).parent("td").parent("tr").remove();
-			//alert($("#xhe0_iframe").contents().find("#attach_"+id).html());
-			$("#xhe0_iframe").contents().find("#attach_"+id).remove();
-		});	
+		if (confirm("确认要删除？")) {
+			var ad = this;
+			var id = $(this).attr("title");
+			dwrService.deleteAttach(id,function(data) {
+				$(ad).parent("td").parent("tr").remove();
+				//alert($("#xhe0_iframe").contents().find("#attach_"+id).html());
+				$("#xhe0_iframe").contents().find("#attach_"+id).remove();
+			});	
+		}
 	});
 	//点击插入附件，插入到文章内容中
 	$("#ok_attach").on("click",".insertAttach",function(){

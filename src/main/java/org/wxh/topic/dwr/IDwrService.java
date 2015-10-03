@@ -1,6 +1,10 @@
 package org.wxh.topic.dwr;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.wxh.topic.model.Topic;
 
 /**
  * dwr相关的业务类
@@ -54,4 +58,16 @@ public interface IDwrService {
 	 * @param newPos 新位置
 	 */
 	public void updateLinkPos(int id,int oldPos,int newPos);
+	/**
+	 * 根据文章id取消发布或发布
+	 * @param id
+	 * @return
+	 */
+	public void changeStatus(int id);
+	/**
+	 * 根据文章id删除
+	 * @param id
+	 * @return
+	 */
+	public void deleteTopic(int id);
 }

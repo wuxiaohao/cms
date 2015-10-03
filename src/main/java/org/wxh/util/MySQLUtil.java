@@ -68,7 +68,7 @@ public class MySQLUtil {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 		try {
-			String cmd = "cmd /c mysqldump -u"+username+" -p"+password+" "+database;
+			String cmd = "cmd /c mysqldump -u"+username+" -p"+password+" --set-charset=utf8 "+database;
 			Process proc = Runtime.getRuntime().exec(cmd);
 			br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			bw = new BufferedWriter(

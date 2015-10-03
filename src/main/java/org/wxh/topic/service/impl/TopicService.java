@@ -116,14 +116,23 @@ public class TopicService implements ITopicService {
 	}
 
 	@Override
-	public Pager<Topic> find(Integer cid, String title, Integer status) {
-		return topicDao.find(cid, title, status);
+	public Pager<Topic> find(Integer status) {
+		return topicDao.find(status);
 	}
 
 	@Override
-	public Pager<Topic> find(Integer uid, Integer cid, String title,
+	public Pager<Topic> find(Integer uid,Integer status) {
+		return topicDao.find(uid,status);
+	}
+	
+	@Override
+	public List<Topic> list(Integer cid, String title, Integer status) {
+		return topicDao.list(cid, title, status);
+	}
+	@Override
+	public List<Topic> list(Integer uid, Integer cid, String title,
 			Integer status) {
-		return topicDao.find(uid, cid, title, status);
+		return topicDao.list(uid, cid, title, status);
 	}
 
 	@Override
@@ -164,5 +173,4 @@ public class TopicService implements ITopicService {
 	public Topic loadLastedTopicByColumn(int cid) {
 		return topicDao.loadLastedTopicByColumn(cid);
 	}
-
 }
