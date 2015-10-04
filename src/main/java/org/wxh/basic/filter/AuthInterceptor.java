@@ -21,8 +21,7 @@ import org.wxh.user.model.User;
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
 	private static final Logger logger = Logger.getLogger(AuthInterceptor.class);
-	
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean preHandle(HttpServletRequest request,

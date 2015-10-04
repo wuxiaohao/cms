@@ -20,15 +20,7 @@ public class DwrService implements IDwrService{
 	private IIndexPicService indexPicService;
 	@Autowired
 	private ICmsLinkService cmsLinkService;
-	@Autowired
-	private ITopicService topicService;
-	
-	public ITopicService getTopicService() {
-		return topicService;
-	}
-	public void setTopicService(ITopicService topicService) {
-		this.topicService = topicService;
-	}
+
 	public IAttachmentService getAttachmentService() {
 		return attachmentService;
 	}
@@ -98,32 +90,20 @@ public class DwrService implements IDwrService{
 	
 	@Override
 	public void updatePicPos(int id, int oldPos, int newPos) {
-		indexPicService.updatePos(id, oldPos, newPos);
-	}
-	@Override
-	public void updateLinkPos(int id, int oldPos, int newPos) {
-		cmsLinkService.updatePos(id, oldPos, newPos);
-	}
-	@Override
-	public void changeStatus(int id) {
-		topicService.updateStatus(id);
-		Topic t = topicService.load(id);
-		if(topicService.isUpdateIndex(t.getChannel().getId())) {
-			//indexService.generateBody();
-		}
-	}
-	@Override
-	public void deleteTopic(int id) {
 		try {
-			topicService.delete(id);
-			Topic t = topicService.load(id);
-			/*if(topicService.isUpdateIndex(t.getChannel().getId())) {
-				//indexService.generateBody();
-			}*/
+			indexPicService.updatePos(id, oldPos, newPos);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+	@Override
+	public void updateLinkPos(int id, int oldPos, int newPos) {
+		try {
+			cmsLinkService.updatePos(id, oldPos, newPos);
+		} catch (Exception e) {
+			
+		}
 	}
 
 }

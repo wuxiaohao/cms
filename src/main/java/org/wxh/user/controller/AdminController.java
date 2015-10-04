@@ -57,15 +57,4 @@ public class AdminController {
 		session.setAttribute("messageByImg","1");
 		return "redirect:/admin";
 	}
-	/**
-	 * 跳转到首页，再从首页跳转到超链接列表
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/redirectIndexByLink")
-	public String redirectIndexByLink(@RequestParam(required=false) String type,HttpSession session){
-		session.setAttribute("type",type);
-		session.setAttribute("message2","2");
-		return "redirect:/admin";
-	}
 }

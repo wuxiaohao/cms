@@ -13,12 +13,8 @@ import org.wxh.topic.model.Topic;
 public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 
 	@Override
-	public Pager<Topic> find(Integer status) {
-		String hql = getTopicSelect()+" from Topic t where 1=1";
-		if(status!=null) {
-			hql+=" and t.status="+status;
-		}
-		return this.find(hql);
+	public Pager<Topic> find(Integer cid, String title, Integer status) {
+		return find(null,cid,title,status);
 	}
 	
 	private String getTopicSelect() {
@@ -26,23 +22,7 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	}
 
 	@Override
-	public Pager<Topic> find(Integer uid,Integer status) {
-		String hql = getTopicSelect()+" from Topic t where 1=1";
-		if(status!=null) {
-			hql+=" and t.status="+status;
-		}
- 		if(uid!=null&&uid>0) {
-			hql+=" and t.user.id="+uid;
-		}
-		return this.find(hql);
-	}
-	
-	@Override
-	public List<Topic> list(Integer cid, String title, Integer status) {
-		return list(null,cid,title,status);
-	}
-	@Override
-	public List<Topic> list(Integer uid, Integer cid, String title,
+	public Pager<Topic> find(Integer uid, Integer cid, String title,
 			Integer status) {
 		String hql = getTopicSelect()+" from Topic t where 1=1";
 		if(status!=null) {
@@ -57,9 +37,8 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 		if(cid!=null&&cid>0) {
 			hql+=" and t.channel.id="+cid;
 		}
-		return this.list(hql);
+		return this.find(hql);
 	}
-	
 
 	@Override
 	public Pager<Topic> searchTopicByKeyword(String keyword) {
@@ -117,4 +96,6 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 				.setParameter(0, cid).uniqueResult();
 		return topic;
 	}
+
+	
 }

@@ -96,18 +96,21 @@ public class TopicController {
 		this.groupService = groupService;
 	}
 	
-	private void initList(Model model,HttpSession session,Integer status) {
+	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
 		SystemContext.setSort("t.publishDate");
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
 		if(isAdmin) { //如果是超级管理员，则返回所有的文章
-			model.addAttribute("datas",topicService.find(status));
+			model.addAttribute("datas",topicService.find(cid, con, status));
 		} else {	//如果不是超级管理员，则返回该用户所有的文章
 			User loginUser = (User)session.getAttribute("loginUser");
-			model.addAttribute("datas", topicService.find(loginUser.getId(),status));
+			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
 		}
+		if(con==null) con="";
 		SystemContext.removeOrder();
 		SystemContext.removeSort();
+		model.addAttribute("con",con);
+		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);
 		model.addAttribute("cs",channelService.listPublishChannel());
 	}
@@ -121,13 +124,13 @@ public class TopicController {
 	 */
 	@RequestMapping("/audits")
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
-	public String auditList(Model model,HttpSession session) {
+	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
 		//清空session残留
 		if(session.getAttribute("messageByTopic") != null){
 			session.removeAttribute("messageByTopic");
 			logger.info("文章残留的session已清除干净");
 		}
-		initList(model,session,1);
+		initList(con, cid, model, session,1);
 		return "topic/list";
 	}
 	/**
@@ -140,19 +143,21 @@ public class TopicController {
 	 */
 	@RequestMapping("/unaudits")
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
-	public String unauditList(Model model,HttpSession session) {
-		initList(model,session,0);
+	public String unauditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
+		initList(con, cid, model, session,0);
 		return "topic/list";
 	}
 	/**
 	 * 处理取消发布或发布
-	 * @param id
-	 * @param status
+	 * @param id 文章id
+	 * @param con 文章标题关键字
+	 * @param cid 栏目id
+	 * @param status 文章状态
 	 * @return
 	 */
 	@RequestMapping("/changeStatus/{id}")
 	@AuthMethod(role="ROLE_AUDIT")
-	public String changeStatus(@PathVariable int id,Integer status,Model model,HttpSession session) {
+	public String changeStatus(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
 		topicService.updateStatus(id);
 		Topic t = topicService.load(id);
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
@@ -160,21 +165,25 @@ public class TopicController {
 		}
 		if(status==0) {
 			model.addAttribute("success", "文章发布成功!");
-			return unauditList(model,session);
+			return unauditList(con,cid,model,session);
 		} else {
 			model.addAttribute("success", "文章已取消发布!");
-			return auditList(model,session);
+			return auditList(con,cid,model,session);
 		}
 	}
 	/**
 	 * 删除文章
-	 * @param id
-	 * @param status
+	 * @param id 文章id
+	 * @param con 文章标题关键字
+	 * @param cid 栏目id
+	 * @param status 文章状态
+	 * @param model 
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{id}" ,method = RequestMethod.POST)
 	@AuthMethod(role="ROLE_PUBLISH")
-	public String delete(@PathVariable int id,Integer status,Model model,HttpSession session) {
+	public String delete(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
 		Topic t = topicService.load(id);
 		topicService.delete(id);
 		model.addAttribute("success","文章删除成功!");
@@ -182,9 +191,9 @@ public class TopicController {
 			//indexService.generateBody();
 		}
 		if(status==0) {
-			return unauditList(model, session);
+			return unauditList(con, cid, model, session);
 		} else {
-			return auditList(model, session);
+			return auditList(con, cid, model, session);
 		}
 	}
 	/**
@@ -351,7 +360,7 @@ public class TopicController {
 	 * @param status 文章的状态
 	 * @throws IOException 
 	 */
-	@RequestMapping(value = "/queryTopic" ,method = RequestMethod.POST)
+/*	@RequestMapping(value = "/queryTopic" ,method = RequestMethod.POST)
 	@AuthMethod(role="ROLE_PUBLISH,ROLE_AUDIT")
 	public String queryTopic(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,@RequestParam Integer status,HttpServletResponse response,Model model,HttpSession session) throws IOException{
 		response.setContentType("text/plain;charset=utf-8");
@@ -371,7 +380,7 @@ public class TopicController {
 		}
 		response.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 		return null;
-	}
+	}*/
 	/**
 	 * 返回ztree的json数据
 	 * @param session

@@ -49,7 +49,11 @@
 				required: true
 			},
 			newName:"required",
-			checkcode:"required"
+			checkcode:"required",
+			type:{
+				required: true,
+				maxlength: 10
+			}
 		},opts?(opts.rules||{}):{});
 		var __messages = $.extend({
 			username:{
@@ -77,7 +81,11 @@
 			cname:"文章必须选择所属栏目",
 			title:"文章的标题必须输入",
 			newName:"首页图片必须上传",
-			checkcode:"验证码不能为空"
+			checkcode:"验证码不能为空",
+			type:{
+				required: "类型不能为空",
+				maxlength: "类型长度不能大于10个字符"
+			}
 		},opts?(opts.messages||{}):{});
 		var __defaultOpts = $.extend(opts||{},{
 			rules:__rules,

@@ -1,4 +1,4 @@
-package org.wxh.basic.model;
+package org.wxh.sys.model;
 
 
 import java.util.Date;

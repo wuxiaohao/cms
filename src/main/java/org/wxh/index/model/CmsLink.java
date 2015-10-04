@@ -32,7 +32,7 @@ public class CmsLink {
 	/**
 	 * 超链接的类型
 	 */
-	private String type;
+	private String type ="暂无";
 	/**
 	 * 是否在新窗口中打开，0表示否，1表示是
 	 */

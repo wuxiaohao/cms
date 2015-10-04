@@ -85,7 +85,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a id="lianjie" class="ajaxify" href="<%=request.getContextPath() %>/admin/cmsLink/links">
+							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/cmsLink/links">
 							<i class="icon-wallet"></i>
 							超级链接管理</a>
 						</li>

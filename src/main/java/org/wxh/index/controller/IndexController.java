@@ -91,7 +91,7 @@ public class IndexController {
 			SystemContext.setSort("t.publishDate");
 			SystemContext.setOrder("desc");
 			//System.out.println(c.getType());
-			model.addAttribute("datas", topicService.find(c.getId(),1));
+			model.addAttribute("datas", topicService.find(c.getId(),null,1));
 		}
 		SystemContext.removeSort();
 		SystemContext.removeOrder();

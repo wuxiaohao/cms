@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.wxh.basic.model.BackupFile;
+import org.wxh.sys.model.BackupFile;
 
 /**
  * 备份的工具类

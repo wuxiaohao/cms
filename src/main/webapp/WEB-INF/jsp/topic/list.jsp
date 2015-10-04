@@ -5,84 +5,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 局部刷新table表格 -->
+<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/listTopic.js"></script> --%>
 <script type="text/javascript">
 	$(function(){
 		$("a.delete").confirmOperator();
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
 		showMessage(success,error);
-		//拼接字符串后的更改文章状态
-		$("#data_table").on("click",".changeStatus",function(event){
-			if (!confirm("该操作不可逆，是否确定操作？")) {
-				event.preventDefault();
-				return false;
+		$("#search").click(function(event){
+			var con = $.trim($("#con").val()); 
+			var cid = $("#cid").val();
+			var href ="";
+			var lianjie = "";
+			if(${status} == 0){
+				href = $(".unaudits").attr("href");
+				lianjie = $(".unaudits");
+			} else {
+				href = $(".audits").attr("href");
+				lianjie = $(".audits");
 			}
-			var id = $(this).attr("abc");
-			dwrService.changeStatus(id);
-			$(this).parent("td").parent("tr").remove();
-		});
-		//拼接字符串后的删除
-		$("#data_table").on("click",".deleteTr",function(event){
-			if (!confirm("该操作不可逆，是否确定操作？")) {
-				event.preventDefault();
-				return false;
+			if(!((con == "" || con == null) && (cid ==0 || cid == null))){
+				hrefNew = href+"?con="+con+"&cid="+cid;
+				lianjie.attr("href",hrefNew);
 			}
-			var id = $(this).attr("abc");
-			dwrService.deleteTopic(id);
-			$(this).parent("td").parent("tr").remove();
-		});
-		//检索文章，拼接字符串
-		$("#search").click(function(){
-			var _con = $.trim($("#con").val());
-			var _cid = $("#cid").val();
-			var _status = ${status};
-			$.ajax({
-				type : "post",
-				url : "${pageContext.servletContext.contextPath }/admin/topic/queryTopic",
-				data: {
-					con:_con,
-					cid:_cid,
-					status:_status
-					},
-				error: function(request){
-					alert("Connection error");
-				},
-				success : function(data){
-					var ao = $.parseJSON(data);  //转换json对象
-					var success = $.ajaxCheck(ao);  //判断操作是否成功
-					if(success) {
-						//构造显示页面
-						var tbody = $("#data_table tbody").empty();
-						var node = "";
-						$.each(ao.obj,function(i,value){
-							node += "<tr><td><a href=\"javascript:openWin('${pageContext.servletContext.contextPath }/admin/topic/"+value.id+"','showTopic')\">"+value.title+"</a></td><td>"+value.author+"</td>";						
-							if(value.recommend == 0){
-								node += "<td>不推荐</td><td>"+value.cname+"</td>";
-							} else {
-								node += "<td>推荐</td><td>"+value.cname+"</td>";
-							}
-							if(value.status == 0){
-								node += "<td><span style=\"color: red\">未发布&nbsp;</span><a abc='"+value.id+"' class=\"btn btn-sm blue ajaxify changeStatus \">发布</a></td>";
-							} else {
-								node += "<td>已发布&nbsp;<a abc='"+value.id+"' class=\"btn btn-sm blue ajaxify changeStatus \">取消发布</a></td>";
-							}
-							node += "<td><a abc='"+value.id+"' class=\"btn btn-sm red deleteTr \">删除</a><a href=\"javascript:openWin('${pageContext.servletContext.contextPath }/admin/topic/update/"+value.id+"','updateTopic')\" class=\"btn btn-sm blue\">更新</a>&nbsp;</td>";
-							node += "</tr>";
-						});
-						tbody.html(node);
-						//是否显示分页
-						if(_con == "" && _cid ==0) {
-							$("#tfoot").show();
-						} else {
-							$("#tfoot").hide();
-						}
-					}
-				}
-			});
+			lianjie.click();
+			lianjie.attr("href",href);
 		});
 	});
 </script>
 </head>
+<a style="display: none;" class="ajaxify audits" href="<%=request.getContextPath() %>/admin/topic/audits"></a>
+<a style="display: none;" class="ajaxify unaudits" href="<%=request.getContextPath() %>/admin/topic/unaudits"></a>
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-title">
@@ -129,13 +83,18 @@
 					</p> -->
 					<p style="float: left;"><font size="3">文章标题关键字</font></p>
 					<div class="col-md-4 c">
-						<input type="text" name="con" id="con" class="form-control" />
+						<input type="text" name="con" id="con" value="${con}" class="form-control" />
 					</div>
 					<div class="col-md-4 c">
 						<select name="cid" id="cid" class="bs-select form-control">
 							<option value="0">选择栏目</option>
 							<c:forEach items="${cs }" var="c">
+								<c:if test="${c.id  eq cid}">
+								<option value="${c.id }" selected="selected">${c.name }</option>
+								</c:if>
+								<c:if test="${c.id  ne cid}">
 								<option value="${c.id }">${c.name }</option>
+								</c:if>
 							</c:forEach>
 						</select>	
 					</div>
@@ -143,7 +102,7 @@
 						<button class="btn green" id="search">搜索文章</button>
 					</dir>
 				</div>
-				<table class="table table-striped table-hover table-bordered" id="data_table">
+				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
 							<td width="30%" align="center">文章标题</td>
@@ -154,37 +113,37 @@
 							<td width="150">操作</td>
 						</tr>
 					</thead>
-					<tbody>
 					<c:forEach items="${datas.datas }" var="t">
-						<tr>
-							<td>
-								<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/${t.id }','showTopic')">${t.title }</a>
-							</td>
-							<td>${t.author}</td>
-							<td>
-								<c:if test="${t.recommend eq 0 }">不推荐</c:if>
-								<c:if test="${t.recommend eq 1 }">推荐</c:if>
-							</td>
-							<td>${t.cname }</td>
-							<td>
-								<c:if test="${t.status eq 0 }">
-									<span style="color: red">未发布&nbsp;</span>
-									<a href="admin/topic/changeStatus/${t.id }?status=${t.status}" class="btn btn-sm blue ajaxify delete">发布</a>
-								</c:if>
-								<c:if test="${t.status eq 1 }">
-									<span>已发布&nbsp;</span>
-									<a href="admin/topic/changeStatus/${t.id }?status=${t.status}" class="btn btn-sm blue ajaxify delete">取消发布</a>
-								</c:if>
-							</td>
-							<td>
-								<a href="admin/topic/delete/${t.id }?status=${t.status}" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
-								<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue">更新</a>								
-								&nbsp;
-							</td>
-						</tr>
+						<tbody>
+							<tr>
+								<td>
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/${t.id }','showTopic')">${t.title }</a>
+								</td>
+								<td>${t.author}</td>
+								<td>
+									<c:if test="${t.recommend eq 0 }">不推荐</c:if>
+									<c:if test="${t.recommend eq 1 }">推荐</c:if>
+								</td>
+								<td>${t.cname }</td>
+								<td>
+									<c:if test="${t.status eq 0 }">
+										<span style="color: red">未发布&nbsp;</span>
+										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">发布</a>
+									</c:if>
+									<c:if test="${t.status eq 1 }">
+										<span>已发布&nbsp;</span>
+										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">取消发布</a>
+									</c:if>
+								</td>
+								<td>
+									<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue">更新</a>								
+									&nbsp;
+								</td>
+							</tr>
+						</tbody>
 					</c:forEach>
-					</tbody>
-					<tfoot id="tfoot">
+					<tfoot>
 						<tr>
 							<td colspan="6" style="text-align:right;margin-right:10px;">
 							<c:if test="${status eq 0 }">

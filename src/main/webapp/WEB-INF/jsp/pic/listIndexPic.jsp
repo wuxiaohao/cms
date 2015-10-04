@@ -17,7 +17,7 @@ $(function(){
 		event.preventDefault();//设置<a></a>标签不执行超链接的操作
 		var pos = $(this).attr("pos");
 		var id = $(this).attr("objid");
-		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3'/>&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='btn btn-sm blue confirmPos'>确定</a>&nbsp;<a href='' class='btn btn-sm red cancelPos'>取消</a></span>");
+		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3' readonly='true' />&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='btn btn-sm blue confirmPos'>确定</a>&nbsp;<a href='' class='btn btn-sm red cancelPos'>取消</a></span>");
 		$(this).next("span").children("input:text").spinner({
 			min:$("#minPos").val(),
 			max:$("#maxPos").val(),
@@ -39,13 +39,15 @@ $(function(){
 	//确定事件
 	$(".posCon").on("click",".confirmPos",function(e){
 		e.preventDefault();
-		var id = $(this).parent("span").prev("a").attr("picid"); //当前首页图片的id
+		var id = $(this).parent("span").prev("a").attr("objid"); //当前首页图片的id
 		var op = $(this).parent("span").prev("a").attr("pos"); //原位置
 		var np = $(this).prev("input").val(); //新位置
 		if(op!=np) {
 			//通过dwr更新节点
 			dwrService.updatePicPos(id,op,np,function(){
-				window.location.reload(); //刷新页面
+				//刷新页面
+				$("#tp").click();
+				showMessage("已重新排序!","");
 			});
 		}
 		$(this).parent("span").prev("a.setPos").on("click",setPos);//重新绑定点击事件
@@ -55,6 +57,7 @@ $(function(){
 }) 
 </script>
 </head>
+<a style="display: none;" id="tp" class="ajaxify" href="<%=request.getContextPath() %>/admin/pic/indexPics"></a>
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->

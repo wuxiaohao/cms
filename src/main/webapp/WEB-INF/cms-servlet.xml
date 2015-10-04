@@ -73,8 +73,6 @@
 		   <dwr:include method="deleteAttach" />
 		   <dwr:include method="updatePicPos" />
 		   <dwr:include method="updateLinkPos" />
-		   <dwr:include method="changeStatus" />
-		   <dwr:include method="deleteTopic" />
 		</dwr:remote>
 	</bean>
 </beans>

@@ -55,13 +55,6 @@ public class CmsLinkController {
 		model.addAttribute("min", m.get("min"));
 		model.addAttribute("max",m.get("max"));
 		model.addAttribute("type",type);
-		//清空session残留
-		if(session.getAttribute("type") != null || session.getAttribute("message2") !=null ){
-			session.removeAttribute("type");
-			session.removeAttribute("message2");
-			logger.info("超级接跳转导致残留的session已清除干净");
-		}
-		
 		return "cmsLink/list";
 	}
 	/**
@@ -96,10 +89,10 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.POST)
-	public String delete(@PathVariable int id ,Model model,HttpSession session) {
+	public String delete(@PathVariable int id ,@RequestParam(required=false) String type,Model model,HttpSession session) {
 		cmsLinkService.delete(id);
 		model.addAttribute("success", "超链接删除成功!");
-		return list(model,null,session);
+		return list(model,type,session);
 	}
 	/**
 	 * 返回修改超链接的界面

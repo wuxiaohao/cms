@@ -17,7 +17,7 @@ $(function(){
 		event.preventDefault();//设置<a></a>标签不执行超链接的操作
 		var pos = $(this).attr("pos");
 		var id = $(this).attr("objid");
-		$(this).after("<span>&nbsp;<input type='text' value='"+pos+"' size='3'/>&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='btn btn-sm blue confirmPos'>确定</a>&nbsp;<a href='' class='btn btn-sm red cancelPos'>取消</a></span>");
+		$(this).after("<span>&nbsp;<input type='text'value='"+pos+"' size='3' readonly='true' />&nbsp;<input id='pos"+id+"' type='hidden' value='"+pos+"'/><a href='#' class='btn btn-sm blue confirmPos'>确定</a>&nbsp;<a href='' class='btn btn-sm red cancelPos'>取消</a></span>");
 		$(this).next("span").children("input:text").spinner({
 			min:$("#minPos").val(),
 			max:$("#maxPos").val(),
@@ -45,10 +45,9 @@ $(function(){
 		if(op!=np) {
 			//通过dwr更新节点
 			dwrService.updateLinkPos(id,op,np,function(){
-				var href = window.location.href;
-				href = href.substring(href.indexOf("h"),href.lastIndexOf("/"));
-				href = href + "/redirectIndexByLink"; //先跳转到首页
-				window.location.href = href;
+				//刷新页面
+				$("#lianjie").click();
+				showMessage("已重新排序!","");
 			});
 		}
 		$(this).parent("span").prev("a.setPos").on("click",setPos);//重新绑定点击事件
@@ -57,19 +56,19 @@ $(function(){
 	
 	//选择超链接类型事件
 	$("#selectType").change(function(){
+		var href = $("#lianjie").attr("href");
 		var v = $(this).val();
-		var href = window.location.href;
-		href = href.substring(href.indexOf("h"),href.lastIndexOf("/"));
-		href = href + "/redirectIndexByLink"; //先跳转到首页
-		if(v=="-1") {
-			window.location.href = href;
-		} else {
-			window.location.href=href+"?type="+v //根据指定的类型，刷新页面
-		}
+		if(v != "-1"){
+			hrefNew = href +"?type="+v;
+			$("#lianjie").attr("href",hrefNew);
+		} 
+		$("#lianjie").click();
+		$("#lianjie").attr("href",href);
 	})
 }) 
 </script>
 </head>
+<a style="display: none;" id="lianjie" class="ajaxify" href="<%=request.getContextPath() %>/admin/cmsLink/links"></a>
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
@@ -142,16 +141,11 @@ $(function(){
 									<c:if test="${cl.newWin eq 0}">本窗口</c:if>
 									<c:if test="${cl.newWin eq 1}">新窗口</c:if>
 								</td>
-								
-										<!-- <button type="button" class="btn red">Left</button>
-										<button type="button" class="btn green">Middle</button>
-										<button type="button" class="btn blue">Right</button> -->
-									
 								<td class="posCon">
 									${cl.pos }&nbsp;<a class="btn btn-sm green setPos" pos="${cl.pos }" objid="${cl.id }">排序</a>
 								</td>
 								
-								<td><a href="admin/cmsLink/delete/${cl.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
+								<td><a href="admin/cmsLink/delete/${cl.id }?type=${type}" class="btn btn-sm red ajaxify delete"> 删除 </a>
 									<a href="admin/cmsLink/updateUI/${cl.id }" class="btn btn-sm blue ajaxify"> 更新 </a>
 								</td>
 							</tr>
