@@ -17,10 +17,8 @@ public class BaseInfo {
 	private String domainName;//网站访问域名
 	private int indexPicWidth;//首页图片宽度
 	private int indexPicHeight;//首页图片高度
-	private int indexPicNumber;
-	
-	
-	
+	private int indexPicNumber; //首页图片数量
+
 	public int getIndexPicNumber() {
 		return indexPicNumber;
 	}

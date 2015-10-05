@@ -93,17 +93,29 @@ public interface ITopicService {
 	 * @return
 	 */
 	public Pager<Topic> findRecommendTopic(Integer ci);
-	
-	public List<Topic> listTopicByChannelAndNumber(int cid,int num);
-	
-	public List<Topic> listTopicByChannel(int cid);
-	
 	/**
-	 * 判断所添加文章的栏目是否需要进行更新
-	 * @param cid
+	 * 根据栏目和数量来获取文章 
+	 * @param cid 栏目id
+	 * @param num 文章数量
+	 * @return
+	 */
+	public List<Topic> listTopicByChannelAndNumber(int cid,int num);
+	/**
+	 * 根据栏目获取文章
+	 * @param cid 栏目id
+	 * @return
+	 */
+	public List<Topic> listTopicByChannel(int cid);
+	/**
+	 * 判断当前的栏目是否是主页栏目
+	 * @param cid 栏目id
 	 * @return
 	 */
 	public boolean isUpdateIndex(int cid);
-	
+	/**
+	 * 获取某个栏目中的最新的可用文章
+	 * @param cid 栏目id
+	 * @return
+	 */
 	public Topic loadLastedTopicByColumn(int cid);
 }

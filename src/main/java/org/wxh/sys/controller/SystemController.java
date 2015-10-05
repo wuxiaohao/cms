@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexPicService;
+import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.user.auth.AuthClass;
@@ -37,7 +38,15 @@ public class SystemController {
 	private IAttachmentService attachmentService;
 	@Autowired
 	private IIndexPicService indexPicService;
+	@Autowired
+	private IIndexService indexService;
 
+	public IIndexService getIndexService() {
+		return indexService;
+	}
+	public void setIndexService(IIndexService indexService) {
+		this.indexService = indexService;
+	}
 	public IAttachmentService getAttachmentService() {
 		return attachmentService;
 	}
@@ -83,8 +92,9 @@ public class SystemController {
 		}
 		BaseInfo bi = BaseInfoUtil.getInstacne().write(baseInfo);
 		session.getServletContext().setAttribute("baseInfo", bi);
-		//indexService.generateBottom();
-		//indexService.generateTop();
+		//更新静态页面的首部、底部的信息
+		indexService.generateBottom();
+		indexService.generateTop();
 		model.addAttribute("success", "修改成功!");
 		return showBaseInfo(model);
 	}

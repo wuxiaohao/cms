@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.index.service.IIndexService;
 import org.wxh.util.JsonUtil;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.ChannelTree;
@@ -62,9 +63,17 @@ public class TopicController {
 	private IAttachmentService attachmentService;
 	@Autowired
 	private IGroupService groupService;
+	@Autowired
+	private IIndexService indexService;
 	
 	private final static List<String> imgTypes = Arrays.asList("jpg","jpeg","gif","png");
 	
+	public IIndexService getIndexService() {
+		return indexService;
+	}
+	public void setIndexService(IIndexService indexService) {
+		this.indexService = indexService;
+	}
 	public ITopicService getTopicService() {
 		return topicService;
 	}
@@ -161,7 +170,7 @@ public class TopicController {
 		topicService.updateStatus(id);
 		Topic t = topicService.load(id);
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
-			//indexService.generateBody();
+			indexService.generateBody();//重新生成首页
 		}
 		if(status==0) {
 			model.addAttribute("success", "文章发布成功!");
@@ -188,7 +197,7 @@ public class TopicController {
 		topicService.delete(id);
 		model.addAttribute("success","文章删除成功!");
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
-			//indexService.generateBody();
+			indexService.generateBody();//重新生成首页
 		}
 		if(status==0) {
 			return unauditList(con, cid, model, session);
@@ -236,7 +245,7 @@ public class TopicController {
 		t.setKeyword(keys.toString());
 		topicService.add(t, topicDto.getCid(), loginUser.getId(),aids);
 		if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
-			//indexService.generateBody();
+			indexService.generateBody();//重新生成首页
 		}
 		return "redirect:/jsp/common/addSucByTopic.jsp";
 	}
@@ -293,7 +302,7 @@ public class TopicController {
 		tt.setTitle(t.getTitle());
 		topicService.update(tt, topicDto.getCid(),aids);
 		if(topicService.isUpdateIndex(topicDto.getCid())) {
-			//indexService.generateBody();
+			indexService.generateBody(); //重新生成首页
 		}
 		return "redirect:/jsp/common/updateSucByTopic.jsp";
 	}

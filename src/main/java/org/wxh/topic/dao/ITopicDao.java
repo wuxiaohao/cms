@@ -58,8 +58,8 @@ public interface ITopicDao extends IBaseDao<Topic>{
 	 */
 	public List<Topic> listTopicsByChannel(int cid);
 	/**
-	 * 判断所添加文章的栏目是否需要进行更新
-	 * @param cid
+	 * 判断当前的栏目是否是主页栏目
+	 * @param cid 栏目id
 	 * @return
 	 */
 	public boolean isUpdateIndex(int cid);

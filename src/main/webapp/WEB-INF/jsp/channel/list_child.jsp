@@ -58,9 +58,10 @@ $(function(){
 					<thead>
 						<tr>
 							<th width="150px">栏目名称</th>
-							<th width="140px">栏目类型</th>
+							<th width="110px">栏目类型</th>
 							<th>是否推荐</th>
-							<th>主页栏目</th>
+							<th>首页栏目</th>
+							<th>导航栏目</th>
 							<th>栏目状态</th>
 							<th>操作</th>
 						</tr>
@@ -76,8 +77,13 @@ $(function(){
 									&nbsp;
 								</td>
 								<td>
-									<c:if test="${c.isIndex eq 0 }"><span class="emp">不是</span></c:if>
+									<c:if test="${c.isIndex eq 0 }"><span class="emp">否</span></c:if>
 									<c:if test="${c.isIndex eq 1 }">是</c:if>
+									&nbsp;
+								</td>
+								<td>
+									<c:if test="${c.isTopNav eq 0 }"><span class="emp">否</span></c:if>
+									<c:if test="${c.isTopNav eq 1 }">是</c:if>
 									&nbsp;
 								</td>
 								<td>
@@ -95,7 +101,7 @@ $(function(){
 					<c:if test="${fn:length(channels)>1 }">
 					<tfoot>
 						<tr>
-						<td colspan="6" style="text-align:right;">
+						<td colspan="7" style="text-align:right;">
 								<a id="beginOrder" href="#" class="btn default">开始排序</a>
 								<a id="saveOrder" aa="/cms" href="#" class="btn default">存储排序</a>
 								&nbsp;

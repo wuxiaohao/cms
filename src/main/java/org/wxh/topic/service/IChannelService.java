@@ -61,15 +61,26 @@ public interface IChannelService {
 	 */
 	public List<Channel> listPublishChannel();
 	/**
-	 * 获取所有的导航栏目，栏目的状态必须为已经启用
+	 * 获取所有的顶部导航栏目，栏目的状态必须为已经启用
 	 * @return
 	 */
 	public List<Channel> listTopNavChannel();
-	
+	/**
+	 * 更新栏目序号
+	 * @param ids
+	 */
 	public void updateSort(Integer[] ids);
-	
+	/**
+	 * 根据栏目类型获取所有的首页栏目
+	 * @param ct
+	 * @return
+	 */
 	public List<Channel> listAllIndexChannel(ChannelType ct);
-	
+	/**
+	 * 获取导航栏目中的第一个栏目
+	 * @param cid
+	 * @return
+	 */
 	public Channel loadFirstChannelByNav(int cid);
 	
 	public List<Channel> listUseChannelByParent(Integer cid);

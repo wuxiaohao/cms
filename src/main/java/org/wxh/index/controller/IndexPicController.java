@@ -32,6 +32,7 @@ import org.wxh.basic.common.GlobalResult;
 import org.wxh.index.model.IndexPic;
 import org.wxh.index.model.dto.IndexPicDto;
 import org.wxh.index.service.IIndexPicService;
+import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IAttachmentService;
@@ -53,7 +54,15 @@ public class IndexPicController {
 	private IIndexPicService indexPicService;
 	@Autowired
 	private IAttachmentService attachmentService;
+	@Autowired
+	private IIndexService indexService;
 	
+	public IIndexService getIndexService() {
+		return indexService;
+	}
+	public void setIndexService(IIndexService indexService) {
+		this.indexService = indexService;
+	}
 	public IAttachmentService getAttachmentService() {
 		return attachmentService;
 	}
@@ -120,7 +129,7 @@ public class IndexPicController {
 		}
 		indexPicService.add(indexPic);
 		if(indexPic.getStatus()!=0) {
-			//indexService.generateBody();
+			indexService.generateBody();
 		}
 		return "redirect:/jsp/common/addSucByImg.jsp";
 	}
@@ -157,7 +166,7 @@ public class IndexPicController {
 		tip.setSubTitle(indexPic.getSubTitle());
 		tip.setTitle(indexPic.getTitle());
 		indexPicService.update(tip);
-		//indexService.generateBody();
+		indexService.generateBody();
 		return "redirect:/jsp/common/updateSucByImg.jsp";
 	}
 	/**
@@ -179,7 +188,7 @@ public class IndexPicController {
 	@RequestMapping(value="/deleteIndexPic/{id}",method=RequestMethod.POST)
 	public String deleteIndexPic(@PathVariable int id ,Model model,HttpSession session) {
 		indexPicService.delete(id);
-		//indexService.generateBody();
+		indexService.generateBody();
 		model.addAttribute("success","首页宣传图片删除成功!");
 		return listIndexPic(model, session);
 	}
@@ -191,7 +200,7 @@ public class IndexPicController {
 	@RequestMapping(value="updateIndexPicStatus/{id}",method=RequestMethod.POST)
 	public String updateIndexPicStatus(@PathVariable int id ,Model model,HttpSession session) {
 		indexPicService.updateStatus(id);
-		//indexService.generateBody();
+		indexService.generateBody();
 		model.addAttribute("success","状态修改成功!");
 		return listIndexPic(model, session);
 	}

@@ -15,13 +15,13 @@ public interface IKeywordService {
 	public void addOrUpdate(String name);
 	/**
 	 * 获取引用次数大于等于某个数的关键字
-	 * @param num
+	 * @param num 
 	 * @return
 	 */
 	public List<Keyword> getKeywordByTimes(int num);
 	/**
-	 * 获取引用次数最多个num个关键字
-	 * @param num
+	 * 获取引用次数最多的num个关键字
+	 * @param num 关键字个数
 	 * @return
 	 */
 	public List<Keyword> getMaxTimesKeyword(int num);

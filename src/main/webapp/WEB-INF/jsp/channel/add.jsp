@@ -91,7 +91,7 @@ html { overflow-x:hidden; }
 							</tr>
 							<tr>
 								<td width="150px" align="right">
-									是否在主页显示：<span style="color: red;">* </span>
+									是否在首页显示：<span style="color: red;">* </span>
 								</td>
 								<td>
 									<div class="col-md-4">
@@ -104,7 +104,7 @@ html { overflow-x:hidden; }
 							</tr>
 							<tr>
 								<td width="150px" align="right">
-									导航顶部栏目：<span style="color: red;">* </span>
+									导航栏目：<span style="color: red;">* </span>
 								</td>
 								<td>
 									<div class="col-md-4">

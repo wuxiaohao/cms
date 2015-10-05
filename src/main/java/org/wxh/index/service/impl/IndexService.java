@@ -5,15 +5,24 @@ import org.apache.log4j.Logger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.index.model.IndexTopic;
+import org.wxh.index.service.IIndexPicService;
 import org.wxh.index.service.IIndexService;
+import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.Channel;
+import org.wxh.topic.model.ChannelType;
+import org.wxh.topic.model.Topic;
 import org.wxh.topic.service.IChannelService;
+import org.wxh.topic.service.IKeywordService;
+import org.wxh.topic.service.ITopicService;
 import org.wxh.util.BaseInfoUtil;
 import org.wxh.util.FreemarkerUtil;
+import org.wxh.util.PropertiesUtil;
 
 /**
  * 根据ftl模板代码生成静态页面的控制层
@@ -47,7 +56,31 @@ public class IndexService implements IIndexService {
 
 	@Autowired
 	private IChannelService channelService;
+	@Autowired
+	private ITopicService topicService;
+	@Autowired
+	private IIndexPicService indexPicService;
+	@Autowired
+	private IKeywordService keyworkService;
 
+	public IIndexPicService getIndexPicService() {
+		return indexPicService;
+	}
+	public void setIndexPicService(IIndexPicService indexPicService) {
+		this.indexPicService = indexPicService;
+	}
+	public IKeywordService getKeyworkService() {
+		return keyworkService;
+	}
+	public void setKeyworkService(IKeywordService keyworkService) {
+		this.keyworkService = keyworkService;
+	}
+	public ITopicService getTopicService() {
+		return topicService;
+	}
+	public void setTopicService(ITopicService topicService) {
+		this.topicService = topicService;
+	}
 	public IChannelService getChannelService() {
 		return channelService;
 	}
@@ -68,14 +101,45 @@ public class IndexService implements IIndexService {
 
 	@Override
 	public void generateBottom() {
-		
+		Map<String,Object> root = new HashMap<String,Object>();
+		root.put("baseInfo", BaseInfoUtil.getInstacne().read());
+		String outfile = SystemContext.getRealPath()+outPath+"/bottom.jsp";
+		util.fprint(root, "/bottom.ftl", outfile);
 		logger.info("=============重新生成了底部信息====================");
 	}
 
 	@Override
 	public void generateBody() {
-		// TODO Auto-generated method stub
-
+		//1、获取所有的首页栏目
+		List<Channel> cs = channelService.listAllIndexChannel(ChannelType.TOPIC_LIST);
+		//2、根据首页栏目创建相应的IndexTopic对象
+		//加载indexChannel.properties文件
+		Properties prop = PropertiesUtil.getInstance().load("indexChannel");
+		Map<String,IndexTopic> topics = new HashMap<String, IndexTopic>();
+		for(Channel c:cs) {
+			int cid = c.getId();
+			String[] xs = prop.getProperty(cid+"").split("_");
+			String order = xs[0];
+			int num = Integer.parseInt(xs[1]);
+			IndexTopic it = new IndexTopic();
+			it.setCid(cid);
+			it.setCname(c.getName());
+			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);
+//			System.out.println(cid+"--"+tops);
+			it.setTopics(tops);
+			topics.put(order, it);
+		}
+		String outfile = SystemContext.getRealPath()+outPath+"/body.jsp";
+		//3、更新首页图片
+		BaseInfo bi = BaseInfoUtil.getInstacne().read();
+		int picnum = bi.getIndexPicNumber(); 
+		Map<String,Object> root = new HashMap<String,Object>();
+		root.put("ts", topics);
+		root.put("pics", indexPicService.listIndexPicByNum(picnum));
+		root.put("keywords", keyworkService.getMaxTimesKeyword(12));
+		root.put("xxgk", topicService.loadLastedTopicByColumn(31));
+		util.fprint(root, "/body.ftl", outfile);
+		logger.info("=============重新生成了body信息====================");
 	}
 
 }

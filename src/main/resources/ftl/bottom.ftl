@@ -5,9 +5,9 @@
 	<div id="bottom_con">
 		<table width="962" style="color:#fff;margin-top:20px;">
 			<tr>
-				<td width="320">学校网站研发</td>
+				<td width="320">${baseInfo.name}研发</td>
 				<td style="text-align:center" width="320">
-					<p style="padding-bottom:5px;">学校网站  版权所有</p>
+					<p style="padding-bottom:5px;">${baseInfo.name}  版权所有</p>
 					<p>Copyright 2013-2017</p>
 				</td>
 				<td style="text-align:right">

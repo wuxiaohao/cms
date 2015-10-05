@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.exception.MyException;
+import org.wxh.index.service.IIndexService;
 import org.wxh.util.EnumUtils;
 import org.wxh.util.JsonUtil;
 import org.wxh.topic.model.Channel;
@@ -37,7 +38,15 @@ public class ChannelController {
 	
 	@Autowired
 	private IChannelService channelService;
+	@Autowired
+	private IIndexService indexService;
 
+	public IIndexService getIndexService() {
+		return indexService;
+	}
+	public void setIndexService(IIndexService indexService) {
+		this.indexService = indexService;
+	}
 	public IChannelService getChannelService() {
 		return channelService;
 	}
@@ -131,6 +140,7 @@ public class ChannelController {
 		}
 		try {
 			channelService.add(channel, pid);
+			indexService.generateTop(); //重新生成静态页面的顶部
 			model.addAttribute("success", "栏目已添加成功!");	
 		} catch (MyException e) {
 			model.addAttribute("error", e.getMessage());	
@@ -145,7 +155,7 @@ public class ChannelController {
 	public String delete(@PathVariable Integer pid,@PathVariable Integer id,Model model) {
 		try {
 			channelService.delete(id);
-			//indexService.generateTop();
+			indexService.generateTop(); //重新生成静态页面的顶部
 			model.addAttribute("success", "栏目已删除成功!");	
 		} catch (MyException e) {
 			model.addAttribute("error", e.getMessage());	
@@ -202,7 +212,7 @@ public class ChannelController {
 		tc.setType(channel.getType());
 		tc.setNavOrder(channel.getNavOrder());
 		channelService.update(tc);
-		//indexService.generateTop();
+		indexService.generateTop(); //重新生成静态页面的顶部
 		model.addAttribute("success", "栏目更新成功!");	
 		return listChild(pid,1,model);
 	}
@@ -214,7 +224,7 @@ public class ChannelController {
 	public @ResponseBody AjaxObj updateSort(@Param Integer[] ids) {
 		try {
 			channelService.updateSort(ids);
-			//indexService.generateTop();
+			indexService.generateTop(); //重新生成静态页面的顶部
 		} catch (Exception e) {
 			return new AjaxObj(0,e.getMessage());
 		}

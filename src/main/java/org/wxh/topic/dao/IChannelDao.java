@@ -47,7 +47,10 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 * @return
 	 */
 	public List<Channel> listAllIndexChannel(ChannelType ct);
-	
+	/**
+	 * 获取所有顶部导航栏目
+	 * @return
+	 */
 	public List<Channel> listTopNavChannel();
 	/**
 	 * 删除频道和组的对应关系

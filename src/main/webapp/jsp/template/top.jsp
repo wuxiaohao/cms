@@ -22,6 +22,18 @@
 	<div id="nav_con">
 		<ul>
 			<li><span href="<%=request.getContextPath()%>/index">附中首页</span></li>
+				<li>
+					<span href="<%=request.getContextPath()%>/channel/30">校园之窗</span>
+				</li>
+				<li>
+					<span href="<%=request.getContextPath()%>/channel/31">教育科研</span>
+				</li>
+				<li>
+					<span href="<%=request.getContextPath()%>/channel/29">学校简介</span>
+				</li>
+				<li>
+					<span href="<%=request.getContextPath()%>/channel/32">德育园地</span>
+				</li>
 		</ul>
 	</div>
 </div>

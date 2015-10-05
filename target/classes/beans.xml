@@ -105,4 +105,17 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 	
+	<!-- 通过aop切面思想，定义一个切面 -->
+	<!-- <aop:config>
+		<aop:aspect ref="indexService">
+			<aop:pointcut 
+				id="generateTopic" 
+				expression="execution(* org.wxh.topic.service.impl.ChannelService.add*(..))||
+						 execution(* org.wxh.topic.service.impl.ChannelService.del*(..))||
+						 execution(* org.wxh.topic.service.impl.ChannelService.update*(..))
+			" />
+			<aop:after method="generateTop" pointcut-ref="generateTopic" />
+		</aop:aspect>				
+	</aop:config> -->
+	
 </beans>
