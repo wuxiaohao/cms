@@ -55,7 +55,7 @@ public interface IAttachmentDao extends IBaseDao<Attachment>{
 	 */
 	public Pager<Attachment> listAllIndexPic();
 	/**
-	 * 获取某篇文章的属于附件类型的附件对象
+	 * 获取某篇文章的所有附件
 	 * @param tid
 	 * @return
 	 */

@@ -124,7 +124,7 @@ public class IndexService implements IIndexService {
 			IndexTopic it = new IndexTopic();
 			it.setCid(cid);
 			it.setCname(c.getName());
-			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);
+			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);//赢编码，首页栏目应该可以配置排序，数量等
 //			System.out.println(cid+"--"+tops);
 			it.setTopics(tops);
 			topics.put(order, it);
@@ -135,9 +135,9 @@ public class IndexService implements IIndexService {
 		int picnum = bi.getIndexPicNumber(); 
 		Map<String,Object> root = new HashMap<String,Object>();
 		root.put("ts", topics);
-		root.put("pics", indexPicService.listIndexPicByNum(picnum));
-		root.put("keywords", keyworkService.getMaxTimesKeyword(12));
-		root.put("xxgk", topicService.loadLastedTopicByColumn(31));
+		root.put("pics", indexPicService.listIndexPicByNum(picnum));  //硬编码。数量应该可配置
+		root.put("keywords", keyworkService.getMaxTimesKeyword(12));  //硬编码。
+		root.put("xxgk", topicService.loadLastedTopicByColumn(43)); //栏目id43是校园概况，属于文章内容栏目，目前是硬编码
 		util.fprint(root, "/body.ftl", outfile);
 		logger.info("=============重新生成了body信息====================");
 	}

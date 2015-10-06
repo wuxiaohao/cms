@@ -66,9 +66,8 @@ public class TopicService implements ITopicService {
 	}
 
 	@Override
-	public void add(Topic topic, int cid, int uid, Integer[] aids) {
+	public void add(Topic topic, int cid, User u, Integer[] aids) {
 		Channel c = channelDao.load(cid);
-		User u = userDao.load(uid);
 		if(c==null||u==null)throw new CmsException("要添加的文章必须有用户和栏目");
 		topic.setAuthor(u.getNickname());
 		topic.setCname(c.getName());
@@ -80,8 +79,8 @@ public class TopicService implements ITopicService {
 	}
 
 	@Override
-	public void add(Topic topic, int cid, int uid) {
-		add(topic,cid,uid,null);
+	public void add(Topic topic, int cid, User u) {
+		add(topic,cid,u,null);
 	}
 
 	@Override
@@ -108,6 +107,10 @@ public class TopicService implements ITopicService {
 	@Override
 	public void update(Topic topic, int cid) {
 		update(topic,cid,null);
+	}
+	@Override
+	public void update(Topic topic) {
+		topicDao.update(topic);
 	}
 
 	@Override
@@ -141,10 +144,18 @@ public class TopicService implements ITopicService {
 		return topicDao.findRecommendTopic(ci);
 	}
 	@Override
-	public void updateStatus(int tid) {
+	public void updateStatus(int tid,User u) {
 		Topic t = topicDao.load(tid);
-		if(t.getStatus()==0) t.setStatus(1);
-		else t.setStatus(0);
+		if(t.getStatus()==0) {
+			t.setStatus(1);
+			t.setPublishDate(new Date());
+			t.setAuditor(u.getNickname());
+		}
+		else {
+			t.setStatus(0);
+			t.setPublishDate(null);
+			t.setAuditor(null);
+		}
 		topicDao.update(t);
 	}
 	@Override

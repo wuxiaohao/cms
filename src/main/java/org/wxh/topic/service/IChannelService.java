@@ -22,8 +22,9 @@ public interface IChannelService {
 	/**
 	 * 更新栏目
 	 * @param channel
+	 * @param oldIsTopNav 原来是否为导航栏目
 	 */
-	public void update(Channel channel);
+	public void update(Channel channel,int oldIsTopNav);
 	/**
 	 * 删除栏目
 	 * @param id
@@ -66,10 +67,20 @@ public interface IChannelService {
 	 */
 	public List<Channel> listTopNavChannel();
 	/**
+	 * 获取所有的顶部导航栏目，栏目的状态必须为已经启用(所有数据)
+	 * @return
+	 */
+	public List<Channel> listTopNavChannelAll();
+	/**
 	 * 更新栏目序号
 	 * @param ids
 	 */
 	public void updateSort(Integer[] ids);
+	/**
+	 * 更新顶部导航栏目序号
+	 * @param ids
+	 */
+	public void updateTopNavSort(Integer[] ids);
 	/**
 	 * 根据栏目类型获取所有的首页栏目
 	 * @param ct
@@ -77,12 +88,16 @@ public interface IChannelService {
 	 */
 	public List<Channel> listAllIndexChannel(ChannelType ct);
 	/**
-	 * 获取导航栏目中的第一个栏目
+	 * 获取导航栏目中的第一个子栏目
 	 * @param cid
 	 * @return
 	 */
 	public Channel loadFirstChannelByNav(int cid);
-	
+	/**
+	 * 根据父节点获取已启用的子栏目
+	 * @param cid 栏目id
+	 * @return
+	 */
 	public List<Channel> listUseChannelByParent(Integer cid);
 	
 	/**

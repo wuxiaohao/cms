@@ -105,7 +105,7 @@ html { overflow-x:hidden; }
 							</tr>
 							<tr>
 								<td width="150px" align="right">
-									导航栏目：<span style="color: red;">* </span>
+									顶部栏目：<span style="color: red;">* </span>
 								</td>
 								<td>
 									<div class="col-md-4">
@@ -138,18 +138,6 @@ html { overflow-x:hidden; }
 										<div class="input-icon right">
 											<sf:radiobutton path="status" value="0" class="make-switch switch-radio1" />启用
 											<sf:radiobutton path="status" value="1" class="make-switch switch-radio1" />停用
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									导航序号：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:input path="navOrder" class="form-control" />
 										</div>
 									</div>
 								</td>

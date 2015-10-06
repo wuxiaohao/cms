@@ -6,10 +6,11 @@
 			return false;
 		}
 	}
-	$.fn.mysorttable = function(opts) {
+	$.fn.mysorttable = function(opts,url) {
 		var _isSort = false;
 		var sortEle = $(this).find("tbody");
 		var _that = this;
+		var _url = url;
 		var setting = $.extend({
 			begin:"beginOrder",
 			save:"saveOrder"
@@ -54,7 +55,7 @@
 		function saveOrders() {
 			if(_isSort) {
 				var idArg = sortEle.sortable("serialize",{key:"ids"});
-				var url_ ="/cms/admin/channel/channels/updateSort?"+idArg;
+				var url_ = _url+"?"+idArg;
 				$.ajax({
 					type: "POST",
 					url: url_,

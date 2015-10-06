@@ -26,7 +26,7 @@ import org.wxh.topic.service.IChannelService;
 import org.wxh.user.auth.AuthClass;
 
 /**
- * 栏目
+ * 栏目管理
  * @author wxh
  *
  */
@@ -200,6 +200,7 @@ public class ChannelController {
 			return "channel/update";
 		}
 		Channel tc = channelService.load(id);
+		int oldIsTopNav = tc.getIsTopNav(); //原来是否为导航栏目
 		int pid = 0;
 		if(tc.getParent()!=null) pid = tc.getParent().getId();
 		tc.setCustomLink(channel.getCustomLink());
@@ -210,8 +211,7 @@ public class ChannelController {
 		tc.setRecommend(channel.getRecommend());
 		tc.setStatus(channel.getStatus());
 		tc.setType(channel.getType());
-		tc.setNavOrder(channel.getNavOrder());
-		channelService.update(tc);
+		channelService.update(tc,oldIsTopNav);
 		indexService.generateTop(); //重新生成静态页面的顶部
 		model.addAttribute("success", "栏目更新成功!");	
 		return listChild(pid,1,model);
@@ -219,6 +219,8 @@ public class ChannelController {
 	
 	/**
 	 * 存储拖动后保存的排序
+	 * @param ids 栏目id
+	 * @return
 	 */
 	@RequestMapping(value="/channels/updateSort",method=RequestMethod.POST)
 	public @ResponseBody AjaxObj updateSort(@Param Integer[] ids) {
@@ -230,6 +232,31 @@ public class ChannelController {
 		}
 		return new AjaxObj(1);
 	}
+	/**
+	 * 存储顶部栏目拖动后保存的排序
+	 * @param ids 栏目id
+	 * @return
+	 */
+	@RequestMapping(value = "/updateTopNavSort" ,method = RequestMethod.POST)
+	public @ResponseBody AjaxObj updateTopNavSort(@Param Integer[] ids){
+		try {
+			channelService.updateTopNavSort(ids);
+			indexService.generateTop(); //重新生成静态页面的顶部
+		} catch (Exception e) {
+			return new AjaxObj(0,e.getMessage());
+		}
+		return new AjaxObj(1);
+	}
 	
+	/**
+	 * 显示顶部栏目排序的页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/TopNavchannels",method=RequestMethod.POST)
+	public String listTopNav(Model model){
+		model.addAttribute("channels", channelService.listTopNavChannelAll());
+		return "channel/listTopNavchannel";
+	}
 	
 }

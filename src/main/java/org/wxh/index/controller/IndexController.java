@@ -23,6 +23,11 @@ import org.wxh.topic.service.IKeywordService;
 import org.wxh.topic.service.ITopicService;
 import org.wxh.util.BaseInfoUtil;
 
+/**
+ * 网站的Controller
+ * @author wxh
+ *
+ */
 @Controller
 public class IndexController {
 	@Autowired
@@ -58,36 +63,49 @@ public class IndexController {
 	public void setTopicService(ITopicService topicService) {
 		this.topicService = topicService;
 	}
-
+	
+	/**
+	 * 访问网站首页的方法
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping({"/","/index"})
 	public String index(Model model) {
 		model.addAttribute("baseInfo", BaseInfoUtil.getInstacne().read());
 		return "index/index";
 	}
-	
+	/**
+	 * 显示栏目信息
+	 * @param cid
+	 * @param model
+	 * @param resp
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/channel/{cid}")
 	public String showChannel(@PathVariable int cid,Model model,HttpServletResponse resp,HttpServletRequest req) throws IOException {
 		Channel c = channelService.load(cid);
-		//System.out.println(c.getType());
 		Channel pc = null;
-		if(c.getType()==ChannelType.NAV_CHANNEL) {
-			pc = c;
-			//如果是导航栏目，需要获取该栏目中的第一个栏目
+		//如果是导航栏目
+		if(c.getType()==ChannelType.NAV_CHANNEL) {  
+			pc = c; //自己就是父栏目
+			//如果是导航栏目，需要获取该栏目中的第一个子栏目
 			c = channelService.loadFirstChannelByNav(c.getId());
 		} else {
-			pc = c.getParent();
+			pc = c.getParent();  //获取父栏目
 		}
-//		System.out.println(c.getType()==ChannelType.TOPIC_LIST);
-//		System.out.println(c.getType());
-		if(c.getType()==ChannelType.TOPIC_CONTENT) {
+		model.addAttribute("pc", pc); 
+		model.addAttribute("channel", c); 
+		if(c.getType()==ChannelType.TOPIC_CONTENT) {  //如果是文章内容栏目,直接跳转显示文章内容
 			resp.sendRedirect(req.getContextPath()+"/topic/"+topicService.loadLastedTopicByColumn(cid).getId());
-		} else if(c.getType()==ChannelType.TOPIC_IMG){
+		} else if(c.getType()==ChannelType.TOPIC_IMG){ //如果是图片列表栏目，
 			SystemContext.setPageSize(16);
 			SystemContext.setSort("a.topic.publishDate");
 			SystemContext.setOrder("desc");
 			Pager<Attachment> atts = attachmentService.findChannelPic(cid);
 			model.addAttribute("datas", atts);
-		} else if(c.getType()==ChannelType.TOPIC_LIST) {
+		} else if(c.getType()==ChannelType.TOPIC_LIST) { //如果是文章列表栏目
 			SystemContext.setSort("t.publishDate");
 			SystemContext.setOrder("desc");
 			//System.out.println(c.getType());
@@ -95,19 +113,25 @@ public class IndexController {
 		}
 		SystemContext.removeSort();
 		SystemContext.removeOrder();
-		model.addAttribute("pc", pc);
 		model.addAttribute("cs", channelService.listUseChannelByParent(pc.getId()));
-		model.addAttribute("channel", c);
+		
 		if(c.getType()==ChannelType.TOPIC_LIST) {
 			return "index/channel";
 		} else {
 			return "index/channel_pic";
 		}
 	}
-	
+	/**
+	 * 显示文章内容
+	 * @param tid
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/topic/{tid}")
 	public String showTopic(@PathVariable int tid,Model model) {
 		Topic t = topicService.load(tid);
+		t.setViewCount(t.getViewCount() + 1);
+		topicService.update(t);
 		String keywords = t.getKeyword();
 		model.addAttribute("topic", t);
 		if(keywords==null||"".equals(keywords.trim())||"\\|".equals(keywords.trim())) {
@@ -126,7 +150,12 @@ public class IndexController {
 		}
 		return "index/topic";
 	}
-	
+	/**
+	 * 首页全文搜索
+	 * @param con
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/search/{con}")
 	public String search(@PathVariable String con,Model model) {
 		SystemContext.setOrder("asc");
@@ -140,7 +169,12 @@ public class IndexController {
 		model.addAttribute("con", con);
 		return "index/search";
 	}
-	
+	/**
+	 * 关键字检索
+	 * @param con
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/keyword/{con}")
 	public String keyword(@PathVariable String con,Model model) {
 		model.addAttribute("kws", keywordService.getMaxTimesKeyword(9));

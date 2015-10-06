@@ -70,7 +70,14 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 			this.updateByHql(hql, new Object[]{index++,id});
 		}
 	}
-
+	@Override
+	public void updateTopNavSort(Integer[] ids){
+		int navOrder = 1;
+		String hql = "update Channel c set c.navOrder=? where c.id=?";
+		for(Integer id:ids){
+			this.updateByHql(hql, new Object[]{navOrder++,id});
+		}
+	};
 	@Override
 	public List<Channel> listPublishChannel() {
 		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type!="+ChannelType.NAV_CHANNEL.ordinal();
@@ -81,6 +88,11 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	public List<Channel> listTopNavChannel() {
 		String hql = "select new Channel(c.id,c.name,c.customLink,c.customLinkUrl) " +
 				"from Channel c where c.status=0 and c.isTopNav=1 order by navOrder";
+		return this.list(hql);
+	}
+	@Override
+	public List<Channel> listTopNavChannelAll() {
+		String hql = "select c from Channel c where c.status=0 and c.isTopNav=1 order by navOrder";
 		return this.list(hql);
 	}
 
@@ -118,6 +130,14 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	public List<Channel> listChannelByType(ChannelType ct) {
 		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type=?";
 		return this.list(hql,ct);
+	}
+
+	@Override
+	public Integer getMaxIsTopNav() {
+		String hql = "select max(c.navOrder) from Channel c where c.isTopNav=?";
+		Object obj = this.queryObject(hql, 1);
+		if(obj==null) return 0;
+		return (Integer)obj;
 	}
 
 }

@@ -104,9 +104,23 @@ public interface IBaseDao<T> {
 	
 	/**
 	 * 根据hql查询对象
+	 * @param hql 查询语句
+	 * @param args 查询参数
+	 * @return
 	 */
 	public Object queryObject(String hql, Object[] args);
+	/**
+	 * 根据hql查询对象
+	 * @param hql 查询语句
+	 * @param arg 查询参数
+	 * @return
+	 */
 	public Object queryObject(String hql, Object arg);
+	/**
+	 * 根据hql查询对象
+	 * @param hql 查询语句
+	 * @return
+	 */
 	public Object queryObject(String hql);
 	/**
 	 * 基于别名和查询参数的查询一个对象
@@ -126,13 +140,24 @@ public interface IBaseDao<T> {
 	
 	/**
 	 * 根据hql更新对象
+	 * @param hql hql语句
+	 * @param args 参数对象数组
 	 */
 	public void updateByHql(String hql, Object[] args);
+	/**
+	 * 根据hql更新对象
+	 * @param hql hql语句
+	 * @param arg 参数
+	 */
 	public void updateByHql(String hql, Object arg);
+	/**
+	 * 根据hql更新对象
+	 * @param hql 
+	 */
 	public void updateByHql(String hql);
 	
 	/**
-	 * 根据sql查询对象，不包含关联对s
+	 * 根据sql查询对象，不包含关联对象
 	 */
 	public <N extends Object>List<N> listBySql(String sql, Object[] args, Class<?> clz,boolean hasEntity);
 	public <N extends Object>List<N> listBySql(String sql, Object arg, Class<?> clz,boolean hasEntity);
@@ -140,8 +165,8 @@ public interface IBaseDao<T> {
 	/**
 	 * 根据sql查询对象，不包含关联对象
 	 * @param sql
-	 * @param args 查询条件
-	 * @param alias 
+	 * @param args 查询条件参数
+	 * @param alias 别名
 	 * @param clz 查询的实体对象
 	 * @param hasEntity 该对象是否是hibernate所管理的实体
 	 * @return

@@ -99,10 +99,21 @@ public class BaseDao<T> implements IBaseDao<T> {
 	public List<T> list(String hql, Object[] args) {
 		return this.list(hql, args, null);
 	}
+	/**
+	 * 不分页列表对象
+	 * @param hql 查询对象的hql
+	 * @param args 查询参数
+	 * @return 一组不分页的列表对象
+	 */
 	@Override
 	public List<T> list(String hql, Object arg) {
 		return this.list(hql, new Object[]{arg});
 	}
+	/**
+	 * 不分页列表对象
+	 * @param hql 查询对象的hql
+	 * @return 一组不分页的列表对象
+	 */
 	@Override
 	public List<T> list(String hql) {
 		return this.list(hql,null);
@@ -138,16 +149,27 @@ public class BaseDao<T> implements IBaseDao<T> {
 	 * 分页列表对象
 	 * @param hql 查询对象的hql
 	 * @param args 查询参数
-	 * @return 一组不分页的列表对象
+	 * @return 一组分页的列表对象
 	 */
 	@Override
 	public Pager<T> find(String hql, Object[] args) {
 		return this.find(hql, args, null);
 	}
+	/**
+	 * 分页列表对象
+	 * @param hql 查询对象的hql
+	 * @param args 查询参数
+	 * @return 一组分页的列表对象
+	 */
 	@Override
 	public Pager<T> find(String hql, Object arg) {
 		return this.find(hql, new Object[]{arg});
 	}
+	/**
+	 * 分页列表对象
+	 * @param hql 查询对象的hql
+	 * @return 一组分页的列表对象
+	 */
 	@Override
 	public Pager<T> find(String hql) {
 		return this.find(hql,null);
@@ -193,14 +215,31 @@ public class BaseDao<T> implements IBaseDao<T> {
 	}
 
 //-------------根据hql查询对象----------------
+	/**
+	 * 根据hql查询对象
+	 * @param hql 查询语句
+	 * @param args 查询参数
+	 * @return
+	 */
 	@Override
 	public Object queryObject(String hql, Object[] args) {
 		return this.queryObject(hql, args,null);
 	}
+	/**
+	 * 根据hql查询对象
+	 * @param hql 查询语句
+	 * @param arg 查询参数
+	 * @return
+	 */
 	@Override
 	public Object queryObject(String hql, Object arg) {
 		return this.queryObject(hql, new Object[]{arg});
 	}
+	/**
+	 * 根据hql查询对象
+	 * @param hql 查询语句
+	 * @return
+	 */
 	@Override
 	public Object queryObject(String hql) {
 		return this.queryObject(hql,null);
@@ -231,16 +270,30 @@ public class BaseDao<T> implements IBaseDao<T> {
 	}
 
 //-------------根据hql更新对象----------------
+	/**
+	 * 根据hql更新对象
+	 * @param hql hql语句
+	 * @param args 参数对象数组
+	 */
 	@Override
 	public void updateByHql(String hql, Object[] args) {
 		Query query = getSession().createQuery(hql);
 		setParameter(query, args);
 		query.executeUpdate();
 	}
+	/**
+	 * 根据hql更新对象
+	 * @param hql hql语句
+	 * @param arg 参数
+	 */
 	@Override
 	public void updateByHql(String hql, Object arg) {
 		this.updateByHql(hql,new Object[]{arg});
 	}
+	/**
+	 * 根据hql更新对象
+	 * @param hql 
+	 */
 	@Override
 	public void updateByHql(String hql) {
 		this.updateByHql(hql,null);

@@ -46,10 +46,20 @@ public class ChannelService implements IChannelService {
 			channel.setParent(pc);
 		}
 		channel.setOrders(orders+1);
+		//如果是导航栏目，设置导航的排序
+		if(channel.getIsTopNav() == 1) {
+			Integer navOrder = channelDao.getMaxIsTopNav();
+			channel.setNavOrder(navOrder+1);
+		}
 		channelDao.add(channel);
 	}
 
-	public void update(Channel channel) {
+	public void update(Channel channel,int oldIsTopNav) {
+		//如果是导航栏目，设置导航的排序
+		if(channel.getIsTopNav() == 1 && oldIsTopNav == 0) {
+			Integer navOrder = channelDao.getMaxIsTopNav();
+			channel.setNavOrder(navOrder+1);
+		}
 		channelDao.update(channel);
 	}
 
@@ -94,12 +104,20 @@ public class ChannelService implements IChannelService {
 		channelDao.updateSort(ids);
 	}
 	@Override
+	public void updateTopNavSort(Integer[] ids) {
+		channelDao.updateTopNavSort(ids);
+	}
+	@Override
 	public List<Channel> listPublishChannel() {
 		return channelDao.listPublishChannel();
 	}
 	@Override
 	public List<Channel> listTopNavChannel() {
 		return channelDao.listTopNavChannel();
+	}
+	@Override
+	public List<Channel> listTopNavChannelAll() {
+		return channelDao.listTopNavChannelAll();
 	}
 	@Override
 	public List<Channel> listAllIndexChannel(ChannelType ct) {

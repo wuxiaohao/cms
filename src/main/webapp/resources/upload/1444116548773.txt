@@ -1,0 +1,11 @@
+1、创建数据库
+Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+Connection conn = DriverManager.getConnection("jdbc:derby:Java2012XXX;create=true");//Connection要放到Class中，不要每次都建立
+
+2、创建表
+conn.setAutoCommit(false);
+Statement s = conn.createStatement();//Statement要放到Class中
+s.execute("create table Students(name varchar(40), score int)");
+s.close();
+conn.commit();
+

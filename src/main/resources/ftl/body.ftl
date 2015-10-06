@@ -46,7 +46,7 @@
 				<div id="xwgk_bg"></div>
 			</@indexTopicList>
 			<div id="xxgk">
-				<h3><a href="channel/7" class="index_title_href">学校概况</a></h3>
+				<h3><a href="channel/43" class="index_title_href">学校概况</a></h3>
 				<div id="xxgk_bg"></div>
 				${xxgk.summary}
 			</div>

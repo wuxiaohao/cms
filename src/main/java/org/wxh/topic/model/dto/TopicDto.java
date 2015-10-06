@@ -9,10 +9,11 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.wxh.topic.model.Topic;
+import org.wxh.user.model.User;
 
 
 public class TopicDto {
-	private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+	/*private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");*/ 
 	private int id;
 	private String title;
 	/**
@@ -47,7 +48,18 @@ public class TopicDto {
 	 * 文章的栏目id
 	 */
 	private int cid;
+	/**
+	 * 保存原来的文章状态
+	 * @return
+	 */
+	private int oldStatus;
 	
+	public int getOldStatus() {
+		return oldStatus;
+	}
+	public void setOldStatus(int oldStatus) {
+		this.oldStatus = oldStatus;
+	}
 	public int getId() {
 		return id;
 	}
@@ -117,13 +129,17 @@ public class TopicDto {
 	public TopicDto() {
 	}
 	
-	public Topic getTopic() {
+	public Topic getTopic(User u) {
 		Topic t = new Topic();
 		t.setChannelPicId(this.getChannelPicId());
 		t.setContent(this.getContent());
 		t.setId(this.getId());
 		t.setKeyword(this.getKeyword());
-		try {
+		if(this.getStatus() == 1) {
+			t.setPublishDate(new Date());
+			t.setAuditor(u.getNickname());
+		}
+		/*try {
 			Date d = sdf.parse(this.getPublishDate());
 			Calendar cd = Calendar.getInstance();
 			cd.setTime(d);
@@ -133,6 +149,29 @@ public class TopicDto {
 			t.setPublishDate(ca.getTime());
 		} catch (ParseException e) {
 			t.setPublishDate(new Date());
+		}*/
+		t.setRecommend(this.getRecommend());
+		t.setStatus(this.getStatus());
+		t.setSummary(this.getSummary());
+		t.setTitle(this.getTitle());
+		return t;
+	}
+	
+	public Topic getTopicByUpdate(User u) {
+		Topic t = new Topic();
+		t.setChannelPicId(this.getChannelPicId());
+		t.setContent(this.getContent());
+		t.setId(this.getId());
+		t.setKeyword(this.getKeyword());
+		if(this.getOldStatus() != this.getStatus()) { //如果文章状态有变动
+			if(this.getStatus() == 1){ //发布
+				t.setPublishDate(new Date());
+				t.setAuditor(u.getNickname());
+			}
+			if(this.getStatus() == 0){ //取消发布
+				t.setPublishDate(null);
+				t.setAuditor(null);
+			}
 		}
 		t.setRecommend(this.getRecommend());
 		t.setStatus(this.getStatus());
@@ -146,7 +185,6 @@ public class TopicDto {
 		this.setContent(topic.getContent());
 		this.setId(topic.getId());
 		this.setKeyword(topic.getKeyword());
-		this.setPublishDate(sdf.format(topic.getPublishDate()));
 		this.setRecommend(topic.getRecommend());
 		this.setStatus(topic.getStatus());
 		this.setSummary(topic.getSummary());
@@ -159,9 +197,9 @@ public class TopicDto {
 		this.setId(topic.getId());
 		this.setCid(cid);
 		this.setKeyword(topic.getKeyword());
-		this.setPublishDate(sdf.format(topic.getPublishDate()));
 		this.setRecommend(topic.getRecommend());
 		this.setStatus(topic.getStatus());
+		this.setOldStatus(topic.getStatus());
 		this.setSummary(topic.getSummary());
 		this.setTitle(topic.getTitle());
 	}

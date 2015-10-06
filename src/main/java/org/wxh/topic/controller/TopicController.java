@@ -106,7 +106,11 @@ public class TopicController {
 	}
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		SystemContext.setSort("t.publishDate");
+		if(status == 1){ //如果是获取已发布文章的列表，则按发布时间排序
+			SystemContext.setSort("t.publishDate"); 
+		} else { //如果是获取未发布文章的列表，则按创建时间排序
+			SystemContext.setSort("t.createDate"); 
+		}
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
 		if(isAdmin) { //如果是超级管理员，则返回所有的文章
@@ -167,7 +171,8 @@ public class TopicController {
 	@RequestMapping("/changeStatus/{id}")
 	@AuthMethod(role="ROLE_AUDIT")
 	public String changeStatus(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
-		topicService.updateStatus(id);
+		User loginUser = (User)session.getAttribute("loginUser");
+		topicService.updateStatus(id,loginUser);
 		Topic t = topicService.load(id);
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
 			indexService.generateBody();//重新生成首页
@@ -214,7 +219,6 @@ public class TopicController {
 	@AuthMethod(role="ROLE_PUBLISH")
 	public String add(Model model) {
 		Topic t = new Topic();
-		t.setPublishDate(new Date());
 		TopicDto td = new TopicDto(t);
 		model.addAttribute("topicDto",td);
 		return "topic/add";
@@ -233,8 +237,8 @@ public class TopicController {
 		if(br.hasErrors()) {
 			return "topic/add";
 		}
-		Topic t = topicDto.getTopic();
 		User loginUser = (User)session.getAttribute("loginUser");
+		Topic t = topicDto.getTopic(loginUser);
 		StringBuffer keys = new StringBuffer();
 		if(aks!=null) {
 			for(String k:aks) {
@@ -243,7 +247,7 @@ public class TopicController {
 			}
 		}
 		t.setKeyword(keys.toString());
-		topicService.add(t, topicDto.getCid(), loginUser.getId(),aids);
+		topicService.add(t, topicDto.getCid(), loginUser,aids);
 		if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
 			indexService.generateBody();//重新生成首页
 		}
@@ -284,7 +288,8 @@ public class TopicController {
 			return "topic/update";
 		}
 		Topic tt = topicService.load(id);
-		Topic t = topicDto.getTopic();
+		User loginUser = (User)session.getAttribute("loginUser");
+		Topic t = topicDto.getTopicByUpdate(loginUser);
 		StringBuffer keys = new StringBuffer();
 		if(aks!=null) {
 			for(String k:aks) {
@@ -300,10 +305,9 @@ public class TopicController {
 		tt.setStatus(t.getStatus());
 		tt.setSummary(t.getSummary());
 		tt.setTitle(t.getTitle());
+		tt.setAuditor(t.getAuditor());
 		topicService.update(tt, topicDto.getCid(),aids);
-		if(topicService.isUpdateIndex(topicDto.getCid())) {
-			indexService.generateBody(); //重新生成首页
-		}
+		indexService.generateBody(); //重新生成首页
 		return "redirect:/jsp/common/updateSucByTopic.jsp";
 	}
 	/**

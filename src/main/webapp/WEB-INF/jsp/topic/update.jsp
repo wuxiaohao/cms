@@ -52,19 +52,18 @@
 							</td>
 						</tr>
 						<tr>
+							<sf:hidden path="oldStatus"/>
 							<c:choose>
 							<c:when test="${isAudit||isAdmin }">
-								<tr>
-									<td width="150px" align="right">文章状态：</td>
-									<td>
-										<div class="col-md-4">
-											<div class="input-icon right">
-												<sf:radiobutton path="status" value="0"/>未发布
-												<sf:radiobutton path="status" value="1"/>已发布
-											</div>
-										</div>
-									</td>
-								</tr>
+							<td width="150px" align="right">文章状态：</td>
+							<td>
+								<div class="col-md-4">
+									<div class="input-icon right">
+										<sf:radiobutton path="status" value="0"/>未发布
+										<sf:radiobutton path="status" value="1"/>已发布
+									</div>
+								</div>
+							</td>
 							</c:when>
 							<c:otherwise>
 								<sf:hidden path="status"/>
@@ -82,7 +81,7 @@
 								</div>	
 							</td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td width="150px" align="right">发布时间：</td>
 							<td>
 								<div class="col-md-4">
@@ -91,7 +90,7 @@
 									</div>
 								</div>
 							</td>
-						</tr>
+						</tr> --%>
 						<tr>
 							<td width="150px" align="right">文章关键字：</td>
 							<td>

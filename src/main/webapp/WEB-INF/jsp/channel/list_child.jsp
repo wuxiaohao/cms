@@ -29,7 +29,7 @@ $(function(){
 		parent.refreshTree();  //调用父类的refreshTree
 		parent.showMessage(success,error);  //调用父类回显信息的方法
 	}
-	$(".listTable").mysorttable();
+	$(".listTable").mysorttable(null,"${pageContext.servletContext.contextPath }/admin/channel/channels/updateSort");
 });
 </script>
 </head>
@@ -61,7 +61,7 @@ $(function(){
 							<th width="110px">栏目类型</th>
 							<th>是否推荐</th>
 							<th>首页栏目</th>
-							<th>导航栏目</th>
+							<th>顶部栏目</th>
 							<th>栏目状态</th>
 							<th>操作</th>
 						</tr>

@@ -66,7 +66,7 @@ public class Channel implements java.io.Serializable{
 	 */
 	private Channel parent;
 	/**
-	 * 导航的序号
+	 * 顶部导航的序号
 	 */
 	private int navOrder;
 	

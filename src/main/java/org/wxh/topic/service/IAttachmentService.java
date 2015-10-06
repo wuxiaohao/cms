@@ -54,12 +54,12 @@ public interface IAttachmentService {
 	public List<Attachment> listIndexPic(int num);
 	/**
 	 * 获取某个栏目中的附件图片信息
-	 * @param cid
+	 * @param cid 栏目id
 	 * @return
 	 */
 	public Pager<Attachment> findChannelPic(int cid);
 	/**
-	 * 获取某篇文章的属于附件类型的附件对象
+	 * 获取某篇文章的所有附件
 	 * @param tid
 	 * @return
 	 */

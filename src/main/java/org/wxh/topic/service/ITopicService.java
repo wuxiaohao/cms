@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.model.Topic;
+import org.wxh.user.model.User;
 
 /**
  * 文章业务层
@@ -19,14 +20,14 @@ public interface ITopicService {
 	 * @param uid 文章的用户
 	 * @param aids 文章的附件id数组
 	 */
-	public void add(Topic topic,int cid,int uid,Integer[] aids);
+	public void add(Topic topic,int cid,User u,Integer[] aids);
 	/**
 	 * 添加不带附件信息的文章对象
 	 * @param topic
 	 * @param cid
 	 * @param uid
 	 */
-	public void add(Topic topic,int cid,int uid);
+	public void add(Topic topic,int cid,User u);
 	
 	/**
 	 * 删除文章，先删除文章的附件信息，再删除附件的文件对象
@@ -36,20 +37,25 @@ public interface ITopicService {
 	/**
 	 * 更新文章，带附件信息更新
 	 * @param topic
-	 * @param cid
-	 * @param aids
+	 * @param cid 栏目id
+	 * @param aids 附件id
 	 */
 	public void update(Topic topic,int cid,Integer[] aids);
 	/**
 	 * 没有带附件信息的文章更新
-	 * @param topic
+	 * @param topic 
+	 * @param cid 栏目id
 	 */
 	public void update(Topic topic,int cid);
+	/**
+	 * 文章更新
+	 */
+	public void update(Topic topic);
 	/**
 	 * 更新文章的状态
 	 * @param tid
 	 */
-	public void updateStatus(int tid);
+	public void updateStatus(int tid,User u);
 	
 	/**
 	 * 加载一个文章

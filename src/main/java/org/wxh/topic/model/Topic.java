@@ -49,6 +49,7 @@ public class Topic {
 	private String summary;
 	/**
 	 * 栏目图片id，如果该栏目是图片类型的栏目，就会显示这个id的图片
+	 * 这里存储的是该图片附件的id
 	 */
 	private int channelPicId;
 	/**
@@ -60,7 +61,7 @@ public class Topic {
 	 */
 	private Date createDate;
 	/**
-	 * 文章的作者名称，用来显示用户的昵称，冗余字段
+	 * 文章的作者名称，用来显示用户的昵称
 	 */
 	private String author;
 	/**
@@ -73,9 +74,17 @@ public class Topic {
 	 */
 	private Channel channel;
 	/**
-	 * 文章的发布者
+	 * 文章的创建者
 	 */
 	private User user;
+	/**
+	 * 文章审核人
+	 */
+	private String auditor;
+	/**
+	 * 浏览次数
+	 */
+	private int viewCount;
 	
 	@Id
 	@GeneratedValue
@@ -109,8 +118,14 @@ public class Topic {
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
 	}
-	
-    @Lob     
+	@Column(name="view_count")
+    public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+	@Lob     
 	@Type(type="text")  
 	@Column(name="content", nullable=true) 
 	public String getContent() {
@@ -180,6 +195,12 @@ public class Topic {
 	}
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+	public String getAuditor() {
+		return auditor;
+	}
+	public void setAuditor(String auditor) {
+		this.auditor = auditor;
 	}
 	@Override
 	public String toString() {

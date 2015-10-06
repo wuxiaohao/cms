@@ -66,14 +66,32 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
+							<a id="wenzhang" class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
+							<i class="icon-wallet"></i>
+							文章内容管理</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;">
+					<i class="icon-folder"></i>
+					<span class="title">栏目管理</span>
+					</a>
+					<ul class="sub-menu">
+						<li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/channel/channels">
 							<i class="icon-wallet"></i>
 							栏目信息管理</a>
 						</li>
 						<li>
-							<a id="wenzhang" class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
+							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/channel/TopNavchannels">
 							<i class="icon-wallet"></i>
-							文章内容管理</a>
+							顶部栏目设置</a>
+						</li>
+						<li>
+							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
+							<i class="icon-wallet"></i>
+							首页栏目管理</a>
 						</li>
 					</ul>
 				</li>

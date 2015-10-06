@@ -17,7 +17,7 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	public List<Channel> listByParent(Integer pid);
 	/**
 	 * 获取子栏目的最大的排序号
-	 * @param pid
+	 * @param pid 父节点id
 	 * @return
 	 */
 	public int getMaxOrderByParent(Integer pid);
@@ -33,10 +33,15 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 */
 	public List<ChannelTree> generateTreeByParent(Integer pid);
 	/**
-	 * 通过一个数组来完成排序
+	 * 通过一个数组来完成栏目的排序
 	 * @param ids
 	 */
 	public void updateSort(Integer[] ids);
+	/**
+	 * 通过一个数组来完成顶部导航栏目的排序
+	 * @param ids
+	 */
+	public void updateTopNavSort(Integer[] ids);
 	/**
 	 * 所有的可以发布文章的栏目，栏目的状态必须为启用状态
 	 * @return
@@ -53,13 +58,18 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 */
 	public List<Channel> listTopNavChannel();
 	/**
+	 * 获取所有顶部导航栏目的所有数据
+	 * @return
+	 */
+	public List<Channel> listTopNavChannelAll();
+	/**
 	 * 删除频道和组的对应关系
 	 * @param cid
 	 * @return
 	 */
 	public void deleteChannelGroups(int cid);
 	/**
-	 * 获取导航栏目中的第一个栏目
+	 * 获取导航栏目中的第一个子栏目
 	 * @param cid
 	 * @return
 	 */
@@ -72,4 +82,9 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 * @return
 	 */
 	public List<Channel> listChannelByType(ChannelType ct);
+	/**
+	 * 获取导航栏目最大排序号
+	 * @return
+	 */
+	public Integer getMaxIsTopNav();
 }
