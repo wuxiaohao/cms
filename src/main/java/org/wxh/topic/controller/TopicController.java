@@ -287,9 +287,8 @@ public class TopicController {
 		if(br.hasErrors()) {
 			return "topic/update";
 		}
-		Topic tt = topicService.load(id);
-		User loginUser = (User)session.getAttribute("loginUser");
-		Topic t = topicDto.getTopicByUpdate(loginUser);
+		Topic t = topicDto.getTopicByUpdate(topicService.load(id),(User)session.getAttribute("loginUser"));
+		//设置文章关键字
 		StringBuffer keys = new StringBuffer();
 		if(aks!=null) {
 			for(String k:aks) {
@@ -297,16 +296,8 @@ public class TopicController {
 				keywordService.addOrUpdate(k);
 			}
 		}
-		tt.setKeyword(keys.toString());
-		tt.setChannelPicId(t.getChannelPicId());
-		tt.setContent(t.getContent());
-		tt.setPublishDate(t.getPublishDate());
-		tt.setRecommend(t.getRecommend());
-		tt.setStatus(t.getStatus());
-		tt.setSummary(t.getSummary());
-		tt.setTitle(t.getTitle());
-		tt.setAuditor(t.getAuditor());
-		topicService.update(tt, topicDto.getCid(),aids);
+		t.setKeyword(keys.toString());
+		topicService.update(t, topicDto.getCid(),aids);
 		indexService.generateBody(); //重新生成首页
 		return "redirect:/jsp/common/updateSucByTopic.jsp";
 	}

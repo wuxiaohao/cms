@@ -48,18 +48,7 @@ public class TopicDto {
 	 * 文章的栏目id
 	 */
 	private int cid;
-	/**
-	 * 保存原来的文章状态
-	 * @return
-	 */
-	private int oldStatus;
-	
-	public int getOldStatus() {
-		return oldStatus;
-	}
-	public void setOldStatus(int oldStatus) {
-		this.oldStatus = oldStatus;
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -129,6 +118,11 @@ public class TopicDto {
 	public TopicDto() {
 	}
 	
+	/**
+	 * 封装添加文章的dto数据
+	 * @param u 当前执行操作的用户
+	 * @return
+	 */
 	public Topic getTopic(User u) {
 		Topic t = new Topic();
 		t.setChannelPicId(this.getChannelPicId());
@@ -156,14 +150,14 @@ public class TopicDto {
 		t.setTitle(this.getTitle());
 		return t;
 	}
-	
-	public Topic getTopicByUpdate(User u) {
-		Topic t = new Topic();
-		t.setChannelPicId(this.getChannelPicId());
-		t.setContent(this.getContent());
-		t.setId(this.getId());
-		t.setKeyword(this.getKeyword());
-		if(this.getOldStatus() != this.getStatus()) { //如果文章状态有变动
+	/**
+	 * 封装更新后的数据
+	 * @param t 加载一个文章实体进来
+	 * @param u 当前执行操作的用户
+	 * @return
+	 */
+	public Topic getTopicByUpdate(Topic t,User u) {
+		if(t.getStatus() != this.getStatus()) { //如果文章状态有变动
 			if(this.getStatus() == 1){ //发布
 				t.setPublishDate(new Date());
 				t.setAuditor(u.getNickname());
@@ -172,9 +166,13 @@ public class TopicDto {
 				t.setPublishDate(null);
 				t.setAuditor(null);
 			}
+			t.setStatus(this.getStatus());
 		}
+		t.setChannelPicId(this.getChannelPicId());
+		t.setContent(this.getContent());
+		t.setId(this.getId());
+		t.setKeyword(this.getKeyword());
 		t.setRecommend(this.getRecommend());
-		t.setStatus(this.getStatus());
 		t.setSummary(this.getSummary());
 		t.setTitle(this.getTitle());
 		return t;
@@ -199,9 +197,9 @@ public class TopicDto {
 		this.setKeyword(topic.getKeyword());
 		this.setRecommend(topic.getRecommend());
 		this.setStatus(topic.getStatus());
-		this.setOldStatus(topic.getStatus());
 		this.setSummary(topic.getSummary());
 		this.setTitle(topic.getTitle());
 	}
+	
 	
 }

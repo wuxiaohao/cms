@@ -53,7 +53,8 @@ public interface ITopicService {
 	public void update(Topic topic);
 	/**
 	 * 更新文章的状态
-	 * @param tid
+	 * @param tid 文章id
+	 * @param u 用户
 	 */
 	public void updateStatus(int tid,User u);
 	

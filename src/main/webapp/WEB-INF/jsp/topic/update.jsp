@@ -52,7 +52,6 @@
 							</td>
 						</tr>
 						<tr>
-							<sf:hidden path="oldStatus"/>
 							<c:choose>
 							<c:when test="${isAudit||isAdmin }">
 							<td width="150px" align="right">文章状态：</td>
