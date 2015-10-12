@@ -300,15 +300,38 @@ public class BaseDao<T> implements IBaseDao<T> {
 	}
 
 //----------根据sql查询对象，不包含关联对象---------
+	/**
+	 * 根据sql查询对象，不包含关联对象
+	 * @param sql sql语句
+	 * @param args 查询条件的参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	@Override
 	public <N extends Object>List<N> listBySql(String sql, Object[] args, Class<?> clz,boolean hasEntity) {
 		return this.listBySql(sql, args, null, clz, hasEntity);
 	}
+	/**
+	 * 根据sql查询对象，不包含关联对象
+	 * @param sql sql语句
+	 * @param arg 查询条件的参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	@Override
 	public <N extends Object>List<N> listBySql(String sql, Object arg, Class<?> clz,
 			boolean hasEntity) {
 		return this.listBySql(sql, new Object[]{arg}, clz, hasEntity);
 	}
+	/**
+	 * 根据sql查询对象，不包含关联对象
+	 * @param sql sql语句
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	@Override
 	public <N extends Object>List<N> listBySql(String sql, Class<?> clz,
 			boolean hasEntity) {
@@ -317,9 +340,9 @@ public class BaseDao<T> implements IBaseDao<T> {
 	
 	/**
 	 * 根据sql查询对象，不包含关联对象
-	 * @param sql
-	 * @param args 查询条件
-	 * @param alias 
+	 * @param sql sql语句
+	 * @param args 查询条件的参数
+	 * @param alias 别名参数
 	 * @param clz 查询的实体对象
 	 * @param hasEntity 该对象是否是hibernate所管理的实体
 	 * @return
@@ -336,27 +359,63 @@ public class BaseDao<T> implements IBaseDao<T> {
 			sq.setResultTransformer(Transformers.aliasToBean(clz));
 		return sq.list();
 	}
-
+	/**
+	 * 根据sql查询对象，不包含关联对象
+	 * @param sql sql语句
+	 * @param alias 别名参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	public <N extends Object>List<N> listByAliasSql(String sql, Map<String, Object> alias,
 			Class<?> clz, boolean hasEntity) {
 		return this.listBySql(sql, null, alias, clz, hasEntity);
 	}
 
 //----------根据sql查询对象，不包含关联对象（分页）---------
+	/**
+	 * 根据sql查询对象，不包含关联对象（分页）
+	 * @param sql sql语句
+	 * @param args 查询条件的参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	public <N extends Object>Pager<N> findBySql(String sql, Object[] args, Class<?> clz,
 			boolean hasEntity) {
 		return this.findBySql(sql, args, null, clz, hasEntity);
 	}
-
+	/**
+	 * 根据sql查询对象，不包含关联对象（分页）
+	 * @param sql sql语句
+	 * @param arg 查询条件的参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	public <N extends Object>Pager<N> findBySql(String sql, Object arg, Class<?> clz,
 			boolean hasEntity) {
 		return this.findBySql(sql, new Object[]{arg}, clz, hasEntity);
 	}
-
+	/**
+	 * 根据sql查询对象，不包含关联对象（分页）
+	 * @param sql sql语句
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	public <N extends Object>Pager<N> findBySql(String sql, Class<?> clz, boolean hasEntity) {
 		return this.findBySql(sql, null, clz, hasEntity);
 	}
-
+	/**
+	 * 根据sql查询对象，不包含关联对象（分页）
+	 * @param sql sql语句
+	 * @param args 查询条件的参数
+	 * @param alias 别名参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	public <N extends Object>Pager<N> findBySql(String sql, Object[] args,
 			Map<String, Object> alias, Class<?> clz, boolean hasEntity) {
 		sql = initSort(sql);//初始化排序
@@ -380,7 +439,14 @@ public class BaseDao<T> implements IBaseDao<T> {
 		pages.setTotal(total);
 		return pages;
 	}
-
+	/**
+	 * 根据sql查询对象，不包含关联对象（分页）
+	 * @param sql sql语句
+	 * @param alias 别名参数
+	 * @param clz 查询的实体对象
+	 * @param hasEntity 该对象是否是hibernate所管理的实体
+	 * @return
+	 */
 	public <N extends Object>Pager<N> findByAliasSql(String sql, Map<String, Object> alias,
 			Class<?> clz, boolean hasEntity) {
 		return this.findBySql(sql, null, alias, clz, hasEntity);
