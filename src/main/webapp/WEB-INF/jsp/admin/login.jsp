@@ -36,7 +36,7 @@
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" id="myForm" action="" method="post">
+	<form class="login-form" id="myForm" action="<%=request.getContextPath()%>/login" method="post">
 		<h3 class="form-title">请输入你的账号</h3>
 		<div style="color: red">${error }</div>
 		<div class="form-group">
@@ -115,9 +115,6 @@
 	 2015 &copy; 城市学院. 吴晓豪 制作.
 </div>
 <script>
-	jQuery(document).ready(function() {
-	  Login.init();
-	});
 </script>
 </body>
 </html>
