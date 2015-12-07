@@ -16,10 +16,25 @@
 	</servlet-mapping>
 	
 	<!-- 配置dwr -->
-	<servlet-mapping>
-		<servlet-name>cms</servlet-name>
-		<url-pattern>/dwr/*</url-pattern>
-	</servlet-mapping>
+	<listener>
+     	<listener-class>org.directwebremoting.servlet.DwrListener</listener-class>
+    </listener>
+	<servlet>
+    	<servlet-name>dwr-invoker</servlet-name>
+    	<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+	
+    	<!-- This should NEVER be present in live -->
+   	 	<init-param>
+      		<param-name>debug</param-name>
+     		 <param-value>true</param-value>
+   		 </init-param>
+   		 <load-on-startup>1</load-on-startup>
+ 	 </servlet>
+ 
+	 <servlet-mapping>
+	    <servlet-name>dwr-invoker</servlet-name>
+	    <url-pattern>/dwr/*</url-pattern>
+	 </servlet-mapping>
 	
 	<!-- 初始化信息 -->
 	<servlet>

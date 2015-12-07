@@ -5,7 +5,23 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>cms</name>
-  <description/>
+  <!-- 指定maven的默认远程仓库 -->
+  <repositories>  
+        <repository>  
+            <id>jboss</id>  
+            <name>JBoss Repository</name>  
+            <url>http://repository.jboss.com/maven2/</url>  
+            <releases>  
+                <updatePolicy>daily</updatePolicy><!-- never,always,interval n -->  
+                <enabled>true</enabled>  
+                <checksumPolicy>warn</checksumPolicy><!-- fail,ignore -->  
+            </releases>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+            <layout>default</layout>   
+        </repository>  
+  </repositories>  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>3.2.2.RELEASE</spring.version>
@@ -127,7 +143,7 @@
 
 	<!-- 引入dwr -->
 	<dependency>
-		<groupId>org.directwebremoting</groupId>
+		<groupId>org.directwebremotingt</groupId>
 		<artifactId>dwr</artifactId>
 		<version>3.0.M1</version>
 	</dependency>
@@ -254,19 +270,19 @@
         </configuration>
       </plugin>
       <!-- 配置jetty -->
-      <plugin>
+      <!-- <plugin>
 		  <groupId>org.mortbay.jetty</groupId>
 		  <artifactId>jetty-maven-plugin</artifactId>
 		  <configuration>
-		  <!--   间隔x扫描一次,实现热部署 -->
+		    间隔x扫描一次,实现热部署
 		    <scanIntervalSeconds>10</scanIntervalSeconds>
-		   <!--  编写类文件之后，是否自动重启jetty；可选后面两个值[manual|automatic] -->
+		    编写类文件之后，是否自动重启jetty；可选后面两个值[manual|automatic]
 			<reload>manual</reload>
 		    <contextXml>${project.basedir}/src/main/resources/jetty-context.xml</contextXml>  
 		    <webApp>
-			 <!--    指定项目路径(如果不写，则按照pom.xml里面的artifactId属性值配置)，访问路径为http://localhost:8888/cms
+			    指定项目路径(如果不写，则按照pom.xml里面的artifactId属性值配置)，访问路径为http://localhost:8888/cms
 				配置<contextPath>/cms</contextPath>，则访问路径为http://localhost:8888/cms
-				配置<contextPath>/</contextPath>，则访问路径为http://localhost:8888 -->
+				配置<contextPath>/</contextPath>，则访问路径为http://localhost:8888
 		        <contextPath>/cms</contextPath>
 		    </webApp>
 		    <connectors>
@@ -276,7 +292,7 @@
 		       </connector>
 		     </connectors>
 		  </configuration>
-		</plugin>
+		</plugin> -->
     </plugins>
   </build>
 </project>
