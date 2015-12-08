@@ -26,7 +26,7 @@
 		</pg:prev>
 		<pg:pages>
 			<c:if test="${curPage eq pageNumber }">
-				<a href="${pageUrl }" class="btn blue-hoki">${pageNumber }</a>
+				<a href="${pageUrl }" class="btn blue-hoki ajaxify">${pageNumber }</a>
 			</c:if>
 			<c:if test="${curPage != pageNumber }">
 				<a href="${pageUrl }" class="btn btn-default ajaxify">${pageNumber }</a>
