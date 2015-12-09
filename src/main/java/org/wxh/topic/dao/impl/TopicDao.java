@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.ITopicDao;
+import org.wxh.topic.model.ChannelTree;
+import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 
 @Repository("topicDao")
@@ -18,13 +20,13 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	}
 	
 	private String getTopicSelect() {
-		return "select new Topic(t.id,t.title,t.keyword,t.status,t.recommend,t.publishDate,t.author,t.cname)";
+		return "select new Topic(t.id,t.title,t.keyword,t.status,t.recommend,t.createDate,t.publishDate,t.author,t.cname,t.auditor)";
 	}
 
 	@Override
 	public Pager<Topic> find(Integer uid, Integer cid, String title,
 			Integer status) {
-		String hql = getTopicSelect()+" from Topic t where 1=1";
+		String hql = getTopicSelect()+" from Topic t where 1=1 and t.channel.type="+ChannelType.TOPIC_LIST.ordinal();
 		if(status!=null) {
 			hql+=" and t.status="+status;
 		}

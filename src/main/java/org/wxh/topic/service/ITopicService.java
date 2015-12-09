@@ -31,7 +31,7 @@ public interface ITopicService {
 	
 	/**
 	 * 删除文章，先删除文章的附件信息，再删除附件的文件对象
-	 * @param id
+	 * @param id 文章id
 	 */
 	public void delete(int id);
 	/**

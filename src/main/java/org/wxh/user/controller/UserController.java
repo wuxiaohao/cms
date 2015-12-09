@@ -306,9 +306,9 @@ public class UserController {
 		List<Role> rs = userService.listUserRoles(uid);
 		for(Role r:rs) {
 			if(r.getRoleType()==RoleType.ROLE_ADMIN) {   //如果是管理员
-				return channelService.generateTree();
+				return channelService.generateTreeAll();
 			}
 		}
-		return groupService.generateUserChannelTree(uid);
+		return groupService.generateUserChannelTreeAll(uid);
 	}
 }

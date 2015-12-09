@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,6 +14,7 @@
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
 		showMessage(success,error);
+		//条件检索
 		$("#search").click(function(event){
 			var con = $.trim($("#con").val()); 
 			var cid = $("#cid").val();
@@ -40,7 +42,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-title">
-			文章内容管理
+			文章新闻管理
 			<small> <i class="fa fa-shopping-cart"></i> 发布、添加、更新、删除文章 </small>
 		</h3>
 		<ul class="page-breadcrumb breadcrumb">
@@ -50,11 +52,11 @@
 				>>
 			</li>
 			<li>
-				<a>文章管理</a>
+				<a>新闻管理</a>
 				>>
 			</li>
 			<li>
-				<a href="admin/topic/audits" class="ajaxify">文章内容管理</a>
+				<a href="admin/topic/audits" class="ajaxify">文章新闻管理</a>
 			</li>
 		</ul>
 	</div>
@@ -105,26 +107,57 @@
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="30%" align="center">文章标题</td>
-							<td>文章作者</td>
+							<td width="28%" align="center">文章标题</td>
+							<c:if test="${status eq 0}">
+							<td>创建人</td>
+							</c:if>
+							<c:if test="${status eq 1}">
+							<td>发布人</td>
+							</c:if>
 							<td>是否推荐</td>
 							<td>所属频道</td>
-							<td width="150">文章的状态</td>
-							<td width="150">操作</td>
+							<c:if test="${status eq 0}">
+							<td>创建时间</td>
+							</c:if>
+							<c:if test="${status eq 1}">
+							<td>发布时间</td>
+							</c:if>
+							<td width="140">状态</td>
+							<td width="120">操作</td>
 						</tr>
 					</thead>
 					<c:forEach items="${datas.datas }" var="t">
 						<tbody>
 							<tr>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/${t.id }','showTopic')">${t.title }</a>
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/${t.id }','showTopic')">
+									<c:choose>
+										<c:when test="${fn:length(t.title)> 18 }">
+											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
+										</c:when>
+										<c:otherwise>
+											<c:out value="${t.title }"></c:out>
+										</c:otherwise>
+									</c:choose>
+									</a>
 								</td>
+								<c:if test="${status eq 0}">
 								<td>${t.author}</td>
+								</c:if>
+								<c:if test="${status eq 1}">
+								<td>${t.auditor}</td>
+								</c:if>
 								<td>
 									<c:if test="${t.recommend eq 0 }">不推荐</c:if>
 									<c:if test="${t.recommend eq 1 }">推荐</c:if>
 								</td>
 								<td>${t.cname }</td>
+								<c:if test="${status eq 0}">
+								<td><c:out value="${fn:substring(t.createDate,0,19) }" /></td>
+								</c:if>
+								<c:if test="${status eq 1}">
+								<td><c:out value="${fn:substring(t.publishDate,0,19) }" /></td>
+								</c:if>
 								<td>
 									<c:if test="${t.status eq 0 }">
 										<span style="color: red">未发布&nbsp;</span>
@@ -145,7 +178,7 @@
 					</c:forEach>
 					<tfoot>
 						<tr>
-							<td colspan="6" style="text-align:right;margin-right:10px;">
+							<td colspan="7" style="text-align:right;margin-right:10px;">
 							<c:if test="${status eq 0 }">
 							<jsp:include page="/jsp/pager.jsp">
 								<jsp:param value="${datas.total }" name="totalRecord"/>

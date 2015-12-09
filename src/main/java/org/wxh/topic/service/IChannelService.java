@@ -46,10 +46,15 @@ public interface IChannelService {
 	public List<Channel> listByParent(Integer pid);
 	
 	/**
-	 * 把所有的栏目获取并生成一颗完整的树
+	 * 获取所有的文章和导航栏目获取并生成一颗完整的树
 	 * @return
 	 */
 	public List<ChannelTree> generateTree();
+	/**
+	 * 获取所有的栏目获取并生成一颗完整的树
+	 * @return
+	 */
+	public List<ChannelTree> generateTreeAll();
 	/**
 	 * 根据父类对象获取子类栏目，并且生成树列表（用于异步加载）
 	 * @param pid
@@ -60,7 +65,13 @@ public interface IChannelService {
 	 * 获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
 	 * @return
 	 */
-	public List<Channel> listPublishChannel();
+	public List<Channel> listPublishChannel(int type);
+	/**
+	 * 根据用户id获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
+	 * @param uid
+	 * @return
+	 */
+	public List<Channel> listPublishChannel(int uid,int type);
 	/**
 	 * 获取所有的顶部导航栏目，栏目的状态必须为已经启用
 	 * @return

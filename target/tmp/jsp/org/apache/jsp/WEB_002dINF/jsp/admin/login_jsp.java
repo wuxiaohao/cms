@@ -186,9 +186,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("/resources/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js\"></script>\n");
       out.write("<script src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("/resources/myjs/table-managed.js\" ></script>\n");
-      out.write("<script src=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/resources/assets/global/plugins/jstree/dist/jstree.min.js\"></script>\n");
       out.write("<script src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
@@ -196,9 +193,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write(" \n");
       out.write("<!-- END PAGE LEVEL SCRIPTS -->\n");
-      out.write("<script src=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("/resources/myjs/jquery.form.js\" ></script>\n");
       out.write("<script src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.servletContext.contextPath }", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/resources/assets/global/scripts/metronic.js\" type=\"text/javascript\"></script>\n");
@@ -270,7 +264,9 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<!-- BEGIN LOGIN -->\n");
       out.write("<div class=\"content\">\n");
       out.write("\t<!-- BEGIN LOGIN FORM -->\n");
-      out.write("\t<form class=\"login-form\" id=\"myForm\" action=\"\" method=\"post\">\n");
+      out.write("\t<form class=\"login-form\" id=\"myForm\" action=\"");
+      out.print(request.getContextPath());
+      out.write("/login\" method=\"post\">\n");
       out.write("\t\t<h3 class=\"form-title\">请输入你的账号</h3>\n");
       out.write("\t\t<div style=\"color: red\">");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${error }", java.lang.String.class, (PageContext)_jspx_page_context, null));
@@ -356,9 +352,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t 2015 &copy; 城市学院. 吴晓豪 制作.\n");
       out.write("</div>\n");
       out.write("<script>\n");
-      out.write("\tjQuery(document).ready(function() {\n");
-      out.write("\t  Login.init();\n");
-      out.write("\t});\n");
       out.write("</script>\n");
       out.write("</body>\n");
       out.write("</html>");

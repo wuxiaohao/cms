@@ -9,6 +9,18 @@
 				<dt>				<span><a href="channel/47" class="index_title_href">校园快讯</a></span>
 </dt>
 				<dd>
+					<a title="呵呵呵" href="topic/18" class='index_link'>
+						[11/29]
+							呵呵呵
+					</a>
+				</dd>
+				<dd>
+					<a title="绯闻绯闻a122" href="topic/4" class='index_link'>
+						[10/07]
+							绯闻绯闻a122
+					</a>
+				</dd>
+				<dd>
 					<a title="报错？???fff" href="topic/17" class='index_link'>
 						[10/07]
 							报错？???fff
@@ -24,12 +36,6 @@
 					<a title="fewfwe" href="topic/14" class='index_link'>
 						[10/07]
 							fewfwe
-					</a>
-				</dd>
-				<dd>
-					<a title="绯闻绯闻a122" href="topic/4" class='index_link'>
-						[10/06]
-							绯闻绯闻a122
 					</a>
 				</dd>
 				<dd>
@@ -105,6 +111,7 @@
 		</div>
 		<div id="chief_keyword">
 			<div>
+					<span class="keyword" href="keyword/dede">dede</span>
 					<span class="keyword" href="keyword/fefw">fefw</span>
 					<span class="keyword" href="keyword/fef">fef</span>
 					<span class="keyword" href="keyword/hehe">hehe</span>
@@ -112,6 +119,7 @@
 					<span class="keyword" href="keyword/绯闻绯闻">绯闻绯闻</span>
 					<span class="keyword" href="keyword/fefe">fefe</span>
 					<span class="keyword" href="keyword/sese">sese</span>
+					<span class="keyword" href="keyword/dede2">dede2</span>
 					<span class="keyword" href="keyword/少妇">少妇</span>
 			</div>
 		</div>

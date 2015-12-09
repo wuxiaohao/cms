@@ -51,7 +51,7 @@ public class Topic {
 	 * 栏目图片id，如果该栏目是图片类型的栏目，就会显示这个id的图片
 	 * 这里存储的是该图片附件的id
 	 */
-	private int channelPicId;
+	private int channelPicId; //已废弃
 	/**
 	 * 文章的发布时间，用来进行排序的
 	 */
@@ -208,16 +208,18 @@ public class Topic {
 	}
 	
 	public Topic(int id, String title,String keyword, int status,
-			int recommend, Date publishDate, String author, String cname) {
+			int recommend,Date createDate, Date publishDate, String author, String cname,String auditor) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.keyword = keyword;
 		this.status = status;
 		this.recommend = recommend;
+		this.createDate = createDate;
 		this.publishDate = publishDate;
 		this.author = author;
 		this.cname = cname;
+		this.auditor = auditor;
 	}
 	
 	public Topic(int id, String title,String keyword, int status,

@@ -62,13 +62,23 @@
 				<li>
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
-					<span class="title">文章管理</span>
+					<span class="title">新闻管理</span>
 					</a>
 					<ul class="sub-menu">
 						<li>
 							<a id="wenzhang" class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
 							<i class="icon-wallet"></i>
-							文章内容管理</a>
+							文章新闻管理</a>
+						</li>
+						<li>
+							<a id="" class="ajaxify" href="<%=request.getContextPath() %>/admin/picTopic/audits">
+							<i class="icon-wallet"></i>
+							图片新闻管理</a>
+						</li>
+						<li>
+							<a id="" class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
+							<i class="icon-wallet"></i>
+							视频新闻管理</a>
 						</li>
 					</ul>
 				</li>

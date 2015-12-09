@@ -126,4 +126,9 @@ public class GroupService implements IGroupService{
 		groupDao.saveOrupdate(group);
 	}
 
+	@Override
+	public List<ChannelTree> generateUserChannelTreeAll(int uid) {
+		return groupDao.generateUserChannelTreeAll(uid);
+	}
+
 }

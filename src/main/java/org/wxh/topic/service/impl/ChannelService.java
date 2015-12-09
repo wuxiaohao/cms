@@ -96,6 +96,10 @@ public class ChannelService implements IChannelService {
 		return channelDao.generateTree();
 	}
 	@Override
+	public List<ChannelTree> generateTreeAll() {
+		return channelDao.generateTreeAll();
+	}
+	@Override
 	public List<ChannelTree> generateTreeByParent(Integer pid) {
 		return channelDao.generateTreeByParent(pid);
 	}
@@ -108,8 +112,12 @@ public class ChannelService implements IChannelService {
 		channelDao.updateTopNavSort(ids);
 	}
 	@Override
-	public List<Channel> listPublishChannel() {
-		return channelDao.listPublishChannel();
+	public List<Channel> listPublishChannel(int type) {
+		return channelDao.listPublishChannel(type);
+	}
+	@Override
+	public List<Channel> listPublishChannel(int uid,int type) {
+		return channelDao.listPublishChannelByUid(uid,type);
 	}
 	@Override
 	public List<Channel> listTopNavChannel() {

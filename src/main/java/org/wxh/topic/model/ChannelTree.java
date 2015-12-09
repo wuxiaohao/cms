@@ -4,7 +4,7 @@ package org.wxh.topic.model;
 
 /**
  * 系统栏目ztree树对象
- * @author Administrator
+ * @author wxh
  *
  */
 public class ChannelTree {

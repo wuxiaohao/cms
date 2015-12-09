@@ -66,7 +66,7 @@ public class ChannelController {
 	 */
 	@RequestMapping(value="/treeAll",method=RequestMethod.POST)
 	public @ResponseBody List<ChannelTree> tree() {
-		return channelService.generateTree();
+		return channelService.generateTreeAll();
 	}
 	/**
 	 * 异步加载示例

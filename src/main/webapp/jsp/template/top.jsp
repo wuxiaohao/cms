@@ -23,10 +23,19 @@
 		<ul>
 			<li><span href="<%=request.getContextPath()%>/index">附中首页</span></li>
 				<li>
+					<span href="<%=request.getContextPath()%>/channel/50">党团工作</span>
+				</li>
+				<li>
+					<span href="<%=request.getContextPath()%>/channel/46">校园文化</span>
+				</li>
+				<li>
 					<span href="<%=request.getContextPath()%>/channel/39">学校简介</span>
 				</li>
 				<li>
 					<span href="<%=request.getContextPath()%>/channel/55">学科资源</span>
+				</li>
+				<li>
+					<span href="<%=request.getContextPath()%>/channel/42">德育园地</span>
 				</li>
 				<li>
 					<span href="<%=request.getContextPath()%>/channel/57">德育建设</span>
@@ -35,19 +44,10 @@
 					<span href="<%=request.getContextPath()%>/channel/40">校园之窗</span>
 				</li>
 				<li>
-					<span href="<%=request.getContextPath()%>/channel/41">教育科研</span>
-				</li>
-				<li>
-					<span href="<%=request.getContextPath()%>/channel/50">党团工作</span>
-				</li>
-				<li>
-					<span href="<%=request.getContextPath()%>/channel/42">德育园地</span>
-				</li>
-				<li>
 					<span href="<%=request.getContextPath()%>/channel/45">师生风采</span>
 				</li>
 				<li>
-					<span href="<%=request.getContextPath()%>/channel/46">校园文化</span>
+					<span href="<%=request.getContextPath()%>/channel/41">教育科研</span>
 				</li>
 		</ul>
 	</div>

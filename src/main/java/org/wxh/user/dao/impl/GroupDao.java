@@ -9,6 +9,7 @@ import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.impl.ChannelDao;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelTree;
+import org.wxh.topic.model.ChannelType;
 import org.wxh.user.dao.IGroupDao;
 import org.wxh.user.model.Group;
 import org.wxh.user.model.GroupChannel;
@@ -70,6 +71,15 @@ public class GroupDao extends BaseDao<Group> implements IGroupDao {
 	public List<ChannelTree> generateUserChannelTree(int uid) {
 		String sql = "select distinct c.id as id,c.name as name,c.pid as pid from " +
 				"t_group_channel gc left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id)" +
+				"where ug.u_id=? and c.type="+ChannelType.TOPIC_LIST.ordinal()+" or c.type="+ChannelType.NAV_CHANNEL.ordinal();
+		List<ChannelTree> cts = this.listBySql(sql,uid,ChannelTree.class, false);
+		ChannelDao.initTreeNode(cts);
+		return cts;
+	}
+	@Override
+	public List<ChannelTree> generateUserChannelTreeAll(int uid) {
+		String sql = "select distinct c.id as id,c.name as name,c.pid as pid from " +
+				"t_group_channel gc left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id)" +
 				"where ug.u_id=?";
 		List<ChannelTree> cts = this.listBySql(sql,uid,ChannelTree.class, false);
 		ChannelDao.initTreeNode(cts);
@@ -90,5 +100,4 @@ public class GroupDao extends BaseDao<Group> implements IGroupDao {
 	public void deleteGroupChannel(int gid) {
 		this.updateByHql("delete GroupChannel gc where gc.group.id=?",gid);
 	}
-
 }

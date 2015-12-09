@@ -28,6 +28,7 @@ import org.wxh.index.service.IIndexService;
 import org.wxh.util.JsonUtil;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.ChannelTree;
+import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.model.dto.TopicDto;
@@ -68,43 +69,6 @@ public class TopicController {
 	
 	private final static List<String> imgTypes = Arrays.asList("jpg","jpeg","gif","png");
 	
-	public IIndexService getIndexService() {
-		return indexService;
-	}
-	public void setIndexService(IIndexService indexService) {
-		this.indexService = indexService;
-	}
-	public ITopicService getTopicService() {
-		return topicService;
-	}
-	public void setTopicService(ITopicService topicService) {
-		this.topicService = topicService;
-	}
-	public IChannelService getChannelService() {
-		return channelService;
-	}
-	public void setChannelService(IChannelService channelService) {
-		this.channelService = channelService;
-	}
-	public IKeywordService getKeywordService() {
-		return keywordService;
-	}
-	public void setKeywordService(IKeywordService keywordService) {
-		this.keywordService = keywordService;
-	}
-	public IAttachmentService getAttachmentService() {
-		return attachmentService;
-	}
-	public void setAttachmentService(IAttachmentService attachmentService) {
-		this.attachmentService = attachmentService;
-	}
-	public IGroupService getGroupService() {
-		return groupService;
-	}
-	public void setGroupService(IGroupService groupService) {
-		this.groupService = groupService;
-	}
-	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
 		if(status == 1){ //如果是获取已发布文章的列表，则按发布时间排序
 			SystemContext.setSort("t.publishDate"); 
@@ -115,21 +79,24 @@ public class TopicController {
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
 		if(isAdmin) { //如果是超级管理员，则返回所有的文章
 			model.addAttribute("datas",topicService.find(cid, con, status));
+			SystemContext.removeOrder();
+			SystemContext.removeSort();
+			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.TOPIC_LIST.ordinal()));//返回所有文章栏目
 		} else {	//如果不是超级管理员，则返回该用户所有的文章
 			User loginUser = (User)session.getAttribute("loginUser");
 			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
+			SystemContext.removeOrder();
+			SystemContext.removeSort();
+			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.TOPIC_LIST.ordinal()));//返回该用户可以操作的文章栏目
 		}
 		if(con==null) con="";
-		SystemContext.removeOrder();
-		SystemContext.removeSort();
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);
-		model.addAttribute("cs",channelService.listPublishChannel());
 	}
 	/**
 	 * 显示已经发布的文章
-	 * @param con
+	 * @param con 文章标题
 	 * @param cid
 	 * @param model
 	 * @param session
