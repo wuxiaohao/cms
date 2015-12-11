@@ -6,6 +6,8 @@
 <html>
 <head>
 <%@ include file="/jsp/commonTopic.jsp"%>
+<!-- 引入外部js文件 -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/topicAdd.js"></script>
 </head>
 <body>
 <input type="hidden" id="sid" value="<%=session.getId()%>"/>

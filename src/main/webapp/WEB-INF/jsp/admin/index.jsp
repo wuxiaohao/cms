@@ -50,7 +50,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if($("#messageByImg").val() == "1"){
 			$("#messageByImg").val("");
 			$("#HeadImg").click();
-		}		
+		}	
+		//组图新闻添加或修改成功后的跳转
+		if($("#messageByPicTopic").val() == "1"){
+			$("#messageByPicTopic").val("");
+			$("#zutu").click();
+		}	
 	});
 	
 </script>
@@ -60,6 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <input type="hidden" id="contextPath" value="<%=request.getContextPath()%>"/>
 <input type="hidden" id="messageByTopic" value="${messageByTopic }"/>
 <input type="hidden" id="messageByImg" value="${messageByImg }"/>
+<input type="hidden" id="messageByPicTopic" value="${messageByPicTopic }"/>
 <!-- 获取头 -->
 <%@ include file="head.jsp"%>
  <div class="clearfix">

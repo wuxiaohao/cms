@@ -43,18 +43,29 @@ $(function(){
 	
 	//文件上传uploadify
 	$("#attach").uploadify({
+		//指定swf文件
 		swf:$("#ctx").val()+"/resources/uploadify/uploadify.swf",
+		//后台处理的页面
 		uploader:$("#ctx").val()+"/admin/topic/upload",
+		//按钮显示的文字
+		buttonText: '选择文件',
+		//文件上传对象的名称
 		fileObjName:"attach",
+		//是否自动上传
 		auto:false,
 		formData:{"sid":$("#sid").val()},
+		//允许上传的文件后缀，限制弹出文件选择框里能选择的文件
 		fileTypeExts:"*.jpg;*.gif;*.png;*.doc;*.docx;*.txt;*.xls;*.xlsx;*.rar;*.zip;*.pdf;*.flv;*.swf",
+		//允许上传的文件类型的描述，在弹出的文件选择框里会显示
+		fileTypeDesc: '支持上传的文件类型',
+		//上传成功后执行
 		onUploadSuccess:function(file, data, response) {
 			var ao = $.parseJSON(data);
 			var suc = $.ajaxCheck(ao);  //判断操作是否成功
 			if(suc) {
 				var node = createAttachNode(ao.obj);
 				$("#ok_attach").find("tbody").append(node);
+				$('#' + file.id).find('.data').html(' 上传完毕');
 			}
 		}
 	});

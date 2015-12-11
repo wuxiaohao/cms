@@ -37,8 +37,7 @@ display:inline;
 <!-- 引入dwr -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/engine.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
-<!-- 引入外部js文件 -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/topicAdd.js"></script>
+
 <script type="text/javascript">
 	$(function(){		
 		$("a.delete").confirmOperator();

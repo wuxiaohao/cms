@@ -14,26 +14,6 @@
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
 		showMessage(success,error);
-		//条件检索
-		$("#search").click(function(event){
-			var con = $.trim($("#con").val()); 
-			var cid = $("#cid").val();
-			var href ="";
-			var lianjie = "";
-			if(${status} == 0){
-				href = $(".unaudits").attr("href");
-				lianjie = $(".unaudits");
-			} else {
-				href = $(".audits").attr("href");
-				lianjie = $(".audits");
-			}
-			if(!((con == "" || con == null) && (cid ==0 || cid == null))){
-				hrefNew = href+"?con="+con+"&cid="+cid;
-				lianjie.attr("href",hrefNew);
-			}
-			lianjie.click();
-			lianjie.attr("href",href);
-		});
 	});
 </script>
 </head>
@@ -42,8 +22,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-title">
-			文章新闻管理
-			<small> <i class="fa fa-shopping-cart"></i> 发布、添加、更新、删除文章 </small>
+			组图新闻管理
+			<small> <i class="fa fa-shopping-cart"></i> 发布、添加、更新、删除组图 </small>
 		</h3>
 		<ul class="page-breadcrumb breadcrumb">
 			<li>
@@ -56,7 +36,7 @@
 				>>
 			</li>
 			<li>
-				<a href="admin/topic/audits" class="ajaxify">文章新闻管理</a>
+				<a href="admin/topic/audits" class="ajaxify">组图新闻管理</a>
 			</li>
 		</ul>
 	</div>
@@ -69,27 +49,27 @@
 			<div class="portlet-title">
 				<div class="caption" style="float: right;">
 					<c:if test="${status eq 0 }">
-						<a href="admin/topic/audits" class="btn btn-default red-stripe ajaxify">已发布文章列表</a>
-						<a href="admin/topic/unaudits" class="btn red ajaxify">未发布文章列表</a>
+						<a href="admin/picTopic/audits" class="btn btn-default red-stripe ajaxify">已发布组图列表</a>
+						<a href="admin/picTopic/unaudits" class="btn red ajaxify">未发布组图列表</a>
 					</c:if>
 					<c:if test="${status eq 1 }">
-						<a href="admin/topic/audits" class="btn red ajaxify">已发布文章列表</a>
-						<a href="admin/topic/unaudits" class="btn btn-default red-stripe ajaxify">未发布文章列表</a>
+						<a href="admin/picTopic/audits" class="btn red ajaxify">已发布组图列表</a>
+						<a href="admin/picTopic/unaudits" class="btn btn-default red-stripe ajaxify">未发布组图列表</a>
 					</c:if>
-					<a class="btn btn-default yellow-stripe" href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/add','addTopic')">添加文章</a>
+					<a class="btn btn-default yellow-stripe" href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/add','addTopic')">新建组图</a>
 				</div>
 			</div>
 			<div class="portlet-body">
 				<div class="note note-success" style="height: 60px">
 					<!-- <p>Please click &nbsp;&nbsp;icon on the header's right top to toggle the quick sidebar.
 					</p> -->
-					<p style="float: left;"><font size="3">文章标题关键字</font></p>
+					<p style="float: left;"><font size="3">标题关键字</font></p>
 					<div class="col-md-4 c">
 						<input type="text" name="con" id="con" value="${con}" class="form-control" />
 					</div>
 					<div class="col-md-4 c">
 						<select name="cid" id="cid" class="bs-select form-control">
-							<option value="0">选择栏目</option>
+							<option value="0">请选择栏目</option>
 							<c:forEach items="${cs }" var="c">
 								<c:if test="${c.id  eq cid}">
 								<option value="${c.id }" selected="selected">${c.name }</option>
@@ -100,14 +80,12 @@
 							</c:forEach>
 						</select>	
 					</div>
-					<dir class="c">
-						<button class="btn green" id="search">检索</button>
-					</dir>
+					<button class="btn green" id="search">检索</button>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="28%" align="center">文章标题</td>
+							<td width="28%" align="center">标题</td>
 							<c:if test="${status eq 0}">
 							<td>创建人</td>
 							</c:if>
@@ -130,7 +108,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/${t.id }','showTopic')">
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/${t.id }','showTopic')" title="预览">
 									<c:choose>
 										<c:when test="${fn:length(t.title)> 18 }">
 											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
@@ -161,16 +139,16 @@
 								<td>
 									<c:if test="${t.status eq 0 }">
 										<span style="color: red">未发布&nbsp;</span>
-										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">发布</a>
+										<a href="admin/picTopic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">发布</a>
 									</c:if>
 									<c:if test="${t.status eq 1 }">
 										<span>已发布&nbsp;</span>
-										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">取消发布</a>
+										<a href="admin/picTopic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">取消发布</a>
 									</c:if>
 								</td>
 								<td>
-									<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue">更新</a>								
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/update/${t.id}','updateTopic')" class="btn btn-sm blue">更新</a>
+									<a href="admin/picTopic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
 									&nbsp;
 								</td>
 							</tr>
@@ -182,13 +160,13 @@
 							<c:if test="${status eq 0 }">
 							<jsp:include page="/jsp/pager.jsp">
 								<jsp:param value="${datas.total }" name="totalRecord"/>
-								<jsp:param value="admin/topic/unaudits" name="url"/>
+								<jsp:param value="admin/picTopic/unaudits" name="url"/>
 							</jsp:include>
 							</c:if>
 							<c:if test="${status eq 1 }">
 							<jsp:include page="/jsp/pager.jsp">
 								<jsp:param value="${datas.total }" name="totalRecord"/>
-								<jsp:param value="admin/topic/audits" name="url"/>
+								<jsp:param value="admin/picTopic/audits" name="url"/>
 							</jsp:include>
 							</c:if>
 							</td>
