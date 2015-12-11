@@ -5,6 +5,7 @@ import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexPicService;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IDwrService;
+import org.wxh.topic.service.IPictureService;
 import org.wxh.user.service.IGroupService;
 
 @Service("dwrService")
@@ -17,6 +18,8 @@ public class DwrService implements IDwrService{
 	private IIndexPicService indexPicService;
 	@Autowired
 	private ICmsLinkService cmsLinkService;
+	@Autowired
+	private IPictureService pictureService;
 
 	public IAttachmentService getAttachmentService() {
 		return attachmentService;
@@ -68,6 +71,7 @@ public class DwrService implements IDwrService{
 	public void updateIndexPic(int aid) {
 		attachmentService.updateIndexPic(aid);
 	}
+
 	/**
 	 * 更新是否是附件信息
 	 * @param aid
@@ -83,6 +87,13 @@ public class DwrService implements IDwrService{
 	@Override
 	public void deleteAttach(int id) {
 		attachmentService.delete(id);
+	}
+	/**
+	 * 删除图片信息
+	 */
+	@Override
+	public void deletePicture(int id) {
+		pictureService.delete(id);
 	}
 	
 	@Override

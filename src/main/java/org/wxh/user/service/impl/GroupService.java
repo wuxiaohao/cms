@@ -117,10 +117,13 @@ public class GroupService implements IGroupService{
 		return groupDao.generateGroupChannelTree(gid);
 	}
 	@Override
+	public List<ChannelTree> generateUserChannelTree(int uid,int type) {
+		return groupDao.generateUserChannelTree(uid,type);
+	}
+	@Override
 	public List<ChannelTree> generateUserChannelTree(int uid) {
 		return groupDao.generateUserChannelTree(uid);
 	}
-
 	@Override
 	public void saveOrupdate(Group group) {
 		groupDao.saveOrupdate(group);

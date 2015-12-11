@@ -95,7 +95,15 @@ public interface IGroupService {
 	public List<ChannelTree> generateGroupChannelTree(int gid);
 	/**
 	 * 获取某个用户的文章和导航栏目树
-	 * @param uid
+	 * @param uid 用户id
+	 * @param type 栏目类型
+	 * @return
+	 */
+	public List<ChannelTree> generateUserChannelTree(int uid,int type);
+	/**
+	 * 获取某个用户的文章和导航栏目树
+	 * @param uid 用户id
+	 * @param type 栏目类型
 	 * @return
 	 */
 	public List<ChannelTree> generateUserChannelTree(int uid);

@@ -79,6 +79,12 @@ public interface IGroupDao extends IBaseDao<Group> {
 	 * @param uid
 	 * @return
 	 */
+	public List<ChannelTree> generateUserChannelTree(int uid,int type);
+	/**
+	 * 获取某个用户的文章和导航栏目树
+	 * @param uid
+	 * @return
+	 */
 	public List<ChannelTree> generateUserChannelTree(int uid);
 	/**
 	 * 获取某个用户的所有栏目树

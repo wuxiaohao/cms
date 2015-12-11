@@ -44,6 +44,10 @@ public interface IDwrService {
 	 */
 	public void deleteAttach(int id);
 	/**
+	 * 删除图片信息
+	 */
+	public void deletePicture(int id);
+	/**
 	 * 更新首页图片的排序
 	 * @param id 要更新的首页图片的id
 	 * @param oldPos 原位置

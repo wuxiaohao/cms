@@ -34,11 +34,6 @@ public class Picture {
 	@Column(name="p_pic_name_old")
 	private String picNameOld;
 	/**
-	 * 是否是封面图片
-	 */
-	@Column(name="p_is_index")
-	private String isIndex;
-	/**
 	 * 图片的大小
 	 */
 	@Column(name="p_size")
@@ -63,13 +58,12 @@ public class Picture {
 	public Picture() {
 		super();
 	}
-	public Picture(int id, String picName, String picNameOld, String isIndex,
+	public Picture(int id, String picName, String picNameOld,
 			long size, String suffix, int orders,int pid,String picTopicTitle,Date publishDate,String author) {
 		super();
 		this.id = id;
 		this.picName = picName;
 		this.picNameOld = picNameOld;
-		this.isIndex = isIndex;
 		this.size = size;
 		this.suffix = suffix;
 		this.orders = orders;
@@ -79,13 +73,12 @@ public class Picture {
 		this.pictureTopic.setPublishDate(publishDate);
 		this.pictureTopic.setAuthor(author);
 	}
-	public Picture(int id, String picName, String picNameOld, String isIndex,
+	public Picture(int id, String picName, String picNameOld,
 			long size, String suffix, int orders) {
 		super();
 		this.id = id;
 		this.picName = picName;
 		this.picNameOld = picNameOld;
-		this.isIndex = isIndex;
 		this.size = size;
 		this.suffix = suffix;
 		this.orders = orders;
@@ -109,12 +102,7 @@ public class Picture {
 	public void setPicNameOld(String picNameOld) {
 		this.picNameOld = picNameOld;
 	}
-	public String getIsIndex() {
-		return isIndex;
-	}
-	public void setIsIndex(String isIndex) {
-		this.isIndex = isIndex;
-	}
+
 	public long getSize() {
 		return size;
 	}

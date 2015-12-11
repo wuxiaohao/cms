@@ -12,7 +12,7 @@ import org.wxh.topic.model.PictureTopic;
 @Repository("pictureDao")
 public class PictureDao extends BaseDao<Picture> implements IPictureDao{
 	private String getPictureSelect() {
-		return "select new Picture(a.id,a.picName,a.picNameOld,a.isIndex," +
+		return "select new Picture(a.id,a.picName,a.picNameOld," +
 				"a.size,a.suffix,a.orders,a.pictureTopic.id,a.pictureTopic.title,a.pictureTopic.publishDate,a.pictureTopic.author)";
 	}
 	@Override

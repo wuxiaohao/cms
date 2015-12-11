@@ -81,13 +81,13 @@ public class TopicController {
 			model.addAttribute("datas",topicService.find(cid, con, status));
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
-			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.TOPIC_LIST.ordinal()));//返回所有文章栏目
+			model.addAttribute("cs",channelService.listPublishChannel());//返回所有文章栏目
 		} else {	//如果不是超级管理员，则返回该用户所有的文章
 			User loginUser = (User)session.getAttribute("loginUser");
 			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
-			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.TOPIC_LIST.ordinal()));//返回该用户可以操作的文章栏目
+			model.addAttribute("cs",channelService.listPublishChannelByUid(loginUser.getId()));//返回该用户可以操作的文章栏目
 		}
 		if(con==null) con="";
 		model.addAttribute("con",con);

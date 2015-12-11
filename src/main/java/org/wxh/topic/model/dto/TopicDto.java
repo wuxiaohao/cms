@@ -128,7 +128,6 @@ public class TopicDto {
 		t.setChannelPicId(this.getChannelPicId());
 		t.setContent(this.getContent());
 		t.setId(this.getId());
-		t.setKeyword(this.getKeyword());
 		if(this.getStatus() == 1) {
 			t.setPublishDate(new Date());
 			t.setAuditor(u.getNickname());

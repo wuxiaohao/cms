@@ -23,6 +23,13 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	public int getMaxOrderByParent(Integer pid);
 	/**
 	 * 把所有的文章和导航栏目获取并生成一颗完整的树
+	 * @param type 
+	 * @return
+	 */
+	public List<ChannelTree> generateTree(int type);
+	/**
+	 * 把所有的文章和导航栏目获取并生成一颗完整的树
+	 * @param type 
 	 * @return
 	 */
 	public List<ChannelTree> generateTree();
@@ -53,11 +60,22 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 */
 	public List<Channel> listPublishChannel(int type);
 	/**
+	 * 所有的可以发布文章的栏目，栏目的状态必须为启用状态
+	 * @return
+	 */
+	public List<Channel> listPublishChannel();
+	/**
 	 * 根据用户id获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
 	 * @param uid
 	 * @return
 	 */
 	public List<Channel> listPublishChannelByUid(int uid,int type);
+	/**
+	 * 根据用户id获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
+	 * @param uid
+	 * @return
+	 */
+	public List<Channel> listPublishChannelByUid(int uid);
 	/**
 	 * 根据栏目类型获取所有的首页栏目
 	 * @return

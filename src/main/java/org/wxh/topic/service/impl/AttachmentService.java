@@ -29,8 +29,6 @@ public class AttachmentService implements IAttachmentService {
 	
 	private static final Logger logger = Logger.getLogger(AttachmentService.class);
 	
-	
-	
 	@Autowired
 	private IAttachmentDao attachmentDao;
 	

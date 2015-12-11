@@ -22,7 +22,7 @@ public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTo
 	@Override
 	public Pager<PictureTopic> find(Integer uid, Integer cid, String title,
 			Integer status) {
-		String hql = getPictureTopicSelect()+" from PictureTopic t where 1=1 and t.channel.type="+ChannelType.TOPIC_IMG.ordinal();
+		String hql = getPictureTopicSelect()+" from PictureTopic t where 1=1 and t.channel.type="+ChannelType.IMG_NEW.ordinal();
 		if(status!=null) {
 			hql+=" and t.status="+status;
 		}
@@ -39,6 +39,6 @@ public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTo
 	}
 	
 	private String getPictureTopicSelect() {
-		return "select new PictureTopic(t.id,t.title,t.keyword,t.explain,t.publishDate,t.createDate,t.author,t.status,t.recommend,t.cname,t.auditor)";
+		return "select new PictureTopic(t.id,t.title,t.keyword,t.explain,t.publishDate,t.createDate,t.author,t.status,t.recommend,t.cname,t.auditor,t.pictureId)";
 	}
 }

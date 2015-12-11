@@ -39,7 +39,7 @@ public interface IPictureTopicService {
 	 */
 	public void updateStatus(int tid,User u);
 	/**
-	 * 加载一个新闻图片
+	 * 加载一个组图新闻
 	 * @param id
 	 * @return
 	 */
@@ -49,4 +49,19 @@ public interface IPictureTopicService {
 	 * @param id 新闻图片id
 	 */
 	public void delete(int id);
+	/**
+	 * 添加组图新闻
+	 * @param pt 组图新闻对象
+	 * @param cid 栏目id
+	 * @param uid 用户
+	 * @param pics 图片组的id
+	 */
+	public void add(PictureTopic pt, int cid, User uid, Integer[] pics);
+	/**
+	 * 更新组图新闻，带图片信息更新
+	 * @param pt 组图新闻实体对象
+	 * @param cid 栏目id
+	 * @param pics 图片的id数组
+	 */
+	public void update(PictureTopic pt, int cid, Integer[] pics);
 }

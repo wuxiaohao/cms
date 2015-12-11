@@ -45,8 +45,15 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	}
 
 	@Override
+	public List<ChannelTree> generateTree(int type) {
+		String sql = "select id,name,pid from t_channel c where c.type="+type+" or c.type="+ChannelType.NAV_CHANNEL.ordinal()+" order by orders";
+		List<ChannelTree> cts = this.listBySql(sql, ChannelTree.class, false);
+		initTreeNode(cts);	//初始化树
+		return cts;
+	}
+	@Override
 	public List<ChannelTree> generateTree() {
-		String sql = "select id,name,pid from t_channel c where c.type="+ChannelType.TOPIC_LIST.ordinal()+" or c.type="+ChannelType.NAV_CHANNEL.ordinal()+" order by orders";
+		String sql = "select id,name,pid from t_channel c where c.type!="+ChannelType.IMG_NEW.ordinal()+" order by orders";
 		List<ChannelTree> cts = this.listBySql(sql, ChannelTree.class, false);
 		initTreeNode(cts);	//初始化树
 		return cts;
@@ -91,6 +98,11 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 		return this.list(hql);
 	}
 	@Override
+	public List<Channel> listPublishChannel() {
+		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal();
+		return this.list(hql);
+	}
+	@Override
 	public List<Channel> listPublishChannelByUid(int uid,int type) {
 		String sql = "select distinct c.id as id,c.name as name from t_group_channel gc "
 				+ "left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id) "
@@ -98,7 +110,14 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 		List<Channel> cts = this.listBySql(sql,new Object[]{uid,type},Channel.class, false);
 		return cts;
 	}
-
+	@Override
+	public List<Channel> listPublishChannelByUid(int uid) {
+		String sql = "select distinct c.id as id,c.name as name from t_group_channel gc "
+				+ "left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id) "
+				+ "where ug.u_id=? and c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal();
+		List<Channel> cts = this.listBySql(sql,uid,Channel.class, false);
+		return cts;
+	}
 	@Override
 	public List<Channel> listTopNavChannel() {
 		String hql = "select new Channel(c.id,c.name,c.customLink,c.customLinkUrl) " +

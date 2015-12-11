@@ -48,6 +48,16 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 	/**
+	 * 跳转到首页，再从首页跳转到组图列表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/redirectIndexByPicTopic")
+	public String redirectIndexByPicTopic(HttpSession session){
+		session.setAttribute("messageByPicTopic","1");
+		return "redirect:/admin";
+	}
+	/**
 	 * 跳转到首页，再从首页跳转到首页图片宣传列表
 	 * @param model
 	 * @return

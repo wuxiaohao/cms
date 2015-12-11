@@ -96,11 +96,16 @@ public class PictureTopic {
 	 */
 	@Column(name="pt_recommend")
 	private int recommend;
+	/**
+	 * 封面图片的id
+	 */
+	@Column(name="pt_pictureId")
+	private int pictureId;
 	
 	public PictureTopic() {}
 	
 	public PictureTopic(int id, String title,String keyword,String explain,
-			Date publishDate,Date createDate,String author, int status,int recommend,String cname,String auditor) {
+			Date publishDate,Date createDate,String author, int status,int recommend,String cname,String auditor,int pictureId) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -113,6 +118,7 @@ public class PictureTopic {
 		this.recommend = recommend;
 		this.cname = cname;
 		this.auditor = auditor;
+		this.pictureId = pictureId;
 	}
 	public PictureTopic(int id, String title,String keyword,int status,int recommend,String author) {
 		super();
@@ -211,6 +217,14 @@ public class PictureTopic {
 
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
+	}
+
+	public int getPictureId() {
+		return pictureId;
+	}
+
+	public void setPictureId(int pictureId) {
+		this.pictureId = pictureId;
 	}
 	
 }

@@ -68,10 +68,19 @@ public class GroupDao extends BaseDao<Group> implements IGroupDao {
 	}
 
 	@Override
+	public List<ChannelTree> generateUserChannelTree(int uid,int type) {
+		String sql = "select distinct c.id as id,c.name as name,c.pid as pid from " +
+				"t_group_channel gc left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id)" +
+				"where ug.u_id=? and c.type=? or c.type="+ChannelType.NAV_CHANNEL.ordinal();
+		List<ChannelTree> cts = this.listBySql(sql,new Object[]{uid,type},ChannelTree.class, false);
+		ChannelDao.initTreeNode(cts);
+		return cts;
+	}
+	@Override
 	public List<ChannelTree> generateUserChannelTree(int uid) {
 		String sql = "select distinct c.id as id,c.name as name,c.pid as pid from " +
 				"t_group_channel gc left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id)" +
-				"where ug.u_id=? and c.type="+ChannelType.TOPIC_LIST.ordinal()+" or c.type="+ChannelType.NAV_CHANNEL.ordinal();
+				"where ug.u_id=? and c.type!="+ChannelType.IMG_NEW.ordinal();
 		List<ChannelTree> cts = this.listBySql(sql,uid,ChannelTree.class, false);
 		ChannelDao.initTreeNode(cts);
 		return cts;
