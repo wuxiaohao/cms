@@ -108,7 +108,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/${t.id }','showTopic')" title="预览">
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/update/${t.id}','updateTopic')" >
 									<c:choose>
 										<c:when test="${fn:length(t.title)> 18 }">
 											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
