@@ -97,7 +97,7 @@ public class TopicController {
 	/**
 	 * 显示已经发布的文章
 	 * @param con 文章标题
-	 * @param cid
+	 * @param cid 文章栏目
 	 * @param model
 	 * @param session
 	 * @return
