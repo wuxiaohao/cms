@@ -11,26 +11,28 @@
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
 			系统清理
-			<small> <i class="fa fa-shopping-cart"></i> 清理无用的数据、图片、文件 </small>
+			<small>清理无用的数据、图片、文件 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>系统配置</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/system/cleans" class="ajaxify">系统清理管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/system/cleanList/atts" class="ajaxify">未引用的垃圾附件</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>系统配置</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/system/cleans" class="ajaxify">系统清理管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/system/cleanList/atts" class="ajaxify">未引用的垃圾附件</a>
+				</li>
+			</ul>
+		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>

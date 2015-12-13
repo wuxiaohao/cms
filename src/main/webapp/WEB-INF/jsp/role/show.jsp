@@ -9,26 +9,28 @@
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
 			角色设置
-			<small> <i class="fa fa-shopping-cart"></i> 增加删除修改角色 </small>
+			<small>增加删除修改角色 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>组织机构管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/role/roles" class="ajaxify">角色管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/role/${role.id }" class="ajaxify">查询角色</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>组织机构管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/role/roles" class="ajaxify">角色管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/role/${role.id }" class="ajaxify">查询角色</a>
+				</li>
+			</ul>
+		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>

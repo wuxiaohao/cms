@@ -23,22 +23,24 @@
 	<div class="col-md-12">
 		<h3 class="page-title">
 			组图新闻管理
-			<small> <i class="fa fa-shopping-cart"></i> 发布、添加、更新、删除组图 </small>
+			<small>发布、添加、更新、删除组图 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>新闻管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/topic/audits" class="ajaxify">组图新闻管理</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>新闻管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/picTopic/audits" class="ajaxify">组图新闻管理</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 <!-- BEGIN PAGE CONTENT-->

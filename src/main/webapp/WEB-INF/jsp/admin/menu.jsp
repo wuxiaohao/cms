@@ -12,7 +12,7 @@
 					</div>
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
-				<li class="start">
+				<li class="start active open">
 					<a class="ajaxify start" href="layout_ajax_content_1.html">
 					<i class="icon-home"></i>
 					<span class="title">首页</span>
@@ -22,6 +22,7 @@
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
 					<span class="title">个人中心</span>
+					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
@@ -40,6 +41,7 @@
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
 					<span class="title">组织机构管理</span>
+					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
@@ -63,6 +65,7 @@
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
 					<span class="title">新闻管理</span>
+					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
@@ -81,6 +84,7 @@
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
 					<span class="title">栏目管理</span>
+					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
@@ -105,6 +109,7 @@
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
 					<span class="title">首页管理</span>
+					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
@@ -135,6 +140,7 @@
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
 					<span class="title">系统配置</span>
+					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>

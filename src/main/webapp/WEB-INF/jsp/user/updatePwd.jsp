@@ -13,22 +13,24 @@
 	<div class="col-md-12">
 		<h3 class="page-title">
 			个人中心
-			<small> <i class="fa fa-shopping-cart"></i> 修改密码 </small>
+			<small>修改密码 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>个人中心</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/user/updatePwdUI" class="ajaxify">修改密码</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>个人中心</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/user/updatePwdUI" class="ajaxify">修改密码</a>
+				</li>
+			</ul>
+		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>

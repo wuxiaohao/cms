@@ -13,26 +13,28 @@
 	<div class="col-md-12">
 		<h3 class="page-title">
 			个人中心
-			<small> <i class="fa fa-shopping-cart"></i> 修改个人信息 </small>
+			<small>修改个人信息 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>个人中心</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/user/showMySelf" class="ajaxify">查询个人信息</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/user/updateSelfUI" class="ajaxify">修改个人信息</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>个人中心</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/user/showMySelf" class="ajaxify">查询个人信息</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/user/updateSelfUI" class="ajaxify">修改个人信息</a>
+				</li>
+			</ul>
+		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>

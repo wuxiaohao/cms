@@ -20,20 +20,22 @@
 		<h3 class="page-title">
 			首页新闻图片管理
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>首页管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/pic/newPics" class="ajaxify">首页新闻图片管理</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>首页管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/pic/newPics" class="ajaxify">首页新闻图片管理</a>
+				</li>
+			</ul>
+		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>

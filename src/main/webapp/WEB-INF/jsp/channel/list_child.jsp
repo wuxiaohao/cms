@@ -42,7 +42,7 @@ $(function(){
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-edit"></i>
-					当前栏目:${pc.name }[${pc.id }]
+					当前栏目:${pc.name }
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a>

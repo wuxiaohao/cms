@@ -2,14 +2,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/jsp/commonLogin.jsp"%>
 <script type="text/javascript">
-	$(function(){
-		$("#myForm").cmsvalidate();
-	});
-	
 	function reCheckcode(img) {
 		img.src="drawCheckCode?"+Math.random();
 	}
@@ -21,7 +19,9 @@
 </script>
 <title>后台管理登录</title>
 </head>
-<body class="login">
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-md login">
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<a href="index.html">
@@ -37,15 +37,14 @@
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
 	<form class="login-form" id="myForm" action="<%=request.getContextPath()%>/login" method="post">
-		<h3 class="form-title">请输入你的账号</h3>
+		<h3 class="form-title">请输入您的账号信息</h3>
 		<div style="color: red">${error }</div>
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 			<label class="control-label visible-ie8 visible-ie9">用户名</label>
 			<div class="input-icon">
 				<i class="fa fa-user"></i>
-				<input class="form-control placeholder-no-fix" type="text"
-					 autocomplete="off" placeholder="用户名" name="username" <c:if test="${cms_cookie_username!=''}">value="${cms_cookie_username}"</c:if>/>
+				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username" <c:if test="${cms_cookie_username!=''}">value="${cms_cookie_username}"</c:if>/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -56,18 +55,18 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 			<label class="control-label visible-ie8 visible-ie9">验证码</label>
 			<div class="input-icon">
+				<i class="fa fa-thumb-tack"></i>
 				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="验证码" name="checkcode" id="validateCode"/>			
 			</div>
 			<div style="color: red">${errorCode }</div>
 		</div>
 		<div class="form-actions">
 			<label class="checkbox">
-			<input type="checkbox" value="1" onclick="javascript:document.getElementById('hid').value=this.checked;" /> 记住用户名 </label>
+			<input type="checkbox" value="1" onclick="javascript:document.getElementById('hid').value=this.checked;" /> 记住我 </label>
 			<input type="hidden" id="hid" name="remember" value="false"/>
-			<button type="submit" class="btn green-haze pull-right">
+			<button type="submit" class="btn blue pull-right">
 			登录 <i class="m-icon-swapright m-icon-white"></i>
 			</button>
 		</div>
@@ -78,10 +77,10 @@
 			</div>
 		</div>
 		<div class="forget-password">
-			<h4>忘记你的密码?</h4>
+			<h4>忘记你的密码 ?</h4>
 			<p>
 				 别担心, 请点击 <a href="javascript:;" id="forget-password">
-				这里</a>
+				这里 </a>
 				申请重置你的密码.
 			</p>
 		</div>
@@ -102,19 +101,17 @@
 		<div class="form-actions">
 			<button type="button" id="back-btn" class="btn">
 			<i class="m-icon-swapleft"></i> Back </button>
-			<button type="submit" class="btn green-haze pull-right">
+			<button type="submit" class="btn blue pull-right">
 			Submit <i class="m-icon-swapright m-icon-white"></i>
 			</button>
 		</div>
 	</form>
-	<!-- END FORGOT PASSWORD FORM -->
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-	 2015 &copy; 城市学院. 吴晓豪 制作.
+	2015 -- 2016 &copy; 城市学院. 吴晓豪 制作.
 </div>
-<script>
-</script>
 </body>
+<!-- END BODY -->
 </html>

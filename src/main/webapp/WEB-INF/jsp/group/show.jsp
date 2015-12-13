@@ -9,26 +9,28 @@
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
 			用户组管理
-			<small> <i class="fa fa-shopping-cart"></i> 增加删除修改用户组信息 </small>
+			<small>增加删除修改用户组信息 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>组织机构管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/group/groups" class="ajaxify">用户组管理</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/group/updateUI/${group.id }" class="ajaxify">查询用户组信息</a>
-			</li>
-		</ul>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>组织机构管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/group/groups" class="ajaxify">用户组管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/group/updateUI/${group.id }" class="ajaxify">查询用户组信息</a>
+				</li>
+			</ul>
+		</div>
 		<!-- END PAGE TITLE & BREADCRUMB-->
 	</div>
 </div>

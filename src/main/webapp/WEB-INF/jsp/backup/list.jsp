@@ -29,23 +29,25 @@ $(function(){
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
 			网站数据备份
-			<small> <i class="fa fa-shopping-cart"></i> 备份和恢复数据、文件 </small>
+			<small>备份和恢复数据、文件 </small>
 		</h3>
-		<ul class="page-breadcrumb breadcrumb">
-			<li>
-				<i class="fa fa-home"></i>
-				<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
-				>>
-			</li>
-			<li>
-				<a>系统配置</a>
-				>>
-			</li>
-			<li>
-				<a href="admin/backups" class="ajaxify">网站数据备份</a>
-			</li>
-		</ul>
-		<!-- END PAGE TITLE & BREADCRUMB-->
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>系统配置</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/backups" class="ajaxify">网站数据备份</a>
+				</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
 	</div>
 </div>
 
