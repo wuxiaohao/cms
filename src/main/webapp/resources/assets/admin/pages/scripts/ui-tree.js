@@ -183,6 +183,7 @@ var UITree = function () {
     return {
         //main function to initiate the module
         init: function () {
+
             handleSample1();
             handleSample2();
             contextualMenuSample();

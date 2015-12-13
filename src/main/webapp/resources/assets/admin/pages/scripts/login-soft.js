@@ -12,17 +12,20 @@ var Login = function () {
 	                password: {
 	                    required: true
 	                },
-	                remember: {
-	                    required: false
+	                checkcode: {
+	                	required: true
 	                }
 	            },
 
 	            messages: {
 	                username: {
-	                    required: "Username is required."
+	                    required: "用户名不能为空."
 	                },
 	                password: {
-	                    required: "Password is required."
+	                    required: "密码不能为空."
+	                },
+	                checkcode: {
+	                	required: "验证码不能为空."
 	                }
 	            },
 
@@ -247,17 +250,7 @@ var Login = function () {
         	
             handleLogin();
             handleForgetPassword();
-            handleRegister();        
-	       
-	       	$.backstretch([
-		        "../../assets/admin/pages/media/bg/1.jpg",
-    		    "../../assets/admin/pages/media/bg/2.jpg",
-    		    "../../assets/admin/pages/media/bg/3.jpg",
-    		    "../../assets/admin/pages/media/bg/4.jpg"
-		        ], {
-		          fade: 1000,
-		          duration: 8000
-		    });
+            handleRegister();    
         }
 
     };

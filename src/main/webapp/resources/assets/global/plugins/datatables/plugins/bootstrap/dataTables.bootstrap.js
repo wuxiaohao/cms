@@ -1,7 +1,7 @@
 /* Set the defaults for DataTables initialisation */
 $.extend(true, $.fn.dataTable.defaults, {
-    "dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
-    //"Dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // datatable layout without  horizobtal scroll
+    "dom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-5'i><'col-md-7 col-sm-7'p>>", // default layout with horizobtal scrollable datatable
+    //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // datatable layout without  horizobtal scroll(used when bootstrap dropdowns used in the datatable cells)
     "language": {
         "lengthMenu": " _MENU_ records ",
         "paginate": {
@@ -180,6 +180,7 @@ $.extend($.fn.dataTableExt.oPagination, {
                     fnDraw(oSettings);
                 }
             };
+
             $(nPaging).append(
                 '<ul class="pagination">' +
                 '<li class="prev disabled"><a href="#" title="' + oLang.sFirst + '"><i class="fa fa-angle-double-left"></i></a></li>' +
@@ -347,6 +348,12 @@ $.extend($.fn.dataTableExt.oPagination, {
 
             for (i = 0, iLen = an.length; i < iLen; i++) {
                 var wrapper = $(an[i]).parents(".dataTables_wrapper");
+
+                if (oPaging.iTotal <= 0) {
+                    $('.dataTables_paginate, .dataTables_length', wrapper).hide();
+                } else {
+                    $('.dataTables_paginate, .dataTables_length', wrapper).show();
+                }
 
                 if (oPaging.iTotalPages <= 0) {
                     $('.dataTables_paginate, .dataTables_length .seperator', wrapper).hide();
