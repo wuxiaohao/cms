@@ -22,7 +22,7 @@
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-comments"></i>
 					文章查看
 				</div>
 			</div>

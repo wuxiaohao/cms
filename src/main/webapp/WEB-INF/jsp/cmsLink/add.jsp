@@ -55,7 +55,7 @@ $(function(){
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-gift"></i>添加超链接
+					<i class="fa fa-edit"></i>添加超链接
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse">

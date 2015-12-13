@@ -36,65 +36,54 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box red">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-gift"></i>用户名: ${user.username}
+				<div class="caption font-green">
+					<i class="icon-pin font-green"></i>
+					<span class="caption-subject bold uppercase"> 修改密码</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse">
-					</a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<!-- BEGIN FORM-->
-				<sf:form id="addForm" method="post" modelAttribute="user" action="admin/user/updatePwd" class="form-horizontal ajaxiform">
-					<input type="hidden" name="id" value="${user.id }"/>				
+			<div class="portlet-body form">
+				<sf:form id="addForm" method="post" role="form" modelAttribute="user" action="admin/user/updatePwd" class="form-horizontal ajaxiform">	
+					<input type="hidden" name="id" value="${user.id }"/>
 					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-3">原始密码 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<input type="password" name="oldPwd" class="form-control"/>
-								</div>
-							</div>
-							<span style="color: red;">${error }</span>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">新密码 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:password path="password" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">原密码</label>
+							<div class="col-md-3">
+								<input type="password" name="oldPwd" class="form-control" id="form_control_1" placeholder="请输入原密码"/>
+								<span style="color: red;">${error }</span>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">确认密码 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<input type="password" name="confirmPwd" class="form-control"/>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">新密码</label>
+							<div class="col-md-3">
+								<input type="password" name="password" id="password" class="form-control" id="form_control_1" placeholder="请输入新密码"/>
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">确认密码</label>
+							<div class="col-md-3">
+								<input type="password" name="confirmPwd" class="form-control" id="form_control_1" placeholder="请再次确认新密码"/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
 					</div>
 					<div class="form-actions">
 						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
+							<div class="col-md-offset-2 col-md-10">
 								<button type="submit" class="btn green">修改</button>
 							</div>
 						</div>
 					</div>
 				</sf:form>
-				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END VALIDATION STATES-->
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>

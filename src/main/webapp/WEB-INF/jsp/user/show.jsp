@@ -38,78 +38,154 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red">
+		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-edit"></i>
-					查询用户
-				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse"> </a>
+				<i class="icon-equalizer font-green-haze"></i>
+				<span class="caption-subject font-green-haze bold">查询用户信息</span>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<table class="table table-striped table-hover table-bordered" id="sample_1">
-					<tbody>
-						<tr>
-							<td width="150px" align="center">用户名</td>
-							<td>${user.username }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">显示名称</td>
-							<td>${user.nickname }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">联系电话</td>
-							<td>${user.phone}</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">电子邮件</td>
-							<td>${user.email }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">状态</td>
-							<td>
-								<c:if test="${user.status eq 0 }">
-									<span class="emp">停用</span>
-								</c:if>
-								<c:if test="${user.status eq 1 }">
-									<span>启用</span>
-								</c:if>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">创建时间</td>
-							<td><fmt:formatDate value="${user.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">拥有角色</td>
-							<td>
-								<c:forEach items="${rs }" var="r">
-									<a href="<%=request.getContextPath()%>/admin/role/${r.id}" class="btn btn-xs red ajaxify">
-									${r.name }
-									</a>&nbsp;
-								</c:forEach>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">所在用户组</td>
-							<td>
-								<c:forEach items="${gs }" var="g">
-									<a href="<%=request.getContextPath()%>/admin/group/${g.id}" class="btn btn-xs blue ajaxify">${g.name }</a>&nbsp;
-								</c:forEach>
-							</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2" align="center">
-								<a href="admin/user/updateUI/${user.id }" class="btn green ajaxify">修改用户</a>
-								<a class="btn default ajaxify" href="admin/user/users">取消</a>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
+			<div class="portlet-body form">
+				<div class="form-horizontal">
+				<div class="form-body">
+					<h3 class="form-section">基本信息</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">用户名&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${user.username }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">显示名称&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${user.nickname }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">联系电话&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${user.phone}
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">电子邮件&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${user.email }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">当前状态&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 <c:if test="${user.status eq 0 }">
+											<span class="emp">停用</span>
+										 </c:if>
+										 <c:if test="${user.status eq 1 }">
+											<span>启用</span>
+										 </c:if>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">创建时间&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 <fmt:formatDate value="${user.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<h3 class="form-section">所属角色和组</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">角色&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${empty rs}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty rs}">
+										 	<c:forEach items="${rs }" var="r">
+										 	<a href="<%=request.getContextPath()%>/admin/role/${r.id}" class="btn btn-xs btn-danger ajaxify">
+										 	${r.name }</a>
+										</c:forEach>
+										</c:if>	
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">用户组&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 <c:if test="${empty gs}">
+										 	暂无...
+										 </c:if>	
+										 <c:if test="${!empty gs}">
+										 	<c:forEach items="${gs }" var="g">
+												<a href="<%=request.getContextPath()%>/admin/group/${g.id}" class="btn btn-xs blue ajaxify">${g.name }</a>
+											 </c:forEach>
+										 </c:if>	
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a href="admin/user/updateUI/${user.id }" class="btn green ajaxify">修改用户</a>
+									<a class="btn default ajaxify" href="admin/user/users">返回</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->

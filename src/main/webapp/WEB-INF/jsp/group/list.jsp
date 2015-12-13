@@ -166,7 +166,7 @@ $(function(){
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-cogs"></i>
 					用户列表
 				</div>
 				<div class="tools">
@@ -176,9 +176,9 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn red ajaxify" href="admin/group/addUI">新增用户组</a>
-						<a href="javascript:void(0);" id="showTree" class="btn green">查询管理栏目</a>
-						<a href="javascript:void(0);" id="setTree" class="btn yellow">设置管理栏目</a>
+						<a class="btn green-meadow ajaxify" href="admin/group/addUI">添加用户组&nbsp;<i class="fa fa-plus"></i></a>
+						<a href="javascript:void(0);" id="showTree" class="btn btn-danger">查询栏目&nbsp;<i class="fa fa-search"></i></a>
+						<a href="javascript:void(0);" id="setTree" class="btn btn-info">设置栏目&nbsp;<i class="fa fa-edit"></i></a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">

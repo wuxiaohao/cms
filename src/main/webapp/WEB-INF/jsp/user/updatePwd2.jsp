@@ -7,13 +7,13 @@
 	$(function(){
 		$("#addForm").cmsvalidate();
 	});
+	
 </script>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-			角色设置
-			<small>增加删除修改角色 </small>
+			个人中心
+			<small>修改密码 </small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -23,15 +23,11 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a>组织机构管理</a>
+					<a>个人中心</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/role/roles" class="ajaxify">角色管理</a>
-					<i class="fa fa-angle-right"></i>
-				</li>
-				<li>
-					<a href="admin/role/addUI" class="ajaxify">新增角色</a>
+					<a href="admin/user/updatePwdUI" class="ajaxify">修改密码</a>
 				</li>
 			</ul>
 		</div>
@@ -41,10 +37,10 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
+		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>添加角色功能
+					<i class="fa fa-edit"></i>用户名: ${user.username}
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse">
@@ -53,34 +49,45 @@
 			</div>
 			<div class="portlet-body">
 				<!-- BEGIN FORM-->
-				<sf:form onkeydown="if(event.keyCode==13){return false;}" id="addForm" method="post" modelAttribute="role" action="admin/role/add" class="form-horizontal ajaxiform">
+				<sf:form id="addForm" method="post" modelAttribute="user" action="admin/user/updatePwd" class="form-horizontal ajaxiform">
+					<input type="hidden" name="id" value="${user.id }"/>				
 					<div class="form-body">
 						<div class="form-group">
-							<label class="control-label col-md-3">角色名称 <span class="required">
+							<label class="control-label col-md-3">原始密码 <span class="required">
 							* </span>
 							</label>
 							<div class="col-md-4">
 								<div class="input-icon right">
-									<sf:input path="name" class="form-control" />
+									<input type="password" name="oldPwd" class="form-control"/>
+								</div>
+							</div>
+							<span style="color: red;">${error }</span>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">新密码 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:password path="password" class="form-control" />
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3">角色类型 <span class="required">
+							<label class="control-label col-md-3">确认密码 <span class="required">
 							* </span>
 							</label>
 							<div class="col-md-4">
 								<div class="input-icon right">
-									<sf:select path="roleType" class="bs-select form-control"><sf:options items="${types }"/></sf:select>
+									<input type="password" name="confirmPwd" class="form-control"/>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-actions fluid">
+					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-offset-3 col-md-9">
-								<button type="submit" class="btn green">提交</button>
-								<a type="button" class="btn default ajaxify" href="admin/role/roles">取消</a>
+								<button type="submit" class="btn green">修改</button>
 							</div>
 						</div>
 					</div>

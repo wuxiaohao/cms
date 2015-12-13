@@ -45,7 +45,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-gift"></i>修改角色
+					<i class="fa fa-edit"></i>修改角色
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse">

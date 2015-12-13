@@ -39,10 +39,10 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red">
+		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-comments"></i>
 					网站基本信息
 				</div>
 				<div class="tools">

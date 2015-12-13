@@ -8,7 +8,8 @@
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-			首页宣传图片管理
+			用户信息管理
+			<small>增加删除修改用户信息 </small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -18,15 +19,15 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a>首页管理</a>
+					<a>组织机构管理</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/pic/indexPics" class="ajaxify">首页宣传图片管理</a>
+					<a href="admin/user/users" class="ajaxify">用户信息管理</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/pic/indexPic/${indexPic.id }" class="ajaxify">查询首页宣传图片</a>
+					<a href="admin/user/${user.id }" class="ajaxify">查询用户</a>
 				</li>
 			</ul>
 		</div>
@@ -41,7 +42,7 @@
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-comments"></i>
-					${indexPic.title }
+					查询用户
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a>
@@ -51,41 +52,60 @@
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<tbody>
 						<tr>
-							<td colspan="2">
-								<img src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
-							</td>
+							<td width="150px" align="center">用户名</td>
+							<td>${user.username }</td>
 						</tr>
 						<tr>
-							<td width="150px" align="center">首页图片标题</td>
-							<td>${indexPic.title }</td>
+							<td width="150px" align="center">显示名称</td>
+							<td>${user.nickname }</td>
 						</tr>
 						<tr>
-							<td width="150px" align="center">首页图片子标题</td>
-							<td>${indexPic.subTitle }</td>
+							<td width="150px" align="center">联系电话</td>
+							<td>${user.phone}</td>
+						</tr>
+						<tr>
+							<td width="150px" align="center">电子邮件</td>
+							<td>${user.email }</td>
 						</tr>
 						<tr>
 							<td width="150px" align="center">状态</td>
 							<td>
-								<c:if test="${indexPic.status eq 0 }">未发布</c:if>
-								<c:if test="${indexPic.status ne 0 }">已发布</c:if>
+								<c:if test="${user.status eq 0 }">
+									<span class="emp">停用</span>
+								</c:if>
+								<c:if test="${user.status eq 1 }">
+									<span>启用</span>
+								</c:if>
 							</td>
 						</tr>
 						<tr>
-							<td width="150px" align="center">链接类型</td>
+							<td width="150px" align="center">创建时间</td>
+							<td><fmt:formatDate value="${user.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						</tr>
+						<tr>
+							<td width="150px" align="center">拥有角色</td>
 							<td>
-								<c:if test="${indexPic.linkType eq 0 }">站内链接</c:if>
-								<c:if test="${indexPic.linkType ne 0 }">站外链接</c:if>
+								<c:forEach items="${rs }" var="r">
+									<a href="<%=request.getContextPath()%>/admin/role/${r.id}" class="btn btn-xs red ajaxify">
+									${r.name }
+									</a>&nbsp;
+								</c:forEach>
 							</td>
 						</tr>
 						<tr>
-							<td width="150px" align="center">链接地址</td>
-							<td>${indexPic.linkUrl }</td>
+							<td width="150px" align="center">所在用户组</td>
+							<td>
+								<c:forEach items="${gs }" var="g">
+									<a href="<%=request.getContextPath()%>/admin/group/${g.id}" class="btn btn-xs blue ajaxify">${g.name }</a>&nbsp;
+								</c:forEach>
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
 							<td colspan="2" align="center">
-								<a class="btn default ajaxify" href="admin/pic/indexPics">取消</a>
+								<a href="admin/user/updateUI/${user.id }" class="btn green ajaxify">修改用户</a>
+								<a class="btn default ajaxify" href="admin/user/users">取消</a>
 							</td>
 						</tr>
 					</tfoot>

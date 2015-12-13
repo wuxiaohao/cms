@@ -25,7 +25,7 @@ html { overflow-x:hidden; }
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-gift"></i>添加[${pc.name}]子栏目功能
+					<i class="fa fa-edit"></i>添加[${pc.name}]子栏目功能
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse">

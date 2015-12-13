@@ -41,7 +41,7 @@
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-comments"></i>
 					查询用户组
 				</div>
 				<div class="tools">

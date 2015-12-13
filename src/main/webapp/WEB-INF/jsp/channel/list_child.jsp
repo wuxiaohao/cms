@@ -41,7 +41,7 @@ $(function(){
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-cogs"></i>
 					当前栏目:${pc.name }
 				</div>
 				<div class="tools">

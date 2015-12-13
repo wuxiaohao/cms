@@ -55,7 +55,16 @@ $(function(){
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet gren">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs"></i>
+					备份数据列表
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"> </a>
+				</div>
+			</div>
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">

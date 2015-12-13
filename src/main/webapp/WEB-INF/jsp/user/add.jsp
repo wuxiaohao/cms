@@ -41,130 +41,112 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-gift"></i>添加用户功能
+				<div class="caption font-green">
+					<i class="icon-pin font-green"></i>
+					<span class="caption-subject bold uppercase"> 添加用户</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse">
-					</a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<!-- BEGIN FORM-->
-				<sf:form id="addForm" method="post" modelAttribute="userDto" action="admin/user/add" class="form-horizontal ajaxiform">
+			<div class="portlet-body form">
+				<sf:form id="addForm" method="post" role="form" modelAttribute="userDto" action="admin/user/add" class="form-horizontal ajaxiform">	
 					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-3">用户名 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="username" class="form-control" />
-									<sf:errors cssClass="errorContainer" path="username"/>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">用户名</label>
+							<div class="col-md-6">
+								<sf:input path="username" class="form-control"  id="form_control_1"  />
+								<sf:errors cssClass="errorContainer" path="username"/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">显示名称(可以是中文) <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="nickname" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">昵称(可以是中文)</label>
+							<div class="col-md-6">
+								<sf:input path="nickname" class="form-control" id="form_control_1"/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">用户密码 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:password path="password" class="form-control" />
-									<sf:errors cssClass="errorContainer" path="password"/>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">密码</label>
+							<div class="col-md-6">
+								<input type="password" name="password" id="password" class="form-control" id="form_control_1" />
+								<sf:errors cssClass="errorContainer" path="password"/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">确认密码 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<input type="password" id="confirmPwd" name="confirmPwd" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">确认密码</label>
+							<div class="col-md-6">
+								<input type="password" id="confirmPwd" name="confirmPwd" class="form-control" id="form_control_1" />
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">联系电话 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="phone" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">联系电话</label>
+							<div class="col-md-6">
+								<sf:input path="phone" class="form-control" id="form_control_1" />
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">电子邮件 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="email" class="form-control" />
-									<sf:errors path="email"/>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">电子邮件</label>
+							<div class="col-md-6">
+								<sf:input path="email" class="form-control" id="form_control_1" />
+								<sf:errors path="email"/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">状态 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:select path="status" class="bs-select form-control">
-										<sf:option value="0">停用</sf:option>
-										<sf:option value="1">启用</sf:option>
-									</sf:select>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">角色</label>
+							<div class="col-md-6">
+								<sf:checkboxes  items="${roles}" itemLabel="name" itemValue="id" path="roleIds"/>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">角色<span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:checkboxes  items="${roles}" itemLabel="name" itemValue="id" path="roleIds"/>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">用户组</label>
+							<div class="col-md-6">
+								<sf:checkboxes items="${groups }" path="groupIds" itemLabel="name" itemValue="id"/>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">用户组<span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:checkboxes items="${groups }" path="groupIds" itemLabel="name" itemValue="id"/>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">状态</label>
+							<div class="col-md-6">
+								<div class="md-radio-inline">
+									<div class="md-radio has-error">
+										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn" checked>
+										<label for="radio53">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										停用 </label>
+									</div>
+									<div class="md-radio has-error">
+										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn">
+										<label for="radio54">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										启用 </label>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="form-actions">
 						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
+							<div class="col-md-offset-2 col-md-10">
 								<button type="submit" class="btn green">提交</button>
 								<a type="button" class="btn default ajaxify" href="admin/user/users">取消</a>
 							</div>
 						</div>
 					</div>
 				</sf:form>
-				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END VALIDATION STATES-->
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>

@@ -65,7 +65,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-cogs"></i>
 					用户列表
 				</div>
 				<div class="tools">
@@ -75,8 +75,8 @@
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green ajaxify" href="admin/user/addUI">新增用户</a>
-						<a href="javascript:void(0);" id="showTree" class="btn red">管理栏目</a>
+						<a class="btn green-meadow ajaxify" href="admin/user/addUI">新增用户&nbsp;<i class="fa fa-plus"></i></a>
+						<a href="javascript:void(0);" id="showTree" class="btn red">查询栏目&nbsp;<i class="fa fa-search"></i></a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">

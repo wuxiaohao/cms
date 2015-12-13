@@ -49,7 +49,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-cogs"></i>
 					角色列表
 				</div>
 				<div class="tools">
@@ -59,7 +59,7 @@
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green ajaxify" href="admin/role/addUI">新增角色</a>
+						<a class="btn green-meadow ajaxify" href="admin/role/addUI">新增角色</a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">

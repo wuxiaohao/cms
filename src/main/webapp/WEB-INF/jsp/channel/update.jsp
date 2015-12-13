@@ -26,7 +26,7 @@ html { overflow-x:hidden; }
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-gift"></i>更新[${channel.name}]子栏目功能
+					<i class="fa fa-edit">更新[${channel.name}]子栏目功能
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse">

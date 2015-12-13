@@ -40,7 +40,16 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet gren">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs"></i>
+					图片列表
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"> </a>
+				</div>
+			</div>
 			<div class="portlet-body">
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>

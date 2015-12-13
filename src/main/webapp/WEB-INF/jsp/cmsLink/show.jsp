@@ -41,8 +41,8 @@
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-edit"></i>
-					查询超链接详细信息
+					<i class="fa fa-comments"></i>
+					${cmsLink.title }
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a>
