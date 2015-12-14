@@ -51,105 +51,98 @@ $(function(){
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-edit"></i>添加超链接
+				<div class="caption font-blue">
+					<i class="icon-pin font-blue"></i>
+					<span class="caption-subject bold uppercase"> 添加超链接</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse">
-					</a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<!-- BEGIN FORM-->
-				<sf:form id="addForm" method="post" modelAttribute="cmsLink" action="admin/cmsLink/add" class="form-horizontal ajaxiform">
+			<div class="portlet-body form">
+				<sf:form id="addForm" role="form" method="post" modelAttribute="cmsLink" action="admin/cmsLink/add" class="form-horizontal ajaxiform">	
 					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-3">超链接标题 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="title" class="form-control" />
-									<sf:errors cssClass="errorContainer" path="title"/>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">超链接标题</label>
+							<div class="col-md-3">
+								<sf:input path="title" class="form-control" />
+								<sf:errors cssClass="errorContainer" path="title"/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">超链接地址 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="url" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">超链接地址</label>
+							<div class="col-md-3">
+								<sf:input path="url" class="form-control" />
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">超链接类别 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<select id="urlType" class="bs-select form-control">
-									<option value="0">请选择类型</option>
-									<c:forEach items="${types }" var="t">
-										<option value="${t }">${t }</option>
-									</c:forEach>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">超链接类别</label>
+							<div class="col-md-3">
+								<select id="urlType" class="bs-select form-control">
+								<option value="0">请选择类型</option>
+								<c:forEach items="${types }" var="t">
+									<option value="${t }">${t }</option>
+								</c:forEach>
 									<option value="-1">选择其他</option>
-									</select>
-									<sf:input path="type" readonly="true" class="form-control type" />
-								</div>
+								</select>
+								<div class="form-control-focus"></div>
+								<sf:input path="type" readonly="true" class="form-control type" />
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">打开方式 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right ">
-									<div class="radio-list" data-error-container="#form_2_membership_error">
-									<sf:radiobutton path="newWin" value="0"/>本窗口
-									<sf:radiobutton path="newWin" value="1"/>新窗口
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">打开方式</label>
+							<div class="col-md-6">
+								<div class="md-radio-inline">
+									<div class="md-radio has-error">
+										<input type="radio" id="radio53" name="newWin" value="0" class="md-radiobtn" checked>
+										<label for="radio53">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										本窗口 </label>
+									</div>
+									<div class="md-radio has-error">
+										<input type="radio" id="radio54" name="newWin" value="1" class="md-radiobtn">
+										<label for="radio54">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										新窗口 </label>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">链接标签ID <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="urlId" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">链接标签ID</label>
+							<div class="col-md-3">
+								<sf:input path="urlId" class="form-control" />
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">链接标签类别 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="urlClass" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">>链接标签类别</label>
+							<div class="col-md-3">
+								<sf:input path="urlClass" class="form-control" />
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
 					</div>
 					<div class="form-actions">
 						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
+							<div class="col-md-offset-2 col-md-10">
 								<button type="submit" class="btn green">提交</button>
 								<a class="btn default ajaxify" href="admin/cmsLink/links">取消</a>
 							</div>
 						</div>
 					</div>
 				</sf:form>
-				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END VALIDATION STATES-->
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>

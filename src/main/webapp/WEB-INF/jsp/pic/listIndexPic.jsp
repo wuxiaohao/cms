@@ -103,7 +103,7 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green" href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/addIndexPic','addPic')">添加宣传图片</a>
+						<a class="btn green-meadow" href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/addIndexPic','addPic')">添加&nbsp;<i class="fa fa-plus"></i></a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">

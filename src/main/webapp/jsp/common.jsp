@@ -160,14 +160,19 @@ display:inline;
 		        };
 		});
 	
-	function showMessage(success,error){
-		if (success != 'null' && success != "") {
-			toastr.success(success);
+		function showMessage(success,error){
+			if (success != 'null' && success != "") {
+				toastr.success(success);
+			}
+			if (error != 'null' && error != "") {
+				toastr.error(error);
+			}
 		}
-		if (error != 'null' && error != "") {
-			toastr.error(error);
-		}
-	}
+		
+		//设置对话框语言为中文（默认为英文）
+	    bootbox.setDefaults({
+	        locale: "zh_CN"
+	    });
 </script>
 <!-- END JAVASCRIPTS -->
 <script>

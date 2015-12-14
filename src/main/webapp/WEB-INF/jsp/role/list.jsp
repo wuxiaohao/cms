@@ -59,7 +59,7 @@
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green-meadow ajaxify" href="admin/role/addUI">新增角色</a>
+						<a class="btn green-meadow ajaxify" href="admin/role/addUI">新增角色&nbsp;<i class="fa fa-plus"></i></a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
@@ -81,8 +81,8 @@
 								<td><a href="admin/role/${role.id }" class="ajaxify">${role.name }</a></td>
 								<td>${role.roleType }</td>
 								<td><a href="admin/role/delete/${role.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
-									<a href="admin/role/updateUI/${role.id }" class="btn btn-sm blue ajaxify"> 更新 </a>
-									<a href="admin/role/clearUsers/${role.id }" class="btn btn-sm yellow ajaxify delete"> 清空用户 </a>
+									<a href="admin/role/updateUI/${role.id }" class="btn btn-sm green ajaxify"> 更新 </a>
+									<a href="admin/role/clearUsers/${role.id }" class="btn btn-sm blue ajaxify delete"> 清空用户 </a>
 								</a></td>
 							</tr>
 						</c:forEach>

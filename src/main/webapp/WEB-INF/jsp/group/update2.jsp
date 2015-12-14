@@ -41,45 +41,54 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN SAMPLE FORM PORTLET-->
-		<div class="portlet light bordered">
+		<!-- BEGIN VALIDATION STATES-->
+		<div class="portlet box blue">
 			<div class="portlet-title">
-				<div class="caption font-green">
-					<i class="icon-pin font-green"></i>
-					<span class="caption-subject bold uppercase"> 修改用户组</span>
+				<div class="caption">
+					<i class="fa fa-edit"></i>修改用户组
 				</div>
-				<div class="actions">
-					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
+				<div class="tools">
+					<a href="javascript:;" class="collapse">
+					</a>
 				</div>
 			</div>
-			<div class="portlet-body form">
-				<sf:form id="updateForm" role="form" method="post" modelAttribute="group" action="admin/group/update/${group.id }" class="form-horizontal ajaxiform">	
+			<div class="portlet-body">
+				<!-- BEGIN FORM-->
+				<sf:form id="updateForm" method="post" modelAttribute="group" action="admin/group/update/${group.id }" class="form-horizontal ajaxiform">
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
-							<label class="col-md-2 control-label" for="form_control_1">用户组名称</label>
-							<div class="col-md-6">
-								<sf:input path="name" class="form-control" />
-								<div class="form-control-focus"></div>
+						<div class="form-group">
+							<label class="control-label col-md-3">用户组名称 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:input path="name" class="form-control" />
+								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
-							<label class="col-md-2 control-label" for="form_control_1">用户组描述</label>
-							<div class="col-md-6">
-								<sf:textarea path="descr" class="form-control" rows="3" />
-								<div class="form-control-focus"></div>
+						<div class="form-group">
+							<label class="control-label col-md-3">用户组描述 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:textarea path="descr" class="form-control" rows="3" />
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="form-actions">
 						<div class="row">
-							<div class="col-md-offset-2 col-md-10">
+							<div class="col-md-offset-3 col-md-9">
 								<button type="submit" class="btn green">提交</button>
 								<a class="btn default ajaxify" href="admin/group/groups">取消</a>
 							</div>
 						</div>
 					</div>
 				</sf:form>
+				<!-- END FORM-->
 			</div>
 		</div>
+		<!-- END VALIDATION STATES-->
 	</div>
 </div>

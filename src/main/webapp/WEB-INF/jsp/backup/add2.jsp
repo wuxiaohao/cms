@@ -51,40 +51,34 @@ $(function(){
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN SAMPLE FORM PORTLET-->
-		<div class="portlet light bordered">
-			<div class="portlet-title">
-				<div class="caption font-green">
-					<i class="icon-pin font-green"></i>
-					<span class="caption-subject bold uppercase"> 一键备份</span>
-				</div>
-				<div class="actions">
-					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
-				</div>
-			</div>
-			<div class="portlet-body form">
-				<sf:form role="form" id="addForm" method="post" action="admin/backup/add" class="form-horizontal ajaxiform">
+		<!-- BEGIN VALIDATION STATES-->
+		<div class="portlet gren">
+			<div class="portlet-body">
+				<!-- BEGIN FORM-->
+				<sf:form id="addForm" method="post" action="admin/backup/add" class="form-horizontal ajaxiform">
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
-							<label class="col-md-2 control-label" for="form_control_1">请输入备份的文件名</label>
-							<div class="col-md-6">
-								<input type="text" name="backupFilename" id="backupFilename" class="form-control">
-								<div class="form-control-focus"></div>
+						<div class="form-group">
+							<label class="control-label col-md-3">输入备份的文件名:</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<input type="text" name="backupFilename" id="backupFilename" class="form-control" />
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-actions">
+					<div class="form-actions fluid">
 						<div class="row">
-							<div class="col-md-offset-2 col-md-10">
-								<button type="button" class="btn blue" id="beginBackup">备份</button>
+							<div class="col-md-offset-3 col-md-9">
+								<button type="button" class="btn green" id="beginBackup">备份</button>
 								<a type="button" class="btn default ajaxify" href="admin/backups">取消</a>
 								<span id="backupCon"></span>
 							</div>
 						</div>
 					</div>
 				</sf:form>
+				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END SAMPLE FORM PORTLET-->
+		<!-- END VALIDATION STATES-->
 	</div>
 </div>

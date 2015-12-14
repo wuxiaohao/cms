@@ -38,45 +38,80 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red">
+		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-comments"></i>
-					查询用户组
+				<div class="caption font-blue">
+					<i class="icon-settings font-blue"></i>
+					<span class="caption-subject bold"> 查询用户组</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse"> </a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<table class="table table-striped table-hover table-bordered" id="sample_1">
-					<tbody>
-						<tr>
-							<td width="150px" align="center">用户组名称</td>
-							<td>${group.name }&nbsp;</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">用户组描述</td>
-							<td>${group.descr }&nbsp;</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">用户组所有用户</td>
-							<td>
-								<c:forEach items="${us }" var="u">
-									<a href="<%=request.getContextPath()%>/admin/user/${u.id}" class="btn btn-xs red ajaxify">${u.nickname }</a>&nbsp;
-								</c:forEach>
-							</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2" align="center">
-								<a href="admin/group/updateUI/${group.id }" class="btn green ajaxify">修改用户组</a>
-								<a class="btn default ajaxify" href="admin/user/users">取消</a>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
+			<div class="portlet-body form">
+				<div class="form-horizontal">
+				<div class="form-body">
+					<h3 class="form-section">${group.name }</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">用户组名称&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${group.name }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">用户组描述&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${group.descr }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">该组所有用户&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${empty us}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty us}">
+										<c:forEach items="${us }" var="u">
+											<a href="<%=request.getContextPath()%>/admin/user/${u.id}" class="btn btn-xs btn-danger ajaxify">${u.nickname }</a>&nbsp;
+										</c:forEach>
+										</c:if>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a href="admin/group/updateUI/${group.id }" class="btn blue ajaxify">修改</a>
+									<a class="btn default ajaxify" href="admin/group/groups">返回</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->

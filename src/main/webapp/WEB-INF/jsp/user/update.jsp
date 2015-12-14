@@ -62,7 +62,7 @@
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">昵称(可以是中文)</label>
 							<div class="col-md-6">
-								<sf:input path="nickname" class="form-control" id="form_control_1"/>
+								<sf:input path="nickname" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
@@ -84,16 +84,59 @@
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">联系电话</label>
 							<div class="col-md-6">
-								<sf:input path="phone" class="form-control" id="form_control_1" />
+								<sf:input path="phone" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">电子邮件</label>
 							<div class="col-md-6">
-								<sf:input path="email" class="form-control" id="form_control_1" />
+								<sf:input path="email" class="form-control" />
 								<sf:errors path="email"/>
 								<div class="form-control-focus"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">状态</label>
+							<div class="col-md-6">
+								<div class="md-radio-inline">
+									<c:if test="${userDto.status == 0 }">
+									<div class="md-radio has-success">
+										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn" checked>
+										<label for="radio53">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										停用 </label>
+									</div>
+									<div class="md-radio has-success">
+										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn">
+										<label for="radio54">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										启用 </label>
+									</div>
+									</c:if>
+									<c:if test="${userDto.status == 1 }">
+									<div class="md-radio has-success">
+										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn">
+										<label for="radio53">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										停用 </label>
+									</div>
+									<div class="md-radio has-success">
+										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn" checked>
+										<label for="radio54">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										启用 </label>
+									</div>
+									</c:if>
+								</div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input">
@@ -106,49 +149,6 @@
 							<label class="col-md-2 control-label" for="form_control_1">用户组</label>
 							<div class="col-md-6">
 								<sf:checkboxes items="${groups }" path="groupIds" itemLabel="name" itemValue="id"/>
-							</div>
-						</div>
-						<div class="form-group form-md-line-input">
-							<label class="col-md-2 control-label" for="form_control_1">状态</label>
-							<div class="col-md-6">
-								<div class="md-radio-inline">
-									<c:if test="${userDto.status == 0 }">
-									<div class="md-radio has-error">
-										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn" checked>
-										<label for="radio53">
-										<span></span>
-										<span class="check"></span>
-										<span class="box"></span>
-										停用 </label>
-									</div>
-									<div class="md-radio has-error">
-										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn">
-										<label for="radio54">
-										<span></span>
-										<span class="check"></span>
-										<span class="box"></span>
-										启用 </label>
-									</div>
-									</c:if>
-									<c:if test="${userDto.status == 1 }">
-									<div class="md-radio has-error">
-										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn">
-										<label for="radio53">
-										<span></span>
-										<span class="check"></span>
-										<span class="box"></span>
-										停用 </label>
-									</div>
-									<div class="md-radio has-error">
-										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn" checked>
-										<label for="radio54">
-										<span></span>
-										<span class="check"></span>
-										<span class="box"></span>
-										启用 </label>
-									</div>
-									</c:if>
-								</div>
 							</div>
 						</div>
 					</div>

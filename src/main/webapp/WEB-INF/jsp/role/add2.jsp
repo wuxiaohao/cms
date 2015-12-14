@@ -5,9 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 	$(function(){
-		$("#updateForm").cmsvalidate();
+		$("#addForm").cmsvalidate();
 	});
-	
 </script>
 <div class="row">
 	<div class="col-md-12">
@@ -32,7 +31,7 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/role/updateUI/${role.id }" class="ajaxify">修改角色</a>
+					<a href="admin/role/addUI" class="ajaxify">新增角色</a>
 				</li>
 			</ul>
 		</div>
@@ -41,48 +40,54 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN SAMPLE FORM PORTLET-->
-		<div class="portlet light bordered">
+		<!-- BEGIN VALIDATION STATES-->
+		<div class="portlet box blue">
 			<div class="portlet-title">
-				<div class="caption font-green">
-					<i class="icon-pin font-green"></i>
-					<span class="caption-subject bold uppercase"> 修改角色</span>
+				<div class="caption">
+					<i class="fa fa-edit"></i>添加角色功能
 				</div>
-				<div class="actions">
-					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
+				<div class="tools">
+					<a href="javascript:;" class="collapse">
+					</a>
 				</div>
 			</div>
-			<div class="portlet-body form">
-				<sf:form role="form" onkeydown="if(event.keyCode==13){return false;}" id="updateForm" method="post" modelAttribute="role" action="admin/role/update/${role.id }" class="form-horizontal ajaxiform">	
+			<div class="portlet-body">
+				<!-- BEGIN FORM-->
+				<sf:form onkeydown="if(event.keyCode==13){return false;}" id="addForm" method="post" modelAttribute="role" action="admin/role/add" class="form-horizontal ajaxiform">
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
-							<label class="col-md-2 control-label" for="form_control_1">角色名称</label>
-							<div class="col-md-3">
-								<sf:input path="name" class="form-control" />
-								<div class="form-control-focus"></div>
+						<div class="form-group">
+							<label class="control-label col-md-3">角色名称 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:input path="name" class="form-control" />
+								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
-							<label class="col-md-2 control-label" for="form_control_1">角色类型</label>
-							<div class="col-md-3">
-								<sf:select path="roleType" class="bs-select form-control">
-									<sf:options items="${types }"/>
-								</sf:select>
-								<div class="form-control-focus"></div>
+						<div class="form-group">
+							<label class="control-label col-md-3">角色类型 <span class="required">
+							* </span>
+							</label>
+							<div class="col-md-4">
+								<div class="input-icon right">
+									<sf:select path="roleType" class="bs-select form-control"><sf:options items="${types }"/></sf:select>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-actions">
+					<div class="form-actions fluid">
 						<div class="row">
-							<div class="col-md-offset-2 col-md-10">
+							<div class="col-md-offset-3 col-md-9">
 								<button type="submit" class="btn green">提交</button>
 								<a type="button" class="btn default ajaxify" href="admin/role/roles">取消</a>
 							</div>
 						</div>
 					</div>
 				</sf:form>
+				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END SAMPLE FORM PORTLET-->
+		<!-- END VALIDATION STATES-->
 	</div>
 </div>

@@ -44,8 +44,10 @@
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
 		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<i class="icon-equalizer font-green-haze"></i>
-				<span class="caption-subject font-green-haze bold">${user.username }的个人信息</span>
+				<div class="caption font-blue">
+					<i class="icon-settings font-blue"></i>
+					<span class="caption-subject bold"> ${user.username }的个人信息</span>
+				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
@@ -179,7 +181,7 @@
 						<div class="col-md-12">
 							<div class="row">
 								<div class="col-md-offset-3 col-md-9">
-									<a href="admin/user/updateSelfUI" class="btn green ajaxify"><i class="fa fa-pencil"></i> 修改个人信息</a>
+									<a href="admin/user/updateSelfUI" class="btn blue ajaxify"><i class="fa fa-pencil"></i> 修改个人信息</a>
 								</div>
 							</div>
 						</div>

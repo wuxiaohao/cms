@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -119,7 +118,7 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green ajaxify" href="admin/cmsLink/addUI">添加超链接</a>
+						<a class="btn green-meadow ajaxify" href="admin/cmsLink/addUI">添加&nbsp;<i class="fa fa-plus"></i></a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">

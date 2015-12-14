@@ -39,64 +39,143 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box blue">
+		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-comments"></i>
-					网站基本信息
+				<div class="caption font-blue">
+					<i class="icon-settings font-blue"></i>
+					<span class="caption-subject bold"> 网站基本信息</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse"> </a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<table class="table table-striped table-hover table-bordered" id="sample_1">
-					<tbody>
-						<tr>
-							<td width="150px" align="center">网站名称</td>
-							<td>${baseInfo.name }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">网站所在地址</td>
-							<td>${baseInfo.address }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">邮政编码</td>
-							<td>${baseInfo.zipCode }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">联系电话</td>
-							<td>${baseInfo.phone }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">网站联系邮箱</td>
-							<td>${baseInfo.email }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">网站访问域名</td>
-							<td>${baseInfo.domainName }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">网站备案号</td>
-							<td>${baseInfo.recordCode }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">首页图片宽度</td>
-							<td>${baseInfo.indexPicWidth }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">首页图片高度</td>
-							<td>${baseInfo.indexPicHeight }</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2" align="center">
-								<a href="<%=request.getContextPath() %>/admin/system/baseinfo/updateUI" class="btn green ajaxify">修改网站基本信息</a>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
+			<div class="portlet-body form">
+				<div class="form-horizontal">
+				<div class="form-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">网站名称&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${baseInfo.name }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">网站所在地址&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${baseInfo.address }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">邮政编码&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${baseInfo.zipCode }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">联系电话&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${baseInfo.phone }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">网站联系邮箱&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${baseInfo.email }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">网站访问域名&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${baseInfo.domainName }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">首页图片宽度&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${baseInfo.indexPicWidth }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">首页图片高度&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${baseInfo.indexPicHeight }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">网站备案号&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${baseInfo.recordCode }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a href="<%=request.getContextPath() %>/admin/system/baseinfo/updateUI" class="btn blue ajaxify">修改网站基本信息</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->

@@ -54,7 +54,7 @@
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">原密码</label>
 							<div class="col-md-3">
-								<input type="password" name="oldPwd" class="form-control" id="form_control_1" placeholder="请输入原密码"/>
+								<input type="password" name="oldPwd" class="form-control" placeholder="请输入原密码"/>
 								<span style="color: red;">${error }</span>
 								<div class="form-control-focus"></div>
 							</div>
@@ -62,14 +62,14 @@
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">新密码</label>
 							<div class="col-md-3">
-								<input type="password" name="password" id="password" class="form-control" id="form_control_1" placeholder="请输入新密码"/>
+								<input type="password" name="password" id="password" class="form-control" placeholder="请输入新密码"/>
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">确认密码</label>
 							<div class="col-md-3">
-								<input type="password" name="confirmPwd" class="form-control" id="form_control_1" placeholder="请再次确认新密码"/>
+								<input type="password" name="confirmPwd" class="form-control" placeholder="请再次确认新密码"/>
 								<div class="form-control-focus"></div>
 							</div>
 						</div>

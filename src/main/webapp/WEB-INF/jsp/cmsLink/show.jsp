@@ -38,57 +38,111 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red">
+		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-comments"></i>
-					${cmsLink.title }
+				<div class="caption font-blue">
+					<i class="icon-settings font-blue"></i>
+					<span class="caption-subject bold"> 查看超链接</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse"> </a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<table class="table table-striped table-hover table-bordered" id="sample_1">
-					<tbody>
-						<tr>
-							<td width="150px" align="center">超链接标题</td>
-							<td>${cmsLink.title }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">超链接地址</td>
-							<td><a href="${cmsLink.url }" target="_blank">${cmsLink.url }</a></td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">超链接类别</td>
-							<td>${cmsLink.type }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">打开方式</td>
-							<td>
-								<c:if test="${cmsLink.newWin eq 0}">本窗口</c:if>
-								<c:if test="${cmsLink.newWin eq 1}">新窗口</c:if>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">链接标签ID</td>
-							<td>${cmsLink.urlId }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">链接标签类别</td>
-							<td>${cmsLink.urlClass}</td>
-						</tr>
-						
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2" align="center">
-								<a href="admin/cmsLink/updateUI/${cmsLink.id }" class="btn green ajaxify">修改用户</a>
+			<div class="portlet-body form">
+				<div class="form-horizontal">
+				<div class="form-body">
+					<h3 class="form-section">${cmsLink.title }</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">超链接标题&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${cmsLink.title }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">超链接地址&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 <a href="${cmsLink.url }" target="_blank">${cmsLink.url }</a>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">超链接类别&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${cmsLink.type }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">打开方式&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 <c:if test="${cmsLink.newWin eq 0}">本窗口</c:if>
+										 <c:if test="${cmsLink.newWin eq 1}">新窗口</c:if>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<!--/row-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">链接标签ID&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										${cmsLink.urlId }
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">链接标签类别&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										 ${cmsLink.urlClass}
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a href="admin/cmsLink/updateUI/${cmsLink.id }" class="btn blue ajaxify">修改</a>
 								<a class="btn default ajaxify" href="admin/cmsLink/links">取消</a>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->

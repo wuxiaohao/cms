@@ -167,7 +167,7 @@ $(function(){
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-cogs"></i>
-					用户列表
+					用户组列表
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a>

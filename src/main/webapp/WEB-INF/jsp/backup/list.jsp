@@ -68,7 +68,7 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green ajaxify" href="admin/backup/addUI">备份数据库</a>
+						<a class="btn green-meadow ajaxify" href="admin/backup/addUI">数据备份&nbsp;<i class="fa fa-plus"></i></a>
 					</div>
 					<div style="float: right;color: red; font-size: 18px;" id="info"></div>
 				</div>

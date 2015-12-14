@@ -40,54 +40,48 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-edit"></i>添加角色功能
+				<div class="caption font-green">
+					<i class="icon-pin font-green"></i>
+					<span class="caption-subject bold uppercase"> 添加角色</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse">
-					</a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<!-- BEGIN FORM-->
-				<sf:form onkeydown="if(event.keyCode==13){return false;}" id="addForm" method="post" modelAttribute="role" action="admin/role/add" class="form-horizontal ajaxiform">
+			<div class="portlet-body form">
+				<sf:form role="form" onkeydown="if(event.keyCode==13){return false;}" id="addForm" method="post" modelAttribute="role" action="admin/role/add" class="form-horizontal ajaxiform">	
 					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-3">角色名称 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:input path="name" class="form-control" />
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">角色名称</label>
+							<div class="col-md-3">
+								<sf:input path="name" class="form-control" />
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">角色类型 <span class="required">
-							* </span>
-							</label>
-							<div class="col-md-4">
-								<div class="input-icon right">
-									<sf:select path="roleType" class="bs-select form-control"><sf:options items="${types }"/></sf:select>
-								</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">角色类型</label>
+							<div class="col-md-3">
+								<sf:select path="roleType" class="bs-select form-control">
+									<sf:options items="${types }"/>
+								</sf:select>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
 					</div>
-					<div class="form-actions fluid">
+					<div class="form-actions">
 						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
+							<div class="col-md-offset-2 col-md-10">
 								<button type="submit" class="btn green">提交</button>
-								<a type="button" class="btn default ajaxify" href="admin/role/roles">取消</a>
+								<a type="button" class="btn default ajaxify" href="admin/role/roles">返回</a>
 							</div>
 						</div>
 					</div>
 				</sf:form>
-				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END VALIDATION STATES-->
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>
