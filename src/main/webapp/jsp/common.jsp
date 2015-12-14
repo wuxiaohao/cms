@@ -123,10 +123,11 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
 
 <!-- 阻止自动换行 -->
-<style>
+<style type="text/css">
 .c{
 display:inline;
 }
+html { overflow-x:hidden; }
 </style>
 
 <script>

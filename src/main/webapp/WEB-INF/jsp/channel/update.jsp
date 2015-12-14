@@ -3,17 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<style>
-html { overflow-x:hidden; }
-</style>
-<link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="${pageContext.servletContext.contextPath }/resources/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<!-- 表单校验 -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.validate.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/validate-methods.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.validate.js"></script>
+<!-- 获取总资源 -->
+<%@ include file="/jsp/common.jsp"%>
 <script type="text/javascript">
 	$(function(){
 		$("#addForm").cmsvalidate();
@@ -22,139 +13,269 @@ html { overflow-x:hidden; }
 </script>
 <div class="row">
 	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-edit">更新[${channel.name}]子栏目功能
-				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse">
-					</a>
+				<div class="caption font-blue">
+					<i class="icon-pin font-blue"></i>
+					<span class="caption-subject bold uppercase"> 更新[${channel.name}]栏目</span>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<!-- BEGIN FORM-->
-				<sf:form id="addForm" method="post" modelAttribute="channel" class="form-horizontal">
-					<table class="table table-striped table-hover table-bordered">
-						<tbody>
-							<tr>
-								<td width="150px" align="right">
-									栏目名称：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:input path="name" class="form-control" />
-											<sf:errors path="name" />
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									是否指定链接：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:radiobutton path="customLink" value="0" class="make-switch switch-radio1"/>不指定
-											<sf:radiobutton path="customLink" value="1" class="make-switch switch-radio1"/>指定
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									链接地址：<span >&nbsp; </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:input path="customLinkUrl" class="form-control"/>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									栏目类型：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:select path="type" class="bs-select form-control">
-											<sf:options items="${types}"/>
-											</sf:select>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									是否在首页显示：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:radiobutton path="isIndex" value="0" class="make-switch switch-radio1"/>不显示
-											<sf:radiobutton path="isIndex" value="1" class="make-switch switch-radio1"/>显示
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									顶部栏目：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:radiobutton path="isTopNav" value="0" class="make-switch switch-radio1"/>不是
-											<sf:radiobutton path="isTopNav" value="1" class="make-switch switch-radio1"/>是
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									是否是推荐栏目：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:radiobutton path="recommend" value="0" class="make-switch switch-radio1" />不是
-											<sf:radiobutton path="recommend" value="1" class="make-switch switch-radio1" />是
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="150px" align="right">
-									状态：<span style="color: red;">* </span>
-								</td>
-								<td>
-									<div class="col-md-4">
-										<div class="input-icon right">
-											<sf:radiobutton path="status" value="0" class="make-switch switch-radio1" />启用
-											<sf:radiobutton path="status" value="1" class="make-switch switch-radio1" />停用
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="2" align="center">
-									<button type="submit" class="btn green">更新</button>
-								</td>
-							</tr>
-						</tfoot>
-					</table>
+			<div class="portlet-body form">
+				<sf:form role="form" id="addForm" method="post" modelAttribute="channel" class="form-horizontal">	
+					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">栏目名称</label>
+							<div class="col-md-6">
+								<sf:input path="name" class="form-control" />
+								<sf:errors path="name" />
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+					</div>
+					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">链接地址</label>
+							<div class="col-md-6">
+								<sf:input path="customLinkUrl" class="form-control" />
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group form-md-line-input">
+						<label class="col-md-2 control-label" for="form_control_1">栏目类型</label>
+						<div class="col-md-6">
+							<sf:select path="type" class="bs-select form-control">
+								<sf:options items="${types }"/>
+							</sf:select>
+							<div class="form-control-focus"></div>
+						</div>
+					</div>
+					<div class="form-group form-md-line-input">
+						<label class="col-md-2 control-label" for="form_control_1">是否指定链接</label>
+						<div class="col-md-6">
+							<div class="md-radio-inline">
+								<c:if test="${channel.customLink == 0 }">
+								<div class="md-radio has-error">
+									<input type="radio" id="radio53" name="customLink" value="0" class="md-radiobtn" checked>
+									<label for="radio53">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不指定 </label>
+								</div>
+								<div class="md-radio has-error">
+									<input type="radio" id="radio54" name="customLink" value="1" class="md-radiobtn">
+									<label for="radio54">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									指定 </label>
+								</div>
+								</c:if>
+								<c:if test="${channel.customLink == 1 }">
+								<div class="md-radio has-error">
+									<input type="radio" id="radio53" name="customLink" value="0" class="md-radiobtn">
+									<label for="radio53">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不指定 </label>
+								</div>
+								<div class="md-radio has-error">
+									<input type="radio" id="radio54" name="customLink" value="1" class="md-radiobtn" checked>
+									<label for="radio54">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									指定 </label>
+								</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					<div class="form-group form-md-line-input">
+						<label class="col-md-2 control-label" for="form_control_1">是否在首页显示</label>
+						<div class="col-md-6">
+							<div class="md-radio-inline">
+								<c:if test="${channel.isIndex == 0 }">
+								<div class="md-radio has-info">
+									<input type="radio" id="radio55" name="isIndex" value="0" class="md-radiobtn" checked>
+									<label for="radio55">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不显示 </label>
+								</div>
+								<div class="md-radio has-info">
+									<input type="radio" id="radio56" name="isIndex" value="1" class="md-radiobtn">
+									<label for="radio56">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									显示 </label>
+								</div>
+								</c:if>
+								<c:if test="${channel.isIndex == 1 }">
+								<div class="md-radio has-info">
+									<input type="radio" id="radio55" name="isIndex" value="0" class="md-radiobtn">
+									<label for="radio55">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不显示 </label>
+								</div>
+								<div class="md-radio has-info">
+									<input type="radio" id="radio56" name="isIndex" value="1" class="md-radiobtn" checked>
+									<label for="radio56">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									显示 </label>
+								</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					<div class="form-group form-md-line-input">
+						<label class="col-md-2 control-label" for="form_control_1">是否是推荐栏目</label>
+						<div class="col-md-6">
+							<div class="md-radio-inline">
+								<c:if test="${channel.recommend == 0 }">
+								<div class="md-radio has-success">
+									<input type="radio" id="radio59" name="recommend" value="0" class="md-radiobtn" checked>
+									<label for="radio59">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不推荐 </label>
+								</div>
+								<div class="md-radio has-success">
+									<input type="radio" id="radio60" name="recommend" value="1" class="md-radiobtn">
+									<label for="radio60">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									推荐 </label>
+								</div>
+								</c:if>
+								<c:if test="${channel.recommend == 1 }">
+								<div class="md-radio has-success">
+									<input type="radio" id="radio59" name="recommend" value="0" class="md-radiobtn">
+									<label for="radio59">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不推荐 </label>
+								</div>
+								<div class="md-radio has-success">
+									<input type="radio" id="radio60" name="recommend" value="1" class="md-radiobtn" checked>
+									<label for="radio60">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									推荐 </label>
+								</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					<div class="form-group form-md-line-input">
+						<label class="col-md-2 control-label" for="form_control_1">顶部栏目</label>
+						<div class="col-md-6">
+							<div class="md-radio-inline">
+								<c:if test="${channel.isTopNav == 0 }">
+								<div class="md-radio has-warning">
+									<input type="radio" id="radio57" name="isTopNav" value="0" class="md-radiobtn" checked>
+									<label for="radio57">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不是 </label>
+								</div>&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="md-radio has-warning">
+									<input type="radio" id="radio58" name="isTopNav" value="1" class="md-radiobtn">
+									<label for="radio58">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									是 </label>
+								</div>
+								</c:if>
+								<c:if test="${channel.isTopNav == 1 }">
+								<div class="md-radio has-warning">
+									<input type="radio" id="radio57" name="isTopNav" value="0" class="md-radiobtn">
+									<label for="radio57">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									不是 </label>
+								</div>&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="md-radio has-warning">
+									<input type="radio" id="radio58" name="isTopNav" value="1" class="md-radiobtn" checked>
+									<label for="radio58">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									是 </label>
+								</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					<div class="form-group form-md-line-input">
+						<label class="col-md-2 control-label" for="form_control_1">状态</label>
+						<div class="col-md-6">
+							<div class="md-radio-inline">
+								<c:if test="${channel.status == 0 }">
+								<div class="md-radio has-success">
+									<input type="radio" id="radio61" name="status" value="0" class="md-radiobtn" checked>
+									<label for="radio61">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									启用 </label>
+								</div>&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="md-radio has-success">
+									<input type="radio" id="radio62" name="status" value="1" class="md-radiobtn">
+									<label for="radio62">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									停用</label>
+								</div>
+								</c:if>
+								<c:if test="${channel.status == 1 }">
+								<div class="md-radio has-success">
+									<input type="radio" id="radio61" name="status" value="0" class="md-radiobtn">
+									<label for="radio61">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									启用 </label>
+								</div>&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="md-radio has-success">
+									<input type="radio" id="radio62" name="status" value="1" class="md-radiobtn" checked>
+									<label for="radio62">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									停用</label>
+								</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-2 col-md-10">
+								<button type="submit" class="btn green">修改</button>
+							</div>
+						</div>
+					</div>
 				</sf:form>
-				<!-- END FORM-->
 			</div>
 		</div>
-		<!-- END VALIDATION STATES-->
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>

@@ -30,6 +30,9 @@ $(function(){
 		parent.showMessage(success,error);  //调用父类回显信息的方法
 	}
 	$(".listTable").mysorttable(null,"${pageContext.servletContext.contextPath }/admin/channel/channels/updateSort");
+	$(".check").click(function(){
+		$("#backupCon").html("努力加载中,请稍等...");
+	});
 });
 </script>
 </head>
@@ -51,7 +54,8 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green" href="<%=request.getContextPath() %>/admin/channel/add/${pc.id}" >添加子栏目</a>
+						<a class="btn green-meadow check" href="<%=request.getContextPath() %>/admin/channel/add/${pc.id}" >添加子栏目</a>
+						<span id="backupCon"></span>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered listTable">
