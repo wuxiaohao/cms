@@ -41,8 +41,8 @@
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
 		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption font-blue">
-					<i class="icon-settings font-blue"></i>
+				<div class="caption font-green">
+					<i class="icon-settings font-green"></i>
 					<span class="caption-subject bold"> 网站基本信息</span>
 				</div>
 				<div class="actions">
@@ -167,7 +167,7 @@
 						<div class="col-md-12">
 							<div class="row">
 								<div class="col-md-offset-3 col-md-9">
-									<a href="<%=request.getContextPath() %>/admin/system/baseinfo/updateUI" class="btn blue ajaxify">修改网站基本信息</a>
+									<a href="<%=request.getContextPath() %>/admin/system/baseinfo/updateUI" class="btn green-meadow ajaxify">修改网站基本信息</a>
 								</div>
 							</div>
 						</div>

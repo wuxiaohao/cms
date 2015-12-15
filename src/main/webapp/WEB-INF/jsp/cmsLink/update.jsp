@@ -65,7 +65,7 @@ $(function(){
 			<div class="portlet-body form">
 				<sf:form id="addForm" role="form" method="post" modelAttribute="cmsLink" action="admin/cmsLink/update/${cmsLink.id }" class="form-horizontal ajaxiform">	
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接标题</label>
 							<div class="col-md-3">
 								<sf:input path="title" class="form-control" />
@@ -73,14 +73,14 @@ $(function(){
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接地址</label>
 							<div class="col-md-3">
 								<sf:input path="url" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接类别</label>
 							<div class="col-md-3">
 								<select id="urlType" class="bs-select form-control">
@@ -94,12 +94,12 @@ $(function(){
 								<sf:input path="type" readonly="true" class="form-control type" />
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">打开方式</label>
 							<div class="col-md-6">
 								<div class="md-radio-inline">
 									<c:if test="${cmsLink.newWin == 0 }">
-									<div class="md-radio has-error">
+									<div class="md-radio has-success">
 										<input type="radio" id="radio53" name="newWin" value="0" class="md-radiobtn" checked>
 										<label for="radio53">
 										<span></span>
@@ -107,7 +107,7 @@ $(function(){
 										<span class="box"></span>
 										本窗口 </label>
 									</div>
-									<div class="md-radio has-error">
+									<div class="md-radio has-success">
 										<input type="radio" id="radio54" name="newWin" value="1" class="md-radiobtn">
 										<label for="radio54">
 										<span></span>
@@ -117,7 +117,7 @@ $(function(){
 									</div>
 									</c:if>
 									<c:if test="${cmsLink.newWin == 1 }">
-									<div class="md-radio has-error">
+									<div class="md-radio has-success">
 										<input type="radio" id="radio53" name="newWin" value="0" class="md-radiobtn">
 										<label for="radio53">
 										<span></span>
@@ -125,7 +125,7 @@ $(function(){
 										<span class="box"></span>
 										本窗口 </label>
 									</div>
-									<div class="md-radio has-error">
+									<div class="md-radio has-success">
 										<input type="radio" id="radio54" name="newWin" value="1" class="md-radiobtn" checked>
 										<label for="radio54">
 										<span></span>
@@ -137,14 +137,14 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">链接标签ID</label>
 							<div class="col-md-3">
 								<sf:input path="urlId" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">>链接标签类别</label>
 							<div class="col-md-3">
 								<sf:input path="urlClass" class="form-control" />
@@ -155,7 +155,7 @@ $(function(){
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-offset-2 col-md-10">
-								<button type="submit" class="btn green">提交</button>
+								<button type="submit" class="btn green-meadow">提交</button>
 								<a class="btn default ajaxify" href="admin/cmsLink/links">取消</a>
 							</div>
 						</div>

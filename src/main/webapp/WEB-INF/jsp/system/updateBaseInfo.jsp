@@ -44,8 +44,8 @@ $(function(){
 		<!-- BEGIN SAMPLE FORM PORTLET-->
 		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption font-green">
-					<i class="icon-pin font-green"></i>
+				<div class="caption font-blue">
+					<i class="icon-pin font-blue"></i>
 					<span class="caption-subject bold uppercase"> 更新网站基本信息</span>
 				</div>
 				<div class="actions">
@@ -55,42 +55,42 @@ $(function(){
 			<div class="portlet-body form">
 				<sf:form id="updateForm" method="post" role="form" modelAttribute="baseInfo" action="admin/system/baseinfo/update" class="form-horizontal ajaxiform">	
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">网站名称</label>
 							<div class="col-md-6">
 								<sf:input path="name" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">网站所在地址</label>
 							<div class="col-md-6">
 								<sf:input path="address" class="form-control"/>
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">邮政编码</label>
 							<div class="col-md-6">
 								<sf:input path="zipCode" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">联系电话 </label>
 							<div class="col-md-6">
 								<sf:input path="phone" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">网站联系邮箱</label>
 							<div class="col-md-6">
 								<sf:input path="email" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">网站访问域名 </label>
 							<div class="col-md-6">
 								<div class="input-icon right">
@@ -99,7 +99,7 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">网站备案号 </label>
 							<div class="col-md-6">
 								<div class="input-icon right">
@@ -108,7 +108,7 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">首页图片宽度 </label>
 							<div class="col-md-6">
 								<div class="input-icon right">
@@ -117,7 +117,7 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">首页图片高度 </label>
 							<div class="col-md-6">
 								<div class="input-icon right">
@@ -130,7 +130,7 @@ $(function(){
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-offset-2 col-md-10">
-								<button type="submit" class="btn green">修改</button>
+								<button type="submit" class="btn green-meadow">修改</button>
 								<a type="button" class="btn default ajaxify" href="admin/system/baseinfo">取消</a>
 							</div>
 						</div>

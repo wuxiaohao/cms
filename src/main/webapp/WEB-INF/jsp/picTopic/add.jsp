@@ -5,11 +5,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="/jsp/commonTopic.jsp"%>
+<!-- 引入进度条 -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/assets/jindutiao/fakeLoader.css">
+<script src="${pageContext.servletContext.contextPath }/resources/assets/jindutiao/fakeLoader.min.js"></script>
+<script>
+   $(document).ready(function(){
+     $(".fakeloader").fakeLoader({
+         timeToHide:1500,
+         bgColor:"#e74c3c",
+         spinner:"spinner2"
+     });
+   });
+</script>
 <!-- 引入外部js文件 -->
+<%@ include file="/jsp/commonTopic.jsp"%>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/picTopicAdd.js"></script>
 </head>
 <body>
+<div class="fakeloader"></div>
 <input type="hidden" id="sid" value="<%=session.getId()%>"/>
 <input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
 <!-- BEGIN PAGE CONTENT-->
@@ -138,7 +152,8 @@
 					<tfoot>
 						<tr>
 							<td colspan="2" align="center">
-								<a id="addBtn" class="btn green" >保存</a>
+								<a id="addBtn" class="btn green" >添加</a>
+								<input type="button" onclick="window.close()"  class="btn default" value="关闭"/>
 							</td>
 						</tr>
 					</tfoot>

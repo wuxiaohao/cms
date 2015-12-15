@@ -45,9 +45,9 @@
 		<!-- BEGIN SAMPLE FORM PORTLET-->
 		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption font-green">
-					<i class="icon-pin font-green"></i>
-					<span class="caption-subject bold uppercase"> 修改用户${userDto.username}信息：</span>
+				<div class="caption font-blue">
+					<i class="icon-pin font-blue"></i>
+					<span class="caption-subject bold"> 修改用户${userDto.username}信息：</span>
 				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
@@ -59,14 +59,14 @@
 					<sf:hidden path="username"/>
 					<sf:hidden path="password"/>
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">昵称(可以是中文)</label>
 							<div class="col-md-6">
 								<sf:input path="nickname" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<%-- <div class="form-group form-md-line-input">
+						<%-- <div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">密码</label>
 							<div class="col-md-6">
 								<input type="password" name="password" id="password" class="form-control" id="form_control_1" />
@@ -74,21 +74,21 @@
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">确认密码</label>
 							<div class="col-md-6">
 								<input type="password" id="confirmPwd" name="confirmPwd" class="form-control" id="form_control_1" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div> --%>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">联系电话</label>
 							<div class="col-md-6">
 								<sf:input path="phone" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">电子邮件</label>
 							<div class="col-md-6">
 								<sf:input path="email" class="form-control" />
@@ -96,7 +96,7 @@
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">状态</label>
 							<div class="col-md-6">
 								<div class="md-radio-inline">
@@ -139,13 +139,13 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">角色</label>
 							<div class="col-md-6">
 								<sf:checkboxes  items="${roles}" itemLabel="name" itemValue="id" path="roleIds"/>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">用户组</label>
 							<div class="col-md-6">
 								<sf:checkboxes items="${groups }" path="groupIds" itemLabel="name" itemValue="id"/>

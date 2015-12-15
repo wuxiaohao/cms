@@ -55,14 +55,14 @@
 			<div class="portlet-body form">
 				<sf:form id="addForm" role="form" method="post" modelAttribute="group" action="admin/group/add" class="form-horizontal ajaxiform">
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">用户组名称</label>
 							<div class="col-md-6">
 								<sf:input path="name" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">用户组描述</label>
 							<div class="col-md-6">
 								<sf:textarea path="descr" class="form-control" rows="3" />
