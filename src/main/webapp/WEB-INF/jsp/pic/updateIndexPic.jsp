@@ -3,133 +3,199 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/jcrop/css/jquery.Jcrop.css"/>
-<link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="${pageContext.servletContext.contextPath }/resources/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery.ui.all.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/article.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.validate.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.validate.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/uploadify/uploadify.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jcrop/js/jquery.Jcrop.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/indexPic.js"></script>
-</head>
-<body>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+		<h3 class="page-title">
+			首页宣传图片管理
+		</h3>
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a class="ajaxify start" href="layout_ajax_content_1.html">首页</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>首页管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/pic/indexPics" class="ajaxify">首页宣传图片管理</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a href="admin/pic/updateIndexPicUI/${indexPic.id }" class="ajaxify">修改首页宣传图片</a>
+				</li>
+			</ul>
+		</div>
+		<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
+</div>
 <input type="hidden" id="sid" value="<%=session.getId()%>"/>
 <input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
-<!-- BEGIN PAGE CONTENT-->
-<div style="margin-left: 210px">
-	<div class="col-md-10">
-		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red">
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-edit"></i>
-					添加首页图片
+				<div class="caption font-blue">
+					<i class="icon-pin font-blue"></i>
+					<span class="caption-subject bold uppercase"> 修改首页宣传图片</span>
+				</div>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<sf:form id="addForm" method="post" modelAttribute="indexPic" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}" >
-				<table class="table table-striped table-hover table-bordered">
-					<tbody>
-						<tr>
-							<td colspan="2">
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<input type="file" id="indexPic" name="indexPic"/>
-										<input id="newName" name="newName" class="form-control" value="${indexPic.newName }" readonly />
+			<div class="portlet-body form">
+				<sf:form id="addForm" method="post" role="form" modelAttribute="indexPic" action="admin/pic/updateIndexPic/${indexPic.id }" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}" >	
+					<div class="form-body">
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1"></label>
+							<div class="col-md-6">
+								<input type="file" id="indexPic" name="indexPic" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
+							<div class="col-md-6">
+								<input id="newName" name="newName" value="${indexPic.newName }" readonly class="form-control"/>
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<div class="col-md-6">
+								<div id="indexPicView" style="margin-left: 145px;"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">当前图片</label>
+							<div class="col-md-6">
+								<img src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">图片标题</label>
+							<div class="col-md-6">
+								<sf:input path="title" class="form-control"/>
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">图片子标题</label>
+							<div class="col-md-6">
+								<sf:input path="subTitle" class="form-control"/>
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">状态</label>
+							<div class="col-md-6">
+								<div class="md-radio-inline">
+									<c:if test="${indexPic.status == 0 }">
+									<div class="md-radio has-success">
+										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn" checked>
+										<label for="radio53">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										未发布 </label>
 									</div>
+									<div class="md-radio has-success">
+										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn">
+										<label for="radio54">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										已发布 </label>
+									</div>
+									</c:if>
+									<c:if test="${indexPic.status == 1 }">
+									<div class="md-radio has-success">
+										<input type="radio" id="radio53" name="status" value="0" class="md-radiobtn">
+										<label for="radio53">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										未发布 </label>
+									</div>
+									<div class="md-radio has-success">
+										<input type="radio" id="radio54" name="status" value="1" class="md-radiobtn" checked>
+										<label for="radio54">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										已发布 </label>
+									</div>
+									</c:if>
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div id="indexPicView"></div>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="right">当前图片：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<img src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">链接类型</label>
+							<div class="col-md-6">
+								<div class="md-radio-inline">
+									<c:if test="${indexPic.linkType == 0 }">
+									<div class="md-radio has-success">
+										<input type="radio" id="radio55" name="linkType" value="0" class="md-radiobtn" checked>
+										<label for="radio55">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										站内链接 </label>
 									</div>
+									<div class="md-radio has-success">
+										<input type="radio" id="radio56" name="linkType" value="1" class="md-radiobtn">
+										<label for="radio56">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										站外链接 </label>
+									</div>
+									</c:if>
+									<c:if test="${indexPic.linkType == 1 }">
+									<div class="md-radio has-success">
+										<input type="radio" id="radio55" name="linkType" value="0" class="md-radiobtn">
+										<label for="radio55">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										站内链接 </label>
+									</div>
+									<div class="md-radio has-success">
+										<input type="radio" id="radio56" name="linkType" value="1" class="md-radiobtn" checked>
+										<label for="radio56">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										站外链接 </label>
+									</div>
+									</c:if>
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="right">首页图片标题：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<sf:input path="title" class="form-control" />
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="right">首页图片子标题：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<sf:input path="subTitle" class="form-control" />
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="right">状态：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<sf:radiobutton path="status" value="0"/>未发布
-										<sf:radiobutton path="status" value="1"/>已发布
-									</div>
-								</div>	
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="right">链接类型：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<sf:radiobutton path="linkType" value="0"/>站内链接
-										<sf:radiobutton path="linkType" value="1"/>站外链接
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="right">链接地址：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<sf:input path="linkUrl" class="form-control" />
-									</div>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2" align="center">
-								<button type="submit" class="btn green" >更新首页图片</button>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1">链接地址</label>
+							<div class="col-md-6">
+								<sf:input path="linkUrl" class="form-control"/>
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-2 col-md-10">
+								<button type="submit" class="btn green-meadow">提交</button>
+								<a type="button" class="btn default ajaxify" href="admin/pic/indexPics">取消</a>
+							</div>
+						</div>
+					</div>
 				</sf:form>
 			</div>
 		</div>
-		<!-- END EXAMPLE TABLE PORTLET-->
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>
-<!-- END PAGE CONTENT -->
-</body>
-</html>

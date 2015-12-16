@@ -55,7 +55,9 @@ $(function(){
 				<div class="table-toolbar">
 					<div class="btn-group">
 						<a class="btn green-meadow check" href="<%=request.getContextPath() %>/admin/channel/add/${pc.id}" >添加子栏目</a>
-						<span id="backupCon"></span>
+					</div>
+					<div style="float: right;margin-right: 20px;">
+						<span style="color: red;font-size: 15px" id="backupCon"></span>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered listTable">
@@ -97,7 +99,7 @@ $(function(){
 								</td>
 								<td>
 									<a href="<%=request.getContextPath() %>/admin/channel/delete/${pc.id}/${c.id}" class="btn btn-sm red delete"> 删除 </a>
-									<a href="<%=request.getContextPath() %>/admin/channel/update/${c.id}" class="btn btn-sm blue"> 更新 </a>
+									<a href="<%=request.getContextPath() %>/admin/channel/update/${c.id}" class="btn btn-sm blue check"> 更新 </a>
 								</td>
 							</tr>
 						</c:forEach>

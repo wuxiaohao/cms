@@ -138,7 +138,7 @@
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-offset-2 col-md-10">
-								<button type="submit" class="btn green">提交</button>
+								<button type="submit" class="btn green-meadow">提交</button>
 								<a type="button" class="btn default ajaxify" href="admin/user/users">取消</a>
 							</div>
 						</div>

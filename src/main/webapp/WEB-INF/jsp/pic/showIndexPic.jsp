@@ -37,59 +37,113 @@
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red">
+		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-comments"></i>
-					${indexPic.title }
+				<div class="caption font-blue">
+					<i class="icon-settings font-blue"></i>
+					<span class="caption-subject bold"> ${indexPic.title }</span>
 				</div>
-				<div class="tools">
-					<a href="javascript:;" class="collapse"> </a>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
 				</div>
 			</div>
-			<div class="portlet-body">
-				<table class="table table-striped table-hover table-bordered" id="sample_1">
-					<tbody>
-						<tr>
-							<td colspan="2">
-								<img src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">首页图片标题</td>
-							<td>${indexPic.title }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">首页图片子标题</td>
-							<td>${indexPic.subTitle }</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">状态</td>
-							<td>
-								<c:if test="${indexPic.status eq 0 }">未发布</c:if>
-								<c:if test="${indexPic.status ne 0 }">已发布</c:if>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">链接类型</td>
-							<td>
-								<c:if test="${indexPic.linkType eq 0 }">站内链接</c:if>
-								<c:if test="${indexPic.linkType ne 0 }">站外链接</c:if>
-							</td>
-						</tr>
-						<tr>
-							<td width="150px" align="center">链接地址</td>
-							<td>${indexPic.linkUrl }</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2" align="center">
-								<a class="btn default ajaxify" href="admin/pic/indexPics">取消</a>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
+			<div class="portlet-body form">
+				<div class="form-horizontal">
+				<div class="form-body">
+					<h3 class="form-section">图片</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="col-md-9">
+									<img src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h3 class="form-section">图片信息</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">图片标题&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${empty indexPic.title}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty indexPic.title}">
+										 	${indexPic.title }
+										</c:if>	
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">图片子标题&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${empty indexPic.subTitle}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty indexPic.subTitle}">
+										 	${indexPic.subTitle }
+										</c:if>	
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">状态&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${indexPic.status eq 0 }">未发布</c:if>
+										<c:if test="${indexPic.status ne 0 }">已发布</c:if>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">链接类型&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${indexPic.linkType eq 0 }">站内链接</c:if>
+										<c:if test="${indexPic.linkType ne 0 }">站外链接</c:if>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">链接地址&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${empty indexPic.linkUrl}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty indexPic.linkUrl}">
+										 	${indexPic.linkUrl }
+										</c:if>	
+									</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a class="btn default ajaxify" href="admin/pic/indexPics">返回</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
 			</div>
 		</div>
 		<!-- END EXAMPLE TABLE PORTLET-->

@@ -44,8 +44,8 @@
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
 		<div class="portlet light bg-inverse">
 			<div class="portlet-title">
-				<div class="caption font-blue">
-					<i class="icon-settings font-blue"></i>
+				<div class="caption font-green">
+					<i class="icon-settings font-green"></i>
 					<span class="caption-subject bold"> ${user.username }的个人信息</span>
 				</div>
 				<div class="actions">
@@ -87,7 +87,12 @@
 								<label class="control-label col-md-3">联系电话&nbsp;:</label>
 								<div class="col-md-9">
 									<p class="form-control-static">
-										${user.phone}
+										<c:if test="${empty user.phone}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty user.phone}">
+										 	 ${user.phone}
+										</c:if>	
 									</p>
 								</div>
 							</div>
@@ -181,7 +186,7 @@
 						<div class="col-md-12">
 							<div class="row">
 								<div class="col-md-offset-3 col-md-9">
-									<a href="admin/user/updateSelfUI" class="btn blue ajaxify"><i class="fa fa-pencil"></i> 修改个人信息</a>
+									<a href="admin/user/updateSelfUI" class="btn green-meadow ajaxify"><i class="fa fa-pencil"></i> 修改个人信息</a>
 								</div>
 							</div>
 						</div>

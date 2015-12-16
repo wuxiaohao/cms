@@ -58,7 +58,7 @@
 						<a href="admin/picTopic/audits" class="btn red ajaxify">已发布组图列表</a>
 						<a href="admin/picTopic/unaudits" class="btn btn-default red-stripe ajaxify">未发布组图列表</a>
 					</c:if>
-					<a class="btn btn-default yellow-stripe" href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/add','addTopic')">新建组图</a>
+					<a class="btn btn-default green-stripe ajaxify" href="admin/picTopic/addUI">新建组图</a>
 				</div>
 			</div>
 			<div class="portlet-body">
@@ -110,7 +110,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/update/${t.id}','updateTopic')" >
+									<a href="admin/picTopic/updateUI/${t.id}" class="ajaxify">
 									<c:choose>
 										<c:when test="${fn:length(t.title)> 18 }">
 											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
@@ -149,7 +149,7 @@
 									</c:if>
 								</td>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/picTopic/update/${t.id}','updateTopic')" class="btn btn-sm blue">更新</a>
+									<a href="admin/picTopic/updateUI/${t.id}" class="btn btn-sm blue ajaxify">更新</a>
 									<a href="admin/picTopic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
 									&nbsp;
 								</td>

@@ -103,7 +103,7 @@ $(function(){
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<a class="btn green-meadow" href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/addIndexPic','addPic')">添加&nbsp;<i class="fa fa-plus"></i></a>
+						<a class="btn green-meadow ajaxify" href="admin/pic/addIndexPicUI">添加&nbsp;<i class="fa fa-plus"></i></a>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
@@ -140,8 +140,9 @@ $(function(){
 									${pic.pos }&nbsp;<a class="btn btn-sm green setPos" pos="${pic.pos }" objid="${pic.id }">排序</a>
 								</td>
 								
-								<td><a href="admin/pic/deleteIndexPic/${pic.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/pic/updateIndexPic/${pic.id }','updatePic')" class="btn btn-sm blue"> 更新 </a>
+								<td>
+									<a href="admin/pic/updateIndexPicUI/${pic.id }" class="btn btn-sm blue ajaxify"> 更新 </a>
+									<a href="admin/pic/deleteIndexPic/${pic.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
 								</td>
 							</tr>
 						</c:forEach>

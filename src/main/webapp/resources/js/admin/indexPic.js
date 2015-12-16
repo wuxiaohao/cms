@@ -8,6 +8,7 @@ $(function(){
 	$("#indexPic").uploadify({
 		swf:ctx+"/resources/uploadify/uploadify.swf",
 		uploader:ctx+"/admin/pic/uploadIndexPic",
+		buttonText: '请选择图片',
 		fileObjName:"pic",
 		multi:false,
 		formData:{"sid":$("#sid").val()},
@@ -18,12 +19,12 @@ $(function(){
 				newName = ao.obj.newName;
 				oldName = ao.obj.oldName;
 				$("#indexPicView").append("<img src='"+ctx+"/resources/indexPic/temp/"+newName+"'/>" +
-						"<br/><input type='button' value='确定选择' id='confirmSelect'/>");
+						"<br/><input class='btn btn-sm btn-info' type='button' value='确定选择' id='confirmSelect'/>");
 				indexPicWidth = ao.obj.indexPicWidth;
 				indexPicHeight = ao.obj.indexPicHeight;
 				imgWidth = ao.obj.imgWidth;
 				imgHeight = ao.obj.imgHeight;
-				$("#indexPicView").before("<div id='pc' style='width:"+indexPicWidth+"px;height:"+indexPicHeight+"px;overflow:hidden;margin-bottom:5px;'><img id='preview' src='"+ctx+"/resources/indexPic/temp/"+newName+"'/></div>");
+				$("#indexPicView").before("<div id='pc' style=' margin-left: 145px; width:"+indexPicWidth+"px;height:"+indexPicHeight+"px;overflow:hidden;margin-bottom:5px;'><img id='preview' src='"+ctx+"/resources/indexPic/temp/"+newName+"'/></div>");
 				$("#indexPicView img").Jcrop({
 					aspectRatio:indexPicWidth/indexPicHeight,
 					onChange: showPreview,

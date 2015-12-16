@@ -96,11 +96,6 @@ public class PictureTopicController {
 	 */
 	@RequestMapping("/audits")
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		//清空session残留
-		if(session.getAttribute("messageByPicTopic") != null){
-			session.removeAttribute("messageByPicTopic");
-			logger.info("组图残留的session已清除干净");
-		}
 		initList(con, cid, model, session,1);
 		return "picTopic/list";
 	}
@@ -143,7 +138,7 @@ public class PictureTopicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/addUI", method = RequestMethod.POST)
 	public String add(Model model,HttpSession session) {
 		PictureTopic t = new PictureTopic();
 		PictureTopicDtoDto td = new PictureTopicDtoDto(t);
@@ -169,8 +164,7 @@ public class PictureTopicController {
 	public String add(PictureTopicDtoDto pictureTopicDto,BindingResult br,String[]aks,HttpSession session,Model model) {
 		if(pictureTopicDto.getPics() == null) { //如果没有上传图片
 			model.addAttribute("error", "请选择图片！");
-			model.addAttribute("pictureTopicDto", pictureTopicDto);
-			return "picTopic/add";
+			return add(model,session);
 		}
 		User loginUser = (User) session.getAttribute("loginUser");
 		PictureTopic pt = pictureTopicDto.getPictureTopic(loginUser);
@@ -186,7 +180,9 @@ public class PictureTopicController {
 		/*if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
 			indexService.generateBody();//重新生成首页
 		}*/
-		return "redirect:/jsp/common/addSucByPicTopic.jsp";
+		//return "redirect:/jsp/common/addSucByPicTopic.jsp";
+		model.addAttribute("success", "添加组图成功!");
+		return auditList(null,null,model,session);
 	}
 	
 	/**
@@ -216,7 +212,7 @@ public class PictureTopicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/update/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/updateUI/{id}",method=RequestMethod.POST)
 	public String update(@PathVariable int id,Model model,HttpSession session) {
 		PictureTopic t = pictureTopicService.load(id);
 		String keyword = t.getKeyword();
@@ -264,7 +260,9 @@ public class PictureTopicController {
 		t.setKeyword(keys.toString());
 		pictureTopicService.update(t, pictureTopicDto.getCid(),pictureTopicDto.getPics());
 		/*indexService.generateBody();*/ //重新生成首页
-		return "redirect:/jsp/common/updateSucByPicTopic.jsp";
+		//return "redirect:/jsp/common/updateSucByPicTopic.jsp";
+		model.addAttribute("success", "修改组图成功!");
+		return auditList(null, null, model, session);
 	}
 	/**
 	 * 图片上传

@@ -66,20 +66,6 @@
 						<!--/span-->
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label col-md-3">用户组描述&nbsp;:</label>
-								<div class="col-md-9">
-									<p class="form-control-static">
-										 ${group.descr }
-									</p>
-								</div>
-							</div>
-						</div>
-						<!--/span-->
-					</div>
-					<!--/row-->
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
 								<label class="control-label col-md-3">该组所有用户&nbsp;:</label>
 								<div class="col-md-9">
 									<p class="form-control-static">
@@ -95,7 +81,24 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">用户组描述&nbsp;:</label>
+								<div class="col-md-9">
+									<p class="form-control-static">
+										<c:if test="${empty group.descr}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty group.descr}">
+										 	${group.descr }
+										</c:if>	
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
 					</div>
+					<!--/row-->
 				</div>
 				<div class="form-actions">
 					<div class="row">
@@ -106,8 +109,6 @@
 									<a class="btn default ajaxify" href="admin/group/groups">返回</a>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
 						</div>
 					</div>
 				</div>

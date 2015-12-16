@@ -75,9 +75,6 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div>
-					<!--/row-->
-					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">该角色所有用户&nbsp;:</label>
@@ -96,6 +93,7 @@
 							</div>
 						</div>
 					</div>
+					<!--/row-->
 				</div>
 				<div class="form-actions">
 					<div class="row">
@@ -106,8 +104,6 @@
 									<a class="btn default ajaxify" href="admin/role/roles">取消</a>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
 						</div>
 					</div>
 				</div>

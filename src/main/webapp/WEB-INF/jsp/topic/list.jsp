@@ -78,7 +78,7 @@
 						<a href="admin/topic/audits" class="btn red ajaxify">已发布文章列表</a>
 						<a href="admin/topic/unaudits" class="btn btn-default red-stripe ajaxify">未发布文章列表</a>
 					</c:if>
-					<a class="btn btn-default yellow-stripe" href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/add','addTopic')">添加文章</a>
+					<a class="btn btn-default green-stripe" href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/add','addTopic')">添加文章</a>
 				</div>
 			</div>
 			<div class="portlet-body">

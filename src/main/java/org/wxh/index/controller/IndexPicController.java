@@ -93,11 +93,6 @@ public class IndexPicController {
 	 */
 	@RequestMapping("/indexPics")
 	public String listIndexPic(Model model,HttpSession session) {
-		//清空session残留
-		if(session.getAttribute("messageByImg") != null){
-			session.removeAttribute("messageByImg");
-			logger.info("首页宣传图片残留的session已清除干净");
-		}
 		Map<String,Integer> mm = indexPicService.getMinAdnMaxPos();
 		model.addAttribute("min", mm.get("min"));
 		model.addAttribute("max", mm.get("max"));
@@ -109,7 +104,7 @@ public class IndexPicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/addIndexPic",method=RequestMethod.GET)
+	@RequestMapping(value="/addIndexPicUI",method=RequestMethod.POST)
 	public String addIndexPic(Model model) {
 		IndexPic ip = new IndexPic();
 		ip.setStatus(1);
@@ -123,7 +118,7 @@ public class IndexPicController {
 	 * @return
 	 */
 	@RequestMapping(value="/addIndexPic",method=RequestMethod.POST)
-	public String addIndexPic(@Validated IndexPic indexPic,BindingResult br) {
+	public String addIndexPic(@Validated IndexPic indexPic,BindingResult br,Model model,HttpSession session) {
 		if(br.hasFieldErrors()) {
 			return "pic/addIndexPic";
 		}
@@ -131,7 +126,9 @@ public class IndexPicController {
 		if(indexPic.getStatus()!=0) {
 			indexService.generateBody();
 		}
-		return "redirect:/jsp/common/addSucByImg.jsp";
+		//return "redirect:/jsp/common/addSucByImg.jsp";
+		model.addAttribute("success", "添加首页宣传图片成功!");
+		return listIndexPic(model,session);
 	}
 	/**
 	 * 修改首页宣传图片的界面
@@ -139,7 +136,7 @@ public class IndexPicController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/updateIndexPic/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/updateIndexPicUI/{id}",method=RequestMethod.POST)
 	public String updateIndexPic(@PathVariable int id,Model model) {
 		IndexPic ip = indexPicService.load(id);
 		model.addAttribute("indexPic", ip);
@@ -153,7 +150,7 @@ public class IndexPicController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateIndexPic/{id}",method=RequestMethod.POST)
-	public String updateIndexPic(@PathVariable int id,@Validated IndexPic indexPic,BindingResult br) {
+	public String updateIndexPic(@PathVariable int id,@Validated IndexPic indexPic,BindingResult br,Model model,HttpSession session) {
 		if(br.hasErrors()) {
 			return "pic/updateIndexPic";
 		}
@@ -167,7 +164,9 @@ public class IndexPicController {
 		tip.setTitle(indexPic.getTitle());
 		indexPicService.update(tip);
 		indexService.generateBody();
-		return "redirect:/jsp/common/updateSucByImg.jsp";
+		//return "redirect:/jsp/common/updateSucByImg.jsp";
+		model.addAttribute("success", "修改首页宣传图片成功!");
+		return listIndexPic(model,session);
 	}
 	/**
 	 * 显示某个首页宣传图片

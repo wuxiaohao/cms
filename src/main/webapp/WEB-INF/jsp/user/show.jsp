@@ -83,7 +83,12 @@
 								<label class="control-label col-md-3">联系电话&nbsp;:</label>
 								<div class="col-md-9">
 									<p class="form-control-static">
-										${user.phone}
+										<c:if test="${empty user.phone}">
+										 	暂无...
+										</c:if>	
+										<c:if test="${!empty user.phone}">
+										 	 ${user.phone}
+										</c:if>	
 									</p>
 								</div>
 							</div>
@@ -146,7 +151,7 @@
 										 	<c:forEach items="${rs }" var="r">
 										 	<a href="<%=request.getContextPath()%>/admin/role/${r.id}" class="btn btn-xs btn-danger ajaxify">
 										 	${r.name }</a>
-										</c:forEach>
+											</c:forEach>
 										</c:if>	
 									</p>
 								</div>
@@ -163,8 +168,8 @@
 										 </c:if>	
 										 <c:if test="${!empty gs}">
 										 	<c:forEach items="${gs }" var="g">
-												<a href="<%=request.getContextPath()%>/admin/group/${g.id}" class="btn btn-xs blue ajaxify">${g.name }</a>
-											 </c:forEach>
+											<a href="<%=request.getContextPath()%>/admin/group/${g.id}" class="btn btn-xs blue ajaxify">${g.name }</a>
+											</c:forEach>
 										 </c:if>	
 									</p>
 								</div>
@@ -182,8 +187,6 @@
 									<a class="btn default ajaxify" href="admin/user/users">返回</a>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
 						</div>
 					</div>
 				</div>

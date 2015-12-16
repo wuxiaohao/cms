@@ -1,4 +1,3 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <style type="text/css">
 *.errorContainer {
 	color:#f00;
@@ -10,16 +9,30 @@ html { overflow-x:hidden; }
 display:inline;
 }
 </style>
+
+<!-- 引入进度条 -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/resources/assets/jindutiao/fakeLoader.css">
+<script src="${pageContext.servletContext.contextPath }/resources/assets/jindutiao/fakeLoader.min.js"></script>
+<script>
+   $(document).ready(function(){
+     $(".fakeloader").fakeLoader({
+         timeToHide:1500,
+         bgColor:"#e74c3c",
+         spinner:"spinner2"
+     });
+   });
+</script>
+
+<!-- 华丽分隔线 -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.servletContext.contextPath }/resources/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.css"/> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/base/jquery.ui.all.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/admin/article.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/validate/main.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/zTree/zTreeStyle.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/js/core/jquery.cms.keywordinput.css"/>
-<%-- <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script> --%>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.keywordinput.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/tree/jquery.ztree.core-3.5.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/core/jquery.cms.core.js"></script>

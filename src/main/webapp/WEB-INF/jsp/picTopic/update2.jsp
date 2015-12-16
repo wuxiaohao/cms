@@ -7,15 +7,12 @@
 <head>
 <!-- 引入外部js文件 -->
 <%@ include file="/jsp/commonTopic.jsp"%>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/topicAdd.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/picTopicAdd.js"></script>
 </head>
 <body>
 <div class="fakeloader"></div>
 <input type="hidden" id="sid" value="<%=session.getId()%>"/>
 <input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
-<div id="menuContent" class="menuContent" style="display:none; position: absolute;background:#eee;z-index: 999;border:1px solid #999">
-	<ul id="mytree" class="ztree" style="margin-top:0;"></ul>
-</div>
 <!-- BEGIN PAGE CONTENT-->
 <div style="margin-left: 210px">
 	<div class="col-md-10">
@@ -24,32 +21,38 @@
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-edit"></i>
-					文章编辑
+					组图编辑
 				</div>
 			</div>
 			<div class="portlet-body">
-				<sf:form id="addForm" method="post" modelAttribute="topicDto" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}" >
+				<sf:form id="addForm" method="post" modelAttribute="pictureTopicDto" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}" >
 				<table class="table table-striped table-hover table-bordered">
 					<tbody>
 						<tr>
-							<td width="150px" align="right">文章标题：</td>
+							<td width="150px" align="right">标题：</td>
 							<td>
 								<div class="col-md-4">
 									<div class="input-icon right">
 										<sf:input path="title" class="form-control" />
-										<sf:errors cssClass="errorContainer" path="title"/></td>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="150px" align="right">文章栏目：</td>
+							<td width="150px" align="right">推送到：</td>
 							<td>
 								<div class="col-md-4">
 									<div class="input-icon right">
-										<input type="text" readonly="readonly" name="cname" id="cname" class="form-control" />
-										<input type="hidden" readonly="readonly" id="cid" name="cid" value="0"/>
-										<sf:errors cssClass="errorContainer" path="cid"/>
+										<select name="cid" id="cid" class="bs-select form-control">
+											<c:forEach items="${cs }" var="c">
+												<c:if test="${c.id eq cid}">
+												<option value="${c.id }" selected="selected">${c.name }</option>
+												</c:if>
+												<c:if test="${c.id ne cid}">
+												<option value="${c.id }">${c.name }</option>
+												</c:if>
+											</c:forEach>
+										</select>	
 									</div>
 								</div>
 							</td>
@@ -57,12 +60,12 @@
 						<tr>
 							<c:choose>
 							<c:when test="${isAudit||isAdmin }">
-							<td width="150px" align="right">文章状态：</td>
+							<td width="150px" align="right">状态：</td>
 							<td>
 								<div class="col-md-4">
 									<div class="input-icon right">
-										<sf:radiobutton path="status" value="0"/>未发布
-										<sf:radiobutton path="status" value="1"/>已发布
+										<sf:radiobutton path="status" value="0"/>不发布
+										<sf:radiobutton path="status" value="1"/>发布
 									</div>
 								</div>
 							</td>
@@ -73,7 +76,7 @@
 							</c:choose>
 						</tr>
 						<tr>
-							<td width="150px" align="right">是否推荐该文章：</td>
+							<td width="150px" align="right">是否推荐：</td>
 							<td>
 								<div class="col-md-4">
 									<div class="input-icon right">
@@ -83,74 +86,78 @@
 								</div>	
 							</td>
 						</tr>
-						<%-- <tr>
-							<td width="150px" align="right">作者：</td>
-							<td>
-								<div class="col-md-4">
-									<div class="input-icon right">
-										<sf:input path="author" class="form-control" />
-									</div>
-								</div>
-							</td>
-						</tr> --%>
 						<tr>
-							<td width="150px" align="right">文章关键字：</td>
+							<td width="150px" align="right">检索关键字：</td>
 							<td>
 								<div class="col-md-4">
 									<div class="input-icon right">
+										<div id="keyword-exists">
+											<c:forEach items="${keywords }" var="k">
+												<span>${k }</span>
+											</c:forEach>
+										</div>
 										<sf:input path="keyword" class="form-control" />
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td width="150px" align="right">文章附件：</td>
+							<td width="150px" align="right">图片上传：</td>
 							<td>
 								<div class="col-md-4">
 									<div class="input-icon right">
 										<div id="attachs"></div>
 										<input type="file" id="attach" name="attach" class="form-control" />
 										<a class="btn green-meadow" id="uploadFile" >上传</a>
+										<span style="color: red">${error }</span>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">已传附件</td>
+							<td colspan="2">已传图片</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<table id="ok_attach" width="890px" class="table table-striped table-hover table-bordered">
 									<thead>
 										<tr>
-										<Td>文件名缩略图</Td>
-										<td width="150">文件名</td>
-										<td>文件大小</td>
-										<td>主页图片</td>
-										<td>栏目图片</td>
-										<td>附件信息</td>
+										<td width="280">缩略图</td>
+										<td width="350">图片名称</td>
+										<td>图片大小</td>
+										<td>是否为封面</td>
 										<td width="190">操作</td>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach items="${pics }" var="pic">
+										<tr>
+											<td>
+												<img src="<%=request.getContextPath()%>/resources/picTopic/thumbnail/${pic.picName}"/>
+												<input type="hidden" name="oldAks" value="${pic.id }">
+											</td>
+											<td>${pic.picNameOld }</td>
+											<td>${pic.size/1024}K</td>
+											<td>
+												<input type="radio" value="${pic.id }" name='pictureId' 
+													<c:if test="${pic.id eq pictureTopicDto.pictureId}"> checked="checked"</c:if>
+												>
+											</td>
+											<td>
+												&nbsp;<a href='#' abc="${pic.id }" class='btn btn-xs btn-danger deleteAttach delete'>删除附件</a>
+											</td>
+										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">文章内容：</td>
+							<td colspan="2">新闻图片说明：</td>
 						</tr>
 						<tr>
 							<td colspan="2">
-								<sf:textarea path="content" class="form-control" rows="25" cols="110"/>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">文章摘要：</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-							<sf:textarea path="summary" class="form-control" rows="5" cols="110"/>
+							<sf:textarea path="explain" class="form-control" rows="5" cols="110"/>
 							</td>
 						</tr>
 						
@@ -158,7 +165,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="2" align="center">
-								<a id="addBtn" class="btn green" >添加</a>
+								<a id="addBtn" class="btn green" >提交</a>
 								<input type="button" onclick="window.close()"  class="btn default" value="关闭"/>
 							</td>
 						</tr>

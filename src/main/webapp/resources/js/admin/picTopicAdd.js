@@ -1,12 +1,13 @@
 $(function(){
 	//表单校验
-	var validate = $("#addForm").cmsvalidate();
+	$("#addForm").cmsvalidate();
+	/*var validate = $("#addForm").cmsvalidate();
 	$("#addBtn").click(function(){
 		if(validate.valid()) {
 			$("#addForm").submit();
 			$(this).attr("disabled");
 		}
-	});
+	});*/
 	
 	//引用关键字的自定义插件jquery.cms.keywordinput.js
 	$("#keyword").keywordinput({
@@ -53,7 +54,7 @@ $(function(){
 		node+="<td>"+attach.picNameOld+"</td>";
 		node+="<td>"+Math.round(attach.size/1024)+"K</td>";
 		node+="<td><input type='radio' value='"+attach.id+"' name='pictureId'></td>";
-		node+="<td><a href='#' abc='"+attach.id+"' class='btn btn-xs btn-danger deleteAttach'>删除附件</a></td>";
+		node+="<td><a abc='"+attach.id+"' class='btn btn-xs btn-danger deleteAttach'>删除附件</a></td>";
 		node+="</tr>";
 		return node;
 	}
@@ -72,30 +73,3 @@ $(function(){
 		$("#attach").uploadify("upload","*");
 	})
 })
-/*function choice(event,treeId,treeNode) {
-	$("#cname").val(treeNode.name);
-	$("#cid").val(treeNode.id);
-	hideMenu();
-}
-function beforeChoice(treeId,treeNode) {
-	var check = (treeNode && !treeNode.isParent);
-	if (!check) return check;
-}
-function showMenu() {
-	$("#mytree").width($(this).width()-9);
-	var cObj = $("#cname");
-	var cOffset = $("#cname").offset();
-	$("#menuContent").css({left:cOffset.left + "px", top:cOffset.top + cObj.outerHeight() + "px"}).slideDown("fast");
-
-	$("body").bind("mousedown", onBodyDown);
-}
-function onBodyDown(event) {
-	if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
-		hideMenu();
-	}
-}
-function hideMenu() {
-	$("#menuContent").fadeOut("fast");
-	$("body").unbind("mousedown", onBodyDown);
-}
-*/

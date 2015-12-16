@@ -12,7 +12,7 @@
 					</div>
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
-				<li class="start active open">
+				<li class="start">
 					<a class="ajaxify start" href="layout_ajax_content_1.html">
 					<i class="icon-home"></i>
 					<span class="title">首页</span>
