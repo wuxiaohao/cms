@@ -118,9 +118,8 @@
 									&nbsp;
 								</td>
 								<td>
-									<a href="admin/user/delete/${user.id }" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
-									<a href="admin/user/updateUI/${user.id }" class="btn btn-sm blue ajaxify">更新</a>								
-								&nbsp;
+									<a href="admin/user/updateUI/${user.id }" class="btn btn-sm blue ajaxify"><i class="fa fa-edit"></i>&nbsp;更新</a>								
+									<a href="admin/user/delete/${user.id }" title="${user.id }" class="btn btn-sm red delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 								</td>
 							</tr>
 						</c:forEach>

@@ -101,13 +101,13 @@
 						</select>	
 					</div>
 					<dir class="c">
-						<button class="btn green" id="search">检索</button>
+						<button class="btn btn-circle green-meadow" id="search"><i class="fa fa-search"></i>检索</button>
 					</dir>
 				</div>
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="28%" align="center">文章标题</td>
+							<td width="25%" align="center">文章标题</td>
 							<c:if test="${status eq 0}">
 							<td>创建人</td>
 							</c:if>
@@ -123,7 +123,7 @@
 							<td>发布时间</td>
 							</c:if>
 							<td width="140">状态</td>
-							<td width="120">操作</td>
+							<td width="150">操作</td>
 						</tr>
 					</thead>
 					<c:forEach items="${datas.datas }" var="t">
@@ -161,17 +161,16 @@
 								<td>
 									<c:if test="${t.status eq 0 }">
 										<span style="color: red">未发布&nbsp;</span>
-										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">发布</a>
+										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm purple ajaxify delete">发布</a>
 									</c:if>
 									<c:if test="${t.status eq 1 }">
 										<span>已发布&nbsp;</span>
-										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-sm blue ajaxify delete">取消发布</a>
+										<a href="admin/topic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm purple ajaxify delete">取消发布</a>
 									</c:if>
 								</td>
 								<td>
-									<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify">删除</a>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue">更新</a>								
-									&nbsp;
+									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue"><i class="fa fa-edit"></i>&nbsp;更新</a>			
+									<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 								</td>
 							</tr>
 						</tbody>
