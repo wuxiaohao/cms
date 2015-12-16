@@ -221,9 +221,28 @@
 											<td>${pic.picNameOld }</td>
 											<td>${pic.size/1024}K</td>
 											<td>
-												<input type="radio" value="${pic.id }" name='pictureId' 
-													<c:if test="${pic.id eq pictureTopicDto.pictureId}"> checked="checked"</c:if>
-												>
+												<div class="md-radio-inline">
+													<c:if test="${pic.id == pictureTopicDto.pictureId }">
+													<div class="md-radio has-success">
+														<input type="radio" id="${pic.id }" name="pictureId" value="${pic.id }" class="md-radiobtn" checked>
+														<label for="${pic.id }">
+														<span></span>
+														<span class="check"></span>
+														<span class="box"></span>
+														</label>
+													</div>
+													</c:if>
+													<c:if test="${pic.id != pictureTopicDto.pictureId }">
+													<div class="md-radio has-success">
+														<input type="radio" id="${pic.id }" name="pictureId" value="${pic.id }" class="md-radiobtn" >
+														<label for="${pic.id }">
+														<span></span>
+														<span class="check"></span>
+														<span class="box"></span>
+														</label>
+													</div>
+													</c:if>
+												</div>
 											</td>
 											<td>
 												&nbsp;<a abc="${pic.id }" class='btn btn-xs btn-danger deleteAttach delete'>删除附件</a>

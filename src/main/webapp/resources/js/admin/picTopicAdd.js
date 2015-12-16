@@ -53,7 +53,7 @@ $(function(){
 				"<input type='hidden' name='pics' value='"+attach.id+"'/></td>";
 		node+="<td>"+attach.picNameOld+"</td>";
 		node+="<td>"+Math.round(attach.size/1024)+"K</td>";
-		node+="<td><input type='radio' value='"+attach.id+"' name='pictureId'></td>";
+		node+="<td><div class='md-radio-inline'><div class='md-radio has-success'><input type='radio' id='"+attach.id+"' value='"+attach.id+"' name='pictureId' class='md-radiobtn'><label for='"+attach.id+"'><span></span><span class='check'></span><span class='box'></span></label></div></div></td>";
 		node+="<td><a abc='"+attach.id+"' class='btn btn-xs btn-danger deleteAttach'>删除附件</a></td>";
 		node+="</tr>";
 		return node;
