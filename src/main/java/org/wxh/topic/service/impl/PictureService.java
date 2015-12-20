@@ -94,12 +94,21 @@ public class PictureService implements IPictureService{
 	public void delete(int id) {
 		Picture pic = pictureDao.load(id);
 		pictureDao.delete(id);
+		if(pic.getOrders() != 0) {
+			//重新生成排序
+			pictureDao.updateOrder(pic.getPictureTopic().getId(),pic.getOrders());
+		}
 		deletePictures(pic);
 	}
 
 	@Override
 	public List<Picture> listByPicTopic(int id) {
 		return pictureDao.listByPicTopic(id);
+	}
+
+	@Override
+	public void updateNameAndSort(String[] picNameOlds, Integer[] pics) {
+		pictureDao.updateNameAndSort(picNameOlds,pics);
 	}
 
 }

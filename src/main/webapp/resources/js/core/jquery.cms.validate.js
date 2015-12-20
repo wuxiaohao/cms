@@ -53,7 +53,8 @@
 			type:{
 				required: true,
 				maxlength: 10
-			}
+			},
+			picNameOlds:"required"
 		},opts?(opts.rules||{}):{});
 		var __messages = $.extend({
 			username:{
@@ -85,7 +86,8 @@
 			type:{
 				required: "类型不能为空",
 				maxlength: "类型长度不能大于10个字符"
-			}
+			},
+			picNameOlds:"图片名称不能为空！"
 		},opts?(opts.messages||{}):{});
 		var __defaultOpts = $.extend(opts||{},{
 			rules:__rules,

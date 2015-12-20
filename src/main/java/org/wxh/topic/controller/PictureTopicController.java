@@ -134,7 +134,7 @@ public class PictureTopicController {
 		}
 	}
 	/**
-	 * 添加新闻图片的界面
+	 * 添加组图新闻的界面
 	 * @param model
 	 * @return
 	 */
@@ -144,7 +144,7 @@ public class PictureTopicController {
 		PictureTopicDtoDto td = new PictureTopicDtoDto(t);
 		model.addAttribute("pictureTopicDto",td);
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
-		if(isAdmin) { //如果是超级管理员，则返回所有的文章
+		if(isAdmin) { //如果是超级管理员
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.IMG_NEW.ordinal()));//返回所有新闻图片栏目
 		} else {
 			User loginUser = (User)session.getAttribute("loginUser");
@@ -153,7 +153,7 @@ public class PictureTopicController {
 		return "picTopic/add";
 	}
 	/**
-	 * 添加文章
+	 * 添加组图新闻
 	 * @param br
 	 * @param aks 关键字
 	 * @param aids 附件id
@@ -175,6 +175,14 @@ public class PictureTopicController {
 				keywordService.addOrUpdate(k);
 			}
 		}
+		
+		if(pictureTopicDto.getPicNameOlds().length != pictureTopicDto.getPics().length) {
+			model.addAttribute("error", "图片名称不能为空！");
+			return add(model,session);
+		} else {
+			pictureService.updateNameAndSort(pictureTopicDto.getPicNameOlds(),pictureTopicDto.getPics());
+		}
+		
 		pt.setKeyword(keys.toString());
 		pictureTopicService.add(pt,pictureTopicDto.getCid(),loginUser,pictureTopicDto.getPics());
 		/*if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
@@ -186,7 +194,7 @@ public class PictureTopicController {
 	}
 	
 	/**
-	 * 删除新闻图片
+	 * 删除组图新闻
 	 * @param id 文章id
 	 * @param con 文章标题关键字
 	 * @param cid 栏目id
@@ -207,7 +215,7 @@ public class PictureTopicController {
 		}
 	}
 	/**
-	 * 修改文章信息的页面
+	 * 修改组图新闻的页面
 	 * @param id
 	 * @param model
 	 * @return
@@ -243,11 +251,20 @@ public class PictureTopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	public String update(@PathVariable int id,PictureTopicDtoDto pictureTopicDto,BindingResult br,String[]aks,String[] oldAks,HttpSession session,Model model) {
-		if(oldAks == null && pictureTopicDto.getPics() == null) { //如果把原来图片删除并且没有上传新的图片
+	public String update(@PathVariable int id,PictureTopicDtoDto pictureTopicDto,BindingResult br,String[]aks,HttpSession session,Model model) {
+		if(pictureTopicDto.getPics() == null) { //如果没有上传图片
 			model.addAttribute("error", "请选择图片！");
 			return update(id,model,session);
 		}
+		
+		//修改图片信息
+		if(pictureTopicDto.getPicNameOlds().length != pictureTopicDto.getPics().length) {
+			model.addAttribute("error", "图片名称不能为空！");
+			return add(model,session);
+		} else {
+			pictureService.updateNameAndSort(pictureTopicDto.getPicNameOlds(),pictureTopicDto.getPics());
+		}
+		
 		PictureTopic t = pictureTopicDto.getPicTopicByUpdate(pictureTopicService.load(id),(User)session.getAttribute("loginUser"));
 		//设置文章关键字
 		StringBuffer keys = new StringBuffer();

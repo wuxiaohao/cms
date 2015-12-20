@@ -153,11 +153,12 @@
 								<table id="ok_attach" width="890px" class="table table-striped table-hover table-bordered">
 									<thead>
 										<tr>
-										<td width="280">缩略图</td>
+										<td width="250">缩略图</td>
 										<td width="350">图片名称</td>
 										<td>图片大小</td>
 										<td>是否为封面</td>
-										<td width="190">操作</td>
+										<td>序号</td>
+										<td width="100">操作</td>
 										</tr>
 									</thead>
 									<tbody>

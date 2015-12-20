@@ -28,7 +28,7 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/picTopic/updateUI/${pictureTopicDto.id}" class="ajaxify">添加组图新闻</a>
+					<a href="admin/picTopic/updateUI/${pictureTopicDto.id}" class="ajaxify">修改组图新闻</a>
 				</li>
 			</ul>
 		</div>
@@ -204,11 +204,12 @@
 								<table id="ok_attach" width="890px" class="table table-striped table-hover table-bordered">
 									<thead>
 										<tr>
-										<td width="280">缩略图</td>
-										<td width="350">图片名称</td>
+										<td width="250">缩略图</td>
+										<td width="300">图片名称</td>
 										<td>图片大小</td>
 										<td>是否为封面</td>
-										<td width="190">操作</td>
+										<td>序号</td>
+										<td width="90">操作</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -216,9 +217,9 @@
 										<tr>
 											<td>
 												<img src="<%=request.getContextPath()%>/resources/picTopic/thumbnail/${pic.picName}"/>
-												<input type="hidden" name="oldAks" value="${pic.id }">
+												<input type="hidden" name="pics" value="${pic.id }">
 											</td>
-											<td>${pic.picNameOld }</td>
+											<td><input type ="text" name="picNameOlds" class="form-control" value="${pic.picNameOld }"></td>
 											<td>${pic.size/1024}K</td>
 											<td>
 												<div class="md-radio-inline">
@@ -244,6 +245,7 @@
 													</c:if>
 												</div>
 											</td>
+											<td>${pic.orders }</td>
 											<td>
 												&nbsp;<a abc="${pic.id }" class='btn btn-xs btn-danger deleteAttach delete'>删除附件</a>
 											</td>

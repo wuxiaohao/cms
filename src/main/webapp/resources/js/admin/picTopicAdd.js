@@ -9,6 +9,30 @@ $(function(){
 		}
 	});*/
 	
+	$("#ok_attach tbody").sortable({
+		axis:"y",
+		helper:function(e,ele) {
+			//原始元素的td对象
+			var _original = ele.children();
+			var _helper = ele.clone();//克隆一个新的helper元素
+			_helper.children().each(function(index){
+				$(this).width(_original.eq(index).width());
+			});
+			_helper.addClass("danger");
+			return _helper;
+		},
+		update:function(e,ui) {
+			setOrders();
+		}
+	});
+	
+	function setOrders() {
+		$("#ok_attach tbody tr").each(function(index){
+			var num = (index+1);
+			$(this).find("td:eq(4)").html(num);
+		});
+	}
+	
 	//引用关键字的自定义插件jquery.cms.keywordinput.js
 	$("#keyword").keywordinput({
 		autocomplete:{
@@ -49,11 +73,13 @@ $(function(){
 	var uploadPath = $(ctx).val()+"/resources/picTopic/";
 	function createAttachNode(attach) {
 		var node = "<tr>";
+		var num = $("#ok_attach tbody tr").length-0+1;
 		node+="<td><img src='"+uploadPath+"thumbnail/"+attach.picName+"'/>" +
 				"<input type='hidden' name='pics' value='"+attach.id+"'/></td>";
-		node+="<td>"+attach.picNameOld+"</td>";
+		node+="<td><input type ='text' name='picNameOlds' class='form-control' value='"+attach.picNameOld+"'></td>";
 		node+="<td>"+Math.round(attach.size/1024)+"K</td>";
 		node+="<td><div class='md-radio-inline'><div class='md-radio has-success'><input type='radio' id='"+attach.id+"' value='"+attach.id+"' name='pictureId' class='md-radiobtn'><label for='"+attach.id+"'><span></span><span class='check'></span><span class='box'></span></label></div></div></td>";
+		node+="<td>"+num+"</td>";
 		node+="<td><a abc='"+attach.id+"' class='btn btn-xs btn-danger deleteAttach'>删除附件</a></td>";
 		node+="</tr>";
 		return node;
@@ -66,10 +92,12 @@ $(function(){
 			var id = $(this).attr("abc");
 			dwrService.deletePicture(id,function(data) {
 				$(ad).parent("td").parent("tr").remove();
+				setOrders();//重新排序
 			});	
 		}
 	});
 	$("#uploadFile").click(function() {
 		$("#attach").uploadify("upload","*");
+		setOrders();
 	})
 })

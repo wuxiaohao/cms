@@ -17,13 +17,28 @@ public class PictureDao extends BaseDao<Picture> implements IPictureDao{
 	}
 	@Override
 	public List<Picture> listByPicTopic(int tid) {
-		String hql = getPictureSelect()+" from Picture a where a.pictureTopic.id=?";
+		String hql = getPictureSelect()+" from Picture a where a.pictureTopic.id=? order by orders";
 		return this.list(hql,tid);
 	}
 	@Override
 	public void deleteByPicTopic(int tid) {
 		String hql = "delete Picture a where a.pictureTopic.id=?";
 		this.updateByHql(hql, tid);
+	}
+	@Override
+	public void updateNameAndSort(String[] picNameOlds, Integer[] pics) {
+		String hql = "update Picture p set p.picNameOld=?,p.orders=? where p.id=?";
+		for(int i = 0; i < pics.length; i++) {
+			this.updateByHql(hql, new Object[]{picNameOlds[i],i+1,pics[i]});
+		}
+	}
+	@Override
+	public void updateOrder(int id, int orders) {
+		List<Picture> list = this.list(
+				"from Picture p where p.pictureTopic.id=? and p.orders>?", new Object[]{id,orders});
+		for(Picture p : list) {
+			this.updateByHql("update Picture p set p.orders=p.orders-1 where p.id=?", p.getId());
+		}
 	}
 	
 }

@@ -31,5 +31,12 @@ public interface IPictureService {
 	 * @return
 	 */
 	public List<Picture> listByPicTopic(int id);
+	/**
+	 * 更新图片名称和图片序号序号
+	 * @param pics 所有图片id
+	 * @param picNameOlds 所有图片名称
+	 * @param ids
+	 */
+	void updateNameAndSort(String[] picNameOlds, Integer[] pics);
 
 }

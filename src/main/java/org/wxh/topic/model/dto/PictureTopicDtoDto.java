@@ -49,6 +49,10 @@ public class PictureTopicDtoDto {
 	 * 组图信息的所有图片id
 	 */
 	private Integer[] pics;
+	/**
+	 * 存储图片名称
+	 */
+	private String[] picNameOlds;
 	
 	public PictureTopicDtoDto() {
 		super();
@@ -71,6 +75,14 @@ public class PictureTopicDtoDto {
 		this.setTitle(t.getTitle());
 		this.setPictureId(t.getPictureId());
 		this.setCid(cid);
+	}
+	
+	
+	public String[] getPicNameOlds() {
+		return picNameOlds;
+	}
+	public void setPicNameOlds(String[] picNameOlds) {
+		this.picNameOlds = picNameOlds;
 	}
 	public int getPictureId() {
 		return pictureId;
