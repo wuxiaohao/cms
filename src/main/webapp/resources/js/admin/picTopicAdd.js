@@ -1,13 +1,6 @@
 $(function(){
 	//表单校验
 	$("#addForm").cmsvalidate();
-	/*var validate = $("#addForm").cmsvalidate();
-	$("#addBtn").click(function(){
-		if(validate.valid()) {
-			$("#addForm").submit();
-			$(this).attr("disabled");
-		}
-	});*/
 	
 	$("#ok_attach tbody").sortable({
 		axis:"y",
@@ -68,15 +61,22 @@ $(function(){
 				$("#ok_attach").find("tbody").append(node);
 				$('#' + file.id).find('.data').html(' 上传完毕');
 			}
+			getTrNum();//动态显示图片数量
 		}
 	});
+	
+	//动态显示图片数量
+	function getTrNum(){
+		$("#picNum").html($("#ok_attach tbody tr").length);
+	}
+	
 	var uploadPath = $(ctx).val()+"/resources/picTopic/";
 	function createAttachNode(attach) {
 		var node = "<tr>";
 		var num = $("#ok_attach tbody tr").length-0+1;
-		node+="<td><img src='"+uploadPath+"thumbnail/"+attach.picName+"'/>" +
+		node+="<td><a href='"+uploadPath+attach.picName+"' class='fancybox-button' data-rel='fancybox-button'><img src='"+uploadPath+"thumbnail/"+attach.picName+"' class='img-responsive' alt='' /></a>" +
 				"<input type='hidden' name='pics' value='"+attach.id+"'/></td>";
-		node+="<td><input type ='text' name='picNameOlds' class='form-control' value='"+attach.picNameOld+"'></td>";
+		node+="<td><div class='form-group form-md-line-input has-info'><div class='col-md-12'><input type ='text' name='picNameOlds' class='form-control' value='"+attach.picNameOld+"'><div class='form-control-focus'></div></div></div></td>";
 		node+="<td>"+Math.round(attach.size/1024)+"K</td>";
 		node+="<td><div class='md-radio-inline'><div class='md-radio has-success'><input type='radio' id='"+attach.id+"' value='"+attach.id+"' name='pictureId' class='md-radiobtn'><label for='"+attach.id+"'><span></span><span class='check'></span><span class='box'></span></label></div></div></td>";
 		node+="<td>"+num+"</td>";
@@ -93,8 +93,10 @@ $(function(){
 			dwrService.deletePicture(id,function(data) {
 				$(ad).parent("td").parent("tr").remove();
 				setOrders();//重新排序
+				getTrNum();//动态显示图片数量
 			});	
 		}
+		
 	});
 	$("#uploadFile").click(function() {
 		$("#attach").uploadify("upload","*");

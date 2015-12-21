@@ -21,6 +21,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+<link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME STYLES -->
 <link href="${pageContext.servletContext.contextPath }/resources/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
@@ -78,6 +81,13 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
+<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/plupload/js/plupload.full.min.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/myjs/table-managed.js" ></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jstree/dist/jstree.min.js"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jstree/dist/jstree.js"></script>
@@ -154,7 +164,6 @@ html { overflow-x:hidden; }
 		   Index.initChat();
 		   Index.initMiniCharts();
 		   Tasks.initDashboardWidget();
-		
 		//初始化配置toastr
 		toastr.options = {
 		        "closeButton": true, //是否显示关闭按钮

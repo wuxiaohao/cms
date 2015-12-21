@@ -163,9 +163,6 @@
 											<li>
 												<a class="ajaxify"><i class="fa fa-eye"></i>&nbsp;预览</a>
 											</li>
-											<li>
-												<a class="ajaxify"><i class="fa fa-cogs"></i>&nbsp;组图设置</a>
-											</li>
 										</ul>
 									</div>
 								</td>

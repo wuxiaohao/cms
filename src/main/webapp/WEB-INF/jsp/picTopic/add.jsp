@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- 引入外部js文件 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/picTopicAdd.js"></script>
@@ -148,7 +149,10 @@
 						<div class="form-group form-md-line-input has-info">
 							<div class="col-md-12">
 								<div class="note note-info">
-									<p>已传图片<span class="badge badge-success" style="float: right;">3 </span></p>
+									<p>已传图片
+										<span class="checkpicnull"></span>
+										<span id="picNum" class="badge badge-success" style="float: right;">0</span>
+									</p>
 								</div>
 								<table id="ok_attach" width="890px" class="table table-striped table-hover table-bordered">
 									<thead>

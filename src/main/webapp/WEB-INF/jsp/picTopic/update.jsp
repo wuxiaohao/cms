@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- 引入外部js文件 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/picTopicAdd.js"></script>
@@ -199,7 +199,10 @@
 						<div class="form-group form-md-line-input has-info">
 							<div class="col-md-12">
 								<div class="note note-info">
-									<p>已传图片<span class="badge badge-success" style="float: right;">3 </span></p>
+									<p>已传图片
+										<span class="checkpicnull"></span>
+										<span id="picNum" class="badge badge-success" style="float: right">${fn:length(pics) }</span>
+									</p>
 								</div>
 								<table id="ok_attach" width="890px" class="table table-striped table-hover table-bordered">
 									<thead>
@@ -216,10 +219,19 @@
 										<c:forEach items="${pics }" var="pic">
 										<tr>
 											<td>
-												<img src="<%=request.getContextPath()%>/resources/picTopic/thumbnail/${pic.picName}"/>
+												<a href="<%=request.getContextPath()%>/resources/picTopic/${pic.picName}" class="fancybox-button" data-rel="fancybox-button">
+												<img class="img-responsive" src="<%=request.getContextPath()%>/resources/picTopic/thumbnail/${pic.picName}" alt="">
+												</a>
 												<input type="hidden" name="pics" value="${pic.id }">
 											</td>
-											<td><input type ="text" name="picNameOlds" class="form-control" value="${pic.picNameOld }"></td>
+											<td>
+											<div class="form-group form-md-line-input">
+												<div class="col-md-12">
+													<input type ="text" name="picNameOlds" class="form-control" value="${pic.picNameOld }">
+													<div class="form-control-focus"></div>
+												</div>
+											</div>
+											</td>
 											<td>${pic.size/1024}K</td>
 											<td>
 												<div class="md-radio-inline">

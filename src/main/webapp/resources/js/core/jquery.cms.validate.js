@@ -95,7 +95,11 @@
 			errorElement: opts?(opts.errorElement||"span"):"span",
 			successElement: opts?(opts.errorElement||"span"):"span",
 			errorPlacement: function(error, element) { //指定错误信息位置 
-				error.appendTo( element.parent().parent()); //将错误信息添加当前元素的父结点后面    element.parent().parent()
+				if(element.is("input[name=picNameOlds]")) {
+					error.appendTo(".checkpicnull"); 
+				} else {
+					error.appendTo( element.parent().parent()); 
+				}
 			},
 			errorClass:opts?(opts.errorClass||"errorContainer"):"errorContainer"
 		});
