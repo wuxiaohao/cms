@@ -47,7 +47,7 @@ import org.wxh.util.JsonUtil;
 @Controller
 @RequestMapping("/admin/picTopic")
 public class PictureTopicController {
-	private static final Logger logger = Logger.getLogger(TopicController.class);
+	private static final Logger logger = Logger.getLogger(PictureTopicController.class);
 	
 	@Autowired
 	private IPictureTopicService pictureTopicService;
@@ -161,7 +161,7 @@ public class PictureTopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public String add(PictureTopicDtoDto pictureTopicDto,BindingResult br,String[]aks,HttpSession session,Model model) {
+	public String add(PictureTopicDtoDto pictureTopicDto,BindingResult br,HttpSession session,Model model) {
 		if(pictureTopicDto.getPics() == null) { //如果没有上传图片
 			model.addAttribute("error", "请选择图片！");
 			return add(model,session);
@@ -169,21 +169,13 @@ public class PictureTopicController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		PictureTopic pt = pictureTopicDto.getPictureTopic(loginUser);
 		StringBuffer keys = new StringBuffer();
-		if(aks != null) {
-			for(String k:aks) {
-				keys.append(k).append("|");//拼接关键字
-				keywordService.addOrUpdate(k);
-			}
-		}
-		
+
 		if(pictureTopicDto.getPicNameOlds().length != pictureTopicDto.getPics().length) {
 			model.addAttribute("error", "图片名称不能为空！");
 			return add(model,session);
 		} else {
 			pictureService.updateNameAndSort(pictureTopicDto.getPicNameOlds(),pictureTopicDto.getPics());
 		}
-		
-		pt.setKeyword(keys.toString());
 		pictureTopicService.add(pt,pictureTopicDto.getCid(),loginUser,pictureTopicDto.getPics());
 		/*if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
 			indexService.generateBody();//重新生成首页
@@ -223,9 +215,6 @@ public class PictureTopicController {
 	@RequestMapping(value="/updateUI/{id}",method=RequestMethod.POST)
 	public String update(@PathVariable int id,Model model,HttpSession session) {
 		PictureTopic t = pictureTopicService.load(id);
-		String keyword = t.getKeyword();
-		if(keyword != null && !"".equals(keyword.trim()))
-			model.addAttribute("keywords",keyword.split("\\|"));
 		model.addAttribute("pics",pictureService.listByPicTopic(id));
 		PictureTopicDtoDto ptd = new PictureTopicDtoDto(t,t.getChannel().getId());
 		model.addAttribute("pictureTopicDto",ptd);
@@ -251,7 +240,7 @@ public class PictureTopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	public String update(@PathVariable int id,PictureTopicDtoDto pictureTopicDto,BindingResult br,String[]aks,HttpSession session,Model model) {
+	public String update(@PathVariable int id,PictureTopicDtoDto pictureTopicDto,BindingResult br,HttpSession session,Model model) {
 		if(pictureTopicDto.getPics() == null) { //如果没有上传图片
 			model.addAttribute("error", "请选择图片！");
 			return update(id,model,session);
@@ -266,15 +255,7 @@ public class PictureTopicController {
 		}
 		
 		PictureTopic t = pictureTopicDto.getPicTopicByUpdate(pictureTopicService.load(id),(User)session.getAttribute("loginUser"));
-		//设置文章关键字
-		StringBuffer keys = new StringBuffer();
-		if(aks!=null) {
-			for(String k:aks) {
-				keys.append(k).append("|");
-				keywordService.addOrUpdate(k);
-			}
-		}
-		t.setKeyword(keys.toString());
+
 		pictureTopicService.update(t, pictureTopicDto.getCid(),pictureTopicDto.getPics());
 		/*indexService.generateBody();*/ //重新生成首页
 		//return "redirect:/jsp/common/updateSucByPicTopic.jsp";
