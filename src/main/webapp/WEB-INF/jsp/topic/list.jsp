@@ -130,7 +130,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/${t.id }','showTopic')">
+									<a href="admin/topic/${t.id }" class="ajaxify" >
 									<c:choose>
 										<c:when test="${fn:length(t.title)> 18 }">
 											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
