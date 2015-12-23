@@ -18,10 +18,6 @@ public class PictureTopicDtoDto {
 	 */
 	private String title;
 	/**
-	 * 关键字:通过|来分割不同的关键字
-	 */
-	private String keyword;
-	/**
 	 * 图片新闻说明
 	 */
 	private String explain;
@@ -60,7 +56,6 @@ public class PictureTopicDtoDto {
 	public PictureTopicDtoDto(PictureTopic t) {
 		this.setExplain(t.getExplain());
 		this.setId(t.getId());
-		this.setKeyword(t.getKeyword());
 		this.setRecommend(t.getRecommend());
 		this.setStatus(t.getStatus());
 		this.setTitle(t.getTitle());
@@ -69,7 +64,6 @@ public class PictureTopicDtoDto {
 	public PictureTopicDtoDto(PictureTopic t, Integer cid) {
 		this.setExplain(t.getExplain());
 		this.setId(t.getId());
-		this.setKeyword(t.getKeyword());
 		this.setRecommend(t.getRecommend());
 		this.setStatus(t.getStatus());
 		this.setTitle(t.getTitle());
@@ -108,12 +102,6 @@ public class PictureTopicDtoDto {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
 	}
 	public String getExplain() {
 		return explain;

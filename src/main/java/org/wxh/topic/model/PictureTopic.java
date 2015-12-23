@@ -33,11 +33,6 @@ public class PictureTopic {
 	@Column(name="pt_title")
 	private String title;
 	/**
-	 * 关键字:通过|来分割不同的关键字
-	 */
-	@Column(name="pt_keyword")
-	private String keyword;
-	/**
 	 * 图片新闻说明
 	 */
 	@Lob     
@@ -104,12 +99,11 @@ public class PictureTopic {
 	
 	public PictureTopic() {}
 	
-	public PictureTopic(int id, String title,String keyword,String explain,
+	public PictureTopic(int id, String title,String explain,
 			Date publishDate,Date createDate,String author, int status,int recommend,String cname,String auditor,int pictureId) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.keyword = keyword;
 		this.explain = explain;
 		this.createDate = createDate;
 		this.publishDate = publishDate;
@@ -120,11 +114,10 @@ public class PictureTopic {
 		this.auditor = auditor;
 		this.pictureId = pictureId;
 	}
-	public PictureTopic(int id, String title,String keyword,int status,int recommend,String author) {
+	public PictureTopic(int id, String title,int status,int recommend,String author) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.keyword = keyword;
 		this.status = status;
 		this.recommend = recommend;
 		this.author = author;
@@ -141,12 +134,6 @@ public class PictureTopic {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
 	}
 	public String getExplain() {
 		return explain;

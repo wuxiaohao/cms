@@ -59,7 +59,7 @@
 								<input type="file" id="indexPic" name="indexPic" class="form-control" />
 							</div>
 						</div>
-						<div class="form-group form-md-line-input has-info">
+						<div class="form-group form-md-line-input has-info newName" style="display: none;">
 							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
 							<div class="col-md-6">
 								<input id="newName" name="newName" readonly class="form-control"/>

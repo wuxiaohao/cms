@@ -26,7 +26,7 @@ import org.wxh.topic.service.IPictureService;
 @Service("pictureService")
 public class PictureService implements IPictureService{
 
-	private static final Logger logger = Logger.getLogger(AttachmentService.class);
+	private static final Logger logger = Logger.getLogger(PictureService.class);
 	
 	@Autowired
 	private IPictureDao pictureDao;

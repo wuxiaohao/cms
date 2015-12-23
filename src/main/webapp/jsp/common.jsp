@@ -8,7 +8,6 @@
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
 <link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
-<link href="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL PLUGIN STYLES -->
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES -->
@@ -54,14 +53,6 @@
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-<script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
@@ -158,7 +149,6 @@ html { overflow-x:hidden; }
 		Demo.init(); // init demo features
 		   Index.init();   
 		   Index.initDashboardDaterange();
-		   Index.initJQVMAP(); // init index page's custom scripts
 		   Index.initCalendar(); // init index page's custom scripts
 		   Index.initCharts(); // init index page's custom scripts
 		   Index.initChat();

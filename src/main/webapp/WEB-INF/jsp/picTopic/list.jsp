@@ -14,11 +14,31 @@
 		var success='<%=request.getAttribute("success")%>';
 		var error='<%=request.getAttribute("error")%>';
 		showMessage(success,error);
+		//条件检索
+		$("#search").click(function(event){
+			var con = $.trim($("#con").val()); 
+			var cid = $("#cid").val();
+			var href ="";
+			var lianjie = "";
+			if(${status} == 0){
+				href = $(".unaudits").attr("href");
+				lianjie = $(".unaudits");
+			} else {
+				href = $(".audits").attr("href");
+				lianjie = $(".audits");
+			}
+			if(!((con == "" || con == null) && (cid ==0 || cid == null))){
+				hrefNew = href+"?con="+con+"&cid="+cid;
+				lianjie.attr("href",hrefNew);
+			}
+			lianjie.click();
+			lianjie.attr("href",href);
+		});
 	});
 </script>
 </head>
-<a style="display: none;" class="ajaxify audits" href="<%=request.getContextPath() %>/admin/topic/audits"></a>
-<a style="display: none;" class="ajaxify unaudits" href="<%=request.getContextPath() %>/admin/topic/unaudits"></a>
+<a style="display: none;" class="ajaxify audits" href="<%=request.getContextPath() %>/admin/picTopic/audits"></a>
+<a style="display: none;" class="ajaxify unaudits" href="<%=request.getContextPath() %>/admin/picTopic/unaudits"></a>
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-title">
@@ -89,7 +109,7 @@
 						<tr>
 							<td width="28%" align="center">标题</td>
 							<c:if test="${status eq 0}">
-							<td>创建人</td>
+							<td>作者</td>
 							</c:if>
 							<c:if test="${status eq 1}">
 							<td>发布人</td>

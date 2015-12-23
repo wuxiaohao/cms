@@ -27,8 +27,6 @@ public class PictureTopicService implements IPictureTopicService{
 	private IPictureDao pictureDao;
 	@Autowired
 	private IChannelDao channelDao;
-	@Autowired
-	private IUserDao userDao;
 
 	@Override
 	public Pager<PictureTopic> find(Integer cid, String title, Integer status) {
@@ -48,8 +46,7 @@ public class PictureTopicService implements IPictureTopicService{
 			t.setStatus(1);
 			t.setPublishDate(new Date());
 			t.setAuditor(u.getNickname());
-		}
-		else {
+		} else {
 			t.setStatus(0);
 			t.setPublishDate(null);
 			t.setAuditor(null);

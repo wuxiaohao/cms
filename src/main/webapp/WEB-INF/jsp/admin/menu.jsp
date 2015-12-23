@@ -74,9 +74,14 @@
 							文章新闻管理</a>
 						</li>
 						<li>
-							<a id="zutu" class="ajaxify" href="<%=request.getContextPath() %>/admin/picTopic/audits">
+							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/picTopic/audits">
 							<i class="icon-wallet"></i>
 							组图新闻管理</a>
+						</li>
+						<li>
+							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/video/audits">
+							<i class="icon-wallet"></i>
+							视频新闻管理</a>
 						</li>
 					</ul>
 				</li>

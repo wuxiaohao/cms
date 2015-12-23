@@ -69,6 +69,7 @@ $(function(){
 				$("#indexPicView").prev("#pc").remove();
 				$("#indexPicView").html("<img src='"+ctx+"/resources/indexPic/"+newName+"'/>");
 				$("#newName").val(newName);
+				$(".newName").show(1000);
 			}
 		},"json")
 	}

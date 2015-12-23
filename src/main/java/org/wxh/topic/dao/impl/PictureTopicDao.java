@@ -39,6 +39,6 @@ public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTo
 	}
 	
 	private String getPictureTopicSelect() {
-		return "select new PictureTopic(t.id,t.title,t.keyword,t.explain,t.publishDate,t.createDate,t.author,t.status,t.recommend,t.cname,t.auditor,t.pictureId)";
+		return "select new PictureTopic(t.id,t.title,t.explain,t.publishDate,t.createDate,t.author,t.status,t.recommend,t.cname,t.auditor,t.pictureId)";
 	}
 }

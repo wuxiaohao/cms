@@ -25,6 +25,10 @@ public interface GlobalResult {
 	 */
 	public final static String UPLOAD_PICTURE="/resources/picTopic/";
 	/**
+	 * 视频新闻的视频路径
+	 */
+	public final static String UPLOAD_VIDEO="/resources/video/";
+	/**
 	 * 首页图片的路径
 	 * 
 	 */

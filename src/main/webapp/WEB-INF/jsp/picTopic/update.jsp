@@ -169,19 +169,6 @@
 							</div>
 						</div>
 						<div class="form-group form-md-line-input has-info">
-							<label class="col-md-2 control-label" for="form_control_1">检索关键字</label>
-							<div class="col-md-6">
-								<div class="input-icon right">
-									<div id="keyword-exists">
-										<c:forEach items="${keywords }" var="k">
-											<span>${k }</span>
-										</c:forEach>
-									</div>
-									<sf:input path="keyword" class="form-control" />
-								</div>
-							</div>
-						</div>
-						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">新闻图片说明</label>
 							<div class="col-md-6">
 								<sf:textarea path="explain" class="form-control" rows="2" cols="110"/>

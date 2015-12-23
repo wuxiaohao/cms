@@ -54,10 +54,6 @@ public class PictureTopicController {
 	@Autowired
 	private IPictureService pictureService;
 	@Autowired
-	private IKeywordService keywordService;
-	@Autowired
-	private IGroupService groupService;
-	@Autowired
 	private IChannelService channelService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
@@ -154,10 +150,10 @@ public class PictureTopicController {
 	}
 	/**
 	 * 添加组图新闻
+	 * @param pictureTopicDto
 	 * @param br
-	 * @param aks 关键字
-	 * @param aids 附件id
 	 * @param session
+	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST)
@@ -168,7 +164,6 @@ public class PictureTopicController {
 		}
 		User loginUser = (User) session.getAttribute("loginUser");
 		PictureTopic pt = pictureTopicDto.getPictureTopic(loginUser);
-		StringBuffer keys = new StringBuffer();
 
 		if(pictureTopicDto.getPicNameOlds().length != pictureTopicDto.getPics().length) {
 			model.addAttribute("error", "图片名称不能为空！");
@@ -245,7 +240,6 @@ public class PictureTopicController {
 			model.addAttribute("error", "请选择图片！");
 			return update(id,model,session);
 		}
-		
 		//修改图片信息
 		if(pictureTopicDto.getPicNameOlds().length != pictureTopicDto.getPics().length) {
 			model.addAttribute("error", "图片名称不能为空！");
