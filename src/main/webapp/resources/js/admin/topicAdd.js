@@ -49,6 +49,8 @@ $(function(){
 		uploader:$("#ctx").val()+"/admin/topic/upload",
 		//按钮显示的文字
 		buttonText: '选择文件',
+		//文件队列上传完成1秒后删除
+		removeTimeout : 1,
 		//文件上传对象的名称
 		fileObjName:"attach",
 		//是否自动上传
