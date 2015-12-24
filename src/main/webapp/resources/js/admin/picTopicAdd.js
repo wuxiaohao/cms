@@ -43,8 +43,8 @@ $(function(){
 		uploader:$("#ctx").val()+"/admin/picTopic/upload",
 		//按钮显示的文字
 		buttonText: '选择图片',
-		//文件队列上传完成1秒后删除
-		removeTimeout : 1,
+		//文件队列上传完成0.5秒后删除
+		removeTimeout : 0.5,
 		//文件上传对象的名称
 		fileObjName:"attach",
 		//是否自动上传

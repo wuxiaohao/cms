@@ -43,7 +43,7 @@
 			<div class="portlet-title">
 				<div class="caption font-blue">
 					<i class="icon-pin font-blue"></i>
-					<span class="caption-subject bold uppercase"> 组图编辑</span>
+					<span class="caption-subject bold uppercase"> 组图添加</span>
 				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
@@ -62,7 +62,7 @@
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">推送到</label>
 							<div class="col-md-6">
-								<select name="cid" id="cid" class="bs-select form-control">
+								<select name="cid" id="cid" class="bs-select form-control edited">
 									<c:forEach items="${cs }" var="c">
 										<option value="${c.id }">${c.name }</option>
 									</c:forEach>

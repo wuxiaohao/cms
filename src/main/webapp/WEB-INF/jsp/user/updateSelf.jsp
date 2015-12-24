@@ -59,7 +59,7 @@
 					<div class="form-body">
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">显示昵称(可以是中文) </label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="nickname" class="form-control" placeholder="请输入你的昵称" />
 								<div class="form-control-focus">
 								</div>
@@ -67,7 +67,7 @@
 						</div>
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">联系电话  </label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="phone" class="form-control" placeholder="请输入你的联系电话" />
 								<div class="form-control-focus">
 								</div>
@@ -75,7 +75,7 @@
 						</div>
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">电子邮件  </label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="email" class="form-control" placeholder="请输入你的电子邮件" />
 								<sf:errors path="email"/>
 								<div class="form-control-focus">

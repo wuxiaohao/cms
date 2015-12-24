@@ -55,17 +55,17 @@
 			<div class="portlet-body form">
 				<sf:form role="form" onkeydown="if(event.keyCode==13){return false;}" id="updateForm" method="post" modelAttribute="role" action="admin/role/update/${role.id }" class="form-horizontal ajaxiform">	
 					<div class="form-body">
-						<div class="form-group form-md-line-input has-info">
+						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">角色名称</label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="name" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input has-info">
+						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">角色类型</label>
-							<div class="col-md-3">
-								<sf:select path="roleType" class="bs-select form-control">
+							<div class="col-md-6">
+								<sf:select path="roleType" class="bs-select form-control edited">
 									<sf:options items="${types }"/>
 								</sf:select>
 								<div class="form-control-focus"></div>

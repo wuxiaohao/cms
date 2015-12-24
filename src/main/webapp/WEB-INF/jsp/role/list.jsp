@@ -79,7 +79,7 @@
 								<td style="text-align:center"><input type="checkbox" class="checkboxes"
 									name="checkid" value="${role.id }" /></td>
 								<td><a href="admin/role/${role.id }" class="ajaxify">${role.name }</a></td>
-								<td>${role.roleType }</td>
+								<td>${role.roleType.name }</td>
 								<td><a href="admin/role/delete/${role.id }" class="btn btn-sm red ajaxify delete"> 删除 </a>
 									<a href="admin/role/updateUI/${role.id }" class="btn btn-sm green ajaxify"> 更新 </a>
 									<a href="admin/role/clearUsers/${role.id }" class="btn btn-sm blue ajaxify delete"> 清空用户 </a>

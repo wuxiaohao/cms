@@ -69,7 +69,7 @@
 								<label class="control-label col-md-3">角色类型&nbsp;:</label>
 								<div class="col-md-9">
 									<p class="form-control-static">
-										 ${role.roleType }
+										 ${role.roleType.name }
 									</p>
 								</div>
 							</div>

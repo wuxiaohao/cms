@@ -93,7 +93,7 @@ public class RoleController {
 	@RequestMapping(value="/addUI",method=RequestMethod.POST)
 	public String addUI(Model model) {
 		model.addAttribute(new Role());
-		model.addAttribute("types", EnumUtils.enum2Name(RoleType.class));
+		model.addAttribute("types", EnumUtils.enumProp2NameMap(RoleType.class,"name"));
 		return "role/add";
 	}
 	
@@ -113,7 +113,7 @@ public class RoleController {
 	@RequestMapping(value="/updateUI/{id}",method=RequestMethod.POST)
 	public String updateUI(@PathVariable int id,Model model) {
 		model.addAttribute(roleService.load(id));
-		model.addAttribute("types", EnumUtils.enum2Name(RoleType.class));
+		model.addAttribute("types", EnumUtils.enumProp2NameMap(RoleType.class,"name"));
 		return "role/update";
 	}
 	
@@ -129,7 +129,4 @@ public class RoleController {
 		model.addAttribute("success", "角色修改成功!");
 		return list(model);
 	}
-	
-	
-
 }

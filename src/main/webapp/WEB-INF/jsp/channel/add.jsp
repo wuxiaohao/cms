@@ -41,7 +41,7 @@
 						<div class="form-group form-md-line-input has-success">
 							<label class="col-md-2 control-label" for="form_control_1">栏目类型</label>
 							<div class="col-md-6">
-								<sf:select path="type" class="bs-select form-control">
+								<sf:select path="type" class="bs-select form-control edited">
 									<sf:options items="${types }"/>
 								</sf:select>
 								<div class="form-control-focus"></div>

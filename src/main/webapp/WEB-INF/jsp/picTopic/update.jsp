@@ -62,7 +62,7 @@
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">推送到</label>
 							<div class="col-md-6">
-								<select name="cid" id="cid" class="bs-select form-control">
+								<select name="cid" id="cid" class="bs-select form-control edited">
 									<c:forEach items="${cs }" var="c">
 										<c:if test="${c.id eq cid}">
 										<option value="${c.id }" selected="selected">${c.name }</option>
