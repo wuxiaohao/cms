@@ -8,11 +8,6 @@ $(function(){
 				showMessage("",error);
 				return false;
 			}
-			if($("#vpicName").val() == null || $("#vpicName").val() == ""){
-				var error="请上传缩略图";
-				showMessage("",error);
-				return false;
-			}
 			$("#addForm").submit();
 			$(this).attr("disabled");
 		}
@@ -48,6 +43,7 @@ $(function(){
 				$('#' + file.id).find('.data').html(' 上传完毕');
 				$("#vname").val(ao.obj.videoName);
 				$("#vsize").val(ao.obj.size);
+				$("#vpicName").val(ao.obj.picName)
 				$(".vname").show(1000);
 			}
 		}

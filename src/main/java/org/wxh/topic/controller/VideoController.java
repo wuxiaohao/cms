@@ -1,8 +1,10 @@
 package org.wxh.topic.controller;
 
+import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Video;
@@ -233,6 +236,11 @@ public class VideoController {
 			v.setVideoName(String.valueOf(new Date().getTime()+"."+ext));
 			v.setSize(attach.getSize());
 			videoService.addVideo(v,attach.getInputStream());
+			String realPath = SystemContext.getRealPath();
+			String path = realPath+GlobalResult.UPLOAD_VIDEO + "/" + v.getVideoName();
+			//截图视频图片
+			String picName = processImg(path);
+			v.setPicName(picName);
 			ao = new AjaxObj(1,null,v);
 		} catch (IOException e) {
 			ao = new AjaxObj(0,e.getMessage());
@@ -246,7 +254,7 @@ public class VideoController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/uploadPic",method=RequestMethod.POST)
-	public void uploadPic(MultipartFile attachPic,HttpServletResponse resp) throws IOException {
+	/*public void uploadPic(MultipartFile attachPic,HttpServletResponse resp) throws IOException {
 		AjaxObj ao = null;
 		try {
 			resp.setContentType("text/plain;charset=utf-8");
@@ -259,6 +267,46 @@ public class VideoController {
 			ao = new AjaxObj(0,e.getMessage());
 		}
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
-	}
+	}*/
 	
+	/**
+	 * 截图视频图片
+	 * @param veido_path 视频路径
+	 * @return
+	 */
+	private static String processImg(String veido_path) {
+		File file = new File(veido_path);
+		if (!file.exists()) {
+			System.err.println("路径[" + veido_path + "]对应的视频文件不存在!");
+			return null;
+		}
+		String realPath = SystemContext.getRealPath();
+		String ffmpeg_path = "D:/ffmpeg.exe";//注意这里，一定要有这个插件啊
+		String PicPath = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
+		String picName = String.valueOf(new Date().getTime() + ".jpg" );
+		List<String> commands = new java.util.ArrayList<String>();
+		commands.add(ffmpeg_path);
+		commands.add("-i");
+		commands.add(veido_path);
+		commands.add("-y");
+		commands.add("-f");
+		commands.add("image2");
+		commands.add("-ss");
+		commands.add("8");// 这个参数是设置截取视频多少秒时的画面
+		// commands.add("-t");
+		// commands.add("0.001");
+		commands.add("-s");
+		commands.add("499x431");//设置截取的图片宽高
+		commands.add( PicPath + picName );
+		try {
+			ProcessBuilder builder = new ProcessBuilder();
+			builder.command(commands);
+			builder.start();
+			System.out.println("截取成功");
+			return picName;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

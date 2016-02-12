@@ -112,25 +112,13 @@
 							<div class="col-md-6">
 								<input type="file" id="attach" class="form-control" />
 								<input id="vsize" type="hidden" name="size"/>
+								<input id="vpicName" type="hidden" name="picName"/>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input has-info vname" style="display: none;">
 							<label class="col-md-2 control-label" for="form_control_1">视频名称</label>
 							<div class="col-md-6">
 								<input id="vname" type="text" name="videoName" class="form-control" readonly/>
-								<div class="form-control-focus"></div>
-							</div>
-						</div>
-						<div class="form-group form-md-line-input has-info">
-							<label class="col-md-2 control-label" for="form_control_1">缩略图上传</label>
-							<div class="col-md-6">
-								<input type="file" id="attachPic" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group form-md-line-input has-info vpicName" style="display: none;">
-							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
-							<div class="col-md-6">
-								<input id="vpicName" type="text" name="picName" class="form-control" readonly/>
 								<div class="form-control-focus"></div>
 							</div>
 						</div>

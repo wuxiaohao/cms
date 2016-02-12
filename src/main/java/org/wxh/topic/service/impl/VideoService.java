@@ -157,7 +157,7 @@ public class VideoService implements IVideoService{
 
 	private void addFile(Video v, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath+GlobalResult.UPLOAD_VIDEO;//新闻图片存放的位置
+		String path = realPath+GlobalResult.UPLOAD_VIDEO;
 		File fp = new File(path);
 		if(!fp.exists()) fp.mkdirs();
 		path = path+v.getVideoName();
