@@ -33,7 +33,7 @@ $(function(){
 	});
 	$("#search_btn").click(function(){
 		var sc = $("#search_con").val();
-		if(sc==""||sc=="Search..") {
+		if(sc==""||sc=="请输入关键字") {
 			alert("你需要输入相应的检索内容");
 		} else {
 			window.location.href=$("#ctx").val()+"/search/"+sc;

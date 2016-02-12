@@ -1,0 +1,39 @@
+
+.bs-docs-nav {
+	margin-bottom: 2px;
+	background-color: #f4645f;
+	border-bottom: 2px;	
+}
+header div.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.bs-docs-nav .navbar-brand,
+.bs-docs-nav .navbar-nav>li>a {
+	font-weight: 500;
+	color: #FFF;
+}
+.bs-docs-nav .navbar-nav>li>a:visited {
+	color: #FFF;
+	background-color: #000
+}
+.bs-docs-nav .navbar-nav>.active>a,
+.bs-docs-nav .navbar-nav>.active>a:hover,
+.bs-docs-nav .navbar-nav>li>a:hover {
+	color: #FFF;
+	background-color: #3A87AD
+}
+
+.bs-docs-nav .navbar-toggle .icon-bar {
+	background-color: #FFF
+}
+.bs-docs-nav .navbar-header .navbar-toggle {
+	border-color: #fff
+}
+.bs-docs-nav .navbar-header .navbar-toggle:focus,
+.bs-docs-nav .navbar-header .navbar-toggle:hover {
+	background-color: #3d3d3d;
+	border-color: #FFF
+}

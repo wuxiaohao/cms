@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<#macro indexTopicList indexTopic titleSize showDate=true hasH=false hasDt=true showDot=true df="MM/dd" divId="" hrefClz="">
+<#macro indexTopicList indexTopic titleSize showDate=true hasH=false hasDt=true showDot=true df="yyy-MM-dd" divId="" hrefClz="">
 	<div ${(divId=="")?string("","id='${divId}'")}>
 		<#if hasH>
 			<#nested/>

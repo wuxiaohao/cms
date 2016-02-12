@@ -39,31 +39,6 @@ public class IndexController {
 	@Autowired
 	private IKeywordService keywordService;
 	
-	public IKeywordService getKeywordService() {
-		return keywordService;
-	}
-	public void setKeywordService(IKeywordService keywordService) {
-		this.keywordService = keywordService;
-	}
-	public IAttachmentService getAttachmentService() {
-		return attachmentService;
-	}
-	public void setAttachmentService(IAttachmentService attachmentService) {
-		this.attachmentService = attachmentService;
-	}
-	public IChannelService getChannelService() {
-		return channelService;
-	}
-	public void setChannelService(IChannelService channelService) {
-		this.channelService = channelService;
-	}
-	public ITopicService getTopicService() {
-		return topicService;
-	}
-	public void setTopicService(ITopicService topicService) {
-		this.topicService = topicService;
-	}
-	
 	/**
 	 * 访问网站首页的方法
 	 * @param model

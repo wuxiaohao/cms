@@ -63,31 +63,6 @@ public class IndexService implements IIndexService {
 	@Autowired
 	private IKeywordService keyworkService;
 
-	public IIndexPicService getIndexPicService() {
-		return indexPicService;
-	}
-	public void setIndexPicService(IIndexPicService indexPicService) {
-		this.indexPicService = indexPicService;
-	}
-	public IKeywordService getKeyworkService() {
-		return keyworkService;
-	}
-	public void setKeyworkService(IKeywordService keyworkService) {
-		this.keyworkService = keyworkService;
-	}
-	public ITopicService getTopicService() {
-		return topicService;
-	}
-	public void setTopicService(ITopicService topicService) {
-		this.topicService = topicService;
-	}
-	public IChannelService getChannelService() {
-		return channelService;
-	}
-	public void setChannelService(IChannelService channelService) {
-		this.channelService = channelService;
-	}
-
 	@Override
 	public void generateTop() {
 		List<Channel> list = channelService.listTopNavChannel();

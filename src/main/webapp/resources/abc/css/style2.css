@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+.ti{
+ 	font-size: 16px;
+ 	margin-left: 10px;
+ 	margin-right: 10px;
+ }
+ .imgtxt{
+	 margin-bottom: 1px;
+ }
+ #footer {
+	background-color: #f4645f;
+	border-top: 1px solid #ccc;
+	padding: 20px;
+	text-align: center;
+	color: #eee;
+}
+.tab3 {
+	padding: 10px 0px;
+	text-align: center;
+}

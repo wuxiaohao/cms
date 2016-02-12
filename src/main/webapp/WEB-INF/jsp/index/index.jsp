@@ -3,18 +3,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>欢迎访问${baseInfo.name }</title>
 <!-- 设置关键字，方便被搜索引擎搜索到 -->
 <meta http-equiv="keywords" content="城市学院,东莞理工学院城市学院">   
 <meta http-equiv="description" content="城市学院网站,东莞理工学院城市学院网站">     
-<!-- Date: 2013-09-04 -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/index/web.css" />
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.cycle2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/index/main.js"></script>
-<style type="text/css">
-</style>
+<meta charset="UTF-8">
+<!-- 移动端访问 -->
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>城市学院</title>	
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/docs.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/screen.css">
+<script src="<%=request.getContextPath() %>/resources/qianduan/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/qianduan/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/qianduan/js/pic_hover.js"></script>
+<script type="text/javascript">
+$("#search_btn").click(function(){
+	var sc = $("#search_con").val();
+	if(sc==""||sc=="请输入关键字") {
+		alert("你需要输入相应的检索内容");
+	} else {
+		window.location.href=$("#ctx").val()+"/search/"+sc;
+	}
+});
+</script>
 </head>
 <body>
 <jsp:include page="/jsp/template/top.jsp"/>	

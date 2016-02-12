@@ -40,19 +40,6 @@ public class ChannelController {
 	private IChannelService channelService;
 	@Autowired
 	private IIndexService indexService;
-
-	public IIndexService getIndexService() {
-		return indexService;
-	}
-	public void setIndexService(IIndexService indexService) {
-		this.indexService = indexService;
-	}
-	public IChannelService getChannelService() {
-		return channelService;
-	}
-	public void setChannelService(IChannelService channelService) {
-		this.channelService = channelService;
-	}
 	
 	@RequestMapping(value = "/channels",method=RequestMethod.POST)
 	public String list(Model model) {
