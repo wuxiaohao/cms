@@ -8,6 +8,16 @@
 <script type="text/javascript">
 	$(function(){
 		$(".isNewPic").click(function(){
+			if($(this).attr("checked")) { //如果被选择，则校验图片大小规格
+				var $tp = $(this).parent().parent().find("[name=path]");
+				var img = new Image();
+				img.src = $(this).attr("url");
+				if(img.height != 288 || img.width != 900) {
+					$(this).removeAttr("checked");
+					showMessage("","该图片规格不匹配!");
+					return false;
+				}
+			}
 			dwrService.updateIndexPic($(this).val());
 			showMessage("设置成功!","");
 		})
@@ -65,10 +75,13 @@
 					<tbody>
 						<c:forEach items="${datas.datas }" var="pic">
 							<tr>
-								<td><img src='<%=request.getContextPath()%>/resources/upload/thumbnail/${pic.newName}'/></td>
+								<td>
+									<img src='<%=request.getContextPath()%>/resources/upload/thumbnail/${pic.newName}'/>
+									<input type="hidden" value="<%=request.getContextPath()%>/resources/upload/${pic.newName}" name="path"  />
+								</td>
 								<td>${pic.topic.title }</td>
 								<td>
-									<input class="form-control isNewPic" type="checkbox" value="${pic.id }" <c:if test="${pic.isIndexPic eq 1 }">checked="checked"</c:if>/>
+									<input class="form-control isNewPic" url="<%=request.getContextPath()%>/resources/upload/${pic.newName}" type="checkbox" value="${pic.id }" <c:if test="${pic.isIndexPic eq 1 }">checked="checked"</c:if>/>
 								</td>
 							</tr>
 						</c:forEach>

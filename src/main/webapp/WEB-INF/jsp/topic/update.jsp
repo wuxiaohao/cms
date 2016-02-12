@@ -142,7 +142,7 @@
 										<tr>
 											<td>
 												<c:if test="${att.isImg eq 1 }">
-													<img src="<%=request.getContextPath() %>/resources/upload/thumbnail/${att.newName}"/>
+													<img height='45' width='150' src="<%=request.getContextPath() %>/resources/upload/${att.newName}"/>
 												</c:if>
 												<c:if test="${att.isImg ne 1 }">
 													普通类型附件

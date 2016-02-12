@@ -60,6 +60,7 @@ public interface IAttachmentDao extends IBaseDao<Attachment>{
 	 * @return
 	 */
 	public List<Attachment> listAttachByTopic(int tid);
+	public List<Attachment> listAttachmentByIndexPic(int num);
 	
 	
 }

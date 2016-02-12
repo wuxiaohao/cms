@@ -17,9 +17,11 @@ import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
 import org.wxh.topic.service.ITopicService;
+import org.wxh.topic.service.impl.AttachmentService;
 import org.wxh.util.BaseInfoUtil;
 import org.wxh.util.FreemarkerUtil;
 import org.wxh.util.PropertiesUtil;
@@ -62,6 +64,8 @@ public class IndexService implements IIndexService {
 	private IIndexPicService indexPicService;
 	@Autowired
 	private IKeywordService keyworkService;
+	@Autowired
+	private IAttachmentService attachmentService;
 
 	@Override
 	public void generateTop() {
@@ -85,6 +89,7 @@ public class IndexService implements IIndexService {
 
 	@Override
 	public void generateBody() {
+		Map<String,Object> root = new HashMap<String,Object>();
 		//1、获取所有的首页栏目
 		List<Channel> cs = channelService.listAllIndexChannel(ChannelType.TOPIC_LIST);
 		//2、根据首页栏目创建相应的IndexTopic对象
@@ -94,8 +99,8 @@ public class IndexService implements IIndexService {
 		for(Channel c:cs) {
 			int cid = c.getId();
 			String[] xs = prop.getProperty(cid+"").split("_");
-			String order = xs[0];
-			int num = Integer.parseInt(xs[1]);
+			String order = xs[0];//文章排序
+			int num = Integer.parseInt(xs[1]);//文章数量
 			IndexTopic it = new IndexTopic();
 			it.setCid(cid);
 			it.setCname(c.getName());
@@ -104,15 +109,22 @@ public class IndexService implements IIndexService {
 			it.setTopics(tops);
 			topics.put(order, it);
 		}
-		String outfile = SystemContext.getRealPath()+outPath+"/body.jsp";
-		//3、更新首页图片
+		root.put("ts", topics);
+		
+		//3、更新宣传图片
 		BaseInfo bi = BaseInfoUtil.getInstacne().read();
 		int picnum = bi.getIndexPicNumber(); 
-		Map<String,Object> root = new HashMap<String,Object>();
-		root.put("ts", topics);
 		root.put("pics", indexPicService.listIndexPicByNum(picnum));  //硬编码。数量应该可配置
-		root.put("keywords", keyworkService.getMaxTimesKeyword(12));  //硬编码。
-		root.put("xxgk", topicService.loadLastedTopicByColumn(43)); //栏目id43是校园概况，属于文章内容栏目，目前是硬编码
+		//4、更新新闻滚动图片
+		root.put("newsPic", attachmentService.listAttachmentByIndexPic(5));
+		//5、更新视频新闻栏目
+		
+		//6、更新友情链接
+		
+		
+		//root.put("keywords", keyworkService.getMaxTimesKeyword(12));  //获取关键字，硬编码。
+		//root.put("xxgk", topicService.loadLastedTopicByColumn(43)); //栏目id43是校园概况，属于文章内容栏目，目前是硬编码
+		String outfile = SystemContext.getRealPath()+outPath+"/body.jsp";
 		util.fprint(root, "/body.ftl", outfile);
 		logger.info("=============重新生成了body信息====================");
 	}

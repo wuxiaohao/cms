@@ -55,6 +55,12 @@ public class AttachmentDao extends BaseDao<Attachment> implements IAttachmentDao
 		return this.getSession().createQuery(hql).setParameter(0,1)
 				.setFirstResult(0).setMaxResults(num).list();
 	}
+	
+	@Override
+	public List<Attachment> listAttachmentByIndexPic(int num) {
+		String hql = getAttachmentSelect() + " from Attachment a where a.isIndexPic=1 and a.topic.status=1 and a.isImg=1";
+		return this.getSession().createQuery(hql).setFirstResult(0).setMaxResults(num).list();
+	}
 
 	@Override
 	public Pager<Attachment> findChannelPic(int cid) {

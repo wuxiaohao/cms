@@ -53,6 +53,11 @@ public interface IAttachmentService {
 	 */
 	public List<Attachment> listIndexPic(int num);
 	/**
+	 * 获取指定数量的首页新闻滚动图片
+	 * @return
+	 */
+	public List<Attachment> listAttachmentByIndexPic(int num);
+	/**
 	 * 获取某个栏目中的附件图片信息
 	 * @param cid 栏目id
 	 * @return

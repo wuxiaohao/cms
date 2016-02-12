@@ -182,5 +182,9 @@ public class AttachmentService implements IAttachmentService {
 	public long findNoUseAttachmentNum() {
 		return attachmentDao.findNoUseAttachmentNum();
 	}
+	@Override
+	public List<Attachment> listAttachmentByIndexPic(int num) {
+		return attachmentDao.listAttachmentByIndexPic(num);
+	}
 
 }

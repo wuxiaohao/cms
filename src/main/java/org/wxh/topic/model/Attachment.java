@@ -40,7 +40,7 @@ public class Attachment {
 	 */
 	private long size;
 	/**
-	 * 该附件是否是主页图片
+	 * 该附件是否是首页滚动新闻图片
 	 */
 	private int isIndexPic;
 	/**

@@ -75,7 +75,7 @@ $(function(){
 	function createAttachNode(attach) {
 		var node = "<tr>";
 		if(attach.isImg) {
-			node+="<td><img src='"+uploadPath+"thumbnail/"+attach.newName+"'/></td>";
+			node+="<td><img height='45' width='150' src='"+uploadPath+attach.newName+"'/></td>";
 		} else {
 			node+="<td>普通类型附件</td>";
 		}
@@ -97,7 +97,16 @@ $(function(){
 	
 	//点击主页图片的事件委派对象
 	$("#ok_attach").on("click",".indexPic",function(){
-		//alert($(this).val());
+		if($(this).attr("checked")) { //如果被选择，则校验图片大小规格
+			var $tp = $(this).parent().parent().find("img");
+			var img = new Image();
+			img.src = $tp.attr("src");
+			if(img.height != 288 || img.width != 900) {
+				$(this).removeAttr("checked");
+				alert("图片规格不匹配!");
+				return false;
+			}
+		}
 		dwrService.updateIndexPic($(this).val()); //更新是否是主页信息
 	});
 	//点击附件信息的事件委派对象
