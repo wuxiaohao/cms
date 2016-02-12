@@ -57,25 +57,6 @@ public class IndexPicController {
 	@Autowired
 	private IIndexService indexService;
 	
-	public IIndexService getIndexService() {
-		return indexService;
-	}
-	public void setIndexService(IIndexService indexService) {
-		this.indexService = indexService;
-	}
-	public IAttachmentService getAttachmentService() {
-		return attachmentService;
-	}
-	public void setAttachmentService(IAttachmentService attachmentService) {
-		this.attachmentService = attachmentService;
-	}
-	public IIndexPicService getIndexPicService() {
-		return indexPicService;
-	}
-	public void setIndexPicService(IIndexPicService indexPicService) {
-		this.indexPicService = indexPicService;
-	}
-	
 	/**
 	 * 显示首页新闻图片列表
 	 * @param model
