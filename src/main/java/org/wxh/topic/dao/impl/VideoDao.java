@@ -1,5 +1,7 @@
 package org.wxh.topic.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
@@ -43,6 +45,13 @@ public class VideoDao extends BaseDao<Video> implements IVideoDao{
 		Video v = (Video) queryObject("from Video v where v.id=?", id);
 		this.getSession().clear();
 		return v;
+	}
+
+	@Override
+	public List<Video> listVideoByNum(int cid, int num) {
+		String hql = "from Video v where v.status=1 and v.channel.id=?";
+		return this.getSession().createQuery(hql).
+					setParameter(0, cid).setFirstResult(0).setMaxResults(num).list();
 	}
 
 }

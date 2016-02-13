@@ -23,8 +23,8 @@ $(function(){
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-			超级链接管理
-			<small>增加删除修改超级链接 </small>
+			友情链接管理
+			<small>增加删除修改友情链接 </small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -38,11 +38,11 @@ $(function(){
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/cmsLink/links" class="ajaxify">超级链接管理</a>
+					<a href="admin/cmsLink/links" class="ajaxify">友情链接管理</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/cmsLink/addUI" class="ajaxify">添加超级链接</a>
+					<a href="admin/cmsLink/addUI" class="ajaxify">添加友情链接</a>
 				</li>
 			</ul>
 		</div>
@@ -56,7 +56,7 @@ $(function(){
 			<div class="portlet-title">
 				<div class="caption font-blue">
 					<i class="icon-pin font-blue"></i>
-					<span class="caption-subject bold uppercase"> 添加超链接</span>
+					<span class="caption-subject bold uppercase"> 添加友情链接</span>
 				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
@@ -67,7 +67,7 @@ $(function(){
 					<div class="form-body">
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接标题</label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="title" class="form-control" />
 								<sf:errors cssClass="errorContainer" path="title"/>
 								<div class="form-control-focus"></div>
@@ -75,14 +75,14 @@ $(function(){
 						</div>
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接地址</label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="url" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接类别</label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<select id="urlType" class="bs-select form-control">
 								<option value="0">请选择类型</option>
 								<c:forEach items="${types }" var="t">
@@ -119,14 +119,14 @@ $(function(){
 						</div>
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">链接标签ID</label>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<sf:input path="urlId" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input has-info">
-							<label class="col-md-2 control-label" for="form_control_1">>链接标签类别</label>
-							<div class="col-md-3">
+							<label class="col-md-2 control-label" for="form_control_1">链接标签类别</label>
+							<div class="col-md-6">
 								<sf:input path="urlClass" class="form-control" />
 								<div class="form-control-focus"></div>
 							</div>

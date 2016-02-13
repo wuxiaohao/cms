@@ -72,8 +72,8 @@ $(function(){
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-			超级链接管理
-			<small>增加删除修改超级链接 </small>
+			友情链接管理
+			<small>增加删除修改友情链接 </small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -87,7 +87,7 @@ $(function(){
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/cmsLink/links" class="ajaxify">超级链接管理</a>
+					<a href="admin/cmsLink/links" class="ajaxify">友情链接管理</a>
 				</li>
 			</ul>
 		</div>

@@ -2,6 +2,7 @@ package org.wxh.topic.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.model.Video;
@@ -75,5 +76,11 @@ public interface IVideoService {
 	 * @throws IOException 
 	 */
 	public void addPic(String picName, InputStream inputStream) throws IOException;
+	/**
+	 * 根据栏目id和数量，获取视频列表
+	 * @param cid 栏目id
+	 * @param num 数量
+	 */
+	public List<Video> listVideoByNum(int cid, int num);
 	
 }

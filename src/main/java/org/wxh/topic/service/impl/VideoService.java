@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -174,6 +175,11 @@ public class VideoService implements IVideoService{
 		path = path+picName;
 		logger.info(path);
 		FileUtils.copyInputStreamToFile(is, new File(path));
+	}
+
+	@Override
+	public List<Video> listVideoByNum(int cid, int num) {
+		return videoDao.listVideoByNum(cid,num);
 	}
 
 }

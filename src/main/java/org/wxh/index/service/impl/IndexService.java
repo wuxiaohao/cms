@@ -17,10 +17,12 @@ import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.Video;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
 import org.wxh.topic.service.ITopicService;
+import org.wxh.topic.service.IVideoService;
 import org.wxh.topic.service.impl.AttachmentService;
 import org.wxh.util.BaseInfoUtil;
 import org.wxh.util.FreemarkerUtil;
@@ -66,6 +68,8 @@ public class IndexService implements IIndexService {
 	private IKeywordService keyworkService;
 	@Autowired
 	private IAttachmentService attachmentService;
+	@Autowired
+	private IVideoService videoService;
 
 	@Override
 	public void generateTop() {
@@ -90,7 +94,7 @@ public class IndexService implements IIndexService {
 	@Override
 	public void generateBody() {
 		Map<String,Object> root = new HashMap<String,Object>();
-		//1、获取所有的首页栏目
+		//1、获取所有的首页栏目(置顶新闻未设置)
 		List<Channel> cs = channelService.listAllIndexChannel(ChannelType.TOPIC_LIST);
 		//2、根据首页栏目创建相应的IndexTopic对象
 		//加载indexChannel.properties文件
@@ -104,7 +108,7 @@ public class IndexService implements IIndexService {
 			IndexTopic it = new IndexTopic();
 			it.setCid(cid);
 			it.setCname(c.getName());
-			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);//赢编码，首页栏目应该可以配置排序，数量等
+			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);//硬编码，首页栏目应该可以配置排序，数量等
 //			System.out.println(cid+"--"+tops);
 			it.setTopics(tops);
 			topics.put(order, it);
@@ -115,10 +119,10 @@ public class IndexService implements IIndexService {
 		BaseInfo bi = BaseInfoUtil.getInstacne().read();
 		int picnum = bi.getIndexPicNumber(); 
 		root.put("pics", indexPicService.listIndexPicByNum(picnum));  //硬编码。数量应该可配置
-		//4、更新新闻滚动图片
-		root.put("newsPic", attachmentService.listAttachmentByIndexPic(5));
-		//5、更新视频新闻栏目
-		
+		//4、更新新闻滚动图片(没排序)
+		root.put("newsPic", attachmentService.listAttachmentByIndexPic(5));//硬编码。数量应该可配置
+		//5、更新视频新闻栏目(没排序)
+		List<Video> videos = videoService.listVideoByNum(60,6);//硬编码。栏目id和数量应该可配置
 		//6、更新友情链接
 		
 		

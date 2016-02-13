@@ -120,7 +120,7 @@
 						<li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/cmsLink/links">
 							<i class="icon-wallet"></i>
-							超级链接管理</a>
+							友情链接管理</a>
 						</li>
 						<li>
 							<a id="HeadImg" class="ajaxify" href="<%=request.getContextPath() %>/admin/pic/indexPics">

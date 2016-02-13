@@ -1,5 +1,7 @@
 package org.wxh.topic.dao;
 
+import java.util.List;
+
 import org.wxh.basic.dao.IBaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.model.Video;
@@ -29,5 +31,11 @@ public interface IVideoDao extends IBaseDao<Video>{
 	 * @return
 	 */
 	Video loadVideo(int id);
+	/**
+	 * 根据栏目id和数量，获取视频列表
+	 * @param cid 栏目id
+	 * @param num 数量
+	 */
+	List<Video> listVideoByNum(int cid, int num);
 
 }

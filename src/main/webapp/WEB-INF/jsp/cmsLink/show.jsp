@@ -8,8 +8,8 @@
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-			超级链接管理
-			<small>增加删除修改超级链接 </small>
+			友情链接管理
+			<small>增加删除修改友情链接 </small>
 		</h3>
 		<div class="page-bar">
 			<ul class="page-breadcrumb">
@@ -23,11 +23,11 @@
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/cmsLink/links" class="ajaxify">超级链接管理</a>
+					<a href="admin/cmsLink/links" class="ajaxify">友情链接管理</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 				<li>
-					<a href="admin/cmsLink/${cmsLink.id}" class="ajaxify">查看超级链接</a>
+					<a href="admin/cmsLink/${cmsLink.id}" class="ajaxify">查看友情链接</a>
 				</li>
 			</ul>
 		</div>
@@ -42,7 +42,7 @@
 			<div class="portlet-title">
 				<div class="caption font-blue">
 					<i class="icon-settings font-blue"></i>
-					<span class="caption-subject bold"> 查看超链接</span>
+					<span class="caption-subject bold"> 查看友情接</span>
 				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>
