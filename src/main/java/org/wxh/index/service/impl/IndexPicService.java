@@ -49,9 +49,7 @@ public class IndexPicService implements IIndexPicService {
 	public void delete(int id) {
 		IndexPic pic = indexPicDao.load(id);
 		String rp = SystemContext.getRealPath();
-		String tp = rp+"/resources/indexPic/thumbnail/"+pic.getNewName();
 		String pp = rp+"/resources/indexPic/"+pic.getNewName();
-		new File(tp).delete();
 		new File(pp).delete();
 		indexPicDao.delete(id);
 	}
