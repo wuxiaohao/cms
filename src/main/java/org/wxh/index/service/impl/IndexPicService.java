@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.IndexPic;
@@ -103,6 +105,17 @@ public class IndexPicService implements IIndexPicService {
 	@Override
 	public void updatePos(int id, int oldPos, int newPos) {
 		indexPicDao.updatePos(id, oldPos, newPos);
+	}
+	@Override
+	public void savePic(String newName, InputStream is) throws IOException {
+		String realPath = SystemContext.getRealPath();
+		String path = realPath + GlobalResult.FILE_PATH + "/";//新闻图片存放的位置
+		//创建临时文件存放的位置
+		File fp = new File( path ); 
+		if( !fp.exists() ) fp.mkdirs();
+		path = path + newName;
+		logger.info(path);
+		FileUtils.copyInputStreamToFile(is, new File(path));
 	}
 
 }

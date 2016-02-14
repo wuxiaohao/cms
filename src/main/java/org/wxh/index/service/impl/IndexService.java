@@ -123,14 +123,19 @@ public class IndexService implements IIndexService {
 		root.put("newsPic", attachmentService.listAttachmentByIndexPic(5));//硬编码。数量应该可配置
 		//5、更新视频新闻栏目(没排序)
 		List<Video> videos = videoService.listVideoByNum(60,6);//硬编码。栏目id和数量应该可配置
-		//6、更新友情链接
-		
-		
 		//root.put("keywords", keyworkService.getMaxTimesKeyword(12));  //获取关键字，硬编码。
 		//root.put("xxgk", topicService.loadLastedTopicByColumn(43)); //栏目id43是校园概况，属于文章内容栏目，目前是硬编码
 		String outfile = SystemContext.getRealPath()+outPath+"/body.jsp";
 		util.fprint(root, "/body.ftl", outfile);
 		logger.info("=============重新生成了body信息====================");
+	}
+
+	/**
+	 * 更新友情链接
+	 */
+	@Override
+	public void generateLink() {
+		
 	}
 
 }

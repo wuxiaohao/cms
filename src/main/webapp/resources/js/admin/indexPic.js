@@ -16,6 +16,26 @@ $(function(){
 		onUploadSuccess:function(file, data, response) {
 			var ao = $.parseJSON(data);//把对象转为json数据
 			if(ao.result) {
+				$("#newName").val(ao.obj.newName);
+				$("#oldName").val(ao.obj.oldName);
+				$(".pname").show(1000);
+			} else {
+				alert(ao.msg);
+			}
+		}
+	});
+	//截图功能的代码
+	/*$("#indexPic").uploadify({
+		swf:ctx+"/resources/uploadify/uploadify.swf",
+		uploader:ctx+"/admin/pic/uploadIndexPic",
+		buttonText: '请选择图片',
+		fileObjName:"pic",
+		multi:false,
+		formData:{"sid":$("#sid").val()},
+		fileTypeExts:"*.jpg;*.png;",
+		onUploadSuccess:function(file, data, response) {
+			var ao = $.parseJSON(data);//把对象转为json数据
+			if(ao.result) {
 				newName = ao.obj.newName;
 				oldName = ao.obj.oldName;
 				$("#indexPicView").append("<img src='"+ctx+"/resources/indexPic/temp/"+newName+"'/>" +
@@ -36,7 +56,7 @@ $(function(){
 				alert(ao.msg);
 			}
 		}
-	});
+	});*/
 	
 	function showPreview(coords)
 	{

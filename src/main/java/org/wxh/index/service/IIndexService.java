@@ -13,5 +13,9 @@ public interface IIndexService {
 	 * 重新生成首页body
 	 */
 	public void generateBody();
+	/**
+	 * 重新生成超链接页面
+	 */
+	public void generateLink();
 	
 }

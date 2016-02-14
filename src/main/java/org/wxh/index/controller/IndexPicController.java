@@ -199,6 +199,50 @@ public class IndexPicController {
 			out = resp.getWriter();
 			String oldName = pic.getOriginalFilename(); //图片的原始名称
 			String newName = new Date().getTime()+"."+FilenameUtils.getExtension(oldName);//图片的新名称
+			//网站配置信息的宽度、高度
+			BaseInfo baseInfo = (BaseInfo)session.getServletContext().getAttribute("baseInfo");
+			double w = baseInfo.getIndexPicWidth();
+			double h = baseInfo.getIndexPicHeight();
+			//获取上传图片的宽度，高度
+			BufferedImage bi = ImageIO.read(pic.getInputStream());
+			double nw = bi.getWidth();
+			double nh = bi.getHeight();
+			if(nw == w && nh == h) { //图片的大小符合要求
+				//保存图片
+				indexPicService.savePic(newName, pic.getInputStream());
+				IndexPicDto ipd = new IndexPicDto();
+				ipd.setNewName(newName);
+				ipd.setOldName(oldName);
+				ao.setObj(ipd);
+				ao.setResult(1);
+			} else {
+				ao.setResult(0);
+				ao.setMsg("图片的尺寸不在有效范围中");
+			}
+			
+		} catch (IOException e) {
+			ao.setResult(0);
+			ao.setMsg(e.getMessage());
+		}
+		
+		out.println(JsonUtil.getInstance().obj2json(ao));
+		out.flush();
+	}
+	/**
+	 * 上传首页宣传图片
+	 * @param session
+	 * @param resp
+	 * @param pic
+	 */
+	/*@RequestMapping(value="/uploadIndexPic",method=RequestMethod.POST)
+	public void uploadIndexPic(HttpSession session,HttpServletResponse resp,MultipartFile pic) {
+		resp.setContentType("text/plain;charset=utf-8");
+		AjaxObj ao = new AjaxObj();
+		PrintWriter out = null;
+		try {
+			out = resp.getWriter();
+			String oldName = pic.getOriginalFilename(); //图片的原始名称
+			String newName = new Date().getTime()+"."+FilenameUtils.getExtension(oldName);//图片的新名称
 			String realPath = session.getServletContext().getRealPath("");
 			//创建临时文件存放的位置
 			File f = new File(realPath+GlobalResult.FILE_PATH+"/temp"); 
@@ -246,7 +290,7 @@ public class IndexPicController {
 		
 		out.println(JsonUtil.getInstance().obj2json(ao));
 		out.flush();
-	}
+	}*/
 	/**
 	 * 处理被剪切后的图片的坐标，并上传
 	 * @param session
@@ -257,7 +301,7 @@ public class IndexPicController {
 	 * @param newName
 	 * @return
 	 */
-	@RequestMapping(value="/confirmPic",method=RequestMethod.POST)
+	/*@RequestMapping(value="/confirmPic",method=RequestMethod.POST)
 	public @ResponseBody AjaxObj confirmPic(HttpSession session,int x,int y,int w,int h,String newName) {
 		
 		AjaxObj ao = new AjaxObj();
@@ -289,5 +333,5 @@ public class IndexPicController {
 		}
 		return ao;
 		
-	}
+	}*/
 }

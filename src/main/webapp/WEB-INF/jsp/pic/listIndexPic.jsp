@@ -110,7 +110,7 @@ $(function(){
 					<thead>
 						<tr>
 							<th width="15%">缩略图</th>
-							<th width="25%">图片标题</th>
+							<th width="20%">图片标题</th>
 							<th>状态</th>
 							<th width="8%">链接类型</th>
 							<th width="30%">位置</th>
@@ -120,7 +120,7 @@ $(function(){
 					<tbody>
 						<c:forEach items="${datas.datas }" var="pic">
 							<tr>
-								<td><img src='<%=request.getContextPath()%>/resources/indexPic/thumbnail/${pic.newName}'/></td>
+								<td><img width="150" height="60" src='<%=request.getContextPath()%>/resources/indexPic/${pic.newName}'/></td>
 								<td><a href="admin/pic/indexPic/${pic.id }" class="ajaxify">${pic.title }</a></td>
 								<td>
 									<c:if test="${pic.status eq 0}">

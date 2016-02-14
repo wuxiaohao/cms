@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/jcrop/css/jquery.Jcrop.css"/>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/jcrop/js/jquery.Jcrop.min.js"></script>
+<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/jcrop/css/jquery.Jcrop.css"/>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/jcrop/js/jquery.Jcrop.min.js"></script> --%>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/indexPic.js"></script>
 <div class="row">
 	<div class="col-md-12">
@@ -59,22 +59,30 @@
 								<input type="file" id="indexPic" name="indexPic" class="form-control" />
 							</div>
 						</div>
-						<div class="form-group form-md-line-input has-info newName" style="display: none;">
+						<!-- <div class="form-group form-md-line-input has-info newName" style="display: none;">
 							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
 							<div class="col-md-6">
 								<input id="newName" name="newName" readonly class="form-control"/>
 								<div class="form-control-focus"></div>
 							</div>
-						</div>
-						<div class="form-group form-md-line-input has-info">
+						</div> -->
+						<!-- <div class="form-group form-md-line-input has-info">
 							<div class="col-md-6">
 								<div id="indexPicView" style="margin-left: 145px;"></div>
+							</div>
+						</div> -->
+						<div class="form-group form-md-line-input has-info pname" style="display: none;">
+							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
+							<div class="col-md-6">
+								<input id="oldName" type="text" name="oldName" class="form-control" readonly/>
+								<div class="form-control-focus"></div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">图片标题</label>
 							<div class="col-md-6">
 								<sf:input path="title" class="form-control"/>
+								<input type="hidden" id="newName" name="newName">
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
