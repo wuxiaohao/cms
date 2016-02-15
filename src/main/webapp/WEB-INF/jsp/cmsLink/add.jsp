@@ -16,9 +16,32 @@ $(function(){
 			$(".type").val(v);
 			$(".type").attr("readonly","true");
 		}
-	})
+	});
+	var newName,oldName;
+	var ctx = $("#ctx").val();
+	//multi:false表示只上传一个文件，auto默认为true，自动上传
+	$("#linkPic").uploadify({
+		swf:ctx+"/resources/uploadify/uploadify.swf",
+		uploader:ctx+"/admin/cmsLink/uploadPicLink",
+		buttonText: '请选择图片',
+		fileObjName:"pic",
+		multi:false,
+		formData:{"sid":$("#sid").val()},
+		fileTypeExts:"*.jpg;*.png;",
+		onUploadSuccess:function(file, data, response) {
+			var ao = $.parseJSON(data);//把对象转为json数据
+			if(ao.result) {
+				$("#picName").val(ao.obj);
+				$(".pname").show(1000);
+			} else {
+				alert(ao.msg);
+			}
+		}
+	});
 });
 </script>
+<input type="hidden" id="sid" value="<%=session.getId()%>"/>
+<input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
 <div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
@@ -65,6 +88,20 @@ $(function(){
 			<div class="portlet-body form">
 				<sf:form id="addForm" role="form" method="post" modelAttribute="cmsLink" action="admin/cmsLink/add" class="form-horizontal ajaxiform">	
 					<div class="form-body">
+						<div class="form-group form-md-line-input has-info">
+							<label class="col-md-2 control-label" for="form_control_1"></label>
+							<div class="col-md-6">
+								<input type="file" id="linkPic" name="linkPic" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group form-md-line-input has-info pname" style="display: none;">
+							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
+							<div class="col-md-6">
+								<input id="picName" type="text" name="picName" class="form-control" readonly/>
+								<div class="form-control-focus"></div>
+							</div>
+						</div>
+						
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">超链接标题</label>
 							<div class="col-md-6">

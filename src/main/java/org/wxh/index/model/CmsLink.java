@@ -30,6 +30,10 @@ public class CmsLink {
 	 */
 	private String url;
 	/**
+	 * 超链接图片名称
+	 */
+	private String picName;
+	/**
 	 * 超链接的类型
 	 */
 	private String type ="暂无";
@@ -107,4 +111,11 @@ public class CmsLink {
 	public void setPos(int pos) {
 		this.pos = pos;
 	}
+	public String getPicName() {
+		return picName;
+	}
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+	
 }

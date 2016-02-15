@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.IndexPic;
 import org.wxh.index.model.dto.IndexPicDto;
 import org.wxh.index.service.IIndexPicService;
@@ -131,9 +132,15 @@ public class IndexPicController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateIndexPic/{id}",method=RequestMethod.POST)
-	public String updateIndexPic(@PathVariable int id,@Validated IndexPic indexPic,BindingResult br,Model model,HttpSession session) {
+	public String updateIndexPic(@PathVariable int id,@Validated IndexPic indexPic,String oldPic,BindingResult br,Model model,HttpSession session) {
 		if(br.hasErrors()) {
 			return "pic/updateIndexPic";
+		}
+		if( !oldPic.equals(indexPic.getNewName()) ) {
+			//删除原来旧的图片
+			String realPath = SystemContext.getRealPath();
+			String path = realPath + GlobalResult.FILE_PATH + "/";//新闻图片存放的位置
+			new File(path+oldPic).delete();
 		}
 		IndexPic tip = indexPicService.load(id);
 		tip.setLinkType(indexPic.getLinkType());

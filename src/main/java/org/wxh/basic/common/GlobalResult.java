@@ -33,6 +33,11 @@ public interface GlobalResult {
 	 * 
 	 */
 	public final static String FILE_PATH="/resources/indexPic";
+	/**
+	 * 友情链接图片的路径
+	 * 
+	 */
+	public final static String LINK_PATH="/resources/LinkPic";
 	
 	public final static int T_W = 120;
 	

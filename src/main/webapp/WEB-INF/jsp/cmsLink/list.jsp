@@ -125,7 +125,8 @@ $(function(){
 					<thead>
 						<tr>
 							<th width="15%">标题</th>
-							<th width="25%">超链接</th>
+							<th width="10%">缩略图</th>
+							<th width="20%">超链接</th>
 							<th>类型</th>
 							<th width="8%">打开方式</th>
 							<th width="30%">位置</th>
@@ -136,6 +137,7 @@ $(function(){
 						<c:forEach items="${datas.datas }" var="cl">
 							<tr>
 								<td><a href="admin/cmsLink/${cl.id }" class="ajaxify">${cl.title }</a></td>
+								<td><img width="120" height="40" src='<%=request.getContextPath()%>/resources/LinkPic/${cl.picName}'/></td>
 								<td><a href="${cl.url }" target="_blank">${cl.url }</a></td>
 								<td>${cl.type }</td>
 								<td>

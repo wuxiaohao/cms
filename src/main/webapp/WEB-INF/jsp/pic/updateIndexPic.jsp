@@ -71,6 +71,7 @@
 							<div class="col-md-6">
 								<sf:input path="title" class="form-control"/>
 								<input type="hidden" id="newName" name="newName">
+								<input type="hidden" name="oldPic" value="${indexPic.newName }">
 								<div class="form-control-focus"></div>
 							</div>
 						</div>

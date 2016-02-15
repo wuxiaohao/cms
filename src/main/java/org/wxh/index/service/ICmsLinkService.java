@@ -1,5 +1,7 @@
 package org.wxh.index.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -62,5 +64,11 @@ public interface ICmsLinkService {
 	 * @param newPos
 	 */
 	public void updatePos(int id,int oldPos,int newPos);
+	/**
+	 * 保存图片
+	 * @param newName 
+	 * @param inputStream
+	 */
+	public void savePic(String newName, InputStream inputStream) throws IOException;
 	
 }

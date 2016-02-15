@@ -51,7 +51,17 @@
 			<div class="portlet-body form">
 				<div class="form-horizontal">
 				<div class="form-body">
-					<h3 class="form-section">${cmsLink.title }</h3>
+					<h3 class="form-section">图片</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="col-md-9">
+									<img width="300" height="80" src="<%=request.getContextPath() %>/resources/LinkPic/${cmsLink.picName}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h3 class="form-section">基本信息</h3>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
