@@ -94,4 +94,10 @@ public class CmsLinkDao extends BaseDao<CmsLink> implements ICmsLinkDao {
 		this.update(cl);
 	}
 
+	@Override
+	public List<CmsLink> listAllLink() {
+		String hql = "from CmsLink order by pos";
+		return this.getSession().createQuery(hql).list();
+	}
+
 }

@@ -156,7 +156,7 @@ $(function(){
 					</tbody>
 					<tfoot>
 					<tr>
-						<td colspan="6" style="text-align:right;margin-right:10px;">
+						<td colspan="7" style="text-align:right;margin-right:10px;">
 						<jsp:include page="/jsp/pager.jsp">
 							<jsp:param value="${datas.total }" name="totalRecord"/>
 							<jsp:param value="admin/cmsLink/links" name="url"/>

@@ -43,4 +43,5 @@ public interface ICmsLinkDao extends IBaseDao<CmsLink>{
 	 * @param newPos
 	 */
 	public void updatePos(int id,int oldPos,int newPos);
+	public List<CmsLink> listAllLink();
 }
