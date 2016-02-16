@@ -98,7 +98,7 @@ public class IndexService implements IIndexService {
 	@Override
 	public void generateBody() {
 		Map<String,Object> root = new HashMap<String,Object>();
-		//1、获取所有的首页栏目(置顶新闻未设置)
+		//1、获取所有的首页栏目
 		List<Channel> cs = channelService.listAllIndexChannel(ChannelType.TOPIC_LIST);
 		//2、根据首页栏目创建相应的IndexTopic对象
 		//加载indexChannel.properties文件
