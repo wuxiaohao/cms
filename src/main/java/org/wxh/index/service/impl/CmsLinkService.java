@@ -87,10 +87,7 @@ public class CmsLinkService implements ICmsLinkService {
 		logger.info(path);
 		FileUtils.copyInputStreamToFile(is, new File(path));
 	}
-	/**
-	 * 获取所有友情链接
-	 * @return
-	 */
+	@Override
 	public List<CmsLink> listAllLink() {
 		return cmsLinkDao.listAllLink();
 	}

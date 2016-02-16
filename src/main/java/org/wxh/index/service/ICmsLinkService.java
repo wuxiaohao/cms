@@ -70,5 +70,10 @@ public interface ICmsLinkService {
 	 * @param inputStream
 	 */
 	public void savePic(String newName, InputStream inputStream) throws IOException;
+	/**
+	 * 获取所有友情链接
+	 * @return
+	 */
+	public List<CmsLink> listAllLink();
 	
 }

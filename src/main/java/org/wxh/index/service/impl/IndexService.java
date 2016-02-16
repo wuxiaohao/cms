@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.CmsLink;
 import org.wxh.index.model.IndexTopic;
+import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexPicService;
 import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
@@ -72,7 +73,7 @@ public class IndexService implements IIndexService {
 	@Autowired
 	private IVideoService videoService;
 	@Autowired
-	private CmsLinkService cmsLinkService;
+	private ICmsLinkService cmsLinkService;
 
 	@Override
 	public void generateTop() {
@@ -141,6 +142,8 @@ public class IndexService implements IIndexService {
 		List<CmsLink> list = cmsLinkService.listAllLink();
 		Map<String,Object> root = new HashMap<String,Object>();
 		root.put("pics", list);
+		String outfile = SystemContext.getRealPath()+outPath+"/link.jsp";
+		util.fprint(root, "/link.ftl", outfile);
 	}
 
 }
