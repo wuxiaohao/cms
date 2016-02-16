@@ -102,11 +102,6 @@
 							<i class="icon-wallet"></i>
 							顶部栏目设置</a>
 						</li>
-						<li>
-							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/topic/audits">
-							<i class="icon-wallet"></i>
-							首页栏目管理</a>
-						</li>
 					</ul>
 				</li>
 				<c:if test="${isAdmin }">
@@ -156,7 +151,7 @@
 						<li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/system/cleans">
 							<i class="icon-wallet"></i>
-							系统清理管理</a>
+							垃圾文件清理</a>
 						</li>
 					</ul>
 				</li>

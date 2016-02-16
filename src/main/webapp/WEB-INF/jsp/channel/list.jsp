@@ -49,6 +49,6 @@
 		<TD width=190px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
 			<ul id="tree" class="ztree" style="width:190px; overflow:auto;"></ul>
 		</TD>
-		<TD width=100% align=left valign=top><IFRAME ID="cc" Name="testIframe" FRAMEBORDER=0 SCROLLING="auto" width=90%  height=390px style="margin-left: 30px" ></IFRAME></TD>
+		<TD width=100% align=left valign=top><IFRAME ID="cc" Name="testIframe" FRAMEBORDER=0 SCROLLING="auto" width=97%  height=390px style="margin-left: 30px" ></IFRAME></TD>
 	</TR>
 </TABLE>
