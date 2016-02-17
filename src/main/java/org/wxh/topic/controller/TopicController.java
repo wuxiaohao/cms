@@ -2,11 +2,13 @@ package org.wxh.topic.controller;
 
 import org.apache.log4j.Logger;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +33,7 @@ import org.wxh.topic.model.ChannelTree;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.AjaxObj;
+import org.wxh.topic.model.dto.AttachmentDto;
 import org.wxh.topic.model.dto.TopicDto;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IChannelService;
@@ -302,14 +305,12 @@ public class TopicController {
 	@AuthMethod(role="ROLE_PUBLISH")
 	public void upload(MultipartFile attach,HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/plain;charset=utf-8");
-		AjaxObj ao = null;
+		AjaxObj ao = new AjaxObj();
 		try {
 			Attachment att = new Attachment();
 			String ext = FilenameUtils.getExtension(attach.getOriginalFilename());
 			logger.info(ext);
 			att.setIsAttach(0);
-			if(imgTypes.contains(ext)) att.setIsImg(1);
-			else att.setIsImg(0);
 			att.setIsIndexPic(0);
 			att.setNewName(String.valueOf(new Date().getTime())+"."+ext);
 			att.setOldName(FilenameUtils.getBaseName(attach.getOriginalFilename()));
@@ -317,10 +318,26 @@ public class TopicController {
 			att.setType(attach.getContentType());
 			att.setTopic(null);
 			att.setSize(attach.getSize());
+			if(imgTypes.contains(ext)) {
+				att.setIsImg(1);
+			} else { 
+				att.setIsImg(0);
+			}
 			attachmentService.add(att, attach.getInputStream());
-			ao = new AjaxObj(1,null,att);
+			ao.setResult(1);
+			if(imgTypes.contains(ext)) {
+				//获取上传图片的宽度，高度
+				BufferedImage bi = ImageIO.read(attach.getInputStream());
+				int nw = bi.getWidth();
+				int nh = bi.getHeight();
+				AttachmentDto dto = new AttachmentDto(att,nw,nh);
+				ao.setObj(dto);
+			} else {
+				ao.setObj(att);
+			}
 		} catch (IOException e) {
-			ao = new AjaxObj(0,e.getMessage());
+			ao.setResult(0);
+			ao.setMsg(e.getMessage());
 		}
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 	}

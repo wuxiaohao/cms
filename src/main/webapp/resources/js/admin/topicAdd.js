@@ -82,7 +82,7 @@ $(function(){
 		node+="<td>"+attach.oldName+"</td>";
 		node+="<td>"+Math.round(attach.size/1024)+"K</td>";
 		if(attach.isImg) {
-			node+="<td><input type='checkbox' value='"+attach.id+"' name='indexPic' class='indexPic'></td>";
+			node+="<td><input type='checkbox' value='"+attach.id+"' name='indexPic' class='indexPic' width="+attach.width+" height="+attach.height+"></td>";
 			node+="<td><input type='radio' value='"+attach.id+"' name='channelPicId'></td>";
 		} else {
 			node+="<td>&nbsp;</td><td>&nbsp;</td>";
@@ -97,12 +97,21 @@ $(function(){
 	
 	//点击主页图片的事件委派对象
 	$("#ok_attach").on("click",".indexPic",function(){
-		if($(this).attr("checked")) { //如果被选择，则校验图片大小规格
+		/*if($(this).attr("checked")) { //如果被选择，则校验图片大小规格
 			var $tp = $(this).parent().parent().find("img");
 			var img = new Image();
 			img.src = $tp.attr("src");
 			if(img.height != 288 || img.width != 900) {
 				$(this).removeAttr("checked");
+				alert("图片规格不匹配!");
+				return false;
+			}
+		}*/
+		if( $(this).attr("checked") ) { //如果被选择，则校验图片大小规格
+			var width = $(this).attr("width");
+			var height = $(this).attr("height");
+			if(height != 365 || width != 1140) {
+				$(this).removeAttr("checked");//取消选中
 				alert("图片规格不匹配!");
 				return false;
 			}

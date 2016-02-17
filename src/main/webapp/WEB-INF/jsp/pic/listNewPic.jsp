@@ -12,13 +12,13 @@
 				var $tp = $(this).parent().parent().find("[name=path]");
 				var img = new Image();
 				img.src = $(this).attr("url");
-				if(img.height != 288 || img.width != 900) {
+				if(img.height != 365 || img.width != 1140) {
 					$(this).removeAttr("checked");
 					showMessage("","该图片规格不匹配!");
 					return false;
 				}
 			}
-			dwrService.updateIndexPic($(this).val());
+			dwrService.updateIndexPicFush($(this).val());
 			showMessage("设置成功!","");
 		})
 	});
@@ -76,7 +76,7 @@
 						<c:forEach items="${datas.datas }" var="pic">
 							<tr>
 								<td>
-									<img src='<%=request.getContextPath()%>/resources/upload/thumbnail/${pic.newName}'/>
+									<img height='65' width='230' src='<%=request.getContextPath()%>/resources/upload/${pic.newName}'/>
 									<input type="hidden" value="<%=request.getContextPath()%>/resources/upload/${pic.newName}" name="path"  />
 								</td>
 								<td>${pic.topic.title }</td>

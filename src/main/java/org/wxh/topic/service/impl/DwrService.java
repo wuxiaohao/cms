@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexPicService;
+import org.wxh.index.service.IIndexService;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IDwrService;
 import org.wxh.topic.service.IPictureService;
@@ -20,6 +21,8 @@ public class DwrService implements IDwrService{
 	private ICmsLinkService cmsLinkService;
 	@Autowired
 	private IPictureService pictureService;
+	@Autowired
+	private IIndexService indexService;
 
 	public IAttachmentService getAttachmentService() {
 		return attachmentService;
@@ -70,6 +73,15 @@ public class DwrService implements IDwrService{
 	@Override
 	public void updateIndexPic(int aid) {
 		attachmentService.updateIndexPic(aid);
+	}
+	/**
+	 * 更新是否是主页信息(同时刷新模板界面)
+	 * @param aid
+	 */
+	@Override
+	public void updateIndexPicFush(int aid) {
+		attachmentService.updateIndexPic(aid);
+		indexService.generateBody();//重新生成首页
 	}
 
 	/**

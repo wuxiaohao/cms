@@ -31,6 +31,11 @@ public interface IDwrService {
 	 * @param aid
 	 */
 	public void updateIndexPic(int aid);
+	/**
+	 * 更新是否是主页信息(同时刷新模板界面)
+	 * @param aid
+	 */
+	public void updateIndexPicFush(int aid);
 	
 	/**
 	 * 更新是否是附件信息

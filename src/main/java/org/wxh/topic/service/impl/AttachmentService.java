@@ -71,18 +71,19 @@ public class AttachmentService implements IAttachmentService {
 		//进行文件的存储
 		String realPath = SystemContext.getRealPath();
 		String path = realPath+GlobalResult.UPLOAD_PATH;//附件存放的位置
-		String thumbPath = path+"thumbnail/"; //缩略图存放的位置
+		//String thumbPath = path+"thumbnail/"; //缩略图存放的位置
 		File fp = new File(path);
-		File tfp = new File(thumbPath);
+		//File tfp = new File(thumbPath);
 //		logger.info(fp.exists());
 //		logger.info(tfp.exists());
 		if(!fp.exists()) fp.mkdirs();
-		if(!tfp.exists()) tfp.mkdirs();
+		//if(!tfp.exists()) tfp.mkdirs();
 		path = path+a.getNewName();
-		thumbPath = thumbPath+a.getNewName();
-		logger.info(path+","+thumbPath);
+		//thumbPath = thumbPath+a.getNewName();
+		//logger.info(path+","+thumbPath);
+		FileUtils.copyInputStreamToFile(is, new File(path));
 		//如果是图片
-		if(a.getIsImg()==1) {  
+		/*if(a.getIsImg()==1) {  
 			BufferedImage oldBi = ImageIO.read(is);
 			int width = oldBi.getWidth();
 			Builder<BufferedImage> bf = Thumbnails.of(oldBi);
@@ -102,7 +103,7 @@ public class AttachmentService implements IAttachmentService {
 				.toFile(thumbPath);
 		} else {
 			FileUtils.copyInputStreamToFile(is, new File(path));
-		}
+		}*/
 		
 	}
 
