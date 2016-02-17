@@ -42,7 +42,7 @@ public class Channel implements java.io.Serializable{
 	 */
 	private ChannelType type;
 	/**
-	 * 是否是首页栏目，0表示否，1表示是
+	 * 是否是首页栏目，0表示否，1表示是(已弃用)
 	 */
 	private int isIndex;
 	/**

@@ -66,7 +66,8 @@ $(function(){
 							<th width="150px">栏目名称</th>
 							<th width="110px">栏目类型</th>
 							<th>是否推荐</th>
-							<th>首页栏目</th>
+							<!-- <th>首页栏目</th> -->
+							<th>指定链接</th>
 							<th>顶部栏目</th>
 							<th>栏目状态</th>
 							<th>操作</th>
@@ -82,10 +83,14 @@ $(function(){
 									<c:if test="${c.recommend eq 1 }">推荐</c:if>
 									&nbsp;
 								</td>
-								<td>
+								<%-- <td>
 									<c:if test="${c.isIndex eq 0 }"><span class="emp">否</span></c:if>
 									<c:if test="${c.isIndex eq 1 }">是</c:if>
 									&nbsp;
+								</td> --%>
+								<td>
+									<c:if test="${c.customLink eq 0 }"><span class="emp">不指定</span></c:if>
+									<c:if test="${c.customLink eq 1 }">指定</c:if>
 								</td>
 								<td>
 									<c:if test="${c.isTopNav eq 0 }"><span class="emp">否</span></c:if>

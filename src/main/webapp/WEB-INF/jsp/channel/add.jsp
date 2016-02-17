@@ -70,7 +70,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input has-success">
+						<!-- <div class="form-group form-md-line-input has-success">
 							<label class="col-md-2 control-label" for="form_control_1">是否在首页显示</label>
 							<div class="col-md-6">
 								<div class="md-radio-inline">
@@ -92,7 +92,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group form-md-line-input has-success">
 							<label class="col-md-2 control-label" for="form_control_1">是否是推荐栏目</label>
 							<div class="col-md-6">

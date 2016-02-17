@@ -2,7 +2,7 @@
 	<!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
-		2015-2016 &copy; 吴晓豪 by 城市学院
+		2015-2016 &copy; 吴晓豪 by 东理城
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
