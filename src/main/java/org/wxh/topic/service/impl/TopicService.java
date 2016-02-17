@@ -1,12 +1,15 @@
 package org.wxh.topic.service.impl;
 
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.model.Pager;
+import org.wxh.index.model.IndexTopic;
 import org.wxh.topic.dao.IAttachmentDao;
 import org.wxh.topic.dao.IChannelDao;
 import org.wxh.topic.dao.ITopicDao;
@@ -16,6 +19,7 @@ import org.wxh.topic.model.Topic;
 import org.wxh.topic.service.ITopicService;
 import org.wxh.user.dao.IUserDao;
 import org.wxh.user.model.User;
+import org.wxh.util.PropertiesUtil;
 
 @Service("topicService")
 public class TopicService implements ITopicService {
@@ -168,7 +172,21 @@ public class TopicService implements ITopicService {
 	}
 	@Override
 	public boolean isUpdateIndex(int cid) {
-		return topicDao.isUpdateIndex(cid);
+		boolean check = false;
+		//加载indexChannel.properties文件
+		Properties prop = PropertiesUtil.getInstance().load("indexChannel");
+		Enumeration en = prop.propertyNames();
+		while( en.hasMoreElements() ) {
+			String key = en.nextElement().toString(); //key
+			String[] value = prop.getProperty(key+"").split("_"); //value
+			int _cid = Integer.parseInt( value[0] ); //栏目id
+			if( cid == _cid ) {
+				check = true;
+				break;
+			}
+		}
+		return check;
+		/*return topicDao.isUpdateIndex(cid);*/
 	}
 	
 	@Override

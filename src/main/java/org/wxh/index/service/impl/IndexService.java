@@ -2,6 +2,7 @@ package org.wxh.index.service.impl;
 
 import org.apache.log4j.Logger;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexPicService;
 import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
+import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
@@ -98,40 +100,38 @@ public class IndexService implements IIndexService {
 	@Override
 	public void generateBody() {
 		Map<String,Object> root = new HashMap<String,Object>();
-		//1、获取所有的首页栏目(置顶新闻未设置)
-		List<Channel> cs = channelService.listAllIndexChannel(ChannelType.TOPIC_LIST);
-		//2、根据首页栏目创建相应的IndexTopic对象
+		Map<String,IndexTopic> topics = new HashMap<String, IndexTopic>();
+		//1、获取所有的首页栏目
 		//加载indexChannel.properties文件
 		Properties prop = PropertiesUtil.getInstance().load("indexChannel");
-		Map<String,IndexTopic> topics = new HashMap<String, IndexTopic>();
-		for(Channel c:cs) {
-			int cid = c.getId();
-			String[] xs = prop.getProperty(cid+"").split("_");
-			String order = xs[0];//文章排序
-			int num = Integer.parseInt(xs[1]);//文章数量
+		Enumeration en = prop.propertyNames();
+		while( en.hasMoreElements() ) {
+			String key = en.nextElement().toString(); //key
+			String[] value = prop.getProperty( key+"" ).split( "_" ); //value
+			int cid = Integer.parseInt( value[ 0 ] ); //栏目id
+			int num = Integer.parseInt( value[ 1 ] ); //文章数量
+			Channel channel = channelService.load( cid );
 			IndexTopic it = new IndexTopic();
-			it.setCid(cid);
-			it.setCname(c.getName());
-			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);//硬编码，首页栏目应该可以配置排序，数量等
-//			System.out.println(cid+"--"+tops);
-			it.setTopics(tops);
-			topics.put(order, it);
+			it.setCid( cid ); //栏目id
+			it.setCname( channel.getName() ); //栏目名称
+			List<Topic> tops = topicService.listTopicByChannelAndNumber(cid, num);
+			it.setTopics( tops );
+			topics.put( key ,it );
 		}
 		root.put("ts", topics);
-		
-		//3、更新宣传图片
+		//2、更新宣传图片
 		BaseInfo bi = BaseInfoUtil.getInstacne().read();
 		int picnum = bi.getIndexPicNumber(); 
-		root.put("pics", indexPicService.listIndexPicByNum(picnum));  //硬编码。数量应该可配置
-		//4、更新新闻滚动图片(没排序)
-		root.put("newsPic", attachmentService.listAttachmentByIndexPic(5));//硬编码。数量应该可配置
-		//5、更新视频新闻栏目(没排序)
-		List<Video> videos = videoService.listVideoByNum(60,6);//硬编码。栏目id和数量应该可配置
-		//root.put("keywords", keyworkService.getMaxTimesKeyword(12));  //获取关键字，硬编码。
-		//root.put("xxgk", topicService.loadLastedTopicByColumn(43)); //栏目id43是校园概况，属于文章内容栏目，目前是硬编码
-		String outfile = SystemContext.getRealPath()+outPath+"/body.jsp";
-		util.fprint(root, "/body.ftl", outfile);
-		logger.info("=============重新生成了body信息====================");
+		root.put("pics", indexPicService.listIndexPicByNum( picnum ));  //硬编码。数量应该可配置
+		//3、更新新闻滚动图片(没排序)
+		List<Attachment> newsPic = attachmentService.listAttachmentByIndexPic( 5 );
+		root.put( "newsPics" ,newsPic );//硬编码。数量应该可配置
+		//4、更新视频新闻栏目(没排序)
+		List<Video> videos = videoService.listVideoByNum( 60 ,6 );//硬编码。栏目id和数量应该可配置
+		root.put( "videos" ,videos );
+		String outfile = SystemContext.getRealPath() + outPath + "/body.jsp";
+		util.fprint( root ,"/body.ftl" ,outfile );
+		logger.info( "=============重新生成了body信息====================" );
 	}
 
 	/**
@@ -144,6 +144,7 @@ public class IndexService implements IIndexService {
 		root.put("pics", list);
 		String outfile = SystemContext.getRealPath()+outPath+"/link.jsp";
 		util.fprint(root, "/link.ftl", outfile);
+		logger.info("=============重新生成了友情链接信息====================");
 	}
 
 }

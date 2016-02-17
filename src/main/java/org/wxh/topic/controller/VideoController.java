@@ -283,6 +283,8 @@ public class VideoController {
 		String realPath = SystemContext.getRealPath();
 		String ffmpeg_path = "D:/ffmpeg.exe";//注意这里，一定要有这个插件啊
 		String PicPath = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
+		File fp = new File(PicPath);
+		if( !fp.exists() ) fp.mkdirs();//如果目录不存在则创建目录
 		String picName = String.valueOf(new Date().getTime() + ".jpg" );
 		List<String> commands = new java.util.ArrayList<String>();
 		commands.add(ffmpeg_path);
