@@ -1,17 +1,17 @@
 package org.wxh.index.service.impl;
 
-import org.apache.log4j.Logger;
-
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.CmsLink;
+import org.wxh.index.model.IndexPic;
 import org.wxh.index.model.IndexTopic;
 import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexPicService;
@@ -19,7 +19,6 @@ import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
-import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.Video;
 import org.wxh.topic.service.IAttachmentService;
@@ -27,7 +26,6 @@ import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
 import org.wxh.topic.service.ITopicService;
 import org.wxh.topic.service.IVideoService;
-import org.wxh.topic.service.impl.AttachmentService;
 import org.wxh.util.BaseInfoUtil;
 import org.wxh.util.FreemarkerUtil;
 import org.wxh.util.PropertiesUtil;
@@ -107,7 +105,7 @@ public class IndexService implements IIndexService {
 		Enumeration en = prop.propertyNames();
 		while( en.hasMoreElements() ) {
 			String key = en.nextElement().toString(); //key
-			String[] value = prop.getProperty( key+"" ).split( "_" ); //value
+			String[] value = prop.getProperty( key + "" ).split( "_" ); //value
 			int cid = Integer.parseInt( value[ 0 ] ); //栏目id
 			int num = Integer.parseInt( value[ 1 ] ); //文章数量
 			Channel channel = channelService.load( cid );
@@ -119,13 +117,14 @@ public class IndexService implements IIndexService {
 			topics.put( key ,it );
 		}
 		root.put("ts", topics);
-		//2、更新宣传图片
+		//2、更新宣传图片(没排序)
 		BaseInfo bi = BaseInfoUtil.getInstacne().read();
 		int picnum = bi.getIndexPicNumber(); 
-		root.put("pics", indexPicService.listIndexPicByNum( picnum ));  //硬编码。数量应该可配置
+		List<IndexPic> pics = indexPicService.listIndexPicByNum( picnum );
+		root.put("pics", pics);  //硬编码。数量应该可配置
 		//3、更新新闻滚动图片(没排序)
-		List<Attachment> newsPic = attachmentService.listAttachmentByIndexPic( 5 );
-		root.put( "newsPics" ,newsPic );//硬编码。数量应该可配置
+		List<Attachment> newsPics = attachmentService.listAttachmentByIndexPic( 5 );
+		root.put( "newsPics" ,newsPics );//硬编码。数量应该可配置
 		//4、更新视频新闻栏目(没排序)
 		List<Video> videos = videoService.listVideoByNum( 60 ,6 );//硬编码。栏目id和数量应该可配置
 		root.put( "videos" ,videos );
