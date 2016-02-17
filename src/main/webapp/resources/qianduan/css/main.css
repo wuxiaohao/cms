@@ -297,7 +297,7 @@ padding: 15px 12px;
 .t_c{
 	text-align: center;
 }
-.indexlink h4{border-bottom: 1px solid #ccc;width: 80%;}
+.indexlink h4{border-bottom: 1px solid #ccc;width: 80%;padding: 0px 10px 10px;}
 .indexlink{padding:5px 0; width:100%; margin:0 auto 15px;position: relative;border:solid #ccc 1px;border-radius: 3px;}
 .indexlink ul{display:none; width:100%; overflow:hidden;}
 ul.dis{display:block;list-style: none;}
@@ -350,7 +350,9 @@ ul.dis{display:block;list-style: none;}
 }
 .list_date{width: 29%;}
 
-.fl{float: left;}
-
+.fl{float: left;margin-top:4px}
+.fr{float: right;}
 .channel{padding-left: 0;}
 .topnone {top: 0!important;position: fixed;width: 100%;}
+.carousel-title{position:absolute;background: #010101;opacity: 0.6;color: #fff;margin: 0px;padding: 1%;bottom: 0px;width: 100%;font-size:20}
+.carousel-title b{padding-left: 5%;}

@@ -5620,7 +5620,8 @@ button.list-group-item-danger.active:hover {
 	margin-top: 0;
 	margin-bottom: 0;
 	font-size: 16px;
-	color: inherit
+	color: inherit;
+	display: inline;
 }
 .panel-title>.small,
 .panel-title>.small>a,
@@ -6536,10 +6537,10 @@ button.close {
 }
 .carousel-indicators {
 	position: absolute;
-	bottom: 10px;
-	left: 50%;
+	bottom: -12px;
+	right: 0%;
 	z-index: 15;
-	width: 60%;
+	width: 23%;
 	padding-left: 0;
 	margin-left: -30%;
 	text-align: center;
@@ -6602,7 +6603,7 @@ button.close {
 		padding-bottom: 30px
 	}
 	.carousel-indicators {
-		bottom: 20px
+		bottom: -5px
 	}
 }
 .btn-group-vertical>.btn-group:after,
