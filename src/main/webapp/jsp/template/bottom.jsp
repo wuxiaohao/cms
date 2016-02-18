@@ -1,19 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<div id="bottom">
-	<div id="bottom_con">
-		<table width="962" style="color:#fff;margin-top:20px;">
-			<tr>
-				<td width="320">学校网站研发</td>
-				<td style="text-align:center" width="320">
-					<p style="padding-bottom:5px;">学校网站  版权所有</p>
-					<p>Copyright 2013-2017</p>
-				</td>
-				<td style="text-align:right">
-					技术支持:<a href="mailto:ynkonghao@gmail.com" class="main_nav_link">ynkonghao@gmail.com</a>
-				</td>
-			</tr>
-		</table>
+    
+<footer id="footer">
+	<div class="container">
+		<span>城市学院计信系12软工城院网站后台管理系统研发</span>
+		<br />
+		<span>城院网站后台管理系统</span>
+		<br />
+		<span>Copyright 2015-2017</span>
+		<br />
+		技术支持：<a href="mailto:wuxiaohao@ppmoney.com" class="main_nav_link">wuxiaohao@ppmoney.com</a>
 	</div>
-</div>
+</footer>

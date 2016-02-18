@@ -27,13 +27,14 @@ import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.CmsLink;
 import org.wxh.index.service.ICmsLinkService;
+import org.wxh.index.service.IIndexService;
 import org.wxh.topic.controller.TopicController;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.user.auth.AuthClass;
 import org.wxh.util.JsonUtil;
 
 /**
- * 超链接管理
+ * 友情链接管理
  * @author wxh
  *
  */
@@ -47,6 +48,8 @@ public class CmsLinkController {
 	
 	@Autowired
 	private ICmsLinkService cmsLinkService;
+	@Autowired
+	private IIndexService indexService;
 	
 	public ICmsLinkService getCmsLinkService() {
 		return cmsLinkService;
@@ -94,6 +97,7 @@ public class CmsLinkController {
 		}
 		cmsLinkService.add(cmsLink);
 		model.addAttribute("success", "超链接添加成功!");
+		indexService.generateLink();//重新生成超链接页面
 		return list(model,null,session);
 	}
 	/**
@@ -105,6 +109,7 @@ public class CmsLinkController {
 	public String delete(@PathVariable int id ,@RequestParam(required=false) String type,Model model,HttpSession session) {
 		cmsLinkService.delete(id);
 		model.addAttribute("success", "超链接删除成功!");
+		indexService.generateLink();//重新生成超链接页面
 		return list(model,type,session);
 	}
 	/**
@@ -146,6 +151,7 @@ public class CmsLinkController {
 		tcl.setUrlId(cmsLink.getUrlId());
 		cmsLinkService.update(tcl);
 		model.addAttribute("success", "修改成功!");
+		indexService.generateLink();//重新生成超链接页面
 		return list(model,null,session);
 	}
 	/**

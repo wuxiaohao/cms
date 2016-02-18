@@ -121,6 +121,7 @@ public class DwrService implements IDwrService{
 	public void updateLinkPos(int id, int oldPos, int newPos) {
 		try {
 			cmsLinkService.updatePos(id, oldPos, newPos);
+			indexService.generateLink();
 		} catch (Exception e) {
 			
 		}

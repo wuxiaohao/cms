@@ -31,7 +31,7 @@ public class IndexPic {
 	 */
 	private int linkType;
 	/**
-	 * 链接的地址,如果是站内链接就用一个文章节点来表示
+	 * 链接的地址,如果是站内链接就用一个节点来表示，如  channel/id
 	 */
 	private String linkUrl;
 	/**

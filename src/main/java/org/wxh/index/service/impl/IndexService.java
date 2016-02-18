@@ -13,6 +13,7 @@ import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.CmsLink;
 import org.wxh.index.model.IndexPic;
 import org.wxh.index.model.IndexTopic;
+import org.wxh.index.model.IndexVideo;
 import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexPicService;
 import org.wxh.index.service.IIndexService;
@@ -125,9 +126,14 @@ public class IndexService implements IIndexService {
 		//3、更新新闻滚动图片(没排序)
 		List<Attachment> newsPics = attachmentService.listAttachmentByIndexPic( 5 );
 		root.put( "newsPics" ,newsPics );//硬编码。数量应该可配置
-		//4、更新视频新闻栏目(没排序)
-		List<Video> videos = videoService.listVideoByNum( 60 ,6 );//硬编码。栏目id和数量应该可配置
-		root.put( "videos" ,videos );
+		//4、更新视频新闻栏目
+		List<Video> v = videoService.listVideoByNum( 60 ,6 );//硬编码。栏目id和数量应该可配置
+		Channel channel = channelService.load( 60 );
+		IndexVideo vids = new IndexVideo();
+		vids.setCid( channel.getId() );
+		vids.setCname( channel.getName() );
+		vids.setVideos( v );
+		root.put( "vids" ,vids );
 		String outfile = SystemContext.getRealPath() + outPath + "/body.jsp";
 		util.fprint( root ,"/body.ftl" ,outfile );
 		logger.info( "=============重新生成了body信息====================" );

@@ -5,10 +5,10 @@
 	<div class="container">
 		<span>城市学院计信系12软工${baseInfo.name}研发</span>
 		<br />
-		<p style="padding-bottom:5px;">${baseInfo.name}  版权所有</p>
+		<span>${baseInfo.name}</span>
 		<br />
-		<p>Copyright 2015-2017</p>
+		<span>Copyright 2015-2017</span>
 		<br />
-		技术支持:<a href="mailto:ynkonghao@gmail.com" class="main_nav_link">ynkonghao@gmail.com</a>
+		技术支持：<a href="mailto:wuxiaohao@ppmoney.com" class="main_nav_link">wuxiaohao@ppmoney.com</a>
 	</div>
 </footer>

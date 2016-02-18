@@ -1,13 +1,10 @@
 package org.wxh.topic.controller;
 
 import java.io.File;
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.jws.WebParam.Mode;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.index.service.IIndexService;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Video;
 import org.wxh.topic.model.dto.AjaxObj;
@@ -31,8 +29,6 @@ import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IVideoService;
 import org.wxh.user.model.User;
 import org.wxh.util.JsonUtil;
-
-import com.fasterxml.jackson.annotation.JsonFormat.Value;
 
 /**
  * 视频
@@ -48,6 +44,8 @@ public class VideoController {
 	private IVideoService videoService;
 	@Autowired
 	private IChannelService channelService;
+	@Autowired
+	private IIndexService indexService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
 		if(status == 1) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
@@ -113,6 +111,7 @@ public class VideoController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		videoService.updateStatus(id,loginUser);
 		Video v = videoService.load(id);
+		indexService.generateBody();//重新生成首页body
 		if(status==0) {
 			model.addAttribute("success", "发布成功!");
 			return unauditList(con,cid,model,session);
@@ -157,6 +156,7 @@ public class VideoController {
 			video.setAuditor(loginUser.getNickname()); //设置发布人
 		}
 		videoService.add(video,cid,loginUser);
+		indexService.generateBody();//重新生成首页body
 		model.addAttribute("success", "添加视频新闻成功!");
 		return auditList(null,null,model,session);
 	}
@@ -175,6 +175,7 @@ public class VideoController {
 		Video v = videoService.load(id);
 		videoService.delete(id);
 		model.addAttribute("success","视频新闻删除成功!");
+		indexService.generateBody();//重新生成首页body
 		if(status==0) {
 			return unauditList(con, cid, model, session);
 		} else {
@@ -217,6 +218,7 @@ public class VideoController {
 		video.getVideo(vOld,(User)session.getAttribute("loginUser"));
 		videoService.update(video,vOld,cid);
 		model.addAttribute("success", "修改视频新闻成功!");
+		indexService.generateBody();//重新生成首页body
 		return auditList(null, null, model, session);
 	}
 	/**

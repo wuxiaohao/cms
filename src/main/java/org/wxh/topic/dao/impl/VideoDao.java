@@ -49,7 +49,7 @@ public class VideoDao extends BaseDao<Video> implements IVideoDao{
 
 	@Override
 	public List<Video> listVideoByNum(int cid, int num) {
-		String hql = "from Video v where v.status=1 and v.channel.id=?";
+		String hql = "from Video v where v.status=1 and v.channel.id=? order by v.publishDate desc";
 		return this.getSession().createQuery(hql).
 					setParameter(0, cid).setFirstResult(0).setMaxResults(num).list();
 	}
