@@ -68,41 +68,47 @@ public class IndexController {
 	 */
 	@RequestMapping("/channel/{cid}")
 	public String showChannel(@PathVariable int cid,Model model,HttpServletResponse resp,HttpServletRequest req) throws IOException {
-		Channel c = channelService.load(cid);
+		//1、获取当前栏目及父栏目
+		Channel c = channelService.load( cid );
 		Channel pc = null;
 		//如果是导航栏目
-		if(c.getType()==ChannelType.NAV_CHANNEL) {  
+		if( c.getType() == ChannelType.NAV_CHANNEL ) {  
 			pc = c; //自己就是父栏目
 			//如果是导航栏目，需要获取该栏目中的第一个子栏目
-			c = channelService.loadFirstChannelByNav(c.getId());
+			c = channelService.loadFirstChannelByNav( c.getId() );
 		} else {
 			pc = c.getParent();  //获取父栏目
 		}
-		model.addAttribute("pc", pc); 
-		model.addAttribute("channel", c); 
-		if(c.getType()==ChannelType.TOPIC_CONTENT) {  //如果是文章内容栏目,直接跳转显示文章内容
-			resp.sendRedirect(req.getContextPath()+"/topic/"+topicService.loadLastedTopicByColumn(cid).getId());
-		} else if(c.getType()==ChannelType.TOPIC_IMG){ //如果是图片列表栏目，
-			SystemContext.setPageSize(16);
-			SystemContext.setSort("a.topic.publishDate");
-			SystemContext.setOrder("desc");
-			Pager<Attachment> atts = attachmentService.findChannelPic(cid);
-			model.addAttribute("datas", atts);
-		} else if(c.getType()==ChannelType.TOPIC_LIST) { //如果是文章列表栏目
-			SystemContext.setSort("t.publishDate");
-			SystemContext.setOrder("desc");
+		model.addAttribute( "pc", pc ); 
+		model.addAttribute( "channel", c ); 
+		//2、获取文章列表
+		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
+			resp.sendRedirect( req.getContextPath() + "/topic/" + topicService.loadLastedTopicByColumn( cid ).getId() );
+		} else if ( c.getType() == ChannelType.TOPIC_IMG ){ //如果是图片列表栏目，
+			SystemContext.setPageSize( 16 );
+			SystemContext.setSort( "a.topic.publishDate" );
+			SystemContext.setOrder( "desc" );
+			Pager<Attachment> atts = attachmentService.findChannelPic( cid );
+			model.addAttribute( "datas", atts );
+		} else if ( c.getType() == ChannelType.TOPIC_LIST ) { //如果是文章列表栏目
+			SystemContext.setSort( "t.publishDate" );
+			SystemContext.setOrder( "desc" );
 			//System.out.println(c.getType());
-			model.addAttribute("datas", topicService.find(c.getId(),null,1));
+			model.addAttribute( "datas" , topicService.find( c.getId(),null,1 ) );
+		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
+			
+		} else if ( c.getType() == ChannelType.VIDEO_NEW ) { //如果是视频新闻列表
+			
 		}
+		//3、获取当前栏目下的父栏目列表
 		SystemContext.removeSort();
 		SystemContext.removeOrder();
 		model.addAttribute("cs", channelService.listUseChannelByParent(pc.getId()));
+		//4、获取关键字
+		model.addAttribute("kws", keywordService.getMaxTimesKeyword(9));
 		
-		if(c.getType()==ChannelType.TOPIC_LIST) {
-			return "index/channel";
-		} else {
-			return "index/channel_pic";
-		}
+		return c.getType() == ChannelType.TOPIC_LIST ? "index/channel" : "index/channel_pic";
+		
 	}
 	/**
 	 * 显示文章内容
