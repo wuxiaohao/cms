@@ -105,7 +105,7 @@ public class IndexController {
 		SystemContext.removeOrder();
 		model.addAttribute("cs", channelService.listUseChannelByParent(pc.getId()));
 		//4、获取关键字
-		model.addAttribute("kws", keywordService.getMaxTimesKeyword(9));
+		model.addAttribute( "kws", keywordService.getMaxTimesKeyword(9) );
 		
 		return c.getType() == ChannelType.TOPIC_LIST ? "index/channel" : "index/channel_pic";
 		
