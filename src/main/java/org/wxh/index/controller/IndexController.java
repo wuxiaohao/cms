@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.index.service.IIndexService;
+import org.wxh.index.service.impl.IndexService;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
@@ -30,6 +33,9 @@ import org.wxh.util.BaseInfoUtil;
  */
 @Controller
 public class IndexController {
+	
+	private static final Logger logger = Logger.getLogger(IndexService.class);
+	
 	@Autowired
 	private IChannelService channelService;
 	@Autowired
@@ -38,6 +44,8 @@ public class IndexController {
 	private IAttachmentService attachmentService;
 	@Autowired
 	private IKeywordService keywordService;
+	@Autowired
+	private IIndexService indexService;
 	
 	/**
 	 * 访问网站首页的方法
@@ -170,4 +178,59 @@ public class IndexController {
 			}
 		}
 	}
+	//-----------------------------------------------------首页生成----------------------------------------------------------
+	/**
+	 * 首页生成
+	 * @return
+	 */
+	@RequestMapping("/generateAll")
+	public String generateAll() {
+		indexService.generateTop();
+		indexService.generateBottom();
+		indexService.generateBody();
+		indexService.generateLink();
+		logger.info("-------------------------------首页静态页面已生成----------------------------------------");
+		return null;
+	}
+	/**
+	 * 首页顶部
+	 * @return
+	 */
+	@RequestMapping("/generateTop")
+	public String generateTop() {
+		indexService.generateTop();
+		logger.info("-------------------------------首页顶部已生成----------------------------------------");
+		return null;
+	}
+	/**
+	 * 首页底部
+	 * @return
+	 */
+	@RequestMapping("/generateBottom")
+	public String generateBottom() {
+		indexService.generateBottom();
+		logger.info("-------------------------------首页底部已生成----------------------------------------");
+		return null;
+	}
+	/**
+	 * 首页body
+	 * @return
+	 */
+	@RequestMapping("/generateBody")
+	public String generateBody() {
+		indexService.generateBody();
+		logger.info("-------------------------------首页body已生成----------------------------------------");
+		return null;
+	}
+	/**
+	 * 首页友情链接
+	 * @return
+	 */
+	@RequestMapping("/generateLink")
+	public String generateLink() {
+		indexService.generateLink();
+		logger.info("-------------------------------首页友情链接已生成----------------------------------------");
+		return null;
+	}
+	
 }

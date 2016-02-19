@@ -49,28 +49,7 @@
 		<#-- 文章列表1 -->
 		<div class="span8 article pull-left">
 			<div class="panel panel-info">
-				<div class="panel-heading clearfix">
-					<h3 class="panel-title fl">校务公开</h3>
-					<a href="" class="fr">更多 >></a>
-				</div>
-				<div class="panel-body">
-					<div>
-						<img src="../img/news_top1.jpg" class="topNews_img" />
-						<a class="topNews_title">2015年度高中学业水平考试获奖教师</a>
-						<p class="topNews_content">2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师 2015年度高中学师2015年度高中学业水平师2015年度高中学业水平...
-							<a>[全文]</a></p>
-						<hr>
-					</div>
-					<dl class="article_list">
-						<dd class="clearfix"><a href='#' class="article_link">2015年度高中学业水平考试获奖教师<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">昭通学院附属中学岗位公开选调报名<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">公开选调报名登记及资格审查情况<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">昭通学院附中9月1日按期开学<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">关于转发昭市编的批复的通知<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>						
-					</dl>
-				</div>
+				<@indexTopicList indexTopic=ts["1"] tupian="news_top1.jpg" />
 			</div>
 		</div>
 		<#-- 视频列表 -->
@@ -156,63 +135,13 @@
 			<#--文章列表2-->
 			<div class="span6 article">
 				<div class="panel panel-info">
-					<div class="panel-heading clearfix">
-						<h3 class="panel-title fl">最近更新</h3>
-						<a href="" class="fr">更多  >></a>
-					</div>
-					<div class="panel-body">
-						<div>
-							<img src="../img/news_top2.jpg" class="topNews_img" />
-							<a class="topNews_title">2015年度高中学业水平考试获奖教师</a>
-							<p class="topNews_content">2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师 2015年度高中学...
-								<a>[全文]</a></p>
-							<hr>
-						</div>
-						<dl class="article_list">
-							<dd class="clearfix"><a href='#' class="article_link">2015年度高中学业水平考试获奖教师<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附属中学岗位公开选调报名<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">公开选调报名登记及资格审查情况<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附中9月1日按期开学<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">关于转发昭市编的批复的通知<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-						</dl>
-					</div>
+					<@indexTopicList indexTopic=ts["2"] tupian="news_top2.jpg" />
 				</div>
 			</div>
 			<#--文章列表3-->
 			<div class="span6 article">
 				<div class="panel panel-info">
-					<div class="panel-heading clearfix">
-						<h3 class="panel-title fl">最近更新</h3>
-						<a href="" class="fr">更多  >></a>
-					</div>
-					<div class="panel-body">
-						<div>
-							<img src="../img/news_top3.jpg" class="topNews_img" />
-							<a class="topNews_title">2015年度高中学业水平考试获奖教师</a>
-							<p class="topNews_content">2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师 2015年度高中学...
-								<a>[全文]</a></p>
-							<hr>
-						</div>
-						<dl class="article_list">
-							<dd class="clearfix"><a href='#' class="article_link">2015年度高中学业水平考试获奖教师<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附属中学岗位公开选调报名<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">公开选调报名登记及资格审查情况<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附中9月1日按期开学<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">关于转发昭市编的批复的通知<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-						</dl>
-					</div>
+					<@indexTopicList indexTopic=ts["3"] tupian="news_top3.jpg" />
 				</div>
 			</div>
 		</div>
@@ -222,7 +151,7 @@
 		<h4 class="title">友情链接</h4>
 		<ul class="dis" style="display: block;">
 			<li class="yqlj">
-				<iframe width="100%" height="100px" src="link.jsp" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+				<iframe width="100%" height="100px" src="<%=request.getContextPath() %>/jsp/template/link.jsp" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
 			</li>
 		</ul>
 	</div>
@@ -232,27 +161,29 @@
 <#macro indexTopicList indexTopic tupian="">
 	<div class="panel-heading clearfix">
 		<h3 class="panel-title fl">${indexTopic.cname}</h3>
-		<a href="channel/${indexTopic.id}" class="fr">更多 >></a>
+		<a href="channel/${indexTopic.cid}" class="fr">更多 >></a>
 	</div>
 	<div class="panel-body">
 		<div>
 			<img src="<%=request.getContextPath()%>/resources/qianduan/img/${tupian}" class="topNews_img" />
 			<#list indexTopic.topics as topic>
 				<#if topic_index ==0>
-					<a class="topNews_title">
-						<#if topic.title?length gt 30>
-							${topic.title[0..30]}...
+					<a href='topic/${topic.id}' class="topNews_title">
+						<#if topic.title?length gt 20>
+							${topic.title[0..20]}...
 						<#else>
 							${topic.title}
 						</#if>
 					</a>
 					<p class="topNews_content">
-						<#if topic.summary?length gt 40>
-							${topic.summary[0..40]}...
-						<#else>
-							${topic.summary}
+						<#if topic.summary??>
+							<#if topic.summary?length gt 60>
+								${topic.summary[0..60]}...
+							<#else>
+								${topic.summary}
+							</#if>
+							<a href="topic/${topic.id}">[全文]</a></p>
 						</#if>
-						<a href="topic/${topic.id}">[全文]</a></p>
 					<hr>
 				</#if>
 			</#list>

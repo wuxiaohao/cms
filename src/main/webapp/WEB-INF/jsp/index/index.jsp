@@ -19,8 +19,6 @@
 <script src="<%=request.getContextPath() %>/resources/qianduan/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/qianduan/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/qianduan/js/pic_hover.js"></script>
-<link href="<%=request.getContextPath() %>/resources/qianduan/css/news.css" rel="stylesheet" type="text/css" />
-<SCRIPT src="<%=request.getContextPath() %>/resources/qianduan/js/ScrollPic.js" type="text/javascript"></SCRIPT>
 <script type="text/javascript">
 $("#search_btn").click(function(){
 	var sc = $("#search_con").val();
@@ -31,29 +29,26 @@ $("#search_btn").click(function(){
 	}
 });
 </script>
-<SCRIPT language="javascript" type="text/javascript">
-		<!--//--><![CDATA[//><!--
-		var scrollPic_02 = new ScrollPic();
-		scrollPic_02.scrollContId   = "ISL_Cont_1"; //内容容器ID
-		scrollPic_02.arrLeftId      = "LeftArr";//左箭头ID
-		scrollPic_02.arrRightId     = "RightArr"; //右箭头ID
-
-		scrollPic_02.frameWidth     = 1200;//显示框宽度
-		scrollPic_02.pageWidth      = 244; //翻页宽度
-
-		scrollPic_02.speed          = 2; //移动速度(单位毫秒，越小越快)
-		scrollPic_02.space          = 16; //每次移动像素(单位px，越大越快)
-		scrollPic_02.autoPlay       = true; //自动播放
-		scrollPic_02.autoPlayTime   = 5; //自动播放间隔时间(秒)
-
-		scrollPic_02.initialize(); //初始化
-							
-		//--><!]]>
-</SCRIPT>
 </head>
 <body>
 <jsp:include page="/jsp/template/top.jsp"/>	
 <jsp:include page="/jsp/template/body.jsp"/>
 <jsp:include page="/jsp/template/bottom.jsp"/>
+<!-- 搜索弹层 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="" id="search-form" method="GET">
+				<input type="hidden" name="app" value="search">
+				<input type="hidden" name="controller" value="index">
+				<input type="hidden" name="action" value="search">
+				<input type="hidden" id="type" name="type" value="all">
+				<input type="search" placeholder="输入关键字" name="wd" id="head_wd" value="">
+			</form>
+			<div class="close" data-dismiss="modal" aria-label="Close">×</div>
+		</div>
+	</div>
+</div>
+<a href="#" id="back-to-top"></a>
 </body>
 </html>

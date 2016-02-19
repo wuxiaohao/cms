@@ -20,7 +20,7 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	}
 	
 	private String getTopicSelect() {
-		return "select new Topic(t.id,t.title,t.keyword,t.status,t.recommend,t.createDate,t.publishDate,t.author,t.cname,t.auditor)";
+		return "select new Topic(t.id,t.title,t.keyword,t.status,t.recommend,t.createDate,t.publishDate,t.author,t.cname,t.auditor,t.summary)";
 	}
 
 	@Override

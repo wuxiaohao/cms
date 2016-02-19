@@ -208,7 +208,7 @@ public class Topic {
 	}
 	
 	public Topic(int id, String title,String keyword, int status,
-			int recommend,Date createDate, Date publishDate, String author, String cname,String auditor) {
+			int recommend,Date createDate, Date publishDate, String author, String cname,String auditor,String summary) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -220,6 +220,7 @@ public class Topic {
 		this.author = author;
 		this.cname = cname;
 		this.auditor = auditor;
+		this.summary = summary;
 	}
 	
 	public Topic(int id, String title,String keyword, int status,

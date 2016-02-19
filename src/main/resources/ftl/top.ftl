@@ -38,7 +38,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="main.html" class="navbar-brand">网站首页</a>
+			<a href="<%=request.getContextPath()%>/index" class="navbar-brand">网站首页</a>
 		</div>
 		<nav id="bs-navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
