@@ -10,7 +10,7 @@ import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.user.model.User;
 
-public class PictureTopicDtoDto {
+public class PictureTopicDto {
 	
 	private int id;
 	/**
@@ -50,10 +50,10 @@ public class PictureTopicDtoDto {
 	 */
 	private String[] picNameOlds;
 	
-	public PictureTopicDtoDto() {
+	public PictureTopicDto() {
 		super();
 	}
-	public PictureTopicDtoDto(PictureTopic t) {
+	public PictureTopicDto(PictureTopic t) {
 		this.setExplain(t.getExplain());
 		this.setId(t.getId());
 		this.setRecommend(t.getRecommend());
@@ -61,7 +61,7 @@ public class PictureTopicDtoDto {
 		this.setTitle(t.getTitle());
 	}
 	
-	public PictureTopicDtoDto(PictureTopic t, Integer cid) {
+	public PictureTopicDto(PictureTopic t, Integer cid) {
 		this.setExplain(t.getExplain());
 		this.setId(t.getId());
 		this.setRecommend(t.getRecommend());

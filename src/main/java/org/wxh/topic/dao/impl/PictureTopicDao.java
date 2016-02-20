@@ -50,7 +50,7 @@ public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTo
 		String sql = "select pt.pt_id as id,pt.pt_title as title,pt.pt_view_count as viewCount,"
 				+ "DATE_FORMAT(pt.pt_publish_date,'%Y-%m-%d') as publishDate,p.p_pic_name as picName "
 				+ "from t_picture_topic pt JOIN t_picture p ON pt.pt_pictureId=p.p_id "
-				+ "where pt.pt_channel=? ORDER BY pt.pt_publish_date desc";
+				+ "where pt.pt_status=1 and pt.pt_channel=? ORDER BY pt.pt_publish_date desc";
 		return this.findBySql(sql, cid, PictureDto.class, false);
 	}
 }

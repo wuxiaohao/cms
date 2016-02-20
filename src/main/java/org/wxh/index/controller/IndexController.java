@@ -96,6 +96,7 @@ public class IndexController {
 			model.addAttribute( "datas", atts );
 		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
 			//获取组图新闻的封面列表
+			SystemContext.setPageSize( 16 );
 			Pager<PictureDto> pics = pictureTopicService.findPicTopByCid(cid);
 			model.addAttribute("datas", pics);
 		} else if ( c.getType() == ChannelType.VIDEO_NEW ) { //如果是视频新闻列表
@@ -108,9 +109,10 @@ public class IndexController {
 		//3、获取当前栏目下的父栏目列表
 		SystemContext.removeSort();
 		SystemContext.removeOrder();
-		model.addAttribute("cs", channelService.listUseChannelByParent(pc.getId()));
+		SystemContext.removePageSize();
+		model.addAttribute( "cs", channelService.listUseChannelByParent( pc.getId() ) );
 		//4、获取关键字
-		model.addAttribute( "kws", keywordService.getMaxTimesKeyword(9) );
+		model.addAttribute( "kws", keywordService.getMaxTimesKeyword( 9 ) );
 		
 		return c.getType() == ChannelType.TOPIC_LIST ? "index/channel" : "index/channel_pic";
 		

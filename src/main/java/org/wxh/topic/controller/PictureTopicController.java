@@ -28,7 +28,7 @@ import org.wxh.topic.model.Picture;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.AjaxObj;
-import org.wxh.topic.model.dto.PictureTopicDtoDto;
+import org.wxh.topic.model.dto.PictureTopicDto;
 import org.wxh.topic.model.dto.TopicDto;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
@@ -137,7 +137,7 @@ public class PictureTopicController {
 	@RequestMapping(value = "/addUI", method = RequestMethod.POST)
 	public String add(Model model,HttpSession session) {
 		PictureTopic t = new PictureTopic();
-		PictureTopicDtoDto td = new PictureTopicDtoDto(t);
+		PictureTopicDto td = new PictureTopicDto(t);
 		model.addAttribute("pictureTopicDto",td);
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
 		if(isAdmin) { //如果是超级管理员
@@ -157,7 +157,7 @@ public class PictureTopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public String add(PictureTopicDtoDto pictureTopicDto,BindingResult br,HttpSession session,Model model) {
+	public String add(PictureTopicDto pictureTopicDto,BindingResult br,HttpSession session,Model model) {
 		if(pictureTopicDto.getPics() == null) { //如果没有上传图片
 			model.addAttribute("error", "请选择图片！");
 			return add(model,session);
@@ -211,7 +211,7 @@ public class PictureTopicController {
 	public String update(@PathVariable int id,Model model,HttpSession session) {
 		PictureTopic t = pictureTopicService.load(id);
 		model.addAttribute("pics",pictureService.listByPicTopic(id));
-		PictureTopicDtoDto ptd = new PictureTopicDtoDto(t,t.getChannel().getId());
+		PictureTopicDto ptd = new PictureTopicDto(t,t.getChannel().getId());
 		model.addAttribute("pictureTopicDto",ptd);
 		//返回相应的栏目
 		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
@@ -235,7 +235,7 @@ public class PictureTopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	public String update(@PathVariable int id,PictureTopicDtoDto pictureTopicDto,BindingResult br,HttpSession session,Model model) {
+	public String update(@PathVariable int id,PictureTopicDto pictureTopicDto,BindingResult br,HttpSession session,Model model) {
 		if(pictureTopicDto.getPics() == null) { //如果没有上传图片
 			model.addAttribute("error", "请选择图片！");
 			return update(id,model,session);
