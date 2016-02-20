@@ -26,7 +26,8 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	@Override
 	public Pager<Topic> find(Integer uid, Integer cid, String title,
 			Integer status) {
-		String hql = getTopicSelect()+" from Topic t where 1=1 and t.channel.type!="+ChannelType.IMG_NEW.ordinal();
+		String hql = getTopicSelect()+" from Topic t where 1=1 and t.channel.type!=" +ChannelType.IMG_NEW.ordinal() 
+																	+ "and t.channel.type!=" + ChannelType.VIDEO_NEW.ordinal();
 		if(status!=null) {
 			hql+=" and t.status="+status;
 		}
@@ -97,6 +98,12 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 				.createQuery(hql).setFirstResult(0).setMaxResults(1)
 				.setParameter(0, cid).uniqueResult();
 		return topic;
+	}
+
+	@Override
+	public List<Topic> listTopic() {
+		String hql = "from Topic t where t.status=1 ORDER BY t.viewCount desc";
+		return this.getSession().createQuery(hql).setFirstResult(0).setMaxResults(10).list(); 
 	}
 
 	

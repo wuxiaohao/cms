@@ -54,4 +54,10 @@ public class VideoDao extends BaseDao<Video> implements IVideoDao{
 					setParameter(0, cid).setFirstResult(0).setMaxResults(num).list();
 	}
 
+	@Override
+	public Pager<Video> findVideoByCid(int cid) {
+		String hql = "from Video v where v.status=1 and v.channel.id=?";
+		return this.find(hql, cid);
+	}
+
 }

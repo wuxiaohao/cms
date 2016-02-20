@@ -82,5 +82,11 @@ public interface IVideoService {
 	 * @param num 数量
 	 */
 	public List<Video> listVideoByNum(int cid, int num);
+	/**
+	 * 根据栏目id获取视频列表
+	 * @param cid
+	 * @return
+	 */
+	public Pager<Video> findVideoByCid(int cid);
 	
 }

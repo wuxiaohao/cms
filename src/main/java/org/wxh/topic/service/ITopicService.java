@@ -125,4 +125,9 @@ public interface ITopicService {
 	 * @return
 	 */
 	public Topic loadLastedTopicByColumn(int cid);
+	/**
+	 * 获取点击量最多的前10条文章
+	 * @return
+	 */
+	public List<Topic> listTopic();
 }

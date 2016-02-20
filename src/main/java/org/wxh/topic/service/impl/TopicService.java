@@ -193,5 +193,9 @@ public class TopicService implements ITopicService {
 	public Topic loadLastedTopicByColumn(int cid) {
 		return topicDao.loadLastedTopicByColumn(cid);
 	}
+	@Override
+	public List<Topic> listTopic() {
+		return topicDao.listTopic();
+	}
 
 }

@@ -37,5 +37,11 @@ public interface IVideoDao extends IBaseDao<Video>{
 	 * @param num 数量
 	 */
 	List<Video> listVideoByNum(int cid, int num);
+	/**
+	 * 根据栏目id获取视频列表
+	 * @param cid
+	 * @return
+	 */
+	Pager<Video> findVideoByCid(int cid);
 
 }

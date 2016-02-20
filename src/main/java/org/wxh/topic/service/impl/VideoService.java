@@ -182,4 +182,9 @@ public class VideoService implements IVideoService{
 		return videoDao.listVideoByNum(cid,num);
 	}
 
+	@Override
+	public Pager<Video> findVideoByCid(int cid) {
+		return videoDao.findVideoByCid(cid);
+	}
+
 }

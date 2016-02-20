@@ -69,4 +69,5 @@ public interface ITopicDao extends IBaseDao<Topic>{
 	 * @return
 	 */
 	public Topic loadLastedTopicByColumn(int cid);
+	public List<Topic> listTopic();
 }
