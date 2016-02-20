@@ -20,9 +20,11 @@ import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.PictureDto;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
+import org.wxh.topic.service.IPictureTopicService;
 import org.wxh.topic.service.ITopicService;
 import org.wxh.util.BaseInfoUtil;
 
@@ -46,6 +48,8 @@ public class IndexController {
 	private IKeywordService keywordService;
 	@Autowired
 	private IIndexService indexService;
+	@Autowired
+	private IPictureTopicService pictureTopicService;
 	
 	/**
 	 * 访问网站首页的方法
@@ -90,15 +94,16 @@ public class IndexController {
 			SystemContext.setOrder( "desc" );
 			Pager<Attachment> atts = attachmentService.findChannelPic( cid );
 			model.addAttribute( "datas", atts );
+		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
+			//获取组图新闻的封面列表
+			Pager<PictureDto> pics = pictureTopicService.findPicTopByCid(cid);
+			model.addAttribute("datas", pics);
+		} else if ( c.getType() == ChannelType.VIDEO_NEW ) { //如果是视频新闻列表
+			
 		} else if ( c.getType() == ChannelType.TOPIC_LIST ) { //如果是文章列表栏目
 			SystemContext.setSort( "t.publishDate" );
 			SystemContext.setOrder( "desc" );
-			//System.out.println(c.getType());
 			model.addAttribute( "datas" , topicService.find( c.getId(),null,1 ) );
-		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
-			
-		} else if ( c.getType() == ChannelType.VIDEO_NEW ) { //如果是视频新闻列表
-			
 		}
 		//3、获取当前栏目下的父栏目列表
 		SystemContext.removeSort();

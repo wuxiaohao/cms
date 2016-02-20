@@ -6,6 +6,7 @@ import org.wxh.basic.model.Pager;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.PictureDto;
 import org.wxh.user.model.User;
 
 /**
@@ -64,4 +65,10 @@ public interface IPictureTopicService {
 	 * @param pics 图片的id数组
 	 */
 	public void update(PictureTopic pt, int cid, Integer[] pics);
+	/**
+	 * 获取组图新闻的封面列表
+	 * @param cid
+	 * @return
+	 */
+	public Pager<PictureDto> findPicTopByCid(int cid);
 }

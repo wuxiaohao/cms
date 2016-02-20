@@ -14,6 +14,7 @@ import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.Picture;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.PictureDto;
 import org.wxh.topic.service.IPictureTopicService;
 import org.wxh.user.dao.IUserDao;
 import org.wxh.user.model.User;
@@ -107,6 +108,11 @@ public class PictureTopicService implements IPictureTopicService{
 				p.setPictureTopic(pt);
 			}
 		}
+	}
+
+	@Override
+	public Pager<PictureDto> findPicTopByCid(int cid) {
+		return pictureTopicDao.findPicTopByCid(cid);
 	}
 
 }

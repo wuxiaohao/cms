@@ -1,5 +1,6 @@
 package org.wxh.topic.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,8 @@ import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.PictureDto;
+import sun.nio.cs.FastCharsetProvider;
 
 @Repository("pictureTopicDao")
 public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTopicDao{
@@ -40,5 +43,14 @@ public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTo
 	
 	private String getPictureTopicSelect() {
 		return "select new PictureTopic(t.id,t.title,t.explain,t.publishDate,t.createDate,t.author,t.status,t.recommend,t.cname,t.auditor,t.pictureId)";
+	}
+
+	@Override
+	public Pager<PictureDto> findPicTopByCid(int cid) {
+		String sql = "select pt.pt_id as id,pt.pt_title as title,pt.pt_view_count as viewCount,"
+				+ "DATE_FORMAT(pt.pt_publish_date,'%Y-%m-%d') as publishDate,p.p_pic_name as picName "
+				+ "from t_picture_topic pt JOIN t_picture p ON pt.pt_pictureId=p.p_id "
+				+ "where pt.pt_channel=? ORDER BY pt.pt_publish_date desc";
+		return this.findBySql(sql, cid, PictureDto.class, false);
 	}
 }

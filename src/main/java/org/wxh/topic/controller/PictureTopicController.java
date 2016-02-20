@@ -40,7 +40,7 @@ import org.wxh.user.service.IGroupService;
 import org.wxh.util.JsonUtil;
 
 /**
- * 图片文章控制层
+ * 组图新闻控制层
  * @author wxh
  *
  */

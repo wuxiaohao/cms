@@ -7,6 +7,7 @@ import org.wxh.basic.model.Pager;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.PictureDto;
 
 public interface IPictureTopicDao extends IBaseDao<PictureTopic>{
 
@@ -27,6 +28,12 @@ public interface IPictureTopicDao extends IBaseDao<PictureTopic>{
 	 * @return
 	 */
 	Pager<PictureTopic> find(Integer uid, Integer cid, String title, Integer status);
+	/**
+	 * 获取组图新闻的封面列表
+	 * @param cid
+	 * @return
+	 */
+	Pager<PictureDto> findPicTopByCid(int cid);
 	
 
 }
