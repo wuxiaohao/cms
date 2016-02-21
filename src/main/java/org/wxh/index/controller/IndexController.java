@@ -1,6 +1,8 @@
 package org.wxh.index.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +21,15 @@ import org.wxh.index.service.impl.IndexService;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
+import org.wxh.topic.model.Picture;
+import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.Video;
 import org.wxh.topic.model.dto.PictureDto;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
+import org.wxh.topic.service.IPictureService;
 import org.wxh.topic.service.IPictureTopicService;
 import org.wxh.topic.service.ITopicService;
 import org.wxh.topic.service.IVideoService;
@@ -52,6 +57,8 @@ public class IndexController {
 	private IIndexService indexService;
 	@Autowired
 	private IPictureTopicService pictureTopicService;
+	@Autowired
+	private IPictureService pictureService;
 	@Autowired
 	private IVideoService videoService;
 	
@@ -143,6 +150,9 @@ public class IndexController {
 		topicService.update(t);
 		String keywords = t.getKeyword();
 		model.addAttribute("topic", t);
+		//获取导航栏目
+		List<Channel> Navs = getNavChannel( t.getChannel() );
+		model.addAttribute("navs", Navs);
 		if(keywords==null||"".equals(keywords.trim())||"\\|".equals(keywords.trim())) {
 			model.addAttribute("hasKey", false);
 		} else {
@@ -162,6 +172,43 @@ public class IndexController {
 		//热门文章
 		List<Topic> tops = topicService.listTopic();
 		return "index/topic";
+	}
+	/**
+	 * 显示组图新闻
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/imgsNews/{id}")
+	public String showImgsNews(@PathVariable int id,Model model) {
+		PictureTopic top = pictureTopicService.load( id );
+		model.addAttribute("top", top);
+		//获取导航栏目
+		List<Channel> Navs = getNavChannel( top.getChannel() );
+		model.addAttribute("navs", Navs);
+		//获取组图
+		List<Picture> imgs = pictureService.listByPicTopic( id );
+		model.addAttribute("imgs", imgs);
+		return "index/imgs_news";
+	}
+	/**
+	 * 显示视频新闻
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/videoNews/{id}")
+	public String showVideo(@PathVariable int id,Model model) {
+		//获取视频信息
+		Video video = videoService.loadCash( id );
+		//获取导航栏目
+		List<Channel> Navs = getNavChannel( video.getChannel() );
+		model.addAttribute("navs", Navs);
+		//获取视频列表
+		List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
+		//获取总播放量
+		//获取总视频数量
+		return "index/video_news";
 	}
 	/**
 	 * 首页全文搜索
@@ -208,6 +255,24 @@ public class IndexController {
 			}
 		}
 	}
+	
+	/**
+	 * 获取导航栏目
+	 * @param cid
+	 * @return
+	 */
+	private List<Channel> getNavChannel( Channel channel ) {
+		List<Channel> list = new ArrayList<Channel>();
+		list.add( channel );
+		Channel c = channel.getParent();
+		while( c != null ) {
+			list.add( c );
+			c = c.getParent();
+		}
+		Collections.reverse( list );
+		return list;
+	}
+	
 	//-----------------------------------------------------首页生成----------------------------------------------------------
 	/**
 	 * 首页生成

@@ -39,11 +39,17 @@ public interface IVideoService {
 	 */
 	public void updateStatus(int vid, User loginUser);
 	/**
-	 * 加载一个视频新闻
+	 * 加载一个视频新闻(不缓存)
 	 * @param id
 	 * @return
 	 */
 	public Video load(int id);
+	/**
+	 * 加载一个视频新闻(缓存)
+	 * @param id
+	 * @return
+	 */
+	public Video loadCash(int id);
 	/**
 	 * 添加视频新闻
 	 * @param video 视频新闻实体

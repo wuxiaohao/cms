@@ -64,6 +64,10 @@ public class VideoService implements IVideoService{
 		return videoDao.loadVideo(id);
 	}
 
+	public Video loadCash(int id) {
+		return videoDao.load(id);
+	}
+	
 	@Override
 	public void add(Video video, int cid, User u) {
 		Channel c = channelDao.load(cid);
