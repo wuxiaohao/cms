@@ -20,10 +20,10 @@ public class TestImage {
 	@Test
 	public void test01() {
 		try {
-			Thumbnails.of(new File("e:/br/01.jpg"))
-			.size(330, 10000)
+			Thumbnails.of(new File("d:/2-5.jpg"))
+			.forceSize(1140, 365)
 			.scalingMode(ScalingMode.BILINEAR)
-			.toFile(new File("e:/br/01_1.jpg"));
+			.toFile(new File("d:/b1_.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -32,9 +32,9 @@ public class TestImage {
 	@Test
 	public void test02() {
 		try {
-			Thumbnails.of(new File("e:/br/01.jpg"))
-			.scale(0.3f)
-			.toFile(new File("e:/br/01_1.jpg"));
+			Thumbnails.of(new File("d:/b1.jpg"))
+			.scale(0.9f)
+			.toFile(new File("d:/b1_.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,10 +43,10 @@ public class TestImage {
 	@Test
 	public void test03() {
 		try {
-			BufferedImage bi = Thumbnails.of(new File("e:/br/01.jpg"))
+			BufferedImage bi = Thumbnails.of(new File("d:/b1.jpg"))
 			.scale(0.3f)
 			.asBufferedImage();
-			ImageIO.write(bi, "jpg",new FileOutputStream("e:/br/011.jpg"));
+			ImageIO.write(bi, "jpg",new FileOutputStream("d:/b1_.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
