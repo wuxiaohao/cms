@@ -139,9 +139,11 @@ a.article_link:hover {
 	top: -2px;
 	font-weight: bolder;
 }
-.channel_right{
-	margin-left: 0px;
-
+/*.channel_right{
+	margin-left: 0;
+}*/
+.channel_right a{
+	font-size: 14px
 }
 /********************article_show.html css*************************/
 #article_top div.article_show_title {
@@ -275,6 +277,10 @@ padding: 15px 12px;
 	margin-bottom: 1px;
 	color: #000;
 }
+.imgtxt .title{
+	margin: 2px 0 2px;
+	font-size: 14px
+}
 #footer {
 	background-color: #524949;
 	border-top: 1px solid #ccc;
@@ -348,11 +354,12 @@ ul.dis{display:block;list-style: none;}
   border: 1px solid #f4645f;
   text-decoration: none;
 }
-.list_date{width: 29%;}
+.list_date{width: 17%;}
 
 .fl{float: left;margin-top:4px}
 .fr{float: right;}
 .channel{padding-left: 0;}
 .topnone {top: 0!important;position: fixed;width: 100%;}
-.carousel-title{position:absolute;background: #010101;opacity: 0.6;color: #fff;margin: 0px;padding: 1%;bottom: 0px;width: 100%;font-size:20}
+.carousel-title{position:absolute;background: #010101;opacity: 0.6;color: #fff;margin: 0px;padding: 1%;bottom: 0px;width: 100%;font-size:14px}
 .carousel-title b{padding-left: 5%;}
+.fan img{width: 150px;height: 100px;}

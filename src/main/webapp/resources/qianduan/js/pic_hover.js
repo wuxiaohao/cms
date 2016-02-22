@@ -6,12 +6,12 @@ $(function() {
 			$(this).children("img").animate({
 				opacity: 0.8,
 			});
-			$(this).children("p").css("color", "orangered");
+			$(this).children("div").css("color", "orangered");
 		}, function() {
 			$(this).children("img").animate({
 				opacity: 1,
 			});
-			$(this).children("p").css("color", "#000");
+			$(this).children("div").css("color", "#000");
 		});
 	});
 	//轮播自动播放

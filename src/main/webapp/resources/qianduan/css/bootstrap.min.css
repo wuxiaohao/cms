@@ -1222,7 +1222,6 @@ h6 small {
 h1,
 h2,
 h3 {
-	margin-top: 20px;
 	margin-bottom: 10px
 }
 .h1 .small,
@@ -1439,7 +1438,7 @@ ul ul {
 }
 dl {
 	margin-top: 0;
-	margin-bottom: 20px
+	margin-bottom:6px
 }
 dd,
 dt {
@@ -3165,9 +3164,9 @@ fieldset[disabled] a.btn {
 }
 .btn-default.focus,
 .btn-default:focus {
-	color: #333;
+	color: #fff/*;
 	background-color: #e6e6e6;
-	border-color: #8c8c8c
+	border-color: #8c8c8c*/
 }
 .btn-default:hover {
 	color: #333;
@@ -3178,10 +3177,10 @@ fieldset[disabled] a.btn {
 .btn-default:active,
 .open>.dropdown-toggle.btn-default {
 	color: #333;
-	background-color: #e6e6e6;
+	background-color: #F7E1B5;
 	border-color: #adadad
 }
-.btn-default.active.focus,
+/*.btn-default.active.focus,
 .btn-default.active:focus,
 .btn-default.active:hover,
 .btn-default:active.focus,
@@ -3193,7 +3192,7 @@ fieldset[disabled] a.btn {
 	color: #333;
 	background-color: #d4d4d4;
 	border-color: #8c8c8c
-}
+}*/
 .btn-default.active,
 .btn-default:active,
 .open>.dropdown-toggle.btn-default {
