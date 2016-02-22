@@ -20,7 +20,10 @@
 							<div class="header_input">
 							<input type="text" id="search_con" class="form-control" placeholder="请输入关键字"></div>
 							<div class="input-group-btn pc_search">
-								<button class="btn btn-default" id="search_btn">搜索</button>
+								<button class="btn btn-default">搜索</button>
+							</div>
+							<div class="input-group-btn phone_search">
+								<button class="btn btn-default" data-toggle="modal" data-target="#myModal">搜索</button>
 							</div>
 						</div>
 					</div>

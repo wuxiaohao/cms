@@ -65,15 +65,15 @@
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a class="thumbnail">
 								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/${video.picName}" alt="${video.title}">
-								<p class="imgtxt">
+								<div class="imgtxt clearfix">
 									<#if video.title?length gt 8>
-										${video.title[0..8]}...
+										<p class="title">${video.title[0..8]}...</p>
 									<#else>
-										${video.title}
+										<p class="title">${video.title}</p>
 									</#if>
-									<br/>
-									${(video.publishDate)?string("yyy-MM-dd")}
-								</p>
+									<p><span class="pull-left">${(video.publishDate)?string("yyy-MM-dd")}</span>
+									<span class="pull-right">${video.viewCount}次</span></p>
+								</div>
 							</a>
 						</div>
 						</#list>
