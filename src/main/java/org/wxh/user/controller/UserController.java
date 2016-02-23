@@ -1,10 +1,20 @@
 package org.wxh.user.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.Thumbnails.Builder;
+import net.coobird.thumbnailator.resizers.configurations.ScalingMode;
+
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,18 +29,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.exception.MyException;
+import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.ChannelTree;
+import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
 import org.wxh.user.model.Role;
 import org.wxh.user.model.RoleType;
 import org.wxh.user.model.User;
+import org.wxh.user.model.dto.IconDto;
 import org.wxh.user.model.dto.UserDto;
 import org.wxh.user.service.IGroupService;
 import org.wxh.user.service.IRoleService;
 import org.wxh.user.service.IUserService;
+import org.wxh.util.JsonUtil;
 
 /**
  * 用户管理的控制层
@@ -42,7 +58,6 @@ import org.wxh.user.service.IUserService;
 @RequestMapping("/admin/user")
 @AuthClass("login")
 public class UserController {
-	
 	
 	private static final Logger logger = Logger.getLogger(UserController.class);
 	
@@ -272,11 +287,12 @@ public class UserController {
 		if(br.hasErrors()) {
 			return "user/updateSelf";
 		}
-		User ou = userService.load(userDto.getId());
-		ou.setNickname(userDto.getNickname());
-		ou.setPhone(userDto.getPhone());
-		ou.setEmail(userDto.getEmail());
-		userService.update(ou);
+		User ou = userService.load( userDto.getId() );
+		ou.setNickname( userDto.getNickname() );
+		ou.setPhone( userDto.getPhone() );
+		ou.setEmail( userDto.getEmail() );
+		ou.setIcon( userDto.getIcon() );
+		userService.update( ou );
 		session.setAttribute("loginUser", ou);
 		model.addAttribute("success", "个人信息修改成功!");
 		return showMySelf(model,session);
@@ -311,4 +327,97 @@ public class UserController {
 		}
 		return groupService.generateUserChannelTreeAll(uid);
 	}
+	/**
+	 * 上传头像
+	 * @param session
+	 * @param resp
+	 * @param ico
+	 */
+	@RequestMapping(value="/uploadIcon",method=RequestMethod.POST)
+	public void uploadIcon(HttpSession session,HttpServletResponse resp,MultipartFile ico) {
+		resp.setContentType( "text/plain;charset=utf-8" );
+		AjaxObj ao = new AjaxObj();
+		PrintWriter out = null;
+		try {
+			out = resp.getWriter();
+			String oldName = ico.getOriginalFilename();//图片的原始名称
+			String newName = new Date().getTime() + "." + FilenameUtils.getExtension( oldName );//图片的新名称
+			String realPath = session.getServletContext().getRealPath("");
+			//创建临时文件存放的位置
+			String path = realPath + GlobalResult.ICON_PATH + "/temp/";
+			File f = new File( path ); 
+			if( !f.exists() ) {
+				f.mkdir();
+			}
+			IconDto con = new IconDto();
+			con.setNewName( newName ); 
+			con.setOldName( oldName );
+			con.setIconHeight( 150 );
+			con.setIconWidth( 150 );
+			//获取上传图片的宽度，高度
+			BufferedImage bi = ImageIO.read(ico.getInputStream());
+			Builder<BufferedImage> b = Thumbnails.of( bi );
+			BufferedImage bi2 = null;
+			if( bi.getWidth() < 300 && bi.getHeight() < 200 ) { //图片的大小符合要求
+				bi2 = b.scale( 1.0f ).asBufferedImage();
+			} else {  //如果图片超出大小，则按等比例压缩
+				bi2 = b.size(300, 200).keepAspectRatio(true).asBufferedImage();
+			}
+			//保存图片
+			b.toFile( path + newName);
+			con.setImgHeight( bi2.getHeight() );
+			con.setImgWidth( bi2.getWidth() );
+			ao.setObj( con );
+			ao.setResult( 1 );
+ 		} catch (IOException e) {
+			e.printStackTrace();
+			ao.setResult( 0 );
+			ao.setMsg( e.getMessage() );
+		} finally {
+			out.println( JsonUtil.getInstance().obj2json( ao ) );
+			out.flush();
+		}
+		
+	}
+	/**
+	 * 处理被剪切后的图片的坐标，并上传
+	 * @param session
+	 * @param x 
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param newName
+	 * @return
+	 */
+	@RequestMapping(value="/confirmPic",method=RequestMethod.POST)
+	public @ResponseBody AjaxObj confirmPic(HttpSession session,int x,int y,int w,int h,String newName) {
+		
+		AjaxObj ao = new AjaxObj();
+		try {
+			String path = session.getServletContext().getRealPath("");
+			String tpath = path+GlobalResult.ICON_PATH+"/temp/"+newName; //临时存放的路径
+			File tf = new File(tpath);
+			BufferedImage bi = ImageIO.read(tf);
+			String npath = path+GlobalResult.ICON_PATH+"/"+newName; //新的存放路径
+			String ttpath = path+GlobalResult.ICON_PATH+"/thumbnail/"+newName;//缩略图的路径
+			Builder<BufferedImage> b = Thumbnails.of(bi);
+			//根据坐标切割图片
+			BufferedImage bi2 = b.sourceRegion(x, y, w, h).forceSize(150, 150).asBufferedImage();
+			//写原图
+			b.toFile(npath);
+			//写缩略图
+			Thumbnails.of(bi2).forceSize( 29,29 ).scalingMode( ScalingMode.BILINEAR ).toFile( ttpath );
+			//删除临时图片
+			tf.delete(); 
+			ao.setResult(1);
+			return ao;
+		} catch (IOException e) {
+			e.printStackTrace();
+			ao.setResult(0);
+			ao.setMsg(e.getMessage());
+		}
+		return ao;
+		
+	}
+	
 }

@@ -50,7 +50,10 @@ public class User implements java.io.Serializable{
 	 * 创建时间
 	 */
 	private Date createDate;
-	
+	/**
+	 * 用户头像
+	 */
+	private String icon; 
 	
 	public User(int id, String username, String password, String nickname,
 			String email, String phone, int status) {
@@ -73,6 +76,12 @@ public class User implements java.io.Serializable{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
 	@NotNull(message="用户名不能为空")

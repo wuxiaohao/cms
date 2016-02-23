@@ -143,10 +143,10 @@ html { overflow-x:hidden; }
 
 <script>
 	jQuery(document).ready(function() {     
-		Metronic.init(); // init metronic core componets
+		   Metronic.init(); // init metronic core componets
 		   Layout.init(); // init layout
 		   QuickSidebar.init(); // init quick sidebar
-		Demo.init(); // init demo features
+		   Demo.init(); // init demo features
 		   Index.init();   
 		   Index.initDashboardDaterange();
 		   Index.initCalendar(); // init index page's custom scripts

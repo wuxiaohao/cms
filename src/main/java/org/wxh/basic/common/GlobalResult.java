@@ -34,6 +34,11 @@ public interface GlobalResult {
 	 */
 	public final static String FILE_PATH="/resources/indexPic";
 	/**
+	 * 用户头像的路径
+	 * 
+	 */
+	public final static String ICON_PATH="/resources/userIcon";
+	/**
 	 * 友情链接图片的路径
 	 * 
 	 */

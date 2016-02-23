@@ -2,13 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcrop/css/jquery.Jcrop.css" type="text/css" />
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/jcrop/js/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/updateSelf.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<script type="text/javascript">
-	$(function(){
-		$("#addForm").cmsvalidate();
-	});
-	
-</script>
+<input type="hidden" id="sid" value="<%=session.getId()%>"/>
+<input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
 <div class="row">
 	<div class="col-md-12">
 		<h3 class="page-title">
@@ -52,11 +51,25 @@
 				</div>
 			</div>
 			<div class="portlet-body form">
-				<sf:form id="addForm" method="post" role="form" modelAttribute="userDto" action="admin/user/updateSelf" class="form-horizontal ajaxiform">
+				<sf:form id="addForm" method="post" role="form" modelAttribute="userDto" action="admin/user/updateSelf" class="form-horizontal ajaxiform" onkeydown="if(event.keyCode==13){return false;}">
 					<sf:hidden path="id"/>
 					<sf:hidden path="username"/>
 					<sf:hidden path="password"/>
+					<sf:hidden path="icon" id="icon" />
 					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">头像</label>
+							<div class="col-md-6">
+								<input type="file" id="ico" class="form-control" />
+								<div id="touxiangImg"></div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input" id= "hei">
+							<label class="col-md-2"></label>
+							<div class="col-md-2">
+								<div id="headImg"></div>
+							</div>
+						</div>
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">显示昵称(可以是中文) </label>
 							<div class="col-md-6">

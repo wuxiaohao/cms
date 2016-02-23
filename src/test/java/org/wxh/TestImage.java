@@ -20,9 +20,9 @@ public class TestImage {
 	@Test
 	public void test01() {
 		try {
-			Thumbnails.of(new File("d:/2-5.jpg"))
-			.forceSize(1140, 365)
-			.scalingMode(ScalingMode.BILINEAR)
+			Thumbnails.of(new File("d:/1-2.jpg"))
+			.size(500, 500)
+			.keepAspectRatio(true)
 			.toFile(new File("d:/b1_.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -32,7 +32,7 @@ public class TestImage {
 	@Test
 	public void test02() {
 		try {
-			Thumbnails.of(new File("d:/b1.jpg"))
+			Thumbnails.of(new File("d:/1-2.jpg"))
 			.scale(0.9f)
 			.toFile(new File("d:/b1_.jpg"));
 		} catch (IOException e) {

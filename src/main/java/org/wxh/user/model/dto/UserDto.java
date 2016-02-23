@@ -40,6 +40,10 @@ public class UserDto {
 	 * 组id
 	 */
 	private Integer[] groupIds;
+	/**
+	 * 头像图片名称
+	 */
+	private String icon;
 	
 	
 	public int getId() {
@@ -85,37 +89,38 @@ public class UserDto {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getIcon() {
+		return icon;
+	}
 
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getPhone() {
 		return phone;
 	}
-
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-
 	public int getStatus() {
 		return status;
 	}
-
 
 	public void setStatus(int status) {
 		this.status = status;
 	}
 
-
 	public Integer[] getRoleIds() {
 		return roleIds;
 	}
-
 
 	public void setRoleIds(Integer[] roleIds) {
 		this.roleIds = roleIds;
