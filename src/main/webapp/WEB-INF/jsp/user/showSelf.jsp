@@ -59,6 +59,19 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
+								<label class="control-label col-md-3">头像&nbsp;:</label>
+								<div class="col-md-9">
+									<c:if test="${!empty(user.icon)}">
+										<img style="border:3px solid #AAAAAA"; src="<%=request.getContextPath() %>/resources/userIcon/${user.icon}"/>
+									</c:if>
+									<c:if test="${empty(user.icon) }">
+										<img style="border:3px solid #AAAAAA"; src="<%=request.getContextPath() %>/resources/userIcon/zanwu.png"/>
+									</c:if>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
 								<label class="control-label col-md-3">用户名&nbsp;:</label>
 								<div class="col-md-9">
 									<p class="form-control-static">

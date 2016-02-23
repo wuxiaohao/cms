@@ -60,11 +60,21 @@
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">头像</label>
 							<div class="col-md-6">
+								<c:if test="${!empty(userDto.icon)}">
+									<div id="touxiangImg">
+										<img style="border:3px solid #AAAAAA"; src="<%=request.getContextPath() %>/resources/userIcon/${userDto.icon}"/>
+									</div>
+								</c:if>
+								<c:if test="${empty(userDto.icon) }">
+									<div id="touxiangImg">
+										<img style="border:3px solid #AAAAAA"; src="<%=request.getContextPath() %>/resources/userIcon/zanwu.png"/>
+									</div>
+								</c:if>
+								<br/>
 								<input type="file" id="ico" class="form-control" />
-								<div id="touxiangImg"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input" id= "hei">
+						<div class="form-group form-md-line-input" style="display: none;" id="hei">
 							<label class="col-md-2"></label>
 							<div class="col-md-2">
 								<div id="headImg"></div>

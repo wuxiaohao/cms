@@ -11,9 +11,11 @@ $(function(){
 		buttonText: '请选择图片',
 		fileObjName:"ico",
 		multi:false,
+		removeTimeout : 0.5,
 		formData:{"sid":$("#sid").val()},
 		fileTypeExts:"*.jpg;*.png;",
 		onUploadSuccess:function(file, data, response) {
+			$('#' + file.id).find('.data').html('上传成功');
 			var ao = $.parseJSON(data);//把对象转为json数据
 			if(ao.result) {
 				newName = ao.obj.newName;
@@ -24,14 +26,16 @@ $(function(){
 				iconHeight = ao.obj.iconHeight; //头像高度
 				imgWidth = ao.obj.imgWidth; //上传的临时图片宽度
 				imgHeight = ao.obj.imgHeight; //上传的临时图片高度
-				$("#headImg").parent().after("<div class='col-md-2' id='pc'><div style='border:2px solid #AAAAAA;width:"+iconWidth+"px;height:"+iconHeight+"px;overflow:hidden;'><img id='preview' src='"+ctx+"/resources/userIcon/temp/"+newName+"'/></div></div>");
+				$("#headImg").parent().after("<div class='col-md-2' id='pc'><div style='border:3px solid #AAAAAA;width:"+iconWidth+"px;height:"+iconHeight+"px;overflow:hidden;'><img id='preview' src='"+ctx+"/resources/userIcon/temp/"+newName+"'/></div></div>");
+				$("#hei").show();
 				$("#headImg img").Jcrop({
 					aspectRatio:1,
 					onChange: showPreview,
 					onSelect: showPreview,
 					setSelect: [0,0,iconWidth,iconHeight],
 					dragEdges:true
-				});$("#confirmSelect").click(confirmSelect);
+				});
+				$("#confirmSelect").click(confirmSelect);
 			} else {
 				alert(ao.msg);
 			}
@@ -68,8 +72,9 @@ $(function(){
 			if($.ajaxCheck(data)) {
 				$("#pc").remove();
 				$("#hei").remove();
-				$("#touxiangImg").html("<img src='"+ctx+"/resources/userIcon/"+newName+"'/>");
 				$("#ico").hide();
+				$("#touxiangImg img").remove();//删除原来显示的头像
+				$("#touxiangImg").html("<img style='border:3px solid #AAAAAA'; src='"+ctx+"/resources/userIcon/"+newName+"'/>");
 				$("#icon").val(newName);
 			}
 		},"json")

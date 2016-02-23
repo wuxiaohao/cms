@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<!-- BEGIN HEADER -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -65,7 +66,13 @@
 			<ul class="nav navbar-nav pull-right">
 				<li class="dropdown dropdown-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img alt="" class="img-circle" src="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/img/avatar3_small.jpg"/>
+					<c:if test="${!empty(loginUser.icon)}">
+						<img alt="这是头像啊" class="img-circle" src="<%=request.getContextPath() %>/resources/userIcon/thumbnail/${loginUser.icon}"/>
+					</c:if>
+					<c:if test="${empty(loginUser.icon) }">
+						<img alt="这是头像啊" class="img-circle" src="<%=request.getContextPath() %>/resources/userIcon/thumbnail/zanwu.png"/>
+					</c:if>
+					<%-- <img alt="" class="img-circle" src="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/img/avatar3_small.jpg"/> --%>
 					<span class="username username-hide-on-mobile">
 					欢迎您，${loginUser.nickname }
 					</span>

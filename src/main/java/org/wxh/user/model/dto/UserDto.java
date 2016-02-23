@@ -157,6 +157,7 @@ public class UserDto {
 		this.setPhone(user.getPhone());
 		this.setStatus(user.getStatus());
 		this.setUsername(user.getUsername());
+		this.setIcon(user.getIcon());
 	}
 	public UserDto(User user,Integer[] roleIds,Integer[] groupIds) {
 		this.setEmail(user.getEmail());
@@ -168,6 +169,7 @@ public class UserDto {
 		this.setUsername(user.getUsername());
 		this.setGroupIds(groupIds);
 		this.setRoleIds(roleIds);
+		this.setIcon(user.getIcon());
 	}
 	public UserDto(User user,List<Integer> roleIds,List<Integer> groupIds) {
 		this.setEmail(user.getEmail());
