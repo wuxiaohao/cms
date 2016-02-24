@@ -137,7 +137,7 @@ $(function(){
 						<c:forEach items="${datas.datas }" var="cl">
 							<tr>
 								<td><a href="admin/cmsLink/${cl.id }" class="ajaxify">${cl.title }</a></td>
-								<td><img width="120" height="40" src='<%=request.getContextPath()%>/resources/LinkPic/${cl.picName}'/></td>
+								<td><img width="120" height="40" src='<%=request.getContextPath()%>/resources/linkPic/${cl.picName}'/></td>
 								<td><a href="${cl.url }" target="_blank">${cl.url }</a></td>
 								<td>${cl.type }</td>
 								<td>

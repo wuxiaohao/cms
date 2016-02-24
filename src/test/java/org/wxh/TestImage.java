@@ -21,8 +21,7 @@ public class TestImage {
 	public void test01() {
 		try {
 			Thumbnails.of(new File("d:/1-2.jpg"))
-			.size(500, 500)
-			.keepAspectRatio(true)
+			.forceSize(1000, 400)
 			.toFile(new File("d:/b1_.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();

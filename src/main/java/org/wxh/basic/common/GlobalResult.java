@@ -16,6 +16,31 @@ public interface GlobalResult {
 	public final static int THUMBNAIL_WIDTH = 150;
 	public final static int THUMBNAIL_HEIGHT = 110;
 	/**
+	 * 友情链接图片的宽度
+	 */
+	public final static int LINKPIC_WIDTH = 222;
+	/**
+	 * 友情链接图片的高度
+	 */
+	public final static int LINKPIC_HEIGHT = 60;
+	/**
+	 * 用户头像的宽度
+	 */
+	public final static int ICON_WIDTH = 150;
+	/**
+	 * 用户头像的高度
+	 */
+	public final static int ICON_HEIGHT = 150;
+	/**
+	 * 用户头像宽度缩略图
+	 */
+	public final static int ICON_WIDTH_THUMBNAIL = 29;
+	/**
+	 * 用户头像高度缩略图
+	 */
+	public final static int ICON_HEIGHT_THUMBNAIL = 29;
+	
+	/**
 	 * 附件路径
 	 * SystemContext.getRealPath()+UPLOAD_PATH
 	 */
@@ -42,7 +67,7 @@ public interface GlobalResult {
 	 * 友情链接图片的路径
 	 * 
 	 */
-	public final static String LINK_PATH="/resources/LinkPic";
+	public final static String LINK_PATH="/resources/linkPic";
 	
 	public final static int T_W = 120;
 	

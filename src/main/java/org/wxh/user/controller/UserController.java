@@ -352,8 +352,8 @@ public class UserController {
 			IconDto con = new IconDto();
 			con.setNewName( newName ); 
 			con.setOldName( oldName );
-			con.setIconHeight( 150 );
-			con.setIconWidth( 150 );
+			con.setIconHeight( GlobalResult.ICON_HEIGHT );
+			con.setIconWidth( GlobalResult.ICON_WIDTH );
 			//获取上传图片的宽度，高度
 			BufferedImage bi = ImageIO.read(ico.getInputStream());
 			Builder<BufferedImage> b = Thumbnails.of( bi );
@@ -391,7 +391,6 @@ public class UserController {
 	 */
 	@RequestMapping(value="/confirmPic",method=RequestMethod.POST)
 	public @ResponseBody AjaxObj confirmPic(HttpSession session,int x,int y,int w,int h,String newName) {
-		
 		AjaxObj ao = new AjaxObj();
 		try {
 			String path = session.getServletContext().getRealPath("");
@@ -402,15 +401,14 @@ public class UserController {
 			String ttpath = path+GlobalResult.ICON_PATH+"/thumbnail/"+newName;//缩略图的路径
 			Builder<BufferedImage> b = Thumbnails.of(bi);
 			//根据坐标切割图片
-			BufferedImage bi2 = b.sourceRegion(x, y, w, h).forceSize(150, 150).asBufferedImage();
+			BufferedImage bi2 = b.sourceRegion(x, y, w, h).forceSize(GlobalResult.ICON_WIDTH, GlobalResult.ICON_HEIGHT).asBufferedImage();
 			//写原图
 			b.toFile(npath);
 			//写缩略图
-			Thumbnails.of(bi2).forceSize( 29,29 ).scalingMode( ScalingMode.BILINEAR ).toFile( ttpath );
+			Thumbnails.of(bi2).forceSize( GlobalResult.ICON_WIDTH_THUMBNAIL,GlobalResult.ICON_HEIGHT_THUMBNAIL ).scalingMode( ScalingMode.BILINEAR ).toFile( ttpath );
 			//删除临时图片
 			tf.delete(); 
 			ao.setResult(1);
-			return ao;
 		} catch (IOException e) {
 			e.printStackTrace();
 			ao.setResult(0);

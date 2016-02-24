@@ -2,43 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcrop/css/jquery.Jcrop.css" type="text/css" />
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/jcrop/js/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/cmslink.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<script type="text/javascript">
-$(function(){
-	$("#addForm").cmsvalidate();
-	$("#urlType").change(function(){
-		var v = $(this).val();
-		if(v=="-1") {
-			$(".type").removeAttr("readonly");
-			$(".type").select();
-			$(".type").focus();
-		} else if(v!="0"){
-			$(".type").val(v);
-			$(".type").attr("readonly","true");
-		}
-	});
-	var newName,oldName;
-	var ctx = $("#ctx").val();
-	//multi:false表示只上传一个文件，auto默认为true，自动上传
-	$("#linkPic").uploadify({
-		swf:ctx+"/resources/uploadify/uploadify.swf",
-		uploader:ctx+"/admin/cmsLink/uploadPicLink",
-		buttonText: '请选择图片',
-		fileObjName:"pic",
-		multi:false,
-		formData:{"sid":$("#sid").val()},
-		fileTypeExts:"*.jpg;*.png;",
-		onUploadSuccess:function(file, data, response) {
-			var ao = $.parseJSON(data);//把对象转为json数据
-			if(ao.result) {
-				$("#picName").val(ao.obj);
-			} else {
-				alert(ao.msg);
-			}
-		}
-	});
-});
-</script>
 <input type="hidden" id="sid" value="<%=session.getId()%>"/>
 <input type="hidden" id="ctx" value="<%=request.getContextPath()%>"/>
 <div class="row">
@@ -86,19 +53,28 @@ $(function(){
 			</div>
 			<div class="portlet-body form">
 				<sf:form id="addForm" role="form" method="post" modelAttribute="cmsLink" action="admin/cmsLink/update/${cmsLink.id }" class="form-horizontal ajaxiform">	
+					<sf:hidden path="picName" id="picName" />
+					<input type="hidden" name="oldPic" value="${cmsLink.picName }"  />
 					<div class="form-body">
 						<div class="form-group form-md-line-input has-info">
-							<label class="col-md-2 control-label" for="form_control_1"></label>
+							<label class="col-md-2 control-label" for="form_control_1">图片</label>
 							<div class="col-md-6">
+								<c:if test="${!empty(cmsLink.picName) }">
+									<div id="youqingImg">
+										<img style="border:3px solid #AAAAAA"; src="<%=request.getContextPath() %>/resources/linkPic/${cmsLink.picName}"/>
+									</div>
+									<br/>
+								</c:if>
+								<c:if test="${!empty(cmsLink.picName) }">
+									<div id="youqingImg"></div>
+								</c:if>
 								<input type="file" id="linkPic" name="linkPic" class="form-control" />
 							</div>
 						</div>
-						<div class="form-group form-md-line-input has-info pname">
-							<label class="col-md-2 control-label" for="form_control_1">图片名称</label>
+						<div class="form-group form-md-line-input has-info" style="display: none;" id="hei">
+							<label class="col-md-2 control-label" for="form_control_1"></label>
 							<div class="col-md-6">
-								<input id="picName" type="text" name="picName" value="${cmsLink.picName}" value class="form-control" readonly/>
-								<input name="oldPic" value="${cmsLink.picName}" type="hidden" >
-								<div class="form-control-focus"></div>
+							<div id="linkImg"></div>
 							</div>
 						</div>
 						<div class="form-group form-md-line-input has-info">

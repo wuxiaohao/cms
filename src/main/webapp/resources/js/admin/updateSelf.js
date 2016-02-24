@@ -1,6 +1,6 @@
 $(function(){
 	$("#addForm").cmsvalidate();
-	var indexPicWidth=0,indexPicHeight=0,imgWidth=0,imgHeight=0;
+	var iconWidth=0,iconHeight=0,imgWidth=0,imgHeight=0;
 	var x,y,w,h;
 	var newName,oldName;
 	var ctx = $("#ctx").val();
@@ -70,12 +70,12 @@ $(function(){
 		var path = ctx+"/admin/user/confirmPic";
 		$.post(path,{w:w,h:h,x:x,y:y,newName:newName},function(data) {
 			if($.ajaxCheck(data)) {
-				$("#pc").remove();
-				$("#hei").remove();
-				$("#ico").hide();
+				$("#pc").remove();  //移除截图预览框框
+				$("#hei").remove();//移除截图框框
+				$("#ico").hide(); //隐藏上传的按钮
 				$("#touxiangImg img").remove();//删除原来显示的头像
 				$("#touxiangImg").html("<img style='border:3px solid #AAAAAA'; src='"+ctx+"/resources/userIcon/"+newName+"'/>");
-				$("#icon").val(newName);
+				$("#icon").val(newName);  //赋值图片名称
 			}
 		},"json")
 	}

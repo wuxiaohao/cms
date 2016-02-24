@@ -18,11 +18,11 @@
     	<div class="imgstyle">
     		<#if pic.newWin==1>
 	    		<a target="_blank" href="${pic.url}">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/LinkPic/${pic.picName}">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/${pic.picName}">
 	    		</a>
     		<#else>
 	    		<a href="${pic.url}">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/LinkPic/${pic.picName}">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/${pic.picName}">
 	    		</a>
     		</#if>
     	</div>

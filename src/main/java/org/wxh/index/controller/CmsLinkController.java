@@ -11,6 +11,10 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.Thumbnails.Builder;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +26,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.common.GlobalResult;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.index.dao.impl.CmsLinkDao;
 import org.wxh.index.model.CmsLink;
+import org.wxh.index.model.dto.CmsLinkDto;
 import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexService;
 import org.wxh.topic.controller.TopicController;
@@ -140,7 +147,7 @@ public class CmsLinkController {
 			//删除原来旧的图片
 			String realPath = SystemContext.getRealPath();
 			String path = realPath + GlobalResult.LINK_PATH + "/";//新闻图片存放的位置
-			new File(path+oldPic).delete();
+			new File( path + oldPic ).delete();
 		}
 		CmsLink tcl = cmsLinkService.load(id);
 		tcl.setNewWin(cmsLink.getNewWin());
@@ -149,6 +156,7 @@ public class CmsLinkController {
 		tcl.setUrl(cmsLink.getUrl());
 		tcl.setUrlClass(cmsLink.getUrlClass());
 		tcl.setUrlId(cmsLink.getUrlId());
+		tcl.setPicName(cmsLink.getPicName());
 		cmsLinkService.update(tcl);
 		model.addAttribute("success", "修改成功!");
 		indexService.generateLink();//重新生成超链接页面
@@ -180,21 +188,76 @@ public class CmsLinkController {
 			out = resp.getWriter();
 			String oldName = pic.getOriginalFilename(); //图片的原始名称
 			String newName = new Date().getTime() + "." + FilenameUtils.getExtension(oldName);//图片的新名称
+			String realPath = session.getServletContext().getRealPath("");
+			//创建临时文件存放的位置
+			String path = realPath + GlobalResult.LINK_PATH + "/temp/";
+			File f = new File( path );
+			if( !f.exists() ) {
+				f.mkdir();
+			}
+			CmsLinkDto dto = new CmsLinkDto();
+			dto.setNewName( newName );
+			dto.setOldName( oldName );
+			//超链接图片设定宽度
+			dto.setLinkPicWidth( GlobalResult.LINKPIC_WIDTH );
+			dto.setLinkPicHeight( GlobalResult.LINKPIC_HEIGHT );
 			//获取上传图片的宽，高
 			BufferedImage bi = ImageIO.read( pic.getInputStream() );
-			if( 222 == bi.getWidth() && 60 == bi.getHeight() ) {  
-				cmsLinkService.savePic(newName,pic.getInputStream());
-				ao.setObj(newName);
-				ao.setResult(1);
-			} else {
-				ao.setResult(0);
-				ao.setMsg("图片的尺寸不在有效范围中");
+			Builder<BufferedImage> b = Thumbnails.of( bi );
+			BufferedImage bi2 = null;
+			if( bi.getWidth() < 800 && bi.getHeight() <200 ) { //超链接图片设定的宽度
+				bi2 = b.scale( 1.0f ).asBufferedImage();
+			} else { //如果图片超出大小，则按等比例压缩
+				bi2 = b.size(600, 150).keepAspectRatio(true).asBufferedImage();
 			}
+			//保存图片
+			b.toFile( path + newName );
+			dto.setImgHeight( bi2.getHeight() );
+			dto.setImgWidth( bi2.getWidth() );
+			ao.setObj( dto );
+			ao.setResult( 1 );
 		} catch (Exception e) {
+			logger.error( e );
+			ao.setResult( 0 );
+			ao.setMsg( e.getMessage() );
+		} finally {
+			out.println( JsonUtil.getInstance().obj2json( ao ) );
+			out.flush();
+		}
+		
+	}
+	/**
+	 * 处理被剪切后的图片的坐标，并上传
+	 * @param session
+	 * @param x 
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param newName
+	 * @return
+	 */
+	@RequestMapping( value = "/confirmPic", method = RequestMethod.POST )
+	public @ResponseBody AjaxObj confirmPic(HttpSession session,int x,int y,int w,int h,String newName) {
+		AjaxObj ao = new AjaxObj();
+		try {
+			String path = session.getServletContext().getRealPath("");
+			String tpath = path + GlobalResult.LINK_PATH + "/temp/" + newName;//临时存放的路径
+			File tf = new File( tpath );
+			BufferedImage bi = ImageIO.read( tf );
+			String npath = path + GlobalResult.LINK_PATH + "/" + newName; //新的存放路径
+			Builder<BufferedImage> b = Thumbnails.of( bi );
+			//根据坐标切割图片
+			b.sourceRegion(x, y, w, h).forceSize( GlobalResult.LINKPIC_WIDTH, GlobalResult.LINKPIC_HEIGHT ).asBufferedImage();
+			//保存图片
+			b.toFile( npath );
+			//删除临时图片
+			tf.delete(); 
+			ao.setResult(1);
+		} catch (Exception e) {
+			e.printStackTrace();
 			ao.setResult(0);
 			ao.setMsg(e.getMessage());
 		}
-		out.println(JsonUtil.getInstance().obj2json(ao));
-		out.flush();
+		return ao;
 	}
 }
