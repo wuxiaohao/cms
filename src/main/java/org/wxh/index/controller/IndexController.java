@@ -86,6 +86,8 @@ public class IndexController {
 		String result = "";
 		//1、获取当前栏目及父栏目
 		Channel c = channelService.load( cid );
+		List<Channel> navs = getNavChannel( c );
+		model.addAttribute("navs",navs); //传递：导航栏目
 		Channel pc = null;
 		//如果是导航栏目
 		if( c.getType() == ChannelType.NAV_CHANNEL ) {  
@@ -94,37 +96,30 @@ public class IndexController {
 			c = channelService.loadFirstChannelByNav( c.getId() );
 		} else {
 			pc = c.getParent();  //获取父栏目
-		}
-		model.addAttribute( "pc", pc ); 
-		model.addAttribute( "channel", c ); 
+		} 
+		model.addAttribute( "pc", pc ); //传递：父栏目
+		model.addAttribute( "channel", c ); //传递：当前栏目
 		//2、获取新闻列表
 		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
 			resp.sendRedirect( req.getContextPath() + "/topic/" + topicService.loadLastedTopicByColumn( cid ).getId() );
-		} else if ( c.getType() == ChannelType.TOPIC_IMG ){ //如果是图片列表栏目，
-			SystemContext.setPageSize( 16 );
-			SystemContext.setSort( "a.topic.publishDate" );
-			SystemContext.setOrder( "desc" );
-			Pager<Attachment> atts = attachmentService.findChannelPic( cid );
-			model.addAttribute( "datas", atts );
-			result = "index/channel_pic";
 		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
-			SystemContext.setPageSize( 16 );
+			SystemContext.setPageSize( 8 );
 			Pager<PictureDto> pics = pictureTopicService.findPicTopByCid(cid);//获取组图新闻的封面列表
 			model.addAttribute("datas", pics);
-			result = "index/pic_news";
+			result = "index/article_pic";
 		} else if ( c.getType() == ChannelType.VIDEO_NEW ) { //如果是视频新闻列表
-			SystemContext.setPageSize( 3 );
+			SystemContext.setPageSize( 8 );
 			SystemContext.setSort( "v.publishDate" );
 			SystemContext.setOrder( "desc" );
 			Pager<Video> vids = videoService.findVideoByCid( cid );
 			model.addAttribute("datas", vids);
-			result = "index/video_news";
+			result = "index/article_video";
 		} else if ( c.getType() == ChannelType.TOPIC_LIST ) { //如果是文章列表栏目
 			SystemContext.setPageSize( 10 );
 			SystemContext.setSort( "t.publishDate" );
 			SystemContext.setOrder( "desc" );
 			model.addAttribute( "datas" , topicService.find( c.getId(),null,1 ) );
-			result = "index/channel";
+			result = "index/article_list";
 		}
 		//3、获取当前栏目下的父栏目列表
 		SystemContext.removeSort();
@@ -151,8 +146,8 @@ public class IndexController {
 		String keywords = t.getKeyword();
 		model.addAttribute("topic", t);
 		//获取导航栏目
-		List<Channel> Navs = getNavChannel( t.getChannel() );
-		model.addAttribute("navs", Navs);
+		List<Channel> navs = getNavChannel( t.getChannel() );
+		model.addAttribute("navs", navs);
 		if(keywords==null||"".equals(keywords.trim())||"\\|".equals(keywords.trim())) {
 			model.addAttribute("hasKey", false);
 		} else {
@@ -184,8 +179,8 @@ public class IndexController {
 		PictureTopic top = pictureTopicService.load( id );
 		model.addAttribute("top", top);
 		//获取导航栏目
-		List<Channel> Navs = getNavChannel( top.getChannel() );
-		model.addAttribute("navs", Navs);
+		List<Channel> navs = getNavChannel( top.getChannel() );
+		model.addAttribute("navs", navs);
 		//获取组图
 		List<Picture> imgs = pictureService.listByPicTopic( id );
 		model.addAttribute("imgs", imgs);
@@ -202,8 +197,8 @@ public class IndexController {
 		//获取视频信息
 		Video video = videoService.loadCash( id );
 		//获取导航栏目
-		List<Channel> Navs = getNavChannel( video.getChannel() );
-		model.addAttribute("navs", Navs);
+		List<Channel> navs = getNavChannel( video.getChannel() );
+		model.addAttribute("navs", navs);
 		//获取视频列表
 		List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
 		//获取总播放量
@@ -237,11 +232,11 @@ public class IndexController {
 	 */
 	@RequestMapping("/keyword/{con}")
 	public String keyword(@PathVariable String con,Model model) {
-		model.addAttribute("kws", keywordService.getMaxTimesKeyword(9));
+		model.addAttribute("kws", keywordService.getMaxTimesKeyword( 18 ));
 		SystemContext.setOrder("desc");
 		SystemContext.setSort("t.publishDate");
-		Pager<Topic> topics = topicService.searchTopicByKeyword(con);
-		emp(topics,con);
+		Pager<Topic> topics = topicService.searchTopicByKeyword( con );
+		emp( topics,con );
 		model.addAttribute("datas", topics);
 		model.addAttribute("con", con);
 		return "index/keyword";

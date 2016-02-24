@@ -8,31 +8,24 @@
 	items="${param.totalRecord }" 
 	maxPageItems="<%=SystemContext.getPageSize() %>"
 	url="${param.url }">
-	共
-	<pg:last>
-		${pageNumber } 页[${param.totalRecord }条记录],
-	</pg:last>
 	<c:forEach items="${param.params }" var="p">
 		<pg:param name="${p }"/>
 	</c:forEach>
-	<pg:first>
-		<a href="${pageUrl }" class="pager_link">首页</a>
-	</pg:first>
-	<pg:prev>
-		<a href="${pageUrl }" class="pager_link">上一页</a>
-	</pg:prev>
-	<pg:pages>
-		<c:if test="${curPage eq pageNumber }">
-			[${pageNumber }]
-		</c:if>
-		<c:if test="${curPage != pageNumber }">
-			<a href="${pageUrl }" class="pager_link">${pageNumber }</a>
-		</c:if>
-	</pg:pages>
-	<pg:next>
-		<a href="${pageUrl }" class="pager_link">下一页</a>
-	</pg:next>
-	<pg:last>
-		<a href="${pageUrl }" class="pager_link">尾页</a>
-	</pg:last>
-	</pg:pager>
+	<ul class="pagination pagination-sm">
+		<pg:first>
+			<li><a href="${pageUrl }" > &laquo;</a></li>
+		</pg:first>
+		<pg:pages>
+			<%-- <c:if test="${curPage eq pageNumber }">
+				[${pageNumber }]
+			</c:if>
+			<c:if test="${curPage != pageNumber }">
+				<a href="${pageUrl }" class="pager_link">${pageNumber }</a>
+			</c:if> --%>
+			<li><a href="${pageUrl }">${pageNumber }</a></li>
+		</pg:pages>
+		<pg:last>
+			<li><a href="${pageUrl }" > &raquo;</a></li>
+		</pg:last>
+	</ul>
+</pg:pager>
