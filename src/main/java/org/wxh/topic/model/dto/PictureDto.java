@@ -61,6 +61,14 @@ public class PictureDto {
 	public void setPicName(String picName) {
 		this.picName = picName;
 	}
+	public String getPublishDate() {
+		return publishDate;
+	}
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
+	}
+	
+	
 	
 	
 }

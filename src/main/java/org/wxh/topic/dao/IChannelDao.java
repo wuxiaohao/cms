@@ -82,10 +82,11 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 */
 	public List<Channel> listAllIndexChannel(ChannelType ct);
 	/**
-	 * 获取所有顶部导航栏目
+	 * 获取指定数量顶部导航栏目
+	 * @param num 
 	 * @return
 	 */
-	public List<Channel> listTopNavChannel();
+	public List<Channel> listTopNavChannel(int num);
 	/**
 	 * 获取所有顶部导航栏目的所有数据
 	 * @return

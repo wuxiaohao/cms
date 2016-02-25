@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>${baseInfo.name } -- 图片新闻列表</title>
-<meta http-equiv="keywords" content="城市学院,东莞理工学院城市学院">
+<title>${baseInfo.name } -- 视频新闻列表</title>
+<meta http-equiv="keywords" content="城市学院,城市学院新闻,东莞理工学院城市学院">
 <meta http-equiv="description" content="城市学院网站,东莞理工学院城市学院网站">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap-responsive.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap.min.css" />
@@ -55,34 +55,38 @@
 			</c:if>
 			<c:if test="${datas.total gt 0 }">
 				<div class="row-fluid col-md-99 channel_right">
-					<c:forEach begin= "0" end="3" items="${datas.datas}" var="pic">
+					<c:forEach begin= "0" end="3" items="${datas.datas}" var="video">
 						<div class="span3">
 							<a href="title" class="thumbnail">
 								<div class="fan">
-									<img src="<%=request.getContextPath() %>/resources/picTopic/${pic.picName}" alt="${pic.title }">
+									<img src="<%=request.getContextPath() %>/resources/video/thumbnail/${video.picName}" alt="${video.videoName }">
 								</div>
 								<div class="imgtxt clearfix">
-									<p class="title">${pic.title}</p>
+									<p class="title">${video.title}</p>
 									<p>
 										<span class="pull-left">
-											${pic.publishDate}
+											<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd" />
 										</span>
-										<span class="pull-right">${pic.viewCount}</span></p>
+										<span class="pull-right">${video.viewCount}</span></p>
 								</div>
 							</a>
 						</div>
 					</c:forEach>
 				</div>
 				<div class="row-fluid col-md-99 channel_right">
-					<c:forEach begin= "4" end="7" items="${datas.datas}" var="pic">
+					<c:forEach begin= "4" end="7" items="${datas.datas}" var="video">
 						<div class="span3">
 							<a href="title" class="thumbnail">
 								<div class="fan">
-									<img src="<%=request.getContextPath() %>/resources/picTopic/${pic.picName}" alt="${pic.title }">
+									<img src="<%=request.getContextPath() %>/resources/video/thumbnail/${video.picName}" alt="${video.videoName }">
 								</div>
 								<div class="imgtxt clearfix">
-									<p class="title">${pic.title}</p>
-									<p><span class="pull-left">${pic.publishDate}</span><span class="pull-right">${pic.viewCount}</span></p>
+									<p class="title">${video.title}</p>
+									<p>
+										<span class="pull-left">
+											<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd" />
+										</span>
+										<span class="pull-right">${video.viewCount}</span></p>
 								</div>
 							</a>
 						</div>

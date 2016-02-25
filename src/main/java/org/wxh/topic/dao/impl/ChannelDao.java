@@ -119,10 +119,10 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 		return cts;
 	}
 	@Override
-	public List<Channel> listTopNavChannel() {
+	public List<Channel> listTopNavChannel(int num) {
 		String hql = "select new Channel(c.id,c.name,c.customLink,c.customLinkUrl) " +
 				"from Channel c where c.status=0 and c.isTopNav=1 order by navOrder";
-		return this.list(hql);
+		return this.getSession().createQuery( hql ).setFirstResult( 0 ).setMaxResults( num ).list();
 	}
 	@Override
 	public List<Channel> listTopNavChannelAll() {
@@ -155,8 +155,13 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 
 	@Override
 	public List<Channel> listUseChannelByParent(Integer pid) {
-		String hql = "select c from Channel c left join fetch c.parent cp where cp.id="+pid+" and cp.status=0 order by c.orders";
-		if(pid==null||pid==0) hql = "select c from Channel c where c.parent is null and cp.status=0 order by c.orders";
+		String hql;
+		if( pid == null || pid == 0 ) {
+			hql = "select c from Channel c where c.parent is null and c.status=0 order by c.orders";
+		} else {
+			hql = "select c from Channel c where c.parent.id=" + pid + " and c.status=0 order by c.orders";
+			//hql = "select c from Channel c left join fetch c.parent cp where cp.id="+pid+" and cp.status=0 order by c.orders";
+		}
 		return this.list(hql);
 	}
 

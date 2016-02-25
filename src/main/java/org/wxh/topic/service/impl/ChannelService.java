@@ -132,8 +132,8 @@ public class ChannelService implements IChannelService {
 		return channelDao.listPublishChannelByUid(uid);
 	}
 	@Override
-	public List<Channel> listTopNavChannel() {
-		return channelDao.listTopNavChannel();
+	public List<Channel> listTopNavChannel(int num) {
+		return channelDao.listTopNavChannel( num );
 	}
 	@Override
 	public List<Channel> listTopNavChannelAll() {

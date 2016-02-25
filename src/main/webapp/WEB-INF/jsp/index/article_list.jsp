@@ -24,7 +24,7 @@
 		<div class="channel col-md-4">
 			<!-- 栏目树 -->
 			<div class="widget">
-				<h4 class="title ">${pc.name}</h4>
+				<h4 class="title ">${cname}</h4>
 				<c:forEach var="c" items="${cs}">
 					<c:choose>
 						<c:when test="${c.id == channel.id }">

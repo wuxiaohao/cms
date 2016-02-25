@@ -78,7 +78,7 @@ public class IndexService implements IIndexService {
 
 	@Override
 	public void generateTop() {
-		List<Channel> list = channelService.listTopNavChannel();
+		List<Channel> list = channelService.listTopNavChannel( 9 );
 		Map<String,Object> root = new HashMap<String,Object>();
 		root.put("navs", list);
 		root.put("baseInfo", BaseInfoUtil.getInstacne().read());

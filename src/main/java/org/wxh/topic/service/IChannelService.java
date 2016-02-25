@@ -89,10 +89,11 @@ public interface IChannelService {
 	 */
 	public List<Channel> listPublishChannelByUid(int uid);
 	/**
-	 * 获取所有的顶部导航栏目，栏目的状态必须为已经启用
+	 * 获取指定数量的顶部导航栏目，栏目的状态必须为已经启用
+	 * @param num 数量 
 	 * @return
 	 */
-	public List<Channel> listTopNavChannel();
+	public List<Channel> listTopNavChannel(int num);
 	/**
 	 * 获取所有的顶部导航栏目，栏目的状态必须为已经启用(所有数据)
 	 * @return

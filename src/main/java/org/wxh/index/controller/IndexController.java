@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.hamcrest.core.Is;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import org.wxh.index.service.impl.IndexService;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
+import org.wxh.topic.model.Keyword;
 import org.wxh.topic.model.Picture;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
@@ -83,8 +85,8 @@ public class IndexController {
 	 */
 	@RequestMapping("/channel/{cid}")
 	public String showChannel(@PathVariable int cid,Model model,HttpServletResponse resp,HttpServletRequest req) throws IOException {
-		String result = "";
 		//1、获取当前栏目及父栏目
+		String result = "";
 		Channel c = channelService.load( cid );
 		List<Channel> navs = getNavChannel( c );
 		model.addAttribute("navs",navs); //传递：导航栏目
@@ -97,11 +99,26 @@ public class IndexController {
 		} else {
 			pc = c.getParent();  //获取父栏目
 		} 
-		model.addAttribute( "pc", pc ); //传递：父栏目
+		//2、获取当前栏目下的父栏目列表
+		List<Channel> cs = null;
+		String cname = "";
+		if( pc == null ) {
+			cs = channelService.listUseChannelByParent( null );
+			cname = "网站栏目";
+		} else {
+			cs = channelService.listUseChannelByParent( pc.getId() );
+			cname = pc.getName();
+		}
+		model.addAttribute( "cs", cs );
+		model.addAttribute( "cname", cname ); //传递：父栏目的名称
 		model.addAttribute( "channel", c ); //传递：当前栏目
-		//2、获取新闻列表
+		//3、获取关键字
+		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
+		model.addAttribute( "kws", kws );
+		//4、获取新闻列表
 		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
-			resp.sendRedirect( req.getContextPath() + "/topic/" + topicService.loadLastedTopicByColumn( cid ).getId() );
+			Topic topic = topicService.loadLastedTopicByColumn( cid );
+			resp.sendRedirect( req.getContextPath() + "/topic/" + topic.getId() );
 		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
 			SystemContext.setPageSize( 8 );
 			Pager<PictureDto> pics = pictureTopicService.findPicTopByCid(cid);//获取组图新闻的封面列表
@@ -121,13 +138,9 @@ public class IndexController {
 			model.addAttribute( "datas" , topicService.find( c.getId(),null,1 ) );
 			result = "index/article_list";
 		}
-		//3、获取当前栏目下的父栏目列表
 		SystemContext.removeSort();
 		SystemContext.removeOrder();
 		SystemContext.removePageSize();
-		model.addAttribute( "cs", channelService.listUseChannelByParent( pc.getId() ) );
-		//4、获取关键字
-		model.addAttribute( "kws", keywordService.getMaxTimesKeyword( 18 ) );
 		
 		return result;
 		
