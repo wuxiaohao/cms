@@ -2,21 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>${baseInfo.name } -- 视频新闻列表</title>
-<meta http-equiv="keywords" content="城市学院,城市学院新闻,东莞理工学院城市学院">
-<meta http-equiv="description" content="城市学院网站,东莞理工学院城市学院网站">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap-responsive.css" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/docs.min.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/main.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/screen.css">
-<script src="<%=request.getContextPath() %>/resources/qianduan/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/qianduan/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/qianduan/js/pic_hover.js"></script>
+<title>${baseInfo.name } -- ${channel.name}</title>
+<%@ include file="common.jsp" %> 
 <body>
 	<jsp:include page="/jsp/template/top.jsp"/>	
 	<div class="container">
@@ -51,23 +42,28 @@
 				<h4 class="title_line">${channel.name}</h4>
 			</div>
 			<c:if test="${datas.total le 0 }">
-				<span>该栏目还没有任何图片新闻....</span>
+				<span>该栏目还没有任何视频新闻....</span>
 			</c:if>
 			<c:if test="${datas.total gt 0 }">
 				<div class="row-fluid col-md-99 channel_right">
 					<c:forEach begin= "0" end="3" items="${datas.datas}" var="video">
 						<div class="span3">
-							<a href="title" class="thumbnail">
-								<div class="fan">
-									<img src="<%=request.getContextPath() %>/resources/video/thumbnail/${video.picName}" alt="${video.videoName }">
-								</div>
+							<a href="<%=request.getContextPath() %>/videoNews/${video.id}" class="thumbnail">
+								<img src="<%=request.getContextPath() %>/resources/video/thumbnail/${video.picName}" alt="${video.videoName }">
 								<div class="imgtxt clearfix">
-									<p class="title">${video.title}</p>
+									<p class="title">
+										<c:if test="${fn:length(video.title) > '13' }">
+											${fn:substring(video.title,0,13)}...
+										</c:if>
+										<c:if test="${fn:length(video.title) <= '13' }">
+											${video.title }
+										</c:if>
+									</p>
 									<p>
-										<span class="pull-left">
-											<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd" />
-										</span>
-										<span class="pull-right">${video.viewCount}</span></p>
+									<span class="pull-left">
+										<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd" />
+									</span>
+									<span class="pull-right">${video.viewCount}</span></p>
 								</div>
 							</a>
 						</div>
@@ -76,12 +72,17 @@
 				<div class="row-fluid col-md-99 channel_right">
 					<c:forEach begin= "4" end="7" items="${datas.datas}" var="video">
 						<div class="span3">
-							<a href="title" class="thumbnail">
-								<div class="fan">
-									<img src="<%=request.getContextPath() %>/resources/video/thumbnail/${video.picName}" alt="${video.videoName }">
-								</div>
+							<a href="<%=request.getContextPath() %>/videoNews/${video.id}" class="thumbnail">
+								<img src="<%=request.getContextPath() %>/resources/video/thumbnail/${video.picName}" alt="${video.videoName }">
 								<div class="imgtxt clearfix">
-									<p class="title">${video.title}</p>
+									<p class="title">
+										<c:if test="${fn:length(video.title) > '13' }">
+											${fn:substring(video.title,0,13)}...
+										</c:if>
+										<c:if test="${fn:length(video.title) <= '13' }">
+											${video.title }
+										</c:if>
+									</p>
 									<p>
 										<span class="pull-left">
 											<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd" />

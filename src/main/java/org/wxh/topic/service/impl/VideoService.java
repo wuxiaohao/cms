@@ -191,4 +191,9 @@ public class VideoService implements IVideoService{
 		return videoDao.findVideoByCid(cid);
 	}
 
+	@Override
+	public void update(Video video) {
+		videoDao.update( video );
+	}
+
 }

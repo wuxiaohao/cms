@@ -22,7 +22,7 @@
 									<img alt="${newsPic.newName}" src="<%=request.getContextPath()%>/resources/upload/${newsPic.newName}" />
 								</a>
 								<#if newsPic.topic.title?length gt 37>
-									<h5 class="carousel-title">${newsPic.topic.title[0..37]}...</h5>
+									<h5 class="carousel-title">${newsPic.topic.title[0..32]}...</h5>
 								<#else>
 									<h5 class="carousel-title">${newsPic.topic.title}</h5>
 								</#if>
@@ -33,7 +33,7 @@
 									<img alt="${newsPic.oldName}" src="<%=request.getContextPath()%>/resources/upload/${newsPic.newName}" />
 								</a>
 								<#if newsPic.topic.title?length gt 37>
-									<h5 class="carousel-title">${newsPic.topic.title[0..37]}...</h5>
+									<h5 class="carousel-title">${newsPic.topic.title[0..32]}...</h5>
 								<#else>
 									<h5 class="carousel-title">${newsPic.topic.title}</h5>
 								</#if>
@@ -63,7 +63,7 @@
 					<div class="row">
 						<#list vids.videos as video>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
+							<a href="<%=request.getContextPath() %>/videoNews/${video.id}" class="thumbnail">
 								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/${video.picName}" alt="${video.title}">
 								<div class="imgtxt clearfix">
 									<#if video.title?length gt 8>

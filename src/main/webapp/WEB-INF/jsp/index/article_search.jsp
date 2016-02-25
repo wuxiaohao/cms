@@ -14,16 +14,9 @@
 		<div class="channel col-md-4">
 			<!-- 栏目树 -->
 			<div class="widget">
-				<h4 class="title ">${cname}</h4>
+				<h4 class="title ">导航栏目</h4>
 				<c:forEach var="c" items="${cs}">
-					<c:choose>
-						<c:when test="${c.id == channel.id }">
-							<a href="<%=request.getContextPath() %>/channel/${c.id }" class="btn btn-default btn-block active">${c.name }</a>
-						</c:when>
-						<c:otherwise>
-							<a href="<%=request.getContextPath() %>/channel/${c.id }" class="btn btn-default btn-block">${c.name }</a>
-						</c:otherwise>
-					</c:choose>
+					<a href="<%=request.getContextPath() %>/channel/${c.id }" class="btn btn-default btn-block">${c.name }</a>
 				</c:forEach>
 			</div>
 			<!-- 标签云 -->
@@ -38,11 +31,11 @@
 		</div>
 		<div class="col-md-8">
 			<div class="channel_title col-md-99">
-				<h4 class="title_line">${channel.name}</h4>
+				<h4 class="title_line">检索内容:<span style="font-size:16px;color: red">${con }</span></h4>
 			</div>
 			<div class="row list_right col-md-99 channel_right">
 				<c:if test="${datas.total le 0 }">
-					<span class="list-group-item clearfix">该栏目还没有任何文章....</span>
+					<span class="list-group-item clearfix">暂无符合检索条件的文章....</span>
 				</c:if>
 				<c:if test="${datas.total gt 0 }">
 					<c:forEach items="${datas.datas}" var="topic">

@@ -1,6 +1,7 @@
 package org.wxh.index.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.hamcrest.core.Is;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
@@ -84,12 +87,12 @@ public class IndexController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/channel/{cid}")
-	public String showChannel(@PathVariable int cid,Model model,HttpServletResponse resp,HttpServletRequest req) throws IOException {
+	public ModelAndView showChannel(@PathVariable int cid,HttpServletResponse resp,HttpServletRequest req) throws IOException {
+		ModelAndView mv = new ModelAndView();
 		//1、获取当前栏目及父栏目
-		String result = "";
 		Channel c = channelService.load( cid );
 		List<Channel> navs = getNavChannel( c );
-		model.addAttribute("navs",navs); //传递：导航栏目
+		mv.addObject("navs",navs); //传递：导航栏目
 		Channel pc = null;
 		//如果是导航栏目
 		if( c.getType() == ChannelType.NAV_CHANNEL ) {  
@@ -109,40 +112,41 @@ public class IndexController {
 			cs = channelService.listUseChannelByParent( pc.getId() );
 			cname = pc.getName();
 		}
-		model.addAttribute( "cs", cs );
-		model.addAttribute( "cname", cname ); //传递：父栏目的名称
-		model.addAttribute( "channel", c ); //传递：当前栏目
+		mv.addObject( "cs", cs );
+		mv.addObject( "cname", cname ); //传递：父栏目的名称
+		mv.addObject( "channel", c ); //传递：当前栏目
 		//3、获取关键字
 		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
-		model.addAttribute( "kws", kws );
+		mv.addObject( "kws", kws );
 		//4、获取新闻列表
 		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
 			Topic topic = topicService.loadLastedTopicByColumn( cid );
-			resp.sendRedirect( req.getContextPath() + "/topic/" + topic.getId() );
+			String url = "topic/" + topic.getId();
+			return new ModelAndView("redirect:"+url);  
 		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
 			SystemContext.setPageSize( 8 );
 			Pager<PictureDto> pics = pictureTopicService.findPicTopByCid(cid);//获取组图新闻的封面列表
-			model.addAttribute("datas", pics);
-			result = "index/article_pic";
+			mv.addObject("datas", pics);
+			mv.setViewName( "index/article_pic" );
 		} else if ( c.getType() == ChannelType.VIDEO_NEW ) { //如果是视频新闻列表
 			SystemContext.setPageSize( 8 );
 			SystemContext.setSort( "v.publishDate" );
 			SystemContext.setOrder( "desc" );
 			Pager<Video> vids = videoService.findVideoByCid( cid );
-			model.addAttribute("datas", vids);
-			result = "index/article_video";
+			mv.addObject("datas", vids);
+			mv.setViewName( "index/article_video" );
 		} else if ( c.getType() == ChannelType.TOPIC_LIST ) { //如果是文章列表栏目
 			SystemContext.setPageSize( 10 );
 			SystemContext.setSort( "t.publishDate" );
 			SystemContext.setOrder( "desc" );
-			model.addAttribute( "datas" , topicService.find( c.getId(),null,1 ) );
-			result = "index/article_list";
+			mv.addObject( "datas" , topicService.find( c.getId(),null,1 ) );
+			mv.setViewName( "index/article_list" );
 		}
 		SystemContext.removeSort();
 		SystemContext.removeOrder();
 		SystemContext.removePageSize();
 		
-		return result;
+		return mv;
 		
 	}
 	/**
@@ -153,20 +157,22 @@ public class IndexController {
 	 */
 	@RequestMapping("/topic/{tid}")
 	public String showTopic(@PathVariable int tid,Model model) {
+		//获取文章并修改浏览次数
 		Topic t = topicService.load(tid);
 		t.setViewCount(t.getViewCount() + 1);
 		topicService.update(t);
-		String keywords = t.getKeyword();
 		model.addAttribute("topic", t);
 		//获取导航栏目
 		List<Channel> navs = getNavChannel( t.getChannel() );
 		model.addAttribute("navs", navs);
+		//获取文章关键字
+		String keywords = t.getKeyword();
 		if(keywords==null||"".equals(keywords.trim())||"\\|".equals(keywords.trim())) {
 			model.addAttribute("hasKey", false);
 		} else {
-			String[] kws = keywords.split("\\|");
+			String[] kwst = keywords.split("\\|");
 			model.addAttribute("hasKey", true);
-			model.addAttribute("kws",kws);
+			model.addAttribute("kwst",kwst);
 		}
 		List<Attachment> atts = attachmentService.listAttachByTopic(tid);
 		if(atts.size()>0) {
@@ -175,11 +181,13 @@ public class IndexController {
 		} else {
 			model.addAttribute("hasAtts",false);
 		}
-		//获取关键字
-		model.addAttribute( "kws", keywordService.getMaxTimesKeyword( 18 ) );
+		//获取标签云关键字
+		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
+		model.addAttribute( "kws", kws );
 		//热门文章
-		List<Topic> tops = topicService.listTopic();
-		return "index/topic";
+		List<Topic> hotTop = topicService.listTopic();
+		model.addAttribute( "hotTop", hotTop );
+		return "index/article_show";
 	}
 	/**
 	 * 显示组图新闻
@@ -190,6 +198,8 @@ public class IndexController {
 	@RequestMapping("/imgsNews/{id}")
 	public String showImgsNews(@PathVariable int id,Model model) {
 		PictureTopic top = pictureTopicService.load( id );
+		top.setViewCount( top.getViewCount() +1 );
+		pictureTopicService.update( top );
 		model.addAttribute("top", top);
 		//获取导航栏目
 		List<Channel> navs = getNavChannel( top.getChannel() );
@@ -197,45 +207,53 @@ public class IndexController {
 		//获取组图
 		List<Picture> imgs = pictureService.listByPicTopic( id );
 		model.addAttribute("imgs", imgs);
-		return "index/imgs_news";
+		return "index/article_pic_show";
 	}
 	/**
-	 * 显示视频新闻
+	 * 显示视频新闻内容
 	 * @param id
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/videoNews/{id}")
 	public String showVideo(@PathVariable int id,Model model) {
-		//获取视频信息
+		//获取视频信息并修改浏览次数
 		Video video = videoService.loadCash( id );
+		video.setViewCount( video.getViewCount() + 1 );
+		model.addAttribute("video", video);
+		videoService.update(video);
 		//获取导航栏目
 		List<Channel> navs = getNavChannel( video.getChannel() );
 		model.addAttribute("navs", navs);
 		//获取视频列表
-		List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
-		//获取总播放量
-		//获取总视频数量
-		return "index/video_news";
+		/*List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
+		model.addAttribute("vids", vids);*/
+		return "index/article_video_show";
 	}
 	/**
 	 * 首页全文搜索
 	 * @param con
 	 * @param model
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping("/search/{con}")
-	public String search(@PathVariable String con,Model model) {
+	public String search(@PathVariable String con, Model model,HttpServletRequest reqs) throws Exception {
+		//解决get提交乱码问题
+		String key = new String(con.getBytes("iso8859-1"),"UTF-8");
 		SystemContext.setOrder("asc");
 		SystemContext.setSort("c.orders");
 		model.addAttribute("cs", channelService.listChannelByType(ChannelType.NAV_CHANNEL));
 		SystemContext.setOrder("desc");
 		SystemContext.setSort("t.publishDate");
-		Pager<Topic> topics = topicService.searchTopic(con);
-		emp(topics,con);
+		Pager<Topic> topics = topicService.searchTopic(key);
+		emp(topics,key);
 		model.addAttribute("datas", topics);
-		model.addAttribute("con", con);
-		return "index/search";
+		model.addAttribute("con", key);
+		//获取标签云关键字
+		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
+		model.addAttribute( "kws", kws );
+		return "index/article_search";
 	}
 	/**
 	 * 关键字检索
@@ -244,21 +262,27 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/keyword/{con}")
-	public String keyword(@PathVariable String con,Model model) {
-		model.addAttribute("kws", keywordService.getMaxTimesKeyword( 18 ));
+	public String keyword(@PathVariable String con,Model model) throws Exception {
+		//解决get提交乱码问题
+		String key = new String(con.getBytes("iso8859-1"),"UTF-8");
+		//获取标签云关键字
+		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
+		model.addAttribute( "kws", kws );
+		//获取栏目
+		model.addAttribute("cs", channelService.listChannelByType(ChannelType.NAV_CHANNEL));
 		SystemContext.setOrder("desc");
 		SystemContext.setSort("t.publishDate");
-		Pager<Topic> topics = topicService.searchTopicByKeyword( con );
+		Pager<Topic> topics = topicService.searchTopicByKeyword( key );
 		emp( topics,con );
 		model.addAttribute("datas", topics);
-		model.addAttribute("con", con);
-		return "index/keyword";
+		model.addAttribute("con", key);
+		return "index/article_keyword";
 	}
 
 	private void emp(Pager<Topic> topics, String con) {
 		for(Topic t:topics.getDatas()) {
 			if(t.getTitle().contains(con)) {
-				String tt = t.getTitle().replaceAll(con, "<span class='emp'>"+con+"</span>");
+				String tt = t.getTitle().replaceAll(con, "<span style='color: red'>"+con+"</span>");
 				t.setTitle(tt);
 			}
 		}

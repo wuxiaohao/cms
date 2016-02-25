@@ -2,21 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>${baseInfo.name } -- 图片新闻列表</title>
-<meta http-equiv="keywords" content="城市学院,东莞理工学院城市学院">
-<meta http-equiv="description" content="城市学院网站,东莞理工学院城市学院网站">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap-responsive.css" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/docs.min.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/main.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/screen.css">
-<script src="<%=request.getContextPath() %>/resources/qianduan/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/qianduan/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/qianduan/js/pic_hover.js"></script>
+<title>${baseInfo.name } -- ${channel.name}</title>
+<%@ include file="common.jsp" %> 
 <body>
 	<jsp:include page="/jsp/template/top.jsp"/>	
 	<div class="container">
@@ -57,17 +48,25 @@
 				<div class="row-fluid col-md-99 channel_right">
 					<c:forEach begin= "0" end="3" items="${datas.datas}" var="pic">
 						<div class="span3">
-							<a href="title" class="thumbnail">
+							<a href="<%=request.getContextPath() %>/imgsNews/${pic.id}" class="thumbnail">
 								<div class="fan">
 									<img src="<%=request.getContextPath() %>/resources/picTopic/${pic.picName}" alt="${pic.title }">
 								</div>
 								<div class="imgtxt clearfix">
-									<p class="title">${pic.title}</p>
+									<p class="title">
+										<c:if test="${fn:length(pic.title) > '10' }">
+											${fn:substring(pic.title,0,10) }...
+										</c:if>
+										<c:if test="${fn:length(pic.title) <= '10' }">
+											${pic.title}
+										</c:if>
+									</p>
 									<p>
 										<span class="pull-left">
 											${pic.publishDate}
 										</span>
-										<span class="pull-right">${pic.viewCount}</span></p>
+										<span class="pull-right">${pic.viewCount}次</span>
+									</p>
 								</div>
 							</a>
 						</div>
@@ -76,13 +75,25 @@
 				<div class="row-fluid col-md-99 channel_right">
 					<c:forEach begin= "4" end="7" items="${datas.datas}" var="pic">
 						<div class="span3">
-							<a href="title" class="thumbnail">
+							<a href="<%=request.getContextPath() %>/imgsNews/${pic.id}" class="thumbnail">
 								<div class="fan">
 									<img src="<%=request.getContextPath() %>/resources/picTopic/${pic.picName}" alt="${pic.title }">
 								</div>
 								<div class="imgtxt clearfix">
-									<p class="title">${pic.title}</p>
-									<p><span class="pull-left">${pic.publishDate}</span><span class="pull-right">${pic.viewCount}</span></p>
+									<p class="title">
+										<c:if test="${fn:length(pic.title) > '10' }">
+											${fn:substring(pic.title,0,10) }...
+										</c:if>
+										<c:if test="${fn:length(pic.title) <= '10' }">
+											${pic.title}
+										</c:if>
+									</p>
+									<p>
+										<span class="pull-left">
+											${pic.publishDate}
+										</span>
+										<span class="pull-right">${pic.viewCount}次</span>
+									</p>
 								</div>
 							</a>
 						</div>

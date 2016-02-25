@@ -20,10 +20,10 @@
 							<div class="header_input">
 							<input type="text" id="search_con" class="form-control" placeholder="请输入关键字"></div>
 							<div class="input-group-btn pc_search">
-								<button class="btn btn-default">搜索</button>
+								<button id="search_btn" class="btn btn-default">搜索</button>
 							</div>
 							<div class="input-group-btn phone_search">
-								<button class="btn btn-default" data-toggle="modal" data-target="#myModal">搜索</button>
+								<button id="search_btn" class="btn btn-default" data-toggle="modal" data-target="#myModal">搜索</button>
 							</div>
 						</div>
 					</div>
@@ -58,3 +58,25 @@
 		</nav>
 	</div>
 </header>
+<script type="text/javascript">
+$("#search_btn").click(function(){
+	var sc = $("#search_con").val();
+	if(sc==""||sc=="请输入关键字") {
+		alert("你需要输入相应的检索内容");
+	} else {
+		window.location.href=$("#ctx").val()+"/search/"+sc;
+	}
+});
+</script>
+<!-- 搜索弹层 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="" id="search-form" method="POST">
+				<input type="search" placeholder="输入关键字" name="wd" id="head_wd" value="">
+			</form>
+			<div class="close" data-dismiss="modal" aria-label="Close">×</div>
+		</div>
+	</div>
+</div>
+<a href="#" id="back-to-top"></a>

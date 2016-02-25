@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/java/org/wxh/index/controller/CmsLinkController.java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/index/common.jsp=UTF-8
 encoding//src/main/webapp/index.jsp=UTF-8
 encoding//src/main/webapp/jsp/common.jsp=UTF-8
 encoding//src/main/webapp/jsp/commonLogin.jsp=UTF-8

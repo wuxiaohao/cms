@@ -27,12 +27,12 @@
 			nickname:{
 				required: true,
 				minlength: 3,
-				maxlength: 16
+				maxlength: 10
 			},
 			password:"required",
 			name:{
 				required: true,
-				maxlength: 16
+				maxlength: 10
 			},
 			confirmPwd:{
 				equalTo:"#password"
@@ -67,7 +67,7 @@
 			nickname:{
 				required: "显示名称不能为空",
 				minlength: "显示名称长度不能小于3个字符",
-				maxlength: "显示名称长度不能大于16个字符",
+				maxlength: "显示名称长度不能大于10个字符",
 			},
 			password:"密码不能为空",
 			confirmPwd:"两次输入的密码不相同",
@@ -77,7 +77,7 @@
 			},
 			name:{
 				required: "名称不能为空",
-				maxlength: "名称长度不能大于16个字符"
+				maxlength: "名称长度不能大于10个字符"
 			},
 			cname:"属栏目不能为空！",
 			title:"标题不能为空！",

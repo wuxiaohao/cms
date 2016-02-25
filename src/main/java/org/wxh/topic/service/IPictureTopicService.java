@@ -71,4 +71,5 @@ public interface IPictureTopicService {
 	 * @return
 	 */
 	public Pager<PictureDto> findPicTopByCid(int cid);
+	public void update(PictureTopic top);
 }

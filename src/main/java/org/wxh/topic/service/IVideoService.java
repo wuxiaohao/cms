@@ -94,5 +94,6 @@ public interface IVideoService {
 	 * @return
 	 */
 	public Pager<Video> findVideoByCid(int cid);
+	public void update(Video video);
 	
 }

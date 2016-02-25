@@ -115,4 +115,9 @@ public class PictureTopicService implements IPictureTopicService{
 		return pictureTopicDao.findPicTopByCid(cid);
 	}
 
+	@Override
+	public void update(PictureTopic top) {
+		pictureTopicDao.update( top ); 
+	}
+
 }

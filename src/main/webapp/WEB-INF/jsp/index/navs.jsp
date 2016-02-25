@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- 导航栏目（待抽取） -->
+<!-- 导航栏目  -->
 <div class="localAddress">
 	<div class="row-fluid">
 		<div class="span12">
@@ -15,7 +15,7 @@
 					<span class="divider"></span>
 				</li>
 				<c:if test="${empty(navs) }">
-					<li>全站检索</li>
+					<li>检索</li>
 				</c:if>
 				<c:if test="${!empty(navs) }">
 				<c:forEach var="nav" items="${navs }" >
