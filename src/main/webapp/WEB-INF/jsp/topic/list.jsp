@@ -132,8 +132,8 @@
 								<td>
 									<a href="admin/topic/${t.id }" class="ajaxify" >
 									<c:choose>
-										<c:when test="${fn:length(t.title)> 18 }">
-											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
+										<c:when test="${fn:length(t.title)> 13 }">
+											<c:out value="${fn:substring(t.title, 0, 13)}..." />  
 										</c:when>
 										<c:otherwise>
 											<c:out value="${t.title }"></c:out>
