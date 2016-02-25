@@ -2,6 +2,7 @@ package org.wxh.topic.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +106,9 @@ public class ChannelController {
 			pc = channelService.load(pid);
 		}
 		model.addAttribute("pc", pc);
-		model.addAttribute("types", EnumUtils.enumProp2NameMap(ChannelType.class, "name"));
+		Map<String, String> enu = EnumUtils.enumProp2NameMap(ChannelType.class, "name");
+		enu.remove("TOPIC_IMG");
+		model.addAttribute("types", enu);
 	}
 	/**
 	 * 添加栏目的界面
@@ -169,7 +172,9 @@ public class ChannelController {
 			pc = c.getParent();
 		}
 		model.addAttribute("pc",pc);
-		model.addAttribute("types", EnumUtils.enumProp2NameMap(ChannelType.class, "name"));
+		Map<String, String> enu = EnumUtils.enumProp2NameMap(ChannelType.class, "name");
+		enu.remove("TOPIC_IMG");
+		model.addAttribute("types", enu);
 		return "channel/update";
 	}
 	/**

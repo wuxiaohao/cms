@@ -181,7 +181,7 @@
 												<a href="admin/picTopic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 											</li>
 											<li>
-												<a class="ajaxify"><i class="fa fa-eye"></i>&nbsp;预览</a>
+												<a href="imgsNews/${t.id }" target="_blank"><i class="fa fa-eye"></i>&nbsp;预览</a>
 											</li>
 										</ul>
 									</div>

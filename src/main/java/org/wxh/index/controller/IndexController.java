@@ -121,7 +121,7 @@ public class IndexController {
 		//4、获取新闻列表
 		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
 			Topic topic = topicService.loadLastedTopicByColumn( cid );
-			String url = "topic/" + topic.getId();
+			String url = "/topic/" + topic.getId();
 			return new ModelAndView("redirect:"+url);  
 		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
 			SystemContext.setPageSize( 8 );

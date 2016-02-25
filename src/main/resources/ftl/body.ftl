@@ -99,7 +99,7 @@
 					<#list pics as pic>
 						<#if pic_index == 0 >
 							<div class="item active relative">
-								<#--如果是链接到外部-->
+								<#--如果是链接到内部-->
 								<#if pic.linkType == 1>
 								<a target="_blank" href="<%=request.getContextPath()%>/${pic.linkUrl}">
 									<img alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
