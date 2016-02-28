@@ -139,13 +139,10 @@ public class IndexController {
 			SystemContext.setPageSize( 10 );
 			SystemContext.setSort( "t.publishDate" );
 			SystemContext.setOrder( "desc" );
+			Pager<Topic> page = topicService.find( c.getId(),null,1 );
 			mv.addObject( "datas" , topicService.find( c.getId(),null,1 ) );
 			mv.setViewName( "index/article_list" );
-		}
-		SystemContext.removeSort();
-		SystemContext.removeOrder();
-		SystemContext.removePageSize();
-		
+		}	
 		return mv;
 		
 	}
@@ -238,18 +235,16 @@ public class IndexController {
 	 * @throws Exception 
 	 */
 	@RequestMapping("/search/{con}")
-	public String search(@PathVariable String con, Model model,HttpServletRequest reqs) throws Exception {
-		//解决get提交乱码问题
-		String key = new String(con.getBytes("iso8859-1"),"UTF-8");
+	public String search(@PathVariable String con, Model model) throws Exception {
 		SystemContext.setOrder("asc");
 		SystemContext.setSort("c.orders");
 		model.addAttribute("cs", channelService.listChannelByType(ChannelType.NAV_CHANNEL));
 		SystemContext.setOrder("desc");
 		SystemContext.setSort("t.publishDate");
-		Pager<Topic> topics = topicService.searchTopic(key);
-		emp(topics,key);
+		Pager<Topic> topics = topicService.searchTopic(con);
+		emp(topics,con);
 		model.addAttribute("datas", topics);
-		model.addAttribute("con", key);
+		model.addAttribute("con", con);
 		//获取标签云关键字
 		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
 		model.addAttribute( "kws", kws );
@@ -263,8 +258,6 @@ public class IndexController {
 	 */
 	@RequestMapping("/keyword/{con}")
 	public String keyword(@PathVariable String con,Model model) throws Exception {
-		//解决get提交乱码问题
-		String key = new String(con.getBytes("iso8859-1"),"UTF-8");
 		//获取标签云关键字
 		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
 		model.addAttribute( "kws", kws );
@@ -272,10 +265,10 @@ public class IndexController {
 		model.addAttribute("cs", channelService.listChannelByType(ChannelType.NAV_CHANNEL));
 		SystemContext.setOrder("desc");
 		SystemContext.setSort("t.publishDate");
-		Pager<Topic> topics = topicService.searchTopicByKeyword( key );
+		Pager<Topic> topics = topicService.searchTopicByKeyword( con );
 		emp( topics,con );
 		model.addAttribute("datas", topics);
-		model.addAttribute("con", key);
+		model.addAttribute("con", con);
 		return "index/article_keyword";
 	}
 

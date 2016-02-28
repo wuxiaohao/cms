@@ -5,6 +5,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script src="http://html5media.googlecode.com/svn/trunk/src/html5media.min.js"></script>
 <title>${baseInfo.name } -- ${channel.name}</title>
 <%@ include file="common.jsp" %> 
 <body>
@@ -21,7 +23,9 @@
 				<!-- <span class="pull-right ">分享</span> -->
 			</section>
 		 </header>
-		 <video src="<%=request.getContextPath() %>/resources/video/${video.videoName}" width="100%" controls="controls"></video>
+		 <video width="100%" controls="controls">
+			<source src="<%=request.getContextPath() %>/resources/video/${video.videoName}" type="video/mp4">
+		 </video>
 		 <br><br>
 	</div>
 	<jsp:include page="/jsp/template/bottom.jsp"/>

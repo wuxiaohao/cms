@@ -58,12 +58,6 @@ public class CmsLinkController {
 	@Autowired
 	private IIndexService indexService;
 	
-	public ICmsLinkService getCmsLinkService() {
-		return cmsLinkService;
-	}
-	public void setCmsLinkService(ICmsLinkService cmsLinkService) {
-		this.cmsLinkService = cmsLinkService;
-	}
 	/**
 	 * 返回所有超链接的列表页面
 	 * @param model

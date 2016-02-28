@@ -103,7 +103,7 @@
 			</div>
 			<h2>HTML5 video标签嵌入视频各个浏览器下通用</h2>
 			<video width="80%" controls="controls">
-				<source src="../media/aaa.avi" type="video/avi">
+				<source src="../media/aaa.avi" type="video/mp4">
 			</video>
 			
 			<!--<div class="container">

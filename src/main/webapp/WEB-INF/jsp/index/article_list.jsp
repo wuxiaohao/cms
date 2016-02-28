@@ -55,12 +55,12 @@
 					</c:forEach>
 				</c:if>
 			</div>
-			<%-- <div class="t_c">
+			<div class="t_c">
 				<jsp:include page="/jsp/index_pager.jsp">
 					<jsp:param value="${datas.total }" name="totalRecord"/>
-					<jsp:param value="channel/${channel.id}" name="url"/>
+					<jsp:param value="/cms/channel/${channel.id}" name="url"/>
 				</jsp:include>
-			</div> --%>
+			</div>
 		</div>
 
 	</div>

@@ -13,19 +13,13 @@
 	</c:forEach>
 	<ul class="pagination pagination-sm">
 		<pg:first>
-			<li><a href="${pageUrl }" > &laquo;</a></li>
+			<li><a href="${param.url }" > &laquo;</a></li>
 		</pg:first>
 		<pg:pages>
-			<%-- <c:if test="${curPage eq pageNumber }">
-				[${pageNumber }]
-			</c:if>
-			<c:if test="${curPage != pageNumber }">
-				<a href="${pageUrl }" class="pager_link">${pageNumber }</a>
-			</c:if> --%>
-			<li><a href="${pageUrl }">${pageNumber }</a></li>
+			<li><a href="${param.url }">${pageNumber }</a></li>
 		</pg:pages>
 		<pg:last>
-			<li><a href="${pageUrl }" > &raquo;</a></li>
+			<li><a href="${param.url }" > &raquo;</a></li>
 		</pg:last>
 	</ul>
 </pg:pager>
