@@ -13,13 +13,13 @@
 	</c:forEach>
 	<ul class="pagination pagination-sm">
 		<pg:first>
-			<li><a href="${param.url }" > &laquo;</a></li>
+			<li><a href="${pageUrl }" > &laquo;</a></li>
 		</pg:first>
 		<pg:pages>
-			<li><a href="${param.url }">${pageNumber }</a></li>
+			<li><a href="${pageUrl }">${pageNumber }</a></li>
 		</pg:pages>
 		<pg:last>
-			<li><a href="${param.url }" > &raquo;</a></li>
+			<li><a href="${pageUrl }" > &raquo;</a></li>
 		</pg:last>
 	</ul>
 </pg:pager>

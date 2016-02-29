@@ -136,7 +136,6 @@ public class IndexController {
 			mv.addObject("datas", vids);
 			mv.setViewName( "index/article_video" );
 		} else if ( c.getType() == ChannelType.TOPIC_LIST ) { //如果是文章列表栏目
-			SystemContext.setPageSize( 10 );
 			SystemContext.setSort( "t.publishDate" );
 			SystemContext.setOrder( "desc" );
 			Pager<Topic> page = topicService.find( c.getId(),null,1 );
