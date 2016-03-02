@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.TopicDto;
 import org.wxh.user.model.User;
 
 /**
@@ -130,4 +131,9 @@ public interface ITopicService {
 	 * @return
 	 */
 	public List<Topic> listTopic();
+	/**
+	 * 获取上/下篇文章
+	 * @param dto
+	 */
+	public void getPreAndNextTopic(TopicDto dto);
 }

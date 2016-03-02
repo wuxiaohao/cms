@@ -43,12 +43,28 @@ public class TopicDto {
 	/**
 	 * 文章的发布时间，用来进行排序的
 	 */
-	private String publishDate;
+	private Date publishDate;
 	/**
 	 * 文章的栏目id
 	 */
 	private int cid;
-
+	/**
+	 * 作者
+	 */
+	private String author;
+	/**
+	 * 浏览量
+	 */
+	private int viewCount;
+	/**
+	 * 上一篇文章的id
+	 */
+	private Integer preId; 
+	/**
+	 * 下一篇文章的id
+	 */
+	private Integer nextId;
+	
 	public int getId() {
 		return id;
 	}
@@ -99,12 +115,10 @@ public class TopicDto {
 	public void setChannelPicId(int channelPicId) {
 		this.channelPicId = channelPicId;
 	}
-	
-	public String getPublishDate() {
+	public Date getPublishDate() {
 		return publishDate;
 	}
-	
-	public void setPublishDate(String publishDate) {
+	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
 	}
 	@Min(value=1,message="必须选择一个栏目id")
@@ -114,10 +128,30 @@ public class TopicDto {
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
-	
-	public TopicDto() {
+	public String getAuthor() {
+		return author;
 	}
-	
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+	public Integer getPreId() {
+		return preId;
+	}
+	public void setPreId(Integer preId) {
+		this.preId = preId;
+	}
+	public Integer getNextId() {
+		return nextId;
+	}
+	public void setNextId(Integer nextId) {
+		this.nextId = nextId;
+	}
 	/**
 	 * 封装添加文章的dto数据
 	 * @param u 当前执行操作的用户
@@ -198,6 +232,9 @@ public class TopicDto {
 		this.setStatus(topic.getStatus());
 		this.setSummary(topic.getSummary());
 		this.setTitle(topic.getTitle());
+		this.setAuthor(topic.getAuthor());
+		this.setViewCount(topic.getViewCount());
+		this.setPublishDate(topic.getPublishDate());
 	}
 	
 	

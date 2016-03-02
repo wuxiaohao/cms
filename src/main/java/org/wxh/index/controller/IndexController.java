@@ -34,6 +34,7 @@ import org.wxh.topic.model.PictureTopic;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.Video;
 import org.wxh.topic.model.dto.PictureDto;
+import org.wxh.topic.model.dto.TopicDto;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
@@ -160,7 +161,10 @@ public class IndexController {
 		Topic t = topicService.load(tid);
 		t.setViewCount(t.getViewCount() + 1);
 		topicService.update(t);
-		model.addAttribute("topic", t);
+		TopicDto dto = new TopicDto( t, t.getChannel().getId() );
+		//获取上/下篇文章的id
+		topicService.getPreAndNextTopic( dto );
+		model.addAttribute("topic", dto);
 		//获取导航栏目
 		List<Channel> navs = getNavChannel( t.getChannel() );
 		model.addAttribute("navs", navs);

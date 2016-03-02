@@ -1,6 +1,7 @@
 package org.wxh.topic.dao.impl;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -104,6 +105,20 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	public List<Topic> listTopic() {
 		String hql = "from Topic t where t.status=1 ORDER BY t.viewCount desc";
 		return this.getSession().createQuery(hql).setFirstResult(0).setMaxResults(10).list(); 
+	}
+
+	@Override
+	public Integer getPreTopic(int cid, Date publishDate) {
+		String sql = "select id from t_topic t where t.cid=? and t.publish_date>? ORDER BY t.publish_date asc LIMIT 1";
+		List<Integer> list = this.getSession().createSQLQuery( sql ).setParameter(0, cid).setParameter(1, publishDate).list();
+		return list.isEmpty() || list == null ? null : list.get(0);
+	}
+
+	@Override
+	public Integer getNextTopic(int cid, Date publishDate) {
+		String sql = "select id from t_topic t where t.cid=? and t.publish_date<? ORDER BY t.publish_date desc LIMIT 1";
+		List<Integer> list = this.getSession().createSQLQuery( sql ).setParameter(0, cid).setParameter(1, publishDate).list();
+		return list.isEmpty() || list == null ? null : list.get(0);
 	}
 
 	

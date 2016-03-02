@@ -1,6 +1,7 @@
 package org.wxh.topic.dao;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.wxh.basic.dao.IBaseDao;
@@ -70,4 +71,18 @@ public interface ITopicDao extends IBaseDao<Topic>{
 	 */
 	public Topic loadLastedTopicByColumn(int cid);
 	public List<Topic> listTopic();
+	/**
+	 * 获取上一篇文章的id
+	 * @param cid 文章所属栏目id
+	 * @param publishDate 文章发布的时间
+	 * @return topicId
+	 */
+	public Integer getPreTopic(int cid, Date publishDate);
+	/**
+	 * 获取下一篇文章的id
+	 * @param cid 文章所属栏目id
+	 * @param publishDate 文章发布的时间
+	 * @return topicId
+	 */
+	public Integer getNextTopic(int cid, Date publishDate);
 }

@@ -57,8 +57,13 @@
 					</div>
 				</div>
 				<div class="prev-next-wrap clearfix ">
-					<a class="btn btn-default " href=""></i>上一篇文章</a> &nbsp;
-					<a class="btn btn-default " href=" ">下一篇文章<i class="fa fa-angle-right fa-fw "></i></a>
+					<c:if test="${!empty(topic.preId) }">
+						<a class="btn btn-default " href="<%=request.getContextPath() %>/topic/${topic.preId}">上一篇文章<i class="fa fa-angle-right fa-fw "></i></a> 
+					</c:if>
+					&nbsp;
+					<c:if test="${!empty(topic.nextId) }">
+						<a class="btn btn-default " href="<%=request.getContextPath() %>/topic/${topic.nextId}">下一篇文章<i class="fa fa-angle-right fa-fw "></i></a>
+					</c:if>
 				</div>
 			</main>
 			<aside class="col-md-4 sidebar ">

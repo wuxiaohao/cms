@@ -16,6 +16,7 @@ import org.wxh.topic.dao.ITopicDao;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.Topic;
+import org.wxh.topic.model.dto.TopicDto;
 import org.wxh.topic.service.ITopicService;
 import org.wxh.user.dao.IUserDao;
 import org.wxh.user.model.User;
@@ -196,6 +197,15 @@ public class TopicService implements ITopicService {
 	@Override
 	public List<Topic> listTopic() {
 		return topicDao.listTopic();
+	}
+	@Override
+	public void getPreAndNextTopic(TopicDto dto) {
+		//获取上一篇文章的id
+		Integer preId = topicDao.getPreTopic( dto.getCid(), dto.getPublishDate() );
+		dto.setPreId(preId); 
+		//获取下一篇文章的id
+		Integer nextId = topicDao.getNextTopic( dto.getCid(), dto.getPublishDate() );
+		dto.setNextId(nextId);
 	}
 
 }
