@@ -3,9 +3,9 @@
     
 <footer id="footer">
 	<div class="container">
-		<span>城市学院计信系12软工城院网站后台管理系统研发</span>
+		<span>城市学院计信系12软工城院新闻网研发</span>
 		<br />
-		<span>城院网站后台管理系统</span>
+		<span>城院新闻网</span>
 		<br />
 		<span>Copyright 2015-2017</span>
 		<br />

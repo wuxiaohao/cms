@@ -9,31 +9,38 @@
 						<li data-slide-to="1" data-target="#carousel-405390"></li>
 						<li data-slide-to="2" data-target="#carousel-405390"></li>
 						<li data-slide-to="3" data-target="#carousel-405390"></li>
+						<li data-slide-to="4" data-target="#carousel-405390"></li>
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active">
-								<a href="topic/36" title="test02">
-									<img alt="1455716368545.jpg" src="<%=request.getContextPath()%>/resources/upload/1455716368545.jpg" />
+								<a href="topic/38" title="heheheh1">
+									<img alt="1456414624505.jpg" src="<%=request.getContextPath()%>/resources/upload/1456414624505.jpg" />
 								</a>
-									<h5 class="carousel-title">test02</h5>
+									<h5 class="carousel-title">heheheh1</h5>
 							</div>
 							<div class="item">
 								<a href="topic/37" title="test01">
-									<img alt="1-1" src="<%=request.getContextPath()%>/resources/upload/1455716411758.jpg" />
+									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1456414649514.jpg" />
 								</a>
 									<h5 class="carousel-title">test01</h5>
 							</div>
 							<div class="item">
+								<a href="topic/36" title="你发你违法你问佛问佛份文件而访问肯附件文件呢绯闻绯闻">
+									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1456414668450.jpg" />
+								</a>
+									<h5 class="carousel-title">你发你违法你问佛问佛份文件而访问肯附件文件呢绯闻绯闻</h5>
+							</div>
+							<div class="item">
 								<a href="topic/35" title="test03">
-									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1455716437529.jpg" />
+									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1456414705828.jpg" />
 								</a>
 									<h5 class="carousel-title">test03</h5>
 							</div>
 							<div class="item">
-								<a href="topic/38" title="heheheh1">
-									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1455716707371.jpg" />
+								<a href="topic/11" title="绯闻绯闻ddd">
+									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1456414929961.jpg" />
 								</a>
-									<h5 class="carousel-title">heheheh1</h5>
+									<h5 class="carousel-title">绯闻绯闻ddd</h5>
 							</div>
 				</div> <a data-slide="prev" href="#carousel-405390" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-405390" class="right carousel-control">›</a>
 			</div>
@@ -43,96 +50,140 @@
 	<div id="news_content" class="row-fluid">
 		<div class="span8 article pull-left">
 			<div class="panel panel-info">
-				<div class="panel-heading clearfix">
-					<h3 class="panel-title fl">校务公开</h3>
-					<a href="" class="fr">更多 >></a>
-				</div>
-				<div class="panel-body">
-					<div>
-						<img src="../img/news_top1.jpg" class="topNews_img" />
-						<a class="topNews_title">2015年度高中学业水平考试获奖教师</a>
-						<p class="topNews_content">2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师 2015年度高中学师2015年度高中学业水平师2015年度高中学业水平...
-							<a>[全文]</a></p>
-						<hr>
-					</div>
-					<dl class="article_list">
-						<dd class="clearfix"><a href='#' class="article_link">2015年度高中学业水平考试获奖教师<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">昭通学院附属中学岗位公开选调报名<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">公开选调报名登记及资格审查情况<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">昭通学院附中9月1日按期开学<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">关于转发昭市编的批复的通知<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-						<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>						
-					</dl>
-				</div>
+	<div class="panel-heading clearfix">
+		<h3 class="panel-title fl">校园快讯</h3>
+		<a href="channel/47" class="fr">更多 >></a>
+	</div>
+	<div class="panel-body">
+		<div>
+			<img src="<%=request.getContextPath()%>/resources/qianduan/img/news_top1.jpg" class="topNews_img" />
+					<a href='topic/41' class="topNews_title">
+							当时的广东工学院有三个系：机工系、电工系、...
+					</a>
+					<p class="topNews_content">
+								学科建设不仅需要领军人物，还需要年富力强的年轻教师，学校对年轻人才的引进也非常重视和支持。学院积极招揽了郑德涛、陈新、王成...
+							<a href="topic/41">[全文]</a></p>
+					<hr>
+		</div>
+		<dl class="article_list">
+					<dd class="clearfix">
+						<a href='topic/42' class="article_link">
+								当时的广东工学院有三个系：机工系、电工系、...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/43' class="article_link">
+								书的时候，就学习过孙教授主编的教材，对他由...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/44' class="article_link">
+								书的时候，就学习过孙教授主编的教材，对他由...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/45' class="article_link">
+								呆就是50年。“我是1964年入校，当时的...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/40' class="article_link">
+								反反复复反复反反复复反复反复反复反复反复反...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/39' class="article_link">
+								上世纪60年代，王文光怀揣着一腔青春热血的...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/36' class="article_link">
+								你发你违法你问佛问佛份文件而访问肯附件文件...
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/17' class="article_link">
+								报错？???fff
+							<span class="date">2015-12-08</span>
+						</a>
+					</dd>
+		</dl>
+	</div>
 			</div>
 		</div>
 		<div class="span4 article pull-left">
 			<div class="panel panel-info">
 				<div class="panel-heading clearfix">
-					<h3 class="panel-title fl">视频栏目</h3>
+					<h3 class="panel-title fl">城院视频</h3>
 					<a href="<%=request.getContextPath()%>/channel/60" class="fr">更多 >></a>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1455798884220.jpg" alt="2222绯闻绯闻访问发22222">
-								<p class="imgtxt">
-										2222绯闻绯闻访...
-									<br/>
-									2016-02-18
-								</p>
+							<a href="<%=request.getContextPath() %>/videoNews/17" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415349886.jpg" alt="测试1测试1测试1测试1测试1">
+								<div class="imgtxt clearfix">
+										<p class="title">测试1测试1测试1...</p>
+									<p><span class="pull-left">2016-02-25</span>
+									<span class="pull-right">2次</span></p>
+								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1455798736804.jpg" alt="绯闻绯闻访问发为">
-								<p class="imgtxt">
-										绯闻绯闻访问发为
-									<br/>
-									2016-02-18
-								</p>
+							<a href="<%=request.getContextPath() %>/videoNews/24" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415473501.jpg" alt="大帅锅">
+								<div class="imgtxt clearfix">
+										<p class="title">大帅锅</p>
+									<p><span class="pull-left">2016-02-25</span>
+									<span class="pull-right">0次</span></p>
+								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1455798723623.jpg" alt="绯闻绯闻访问发">
-								<p class="imgtxt">
-										绯闻绯闻访问发
-									<br/>
-									2016-02-18
-								</p>
+							<a href="<%=request.getContextPath() %>/videoNews/23" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415459905.jpg" alt="尼玛">
+								<div class="imgtxt clearfix">
+										<p class="title">尼玛</p>
+									<p><span class="pull-left">2016-02-25</span>
+									<span class="pull-right">1次</span></p>
+								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1455798711446.jpg" alt="方违反问问">
-								<p class="imgtxt">
-										方违反问问
-									<br/>
-									2016-02-18
-								</p>
+							<a href="<%=request.getContextPath() %>/videoNews/22" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415432317.jpg" alt="操谁心">
+								<div class="imgtxt clearfix">
+										<p class="title">操谁心</p>
+									<p><span class="pull-left">2016-02-25</span>
+									<span class="pull-right">0次</span></p>
+								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1455798457287.jpg" alt="策士222啊啊啊啊啊啊啊啊啊啊">
-								<p class="imgtxt">
-										策士222啊啊啊啊...
-									<br/>
-									2016-02-18
-								</p>
+							<a href="<%=request.getContextPath() %>/videoNews/21" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415419232.jpg" alt="尼玛好烦啊啊啊啊">
+								<div class="imgtxt clearfix">
+										<p class="title">尼玛好烦啊啊啊啊</p>
+									<p><span class="pull-left">2016-02-25</span>
+									<span class="pull-right">2次</span></p>
+								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1455797658115.jpg" alt="测试111111为绯闻绯闻">
-								<p class="imgtxt">
-										测试111111为...
-									<br/>
-									2016-02-18
-								</p>
+							<a href="<%=request.getContextPath() %>/videoNews/20" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415403136.jpg" alt="wuxiahao">
+								<div class="imgtxt clearfix">
+										<p class="title">wuxiahao</p>
+									<p><span class="pull-left">2016-02-25</span>
+									<span class="pull-right">1次</span></p>
+								</div>
 							</a>
 						</div>
 					</div>
@@ -150,18 +201,18 @@
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active relative">
-								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1455710354411.jpg"/>
+						  	 	<a href="channel/59">
+									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1455710391264.jpg"/>
+									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415716857.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1455710380313.jpg"/>
+									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415724204.jpg"/>
 						  	 	</a>
 							</div>
 				</div>
@@ -173,62 +224,154 @@
 		<div id="data_content_right" class="row-fluid">
 			<div class="span6 article">
 				<div class="panel panel-info">
-					<div class="panel-heading clearfix">
-						<h3 class="panel-title fl">最近更新</h3>
-						<a href="" class="fr">更多  >></a>
-					</div>
-					<div class="panel-body">
-						<div>
-							<img src="../img/news_top2.jpg" class="topNews_img" />
-							<a class="topNews_title">2015年度高中学业水平考试获奖教师</a>
-							<p class="topNews_content">2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师 2015年度高中学...
-								<a>[全文]</a></p>
-							<hr>
-						</div>
-						<dl class="article_list">
-							<dd class="clearfix"><a href='#' class="article_link">2015年度高中学业水平考试获奖教师<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附属中学岗位公开选调报名<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">公开选调报名登记及资格审查情况<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附中9月1日按期开学<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">关于转发昭市编的批复的通知<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-						</dl>
-					</div>
+	<div class="panel-heading clearfix">
+		<h3 class="panel-title fl">高教视点</h3>
+		<a href="channel/48" class="fr">更多 >></a>
+	</div>
+	<div class="panel-body">
+		<div>
+			<img src="<%=request.getContextPath()%>/resources/qianduan/img/news_top2.jpg" class="topNews_img" />
+					<a href='topic/48' class="topNews_title">
+							调研，学习了不少知识，为授课积累了一些经验...
+					</a>
+					<p class="topNews_content">
+								划的专家，具有学术权威性；三是孙健教授有科研成果和重大的科研项目，并且与国外的大学有很好的合作关系。因此，我们通过开会研究...
+							<a href="topic/48">[全文]</a></p>
+					<hr>
+		</div>
+		<dl class="article_list">
+					<dd class="clearfix">
+						<a href='topic/49' class="article_link">
+								很多教师离开了学校，学院的师资力量十分薄弱...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/47' class="article_link">
+								当时的广东工学院有三个系：机工系、电工系、...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/38' class="article_link">
+								heheheh1
+							<span class="date">2016-02-18</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/34' class="article_link">
+								fwefewfwe1
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/33' class="article_link">
+								ffffffffffff
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/32' class="article_link">
+								ffff
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/31' class="article_link">
+								fwfwefw1
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/30' class="article_link">
+								ffff
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/29' class="article_link">
+								fewfew
+							<span class="date">2016-02-17</span>
+						</a>
+					</dd>
+		</dl>
+	</div>
 				</div>
 			</div>
 			<div class="span6 article">
 				<div class="panel panel-info">
-					<div class="panel-heading clearfix">
-						<h3 class="panel-title fl">最近更新</h3>
-						<a href="" class="fr">更多  >></a>
-					</div>
-					<div class="panel-body">
-						<div>
-							<img src="../img/news_top3.jpg" class="topNews_img" />
-							<a class="topNews_title">2015年度高中学业水平考试获奖教师</a>
-							<p class="topNews_content">2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师2015年度高中学业水平考试获奖教师 2015年度高中学...
-								<a>[全文]</a></p>
-							<hr>
-						</div>
-						<dl class="article_list">
-							<dd class="clearfix"><a href='#' class="article_link">2015年度高中学业水平考试获奖教师<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附属中学岗位公开选调报名<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">公开选调报名登记及资格审查情况<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">昭通学院附中9月1日按期开学<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">关于转发昭市编的批复的通知<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">云南招考频道信息<span class="date">2015-12-18</span></a></dd>
-							<dd class="clearfix"><a href='#' class="article_link">师专附中学生对班主任满意度测评表<span class="date">2015-12-18</span></a></dd>
-						</dl>
-					</div>
+	<div class="panel-heading clearfix">
+		<h3 class="panel-title fl">教科信息</h3>
+		<a href="channel/52" class="fr">更多 >></a>
+	</div>
+	<div class="panel-body">
+		<div>
+			<img src="<%=request.getContextPath()%>/resources/qianduan/img/news_top3.jpg" class="topNews_img" />
+					<a href='topic/56' class="topNews_title">
+							绯闻绯闻访问发为废物
+					</a>
+					<p class="topNews_content">
+								学生新闻中心积极开展各项校园文化活动，每年举办“大学生微报大赛”、“我为广工大代言”、“摄影大赛”、“万人读校报”等大型活...
+							<a href="topic/56">[全文]</a></p>
+					<hr>
+		</div>
+		<dl class="article_list">
+					<dd class="clearfix">
+						<a href='topic/57' class="article_link">
+								绯闻绯闻访问绯闻绯闻访问
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/58' class="article_link">
+								访问绯闻绯闻访问发为废物
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/46' class="article_link">
+								机集成制造系统）技术专家，也是国家“863...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/50' class="article_link">
+								非常重视和支持。学院积极招揽了郑德涛、陈新...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/51' class="article_link">
+								非常重视和支持。学院积极招揽了郑德涛、陈新...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/52' class="article_link">
+								心打动孙教授，调动工作也是一波三折，从19...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/53' class="article_link">
+								士，魏昕到华南理工大学读博士，高伟强、姜丽...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/55' class="article_link">
+								绯闻绯闻访问绯闻绯闻访问
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+					<dd class="clearfix">
+						<a href='topic/54' class="article_link">
+								访问方法反反复复凤飞飞
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
+		</dl>
+	</div>
 				</div>
 			</div>
 		</div>
@@ -237,8 +380,10 @@
 		<h4 class="title">友情链接</h4>
 		<ul class="dis" style="display: block;">
 			<li class="yqlj">
-				<iframe width="100%" height="100px" src="news.html" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+				<iframe width="100%" height="100px" src="<%=request.getContextPath() %>/jsp/template/link.jsp" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
 			</li>
 		</ul>
 	</div>
 </div>
+
+
