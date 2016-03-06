@@ -294,5 +294,6 @@
 		  </configuration>
 		</plugin> -->
     </plugins>
+    <finalName>cms</finalName>
   </build>
 </project>
