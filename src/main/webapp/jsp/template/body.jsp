@@ -132,7 +132,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">测试1测试1测试1...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">2次</span></p>
+									<span class="pull-right">3次</span></p>
 								</div>
 							</a>
 						</div>
@@ -201,11 +201,6 @@
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active relative">
-						  	 	<a href="channel/59">
-									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
-						  	 	</a>
-							</div>
-							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
 									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415716857.jpg"/>
 						  	 	</a>
@@ -213,6 +208,11 @@
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
 									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415724204.jpg"/>
+						  	 	</a>
+							</div>
+							<div class="item">
+						  	 	<a href="channel/59">
+									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
 						  	 	</a>
 							</div>
 				</div>
