@@ -64,7 +64,7 @@ public class TopicDto {
 	 * 下一篇文章的id
 	 */
 	private Integer nextId;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -115,19 +115,6 @@ public class TopicDto {
 	public void setChannelPicId(int channelPicId) {
 		this.channelPicId = channelPicId;
 	}
-	public Date getPublishDate() {
-		return publishDate;
-	}
-	public void setPublishDate(Date publishDate) {
-		this.publishDate = publishDate;
-	}
-	@Min(value=1,message="必须选择一个栏目id")
-	public int getCid() {
-		return cid;
-	}
-	public void setCid(int cid) {
-		this.cid = cid;
-	}
 	public String getAuthor() {
 		return author;
 	}
@@ -152,6 +139,23 @@ public class TopicDto {
 	public void setNextId(Integer nextId) {
 		this.nextId = nextId;
 	}
+	public Date getPublishDate() {
+		return publishDate;
+	}
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
+	@Min(value=1,message="必须选择一个栏目id")
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	
+	public TopicDto() {
+	}
+	
 	/**
 	 * 封装添加文章的dto数据
 	 * @param u 当前执行操作的用户
