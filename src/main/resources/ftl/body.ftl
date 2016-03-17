@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="container">
 	<#-- 滚动新闻图片 -->
-	<div class="content_top row-fluid">
+	<div class="content_top row-fluid clearfix">
 		<div class='span12' id="myCarousel">
 			<div class="carousel slide" id="carousel-405390">
 				<ol class="carousel-indicators">
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	
-	<div id="news_content" class="row-fluid">
+	<div id="news_content" class="row-fluid clearfix">
 		<#-- 文章列表1 -->
 		<div class="span8 article pull-left">
 			<div class="panel panel-info">
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<#-- 滚动宣传图片 -->
-	<div class="row-fluid">
+	<div class="row-fluid clearfix">
 		<div class='span12' id="myCarousel">
 			<div class="carousel slide" id="carousel-405391">
 				<ol class="carousel-indicators">
