@@ -22,7 +22,7 @@ public class IndexPic {
 	 */
 	private String title;
 	/**
-	 * 子标题
+	 * 子标题（废弃，相关代码待删除！）
 	 */
 	private String subTitle;
 	/**
