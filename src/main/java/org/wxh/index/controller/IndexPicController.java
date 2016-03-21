@@ -148,7 +148,6 @@ public class IndexPicController {
 		tip.setNewName(indexPic.getNewName());
 		tip.setOldName(indexPic.getOldName());
 		tip.setStatus(indexPic.getStatus());
-		tip.setSubTitle(indexPic.getSubTitle());
 		tip.setTitle(indexPic.getTitle());
 		indexPicService.update(tip);
 		indexService.generateBody();
