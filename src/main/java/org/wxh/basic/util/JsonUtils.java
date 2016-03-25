@@ -17,7 +17,6 @@ import org.slf4j.helpers.MessageFormatter;
 /**
  * JSON 转换相关的工具类 注意,Map的Key只能为简单类型 ,不可采用复杂类型.
  * 
- * @author xupan
  * @date 2015年6月24日
  */
 @SuppressWarnings("unchecked")

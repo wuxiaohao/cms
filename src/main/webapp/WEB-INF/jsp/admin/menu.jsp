@@ -104,7 +104,6 @@
 						</li>
 					</ul>
 				</li>
-				<c:if test="${isAdmin }">
 				<li>
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
@@ -134,8 +133,6 @@
 						</li>
 					</ul>
 				</li>
-				</c:if>
-				<c:if test="${isAdmin }">
 				<li>
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
@@ -155,7 +152,6 @@
 						</li>
 					</ul>
 				</li>
-				</c:if>
 			</ul>
 	</div>
 		</div>

@@ -13,27 +13,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.wxh.basic.exception.CmsException;
+import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.filter.CmsSessionContext;
-import org.wxh.util.Captcha;
-import org.wxh.util.Common;
-import org.wxh.topic.model.dto.AjaxObj;
-import org.wxh.user.auth.AuthMethod;
+import org.wxh.basic.model.message.user.LoginRequest;
 import org.wxh.user.model.Role;
 import org.wxh.user.model.RoleType;
 import org.wxh.user.model.User;
 import org.wxh.user.service.IUserService;
+import org.wxh.util.Captcha;
+import org.wxh.util.Common;
 
 @Controller
 public class LoginController {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass()); 
 	
 	@Autowired
 	private IUserService userService;
@@ -66,15 +67,16 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(String username,String password,String checkcode,String remember,Model model,
-			HttpServletRequest request,HttpSession session,HttpServletResponse response) {
+	public ModelAndView login(LoginRequest request,Model model,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("admin/blackmain");
 		String cc = (String)session.getAttribute("cc");
-		if(!cc.equals(checkcode)) {
+		if(!cc.equals( request.getCheckcode() )) {
 			model.addAttribute("errorCode","验证码出错，请重新输入");
-			return "admin/login";
+			mv.setViewName("admin/login");
+			return mv;
 		}
 		try {
-			User loginUser = userService.login(username, password);
+			User loginUser = userService.login( request.getUsername(), request.getPassword());
 			session.setAttribute("loginUser", loginUser);
 			List<Role> rs = userService.listUserRoles(loginUser.getId());
 			boolean isAdmin = isRole(rs,RoleType.ROLE_ADMIN);
@@ -88,21 +90,22 @@ public class LoginController {
 			//保存登陆信息
 			CmsSessionContext.addSessoin(session);
 			//记住状态需跳转到单独登陆页面，只需输入密码即可，密码不能保存在cookie里；
-			if(null!=remember&&remember.equals("true")){
-				Cookie usercookie = new Cookie("cms_cookie_username", username);
+			if( null != request.getRemember() && request.getRemember().equals("true") ){
+				Cookie usercookie = new Cookie( "cms_cookie_username", request.getUsername() );
 				response.addCookie(usercookie);
 			} else {  //删除Cookie
-				Cookie usercookie = new Cookie("cms_cookie_username", username);
+				Cookie usercookie = new Cookie( "cms_cookie_username", request.getUsername() );
 				usercookie.setMaxAge(0);
 				response.addCookie(usercookie);
 			} 
 			
-			return "admin/blackmain";
+			return mv;
 		} catch (MyException e) {
 			//登陆失败，返回失败信息
-			System.out.println(e.getMessage());
+			logger.error("登陆失败，失败信息:{}",e);
 			model.addAttribute("error",e.getMessage());
-			return "admin/login";
+			mv.setViewName("admin/login");
+			return mv;
 		}
 		
 	}

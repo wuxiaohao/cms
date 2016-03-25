@@ -259,6 +259,7 @@ public class UserController {
 	 * 用户查询个人信息
 	 */
 	@RequestMapping(value="/showMySelf",method=RequestMethod.POST)
+	@AuthMethod
 	public String showMySelf(Model model,HttpSession session) {
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute(user);

@@ -34,6 +34,7 @@ import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IKeywordService;
 import org.wxh.topic.service.IPictureService;
 import org.wxh.topic.service.IPictureTopicService;
+import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
 import org.wxh.user.model.User;
 import org.wxh.user.service.IGroupService;
@@ -46,6 +47,7 @@ import org.wxh.util.JsonUtil;
  */
 @Controller
 @RequestMapping("/admin/picTopic")
+@AuthClass
 public class PictureTopicController {
 	private static final Logger logger = Logger.getLogger(PictureTopicController.class);
 	
