@@ -140,7 +140,7 @@ public class CmsLinkController {
 		if( !oldPic.equals(cmsLink.getPicName()) ) {
 			//删除原来旧的图片
 			String realPath = SystemContext.getRealPath();
-			String path = realPath + GlobalResult.LINK_PATH + "/";//新闻图片存放的位置
+			String path = realPath + GlobalResult.LINK_PATH + File.separator;//新闻图片存放的位置
 			new File( path + oldPic ).delete();
 		}
 		CmsLink tcl = cmsLinkService.load(id);
@@ -184,7 +184,7 @@ public class CmsLinkController {
 			String newName = new Date().getTime() + "." + FilenameUtils.getExtension(oldName);//图片的新名称
 			String realPath = session.getServletContext().getRealPath("");
 			//创建临时文件存放的位置
-			String path = realPath + GlobalResult.LINK_PATH + "/temp/";
+			String path = realPath + GlobalResult.LINK_PATH +File.separator+ "temp"+File.separator;
 			File f = new File( path );
 			if( !f.exists() ) {
 				f.mkdir();
@@ -235,10 +235,10 @@ public class CmsLinkController {
 		AjaxObj ao = new AjaxObj();
 		try {
 			String path = session.getServletContext().getRealPath("");
-			String tpath = path + GlobalResult.LINK_PATH + "/temp/" + newName;//临时存放的路径
+			String tpath = path + GlobalResult.LINK_PATH +File.separator+ "temp"+File.separator + newName;//临时存放的路径
 			File tf = new File( tpath );
 			BufferedImage bi = ImageIO.read( tf );
-			String npath = path + GlobalResult.LINK_PATH + "/" + newName; //新的存放路径
+			String npath = path + GlobalResult.LINK_PATH + File.separator + newName; //新的存放路径
 			Builder<BufferedImage> b = Thumbnails.of( bi );
 			//根据坐标切割图片
 			b.sourceRegion(x, y, w, h).forceSize( GlobalResult.LINKPIC_WIDTH, GlobalResult.LINKPIC_HEIGHT ).asBufferedImage();

@@ -103,7 +103,7 @@ public class VideoService implements IVideoService{
 			logger.info("删除失败!");
 		}
 		//删除缩略图
-		new File(realPath+"thumbnail/"+video.getPicName()).delete();
+		new File(realPath+"thumbnail"+file.separator+video.getPicName()).delete();
 	}
 	/**
 	 * 删除视频
@@ -173,7 +173,7 @@ public class VideoService implements IVideoService{
 	@Override
 	public void addPic(String picName, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail/";//新闻图片存放的位置
+		String path = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail"+File.separator;//新闻图片存放的位置
 		File fp = new File(path);
 		if(!fp.exists()) fp.mkdirs();
 		path = path+picName;

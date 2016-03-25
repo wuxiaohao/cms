@@ -1,5 +1,7 @@
 package org.wxh.basic.common;
 
+import java.io.File;
+
 import org.wxh.basic.model.SystemContext;
 
 /**
@@ -44,30 +46,30 @@ public interface GlobalResult {
 	 * 附件路径
 	 * SystemContext.getRealPath()+UPLOAD_PATH
 	 */
-	public final static String UPLOAD_PATH="/resources/upload/";
+	public final static String UPLOAD_PATH= File.separator+"resources"+File.separator+"upload"+File.separator;
 	/**
 	 * 图片新闻的图片路径
 	 */
-	public final static String UPLOAD_PICTURE="/resources/picTopic/";
+	public final static String UPLOAD_PICTURE= File.separator+"resources"+File.separator+"picTopic"+File.separator;
 	/**
 	 * 视频新闻的视频路径
 	 */
-	public final static String UPLOAD_VIDEO="/resources/video/";
+	public final static String UPLOAD_VIDEO= File.separator+"resources"+File.separator+"video"+File.separator;
 	/**
 	 * 首页图片的路径
 	 * 
 	 */
-	public final static String FILE_PATH="/resources/indexPic";
+	public final static String FILE_PATH= File.separator+"resources"+File.separator+"indexPic";
 	/**
 	 * 用户头像的路径
 	 * 
 	 */
-	public final static String ICON_PATH="/resources/userIcon";
+	public final static String ICON_PATH= File.separator+"resources"+File.separator+"userIcon";
 	/**
 	 * 友情链接图片的路径
 	 * 
 	 */
-	public final static String LINK_PATH="/resources/linkPic";
+	public final static String LINK_PATH= File.separator+"resources"+File.separator+"linkPic";
 	
 	public final static int T_W = 120;
 	

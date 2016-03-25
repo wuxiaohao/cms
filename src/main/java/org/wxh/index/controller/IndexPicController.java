@@ -139,7 +139,7 @@ public class IndexPicController {
 		if( !oldPic.equals(indexPic.getNewName()) ) {
 			//删除原来旧的图片
 			String realPath = SystemContext.getRealPath();
-			String path = realPath + GlobalResult.FILE_PATH + "/";//新闻图片存放的位置
+			String path = realPath + GlobalResult.FILE_PATH + File.separator;//新闻图片存放的位置
 			new File(path+oldPic).delete();
 		}
 		IndexPic tip = indexPicService.load(id);

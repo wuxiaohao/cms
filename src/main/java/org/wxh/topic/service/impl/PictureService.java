@@ -43,7 +43,7 @@ public class PictureService implements IPictureService{
 			logger.info("删除失败!");
 		}
 		//删除该图片的缩略图
-		new File(realPath+"thumbnail/"+file.getName()).delete();
+		new File(realPath+"thumbnail"+File.separator+file.getName()).delete();
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class PictureService implements IPictureService{
 		//进行文件的存储
 		String realPath = SystemContext.getRealPath();
 		String path = realPath+GlobalResult.UPLOAD_PICTURE;//新闻图片存放的位置
-		String thumbPath = path+"thumbnail/"; //缩略图存放的位置
+		String thumbPath = path+"thumbnail"+File.separator; //缩略图存放的位置
 		File fp = new File(path);
 		File tfp = new File(thumbPath);
 //		logger.info(fp.exists());

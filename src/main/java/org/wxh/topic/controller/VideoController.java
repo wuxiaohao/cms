@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -278,39 +279,41 @@ public class VideoController {
 	 */
 	private static String processImg(String veido_path) {
 		File file = new File(veido_path);
-		if (!file.exists()) {
-			System.err.println("路径[" + veido_path + "]对应的视频文件不存在!");
-			return null;
-		}
-		String realPath = SystemContext.getRealPath();
-		String ffmpeg_path = "D:/ffmpeg.exe";//注意这里，一定要有这个插件啊
-		String PicPath = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
-		File fp = new File(PicPath);
-		if( !fp.exists() ) fp.mkdirs();//如果目录不存在则创建目录
-		String picName = String.valueOf(new Date().getTime() + ".jpg" );
-		List<String> commands = new java.util.ArrayList<String>();
-		commands.add(ffmpeg_path);
-		commands.add("-i");
-		commands.add(veido_path);
-		commands.add("-y");
-		commands.add("-f");
-		commands.add("image2");
-		commands.add("-ss");
-		commands.add("8");// 这个参数是设置截取视频多少秒时的画面
-		// commands.add("-t");
-		// commands.add("0.001");
-		commands.add("-s");
-		commands.add("499x431");//设置截取的图片宽高
-		commands.add( PicPath + picName );
+		Properties prop = new Properties();
 		try {
+			prop.load(VideoController.class.getClassLoader().getResourceAsStream("baseinfo.properties"));
+			if (!file.exists()) {
+				System.err.println("路径[" + veido_path + "]对应的视频文件不存在!");
+				return null;
+			}
+			String realPath = SystemContext.getRealPath();
+			String ffmpeg_path = prop.getProperty("ffmpeg_path");//注意这里，一定要有这个插件啊
+			String PicPath = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
+			File fp = new File(PicPath);
+			if( !fp.exists() ) fp.mkdirs();//如果目录不存在则创建目录
+			String picName = String.valueOf(new Date().getTime() + ".jpg" );
+			List<String> commands = new java.util.ArrayList<String>();
+			commands.add(ffmpeg_path);
+			commands.add("-i");
+			commands.add(veido_path);
+			commands.add("-y");
+			commands.add("-f");
+			commands.add("image2");
+			commands.add("-ss");
+			commands.add("8");// 这个参数是设置截取视频多少秒时的画面
+			// commands.add("-t");
+			// commands.add("0.001");
+			commands.add("-s");
+			commands.add("499x431");//设置截取的图片宽高
+			commands.add( PicPath + picName );
 			ProcessBuilder builder = new ProcessBuilder();
 			builder.command(commands);
 			builder.start();
 			System.out.println("截取成功");
 			return picName;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
+		return null;
 	}
 }

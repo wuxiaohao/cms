@@ -52,7 +52,7 @@ public class AttachmentService implements IAttachmentService {
 		}
 		//如果附件是图片，则还要删除该图片的缩略图
 		if(a.getIsImg() == 1){
-			new File(realPath+"thumbnail/"+file.getName()).delete();
+			new File(realPath+"thumbnail"+File.separator+file.getName()).delete();
 		}
 	}
 	

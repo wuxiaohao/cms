@@ -107,7 +107,7 @@ public class IndexPicService implements IIndexPicService {
 	@Override
 	public void savePic(String newName, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath + GlobalResult.FILE_PATH + "/";//新闻图片存放的位置
+		String path = realPath + GlobalResult.FILE_PATH + File.separator;//新闻图片存放的位置
 		//创建临时文件存放的位置
 		File fp = new File( path ); 
 		if( !fp.exists() ) fp.mkdirs();
