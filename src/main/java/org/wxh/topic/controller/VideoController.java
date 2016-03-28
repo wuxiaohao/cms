@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,8 @@ import org.wxh.util.JsonUtil;
 @RequestMapping("/admin/video")
 @AuthClass("login")
 public class VideoController {
-	private static final Logger logger = Logger.getLogger(VideoController.class);
+	
+	private static final Logger logger = LoggerFactory.getLogger(VideoController.class);
 	
 	@Autowired
 	private IVideoService videoService;
@@ -53,7 +55,7 @@ public class VideoController {
 	private IIndexService indexService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if(status == 1) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
+		if(status == Constant.YES) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
 			SystemContext.setSort("v.publishDate"); 
 		} else { //如果是获取未发布视频新闻的列表，则按创建时间排序
 			SystemContext.setSort("v.createDate"); 
@@ -88,7 +90,7 @@ public class VideoController {
 	@RequestMapping("/audits")
 	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		initList(con, cid, model, session,1);
+		initList(con, cid, model, session,Constant.YES);
 		return "video/list";
 	}
 	/**
@@ -102,7 +104,7 @@ public class VideoController {
 	@RequestMapping("/unaudits")
 	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String unauditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		initList(con, cid, model, session,0);
+		initList(con, cid, model, session,Constant.NO);
 		return "video/list";
 	}
 	/**
@@ -120,7 +122,7 @@ public class VideoController {
 		videoService.updateStatus(id,loginUser);
 		Video v = videoService.load(id);
 		indexService.generateBody();//重新生成首页body
-		if(status==0) {
+		if(status==Constant.NO) {
 			model.addAttribute(Constant.BaseCode.SUCCESS, "发布成功!");
 			return unauditList(con,cid,model,session);
 		} else {
@@ -161,7 +163,7 @@ public class VideoController {
 	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
 	public String add(Video video,int cid,BindingResult br,HttpSession session,Model model) {
 		User loginUser = (User) session.getAttribute(Constant.BaseCode.LOGIN_USER);
-		if(video.getStatus() == 1) { //如果视频要立刻发布
+		if(video.getStatus() == Constant.YES) { //如果视频要立刻发布
 			video.setPublishDate(new Date()); //设置发布时间
 			video.setAuditor(loginUser.getNickname()); //设置发布人
 		}
@@ -187,7 +189,7 @@ public class VideoController {
 		videoService.delete(id);
 		model.addAttribute(Constant.BaseCode.SUCCESS,"视频新闻删除成功!");
 		indexService.generateBody();//重新生成首页body
-		if(status==0) {
+		if(status==Constant.NO) {
 			return unauditList(con, cid, model, session);
 		} else {
 			return auditList(con, cid, model, session);
@@ -257,9 +259,9 @@ public class VideoController {
 			//截图视频图片
 			String picName = processImg(path);
 			v.setPicName(picName);
-			ao = new AjaxObj(1,null,v);
+			ao = new AjaxObj(Constant.YES,null,v);
 		} catch (IOException e) {
-			ao = new AjaxObj(0,e.getMessage());
+			ao = new AjaxObj(Constant.NO,e.getMessage());
 		}
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 	}
@@ -278,9 +280,9 @@ public class VideoController {
 			logger.info(ext);
 			String picName =String.valueOf(new Date().getTime()+"."+ext);
 			videoService.addPic(picName,attachPic.getInputStream());
-			ao = new AjaxObj(1,null,picName);
+			ao = new AjaxObj(Constant.YES,null,picName);
 		} catch (IOException e) {
-			ao = new AjaxObj(0,e.getMessage());
+			ao = new AjaxObj(Constant.NO,e.getMessage());
 		}
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 	}*/
@@ -325,6 +327,7 @@ public class VideoController {
 			logger.info("视频截取成功！");
 			return picName;
 		} catch (IOException e1) {
+			logger.error("视频截取异常,异常信息：[{}]",e1.getMessage());
 			e1.printStackTrace();
 		}
 		return null;

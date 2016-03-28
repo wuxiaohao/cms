@@ -216,10 +216,10 @@ public class CmsLinkController {
 			dto.setImgHeight( bi2.getHeight() );
 			dto.setImgWidth( bi2.getWidth() );
 			ao.setObj( dto );
-			ao.setResult( 1 );
+			ao.setResult( Constant.YES );
 		} catch (Exception e) {
 			logger.error("上传超链接的图片异常，异常信息：[{}]", e.getMessage() );
-			ao.setResult( 0 );
+			ao.setResult( Constant.NO );
 			ao.setMsg( e.getMessage() );
 		} finally {
 			out.println( JsonUtil.getInstance().obj2json( ao ) );
@@ -254,10 +254,10 @@ public class CmsLinkController {
 			b.toFile( npath );
 			//删除临时图片
 			tf.delete(); 
-			ao.setResult(1);
+			ao.setResult( Constant.YES );
 		} catch (Exception e) {
 			e.printStackTrace();
-			ao.setResult(0);
+			ao.setResult( Constant.NO );
 			ao.setMsg(e.getMessage());
 			logger.error("处理被剪切后的图片,失败信息：[{}]",e.getMessage());
 		}

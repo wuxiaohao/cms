@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.IAttachmentDao;
@@ -150,13 +151,13 @@ public class TopicService implements ITopicService {
 	@Override
 	public void updateStatus(int tid,User u) {
 		Topic t = topicDao.load(tid);
-		if(t.getStatus()==0) {
-			t.setStatus(1);
+		if(t.getStatus()==Constant.NO) {
+			t.setStatus(Constant.YES);
 			t.setPublishDate(new Date());
 			t.setAuditor(u.getNickname());
 		}
 		else {
-			t.setStatus(0);
+			t.setStatus(Constant.NO);
 			t.setPublishDate(null);
 			t.setAuditor(null);
 		}

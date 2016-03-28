@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.wxh.basic.common.Constant;
 import org.wxh.user.model.User;
 
 @Entity
@@ -112,7 +113,7 @@ public class Video {
 		this.setAuditor(vOld.getAuditor());
 		this.setViewCount(vOld.getViewCount());
 		if(this.getStatus() != vOld.getStatus()) {//如果状态有变动
-			if(this.getStatus() == 1) {//发布
+			if(this.getStatus() == Constant.YES) {//发布
 				this.setPublishDate(new Date());
 				this.setAuditor(u.getNickname());
 			}

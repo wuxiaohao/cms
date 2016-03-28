@@ -323,7 +323,7 @@ public class UserController {
 		List<Role> rs = userService.listUserRoles(uid);
 		for(Role r:rs) {
 			if(r.getRoleType()==RoleType.ROLE_ADMIN) {
-				model.addAttribute("uAdmin",1);
+				model.addAttribute("uAdmin",Constant.YES);
 			}
 		}
 		return "/user/listChannel";
@@ -384,10 +384,10 @@ public class UserController {
 			con.setImgHeight( bi2.getHeight() );
 			con.setImgWidth( bi2.getWidth() );
 			ao.setObj( con );
-			ao.setResult( 1 );
+			ao.setResult( Constant.YES );
  		} catch (IOException e) {
 			e.printStackTrace();
-			ao.setResult( 0 );
+			ao.setResult( Constant.NO );
 			ao.setMsg( e.getMessage() );
 		} finally {
 			out.println( JsonUtil.getInstance().obj2json( ao ) );
@@ -424,10 +424,10 @@ public class UserController {
 			Thumbnails.of(bi2).forceSize( Constant.ICON_WIDTH_THUMBNAIL,Constant.ICON_HEIGHT_THUMBNAIL ).scalingMode( ScalingMode.BILINEAR ).toFile( ttpath );
 			//删除临时图片
 			tf.delete(); 
-			ao.setResult(1);
+			ao.setResult(Constant.YES);
 		} catch (IOException e) {
 			e.printStackTrace();
-			ao.setResult(0);
+			ao.setResult(Constant.NO);
 			ao.setMsg(e.getMessage());
 		}
 		return ao;

@@ -105,7 +105,7 @@ public class ChannelController {
 	private void initAdd(Model model,Integer pid) {
 		if(pid==null) pid = 0;
 		Channel pc = null;
-		if(pid==0) {
+		if(pid==Constant.NO) {
 			pc = new Channel();
 			pc.setId(Constant.ROOT_ID);
 			pc.setName(Constant.ROOT_NAME);
@@ -236,9 +236,9 @@ public class ChannelController {
 			indexService.generateTop(); //重新生成静态页面的顶部
 		} catch (Exception e) {
 			logger.error("生成静态顶部页面失败！异常消息：{}", e.getMessage());
-			return new AjaxObj(0,e.getMessage());
+			return new AjaxObj(Constant.NO,e.getMessage());
 		}
-		return new AjaxObj(1);
+		return new AjaxObj(Constant.YES);
 	}
 	/**
 	 * 存储顶部栏目拖动后保存的排序
@@ -253,9 +253,9 @@ public class ChannelController {
 			indexService.generateTop(); //重新生成静态页面的顶部
 		} catch (Exception e) {
 			logger.error("生成静态顶部页面失败！异常消息：{}", e.getMessage());
-			return new AjaxObj(0,e.getMessage());
+			return new AjaxObj(Constant.NO,e.getMessage());
 		}
-		return new AjaxObj(1);
+		return new AjaxObj(Constant.YES);
 	}
 	
 	/**

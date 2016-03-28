@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.model.Pager;
@@ -151,7 +152,7 @@ public class UserService implements IUserService {
 	public void updateStatus(int id) {
 		User u = userDao.load(id);
 		if(u==null) throw new CmsException("修改状态的用户不存在");
-		if(u.getStatus()==0) u.setStatus(1);
+		if(u.getStatus()==Constant.NO) u.setStatus(Constant.YES);
 		else u.setStatus(0);
 		userDao.update(u);
 	}

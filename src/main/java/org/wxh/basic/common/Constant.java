@@ -44,6 +44,10 @@ public interface Constant {
 	public static final String CONTENT_TYPE = "text/plain;charset=utf-8";
 	public static final String FALSE = "false";
 	public static final String TRUE = "true";
+	/**是（1）*/
+	public static final int YES = 1;
+	/**否（0）*/
+	public static final int NO = 0;
 	
 	/**
 	 * 权限常量

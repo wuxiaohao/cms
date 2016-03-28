@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.common.Constant;
@@ -21,7 +22,7 @@ import org.wxh.index.service.IIndexPicService;
 @Service("indexPicService")
 public class IndexPicService implements IIndexPicService {
 	
-	private static final Logger logger = Logger.getLogger(IndexPicService.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private IIndexPicDao indexPicDao;
@@ -56,7 +57,7 @@ public class IndexPicService implements IIndexPicService {
 	@Override
 	public void updateStatus(int id) {
 		IndexPic ip = indexPicDao.load(id);
-		if(ip.getStatus()==0) ip.setStatus(1);
+		if(ip.getStatus()==Constant.NO) ip.setStatus(Constant.YES);
 		else ip.setStatus(0);
 		indexPicDao.update(ip);
 	}

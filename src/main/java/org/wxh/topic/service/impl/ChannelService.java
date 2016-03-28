@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.topic.dao.IChannelDao;
 import org.wxh.topic.model.Channel;
@@ -47,7 +48,7 @@ public class ChannelService implements IChannelService {
 		}
 		channel.setOrders(orders+1);
 		//如果是导航栏目，设置导航的排序
-		if(channel.getIsTopNav() == 1) {
+		if(channel.getIsTopNav() == Constant.YES) {
 			Integer navOrder = channelDao.getMaxIsTopNav();
 			channel.setNavOrder(navOrder+1);
 		}
@@ -56,7 +57,7 @@ public class ChannelService implements IChannelService {
 
 	public void update(Channel channel,int oldIsTopNav) {
 		//如果是导航栏目，设置导航的排序
-		if(channel.getIsTopNav() == 1 && oldIsTopNav == 0) {
+		if(channel.getIsTopNav() == Constant.YES && oldIsTopNav == Constant.NO) {
 			Integer navOrder = channelDao.getMaxIsTopNav();
 			channel.setNavOrder(navOrder+1);
 		}

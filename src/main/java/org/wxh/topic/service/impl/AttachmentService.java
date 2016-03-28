@@ -43,7 +43,7 @@ public class AttachmentService implements IAttachmentService {
 			logger.info("文件[{}],删除失败！",file.getName());
 		}
 		//如果附件是图片，则还要删除该图片的缩略图
-		if(a.getIsImg() == 1){
+		if(a.getIsImg() == Constant.YES){
 			new File(realPath + "thumbnail" + File.separator + file.getName()).delete();
 		}
 	}
@@ -75,7 +75,7 @@ public class AttachmentService implements IAttachmentService {
 		//logger.info(path+","+thumbPath);
 		FileUtils.copyInputStreamToFile(is, new File(path));
 		//如果是图片
-		/*if(a.getIsImg()==1) {  
+		/*if(a.getIsImg()==Constant.YES) {  
 			BufferedImage oldBi = ImageIO.read(is);
 			int width = oldBi.getWidth();
 			Builder<BufferedImage> bf = Thumbnails.of(oldBi);
@@ -147,10 +147,10 @@ public class AttachmentService implements IAttachmentService {
 	@Override
 	public void updateIndexPic(int aid) {
 		Attachment att = attachmentDao.load(aid);
-		if(att.getIsIndexPic()==0) {
-			att.setIsIndexPic(1);
+		if(att.getIsIndexPic()==Constant.NO) {
+			att.setIsIndexPic(Constant.YES);
 		} else {
-			att.setIsIndexPic(0);
+			att.setIsIndexPic(Constant.NO);
 		}
 		attachmentDao.update(att);
 	}
@@ -158,10 +158,10 @@ public class AttachmentService implements IAttachmentService {
 	@Override
 	public void updateAttachInfo(int aid) {
 		Attachment att = attachmentDao.load(aid);
-		if(att.getIsAttach()==0) {
-			att.setIsAttach(1);
+		if(att.getIsAttach()==Constant.NO) {
+			att.setIsAttach(Constant.YES);
 		} else {
-			att.setIsAttach(0);
+			att.setIsAttach(Constant.NO);
 		}
 		attachmentDao.update(att);
 	}

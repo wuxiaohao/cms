@@ -124,7 +124,7 @@ public class LoginController {
 				logger.info("已保存用户[{}]登陆状态",loginUser.getUsername());
 			} else {  //删除Cookie
 				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, request.getUsername() );
-				usercookie.setMaxAge(0);
+				usercookie.setMaxAge(Constant.NO);
 				response.addCookie(usercookie);
 			} 
 			

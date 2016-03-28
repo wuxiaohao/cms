@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,7 @@ import org.wxh.util.JsonUtil;
 @RequestMapping("/admin/topic")
 public class TopicController {
 	
-	private static final Logger logger = Logger.getLogger(TopicController.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ITopicService topicService;
@@ -71,7 +72,7 @@ public class TopicController {
 	private final static List<String> imgTypes = Arrays.asList("jpg","jpeg","gif","png");
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if(status == 1){ //如果是获取已发布文章的列表，则按发布时间排序
+		if(status == Constant.YES){ //如果是获取已发布文章的列表，则按发布时间排序
 			SystemContext.setSort("t.publishDate"); 
 		} else { //如果是获取未发布文章的列表，则按创建时间排序
 			SystemContext.setSort("t.createDate"); 
@@ -111,7 +112,7 @@ public class TopicController {
 			session.removeAttribute("messageByTopic");
 			logger.info("文章残留的session已清除干净");
 		}
-		initList(con, cid, model, session,1);
+		initList(con, cid, model, session,Constant.YES);
 		return "topic/list";
 	}
 	/**
@@ -125,7 +126,7 @@ public class TopicController {
 	@RequestMapping("/unaudits")
 	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String unauditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		initList(con, cid, model, session,0);
+		initList(con, cid, model, session,Constant.NO);
 		return "topic/list";
 	}
 	/**
@@ -145,7 +146,7 @@ public class TopicController {
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
 			indexService.generateBody();//重新生成首页
 		}
-		if(status==0) {
+		if(status==Constant.NO) {
 			model.addAttribute(Constant.BaseCode.SUCCESS, "文章发布成功!");
 			return unauditList(con,cid,model,session);
 		} else {
@@ -172,7 +173,7 @@ public class TopicController {
 		if(topicService.isUpdateIndex(t.getChannel().getId())) {
 			indexService.generateBody();//重新生成首页
 		}
-		if(status==0) {
+		if(status==Constant.NO) {
 			return unauditList(con, cid, model, session);
 		} else {
 			return auditList(con, cid, model, session);
@@ -217,7 +218,7 @@ public class TopicController {
 		}
 		t.setKeyword(keys.toString());
 		topicService.add(t, topicDto.getCid(), loginUser,aids);
-		if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
+		if(topicDto.getStatus()==Constant.YES&&topicService.isUpdateIndex(topicDto.getCid())) {
 			indexService.generateBody();//重新生成首页
 		}
 		return "redirect:/jsp/common/addSucByTopic.jsp";
@@ -305,14 +306,13 @@ public class TopicController {
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
 	@AuthMethod( role = Constant.AuthConstant.ROLE_PUBLISH )
 	public void upload(MultipartFile attach,HttpServletResponse resp) throws IOException {
-		resp.setContentType(Constant.CONTENT_TYPE);
+		resp.setContentType( Constant.CONTENT_TYPE );
 		AjaxObj ao = new AjaxObj();
 		try {
 			Attachment att = new Attachment();
 			String ext = FilenameUtils.getExtension(attach.getOriginalFilename());
-			logger.info(ext);
-			att.setIsAttach(0);
-			att.setIsIndexPic(0);
+			att.setIsAttach( Constant.NO );
+			att.setIsIndexPic( Constant.NO );
 			att.setNewName(String.valueOf(new Date().getTime())+"."+ext);
 			att.setOldName(FilenameUtils.getBaseName(attach.getOriginalFilename()));
 			att.setSuffix(ext);
@@ -320,12 +320,12 @@ public class TopicController {
 			att.setTopic(null);
 			att.setSize(attach.getSize());
 			if(imgTypes.contains(ext)) {
-				att.setIsImg(1);
+				att.setIsImg( Constant.YES );
 			} else { 
-				att.setIsImg(0);
+				att.setIsImg( Constant.NO );
 			}
 			attachmentService.add(att, attach.getInputStream());
-			ao.setResult(1);
+			ao.setResult(Constant.YES);
 			if(imgTypes.contains(ext)) {
 				//获取上传图片的宽度，高度
 				BufferedImage bi = ImageIO.read(attach.getInputStream());
@@ -337,7 +337,7 @@ public class TopicController {
 				ao.setObj(att);
 			}
 		} catch (IOException e) {
-			ao.setResult(0);
+			ao.setResult(Constant.NO);
 			ao.setMsg(e.getMessage());
 		}
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
@@ -363,9 +363,9 @@ public class TopicController {
 				User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGINUSER);
 				list = topicService.list(loginUser.getId(),cid, con, status); 
 			 }
-			ao = new AjaxObj(1,null,list);
+			ao = new AjaxObj(Constant.YES,null,list);
 		} catch (Exception e) {
-			ao = new AjaxObj(0,e.getMessage());
+			ao = new AjaxObj(Constant.NO,e.getMessage());
 		}
 		response.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 		return null;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.IChannelDao;
@@ -41,12 +42,12 @@ public class PictureTopicService implements IPictureTopicService{
 	@Override
 	public void updateStatus(int tid, User u) {
 		PictureTopic t = pictureTopicDao.load(tid);
-		if(t.getStatus()==0) {
-			t.setStatus(1);
+		if(t.getStatus()==Constant.NO) {
+			t.setStatus(Constant.YES);
 			t.setPublishDate(new Date());
 			t.setAuditor(u.getNickname());
 		} else {
-			t.setStatus(0);
+			t.setStatus(Constant.NO);
 			t.setPublishDate(null);
 			t.setAuditor(null);
 		}

@@ -5,6 +5,7 @@ package org.wxh.user.dao.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.user.dao.IUserDao;
@@ -48,14 +49,14 @@ public class UserDao extends BaseDao<User> implements IUserDao {
 	public UserRole loadUserRole(int userId, int roleId) {
 		String hql = "select ur from UserRole ur left join fetch ur.user u left join fetch ur.role r where u.id=? and r.id=?";
 		return (UserRole)this.getSession().createQuery(hql)
-					.setParameter(0, userId).setParameter(1, roleId).uniqueResult();
+					.setParameter(0, userId).setParameter(Constant.YES, roleId).uniqueResult();
 	}
 
 	@Override
 	public UserGroup loadUserGroup(int userId, int groupId) {
 		String hql = "select ug from UserGroup ug left join fetch ug.user u left join fetch ug.group g where u.id=? and g.id=?";
 		return (UserGroup)this.getSession().createQuery(hql)
-					.setParameter(0, userId).setParameter(1, groupId).uniqueResult();
+					.setParameter(0, userId).setParameter(Constant.YES, groupId).uniqueResult();
 	}
 
 	@Override

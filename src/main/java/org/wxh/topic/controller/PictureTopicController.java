@@ -53,7 +53,7 @@ public class PictureTopicController {
 	private IChannelService channelService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if(status == 1){ //如果是获取已发布文章的列表，则按发布时间排序
+		if(status == Constant.YES){ //如果是获取已发布文章的列表，则按发布时间排序
 			SystemContext.setSort("t.publishDate"); 
 		} else { //如果是获取未发布文章的列表，则按创建时间排序
 			SystemContext.setSort("t.createDate"); 
@@ -89,7 +89,7 @@ public class PictureTopicController {
 	@RequestMapping("/audits")
 	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		initList(con, cid, model, session,1);
+		initList(con, cid, model, session,Constant.YES);
 		return "picTopic/list";
 	}
 	/**
@@ -103,7 +103,7 @@ public class PictureTopicController {
 	@RequestMapping("/unaudits")
 	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String unauditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
-		initList(con, cid, model, session,0);
+		initList(con, cid, model, session,Constant.NO);
 		return "picTopic/list";
 	}
 	/**
@@ -120,7 +120,7 @@ public class PictureTopicController {
 		User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		pictureTopicService.updateStatus(id,loginUser);
 		PictureTopic t = pictureTopicService.load(id);
-		if(status==0) {
+		if(status==Constant.NO) {
 			model.addAttribute(Constant.BaseCode.SUCCESS, "发布成功!");
 			return unauditList(con,cid,model,session);
 		} else {
@@ -173,7 +173,7 @@ public class PictureTopicController {
 			pictureService.updateNameAndSort(pictureTopicDto.getPicNameOlds(),pictureTopicDto.getPics());
 		}
 		pictureTopicService.add(pt,pictureTopicDto.getCid(),loginUser,pictureTopicDto.getPics());
-		/*if(topicDto.getStatus()==1&&topicService.isUpdateIndex(topicDto.getCid())) {
+		/*if(topicDto.getStatus()==Constant.YES&&topicService.isUpdateIndex(topicDto.getCid())) {
 			indexService.generateBody();//重新生成首页
 		}*/
 		//return "redirect:/jsp/common/addSucByPicTopic.jsp";
@@ -197,7 +197,7 @@ public class PictureTopicController {
 		PictureTopic t = pictureTopicService.load(id);
 		pictureTopicService.delete(id);
 		model.addAttribute(Constant.BaseCode.SUCCESS,"组图新闻删除成功!");
-		if(status==0) {
+		if(status==Constant.NO) {
 			return unauditList(con, cid, model, session);
 		} else {
 			return auditList(con, cid, model, session);
@@ -282,9 +282,9 @@ public class PictureTopicController {
 			pic.setPictureTopic(null);
 			pic.setSize(attach.getSize());
 			pictureService.add(pic, attach.getInputStream());
-			ao = new AjaxObj(1,null,pic);
+			ao = new AjaxObj(Constant.YES,null,pic);
 		} catch (IOException e) {
-			ao = new AjaxObj(0,e.getMessage());
+			ao = new AjaxObj(Constant.NO,e.getMessage());
 		}
 		resp.getWriter().write(JsonUtil.getInstance().obj2json(ao));
 	}

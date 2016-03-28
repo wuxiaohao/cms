@@ -91,7 +91,7 @@ public class IndexPicController {
 	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String addIndexPic(Model model) {
 		IndexPic ip = new IndexPic();
-		ip.setStatus(1);
+		ip.setStatus(Constant.YES);
 		model.addAttribute("indexPic", ip);
 		return "pic/addIndexPic";
 	}
@@ -109,7 +109,7 @@ public class IndexPicController {
 			return "pic/addIndexPic";
 		}
 		indexPicService.add(indexPic);
-		if(indexPic.getStatus()!=0) {
+		if(indexPic.getStatus()!=Constant.NO) {
 			indexService.generateBody();
 		}
 		model.addAttribute(Constant.BaseCode.SUCCESS, "添加首页宣传图片成功!");
@@ -229,14 +229,14 @@ public class IndexPicController {
 				ipd.setNewName(newName);
 				ipd.setOldName(oldName);
 				ao.setObj(ipd);
-				ao.setResult(1);
+				ao.setResult(Constant.YES);
 			} else {
-				ao.setResult(0);
+				ao.setResult(Constant.NO);
 				ao.setMsg("图片的尺寸不在有效范围中");
 			}
 			
 		} catch (IOException e) {
-			ao.setResult(0);
+			ao.setResult(Constant.NO);
 			ao.setMsg(e.getMessage());
 		}
 		

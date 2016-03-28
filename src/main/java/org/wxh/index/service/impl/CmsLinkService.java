@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.common.Constant;
@@ -20,7 +21,7 @@ import org.wxh.index.service.ICmsLinkService;
 @Service("cmsLinkService")
 public class CmsLinkService implements ICmsLinkService {
 	
-	private static final Logger logger = Logger.getLogger(IndexPicService.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ICmsLinkDao cmsLinkDao;
@@ -84,7 +85,7 @@ public class CmsLinkService implements ICmsLinkService {
 		File fp = new File( path ); 
 		if( !fp.exists() ) fp.mkdirs();
 		path = path + newName;
-		logger.info(path);
+		logger.info("保存图片的路径为[{}]",path);
 		FileUtils.copyInputStreamToFile(is, new File(path));
 	}
 	@Override

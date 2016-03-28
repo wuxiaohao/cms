@@ -44,12 +44,12 @@ public class VideoService implements IVideoService{
 	@Override
 	public void updateStatus(int vid, User u) {
 		 Video v = videoDao.load(vid);
-		 if(v.getStatus() == 0 ){
-			v.setStatus(1);
+		 if(v.getStatus() == Constant.NO ){
+			v.setStatus(Constant.YES);
 			v.setPublishDate(new Date());
 			v.setAuditor(u.getNickname());
 		 } else {
-			v.setStatus(0);
+			v.setStatus(Constant.NO);
 			v.setPublishDate(null);
 			v.setAuditor(null);
 		 }
