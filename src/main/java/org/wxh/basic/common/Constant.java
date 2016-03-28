@@ -111,7 +111,7 @@ public interface Constant {
 		public static final String MAX ="max";
 		/**最小值*/
 		public static final String MIN ="min";
-		/***/
+		/**记住账号*/
 		public static final String COOKIE = "cms_cookie_username";
 	}
 	
