@@ -4,6 +4,7 @@ package org.wxh.user.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.user.dao.IUserDao;
@@ -13,7 +14,6 @@ import org.wxh.user.model.RoleType;
 import org.wxh.user.model.User;
 import org.wxh.user.model.UserGroup;
 import org.wxh.user.model.UserRole;
-import org.springframework.stereotype.Repository;
 
 @SuppressWarnings("unchecked")
 @Repository("userDao")

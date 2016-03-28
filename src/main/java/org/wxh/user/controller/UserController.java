@@ -4,22 +4,22 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.Thumbnails.Builder;
 import net.coobird.thumbnailator.resizers.configurations.ScalingMode;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Logger;
-
-import javax.imageio.ImageIO;
-import javax.jws.WebParam.Mode;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +27,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.wxh.basic.common.GlobalResult;
+import org.springframework.web.servlet.ModelAndView;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
-import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.model.ChannelTree;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IChannelService;
@@ -47,6 +46,7 @@ import org.wxh.user.service.IGroupService;
 import org.wxh.user.service.IRoleService;
 import org.wxh.user.service.IUserService;
 import org.wxh.util.JsonUtil;
+import org.wxh.util.SecurityUtil;
 
 /**
  * 用户管理的控制层
@@ -59,7 +59,7 @@ import org.wxh.util.JsonUtil;
 @AuthClass("login")
 public class UserController {
 	
-	private static final Logger logger = Logger.getLogger(UserController.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private IUserService userService;
@@ -69,31 +69,6 @@ public class UserController {
 	private IRoleService roleService;
 	@Autowired
 	private IChannelService channelService;
-	
-	public IChannelService getChannelService() {
-		return channelService;
-	}
-	public void setChannelService(IChannelService channelService) {
-		this.channelService = channelService;
-	}
-	public IUserService getUserService() {
-		return userService;
-	}
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
-	public IGroupService getGroupService() {
-		return groupService;
-	}
-	public void setGroupService(IGroupService groupService) {
-		this.groupService = groupService;
-	}
-	public IRoleService getRoleService() {
-		return roleService;
-	}
-	public void setRoleService(IRoleService roleService) {
-		this.roleService = roleService;
-	}
 
 	/**
 	 * 用户列表
@@ -101,9 +76,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/users",method=RequestMethod.POST)
-	public String listUser(Model model){
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
+	public ModelAndView listUser(Model model){
 		model.addAttribute("datas", userService.findUser());
-		return "user/list";
+		return new ModelAndView("user/list");
 	}
 	
 	private void initAddUser(Model model){
@@ -115,6 +91,7 @@ public class UserController {
 	 * 返回添加用户的界面
 	 */
 	@RequestMapping(value = "/addUI", method = RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String addUser(Model model){
 		model.addAttribute("userDto",new UserDto()); //user,user
 		initAddUser(model);
@@ -125,13 +102,14 @@ public class UserController {
 	 * 添加用户
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(@Valid UserDto userDto, BindingResult br, Model model){
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
+	public ModelAndView addUser(@Valid UserDto userDto, BindingResult br, Model model){
 		if(br.hasErrors()){
 			initAddUser(model);
-			return "user/add";
+			return new ModelAndView("user/add");
 		}
 		userService.add(userDto.getUser(), userDto.getRoleIds(), userDto.getGroupIds());
-		model.addAttribute("success", "添加用户成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "添加用户成功!");
 		return listUser(model);
 	}
 	
@@ -139,12 +117,13 @@ public class UserController {
 	 * 校验用户名是否已存在
 	 */
 	@RequestMapping(value = "/checkUserName", method = RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public void checkUserName(HttpServletResponse response,String username) {
 		try {
 			if(userService.checkUserName(username)){
-				response.getWriter().write("false");
+				response.getWriter().write(Constant.FALSE);
 			} else {
-				response.getWriter().write("true");
+				response.getWriter().write(Constant.TRUE);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -156,9 +135,9 @@ public class UserController {
 	 * 删除用户
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-	public String deleteUser(Model model,@PathVariable int id){
+	public ModelAndView deleteUser(Model model,@PathVariable int id){
 		userService.delete(id);
-		model.addAttribute("success", "删除用户成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "删除用户成功!");
 		return listUser(model);
 	}
 	
@@ -166,9 +145,9 @@ public class UserController {
 	 * 修改用户状态
 	 */
 	@RequestMapping(value="/updateStatus/{id}",method=RequestMethod.POST)
-	public String updateStatus(Model model,@PathVariable int id) {
+	public ModelAndView updateStatus(Model model,@PathVariable int id) {
 		userService.updateStatus(id);
-		model.addAttribute("success", "用户状态已更改!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "用户状态已更改!");
 		return listUser(model);
 	}
 	
@@ -189,11 +168,11 @@ public class UserController {
 	 * 修改用户信息
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	public String update(@PathVariable int id,@Valid UserDto userDto,BindingResult br,Model model) {
+	public ModelAndView update(@PathVariable int id,@Valid UserDto userDto,BindingResult br,Model model) {
 		if(br.hasErrors()) {
-			logger.info(br.hasErrors());
+			logger.info("修改用户信息失败，失败信息：[{}]", br.hasErrors());
 			initAddUser(model);
-			return "user/update";
+			return new ModelAndView("user/update");
 		}
 		User ou = userService.load(id);
 		ou.setNickname(userDto.getNickname());
@@ -201,7 +180,38 @@ public class UserController {
 		ou.setEmail(userDto.getEmail());
 		ou.setStatus(userDto.getStatus());
 		userService.update(ou, userDto.getRoleIds(), userDto.getGroupIds());
-		model.addAttribute("success", "用户信息已更新!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "用户信息已更新!");
+		return listUser(model);
+	}
+	
+	/**
+	 * 修改指定用户的密码界面
+	 */
+	@RequestMapping(value="/updatePwdAllUI",method = RequestMethod.POST)
+	public ModelAndView updatePwdAllUI(int id,String username,Model model) {
+		model.addAttribute("userid", id);
+		model.addAttribute("username", username);
+		return new ModelAndView("user/updatePwdAll");
+	}
+	/**
+	 * 修改指定用户的密码
+	 * @param password
+	 * @param confirmPwd
+	 * @return
+	 */
+	@RequestMapping(value="/updatePwdAll",method = RequestMethod.POST)
+	public ModelAndView updatePwdAll(int id,String password,String confirmPwd,Model model) {
+		if (password == null || confirmPwd == null) {
+			logger.error("修改指定用户的密码失败,请求参数:[id:{}，password:{}，confirmPwd:{}]",new Object[]{id,password,confirmPwd});
+			return new ModelAndView("user/updatePwdAll");
+		}
+		if ( !password.equals(confirmPwd) ) {
+			logger.error("两次输入的密码不一致，请求参数：[id:{}，password:{}，confirmPwd:{}]",new Object[]{id,password,confirmPwd});
+			return new ModelAndView("user/updatePwdAll");
+		}
+		
+		userService.updatePwdByNewPwd(id, password);
+		model.addAttribute(Constant.BaseCode.SUCCESS, "密码修改成功！");
 		return listUser(model);
 	}
 	
@@ -210,10 +220,10 @@ public class UserController {
 	 */
 	@RequestMapping(value="/updatePwdUI",method=RequestMethod.POST)
 	@AuthMethod
-	public String updatePwdUI(Model model,HttpSession session) {
-		User u = (User)session.getAttribute("loginUser");
+	public ModelAndView updatePwdUI(Model model,HttpSession session) {
+		User u = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		model.addAttribute(u);
-		return "user/updatePwd";
+		return new ModelAndView("user/updatePwd");
 	}
 	
 	/**
@@ -221,13 +231,14 @@ public class UserController {
 	 */
 	@RequestMapping(value="/updatePwd",method=RequestMethod.POST)
 	@AuthMethod
-	public String updatePwd(Model model,int id,String oldPwd,String password,HttpSession session) {
+	public ModelAndView updatePwd(Model model,int id,String oldPwd,String password,HttpSession session) {
 		try {
 			userService.updatePwd(id, oldPwd, password);
-			model.addAttribute("success", "密码修改成功!");
+			model.addAttribute(Constant.BaseCode.SUCCESS, "密码修改成功!");
 			return showMySelf(model, session);
 		} catch (MyException e) {
-			model.addAttribute("error", e.getMessage());
+			logger.error("修改密码失败，请求参数：[id:{},oldPwd:{},password:{}]",new Object[]{id,oldPwd,password});
+			model.addAttribute(Constant.BaseCode.ERROR, e.getMessage());
 			return updatePwdUI(model, session);
 		}
 	}
@@ -236,6 +247,7 @@ public class UserController {
 	 * 显示某个用户的详细信息
 	 */
 	@RequestMapping(value="/{id}",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String show(@PathVariable int id,Model model) {
 		model.addAttribute(userService.load(id));
 		model.addAttribute("gs",userService.listUserGroups(id));
@@ -247,8 +259,9 @@ public class UserController {
 	 * 管理员查询用户信息
 	 */
 	@RequestMapping(value="/showSelf",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String showSelf(Model model,HttpSession session) {
-		User user = (User)session.getAttribute("loginUser");
+		User user = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		model.addAttribute(user);
 		model.addAttribute("gs",userService.listUserGroups(user.getId()));
 		model.addAttribute("rs",userService.listUserRoles(user.getId()));
@@ -260,12 +273,12 @@ public class UserController {
 	 */
 	@RequestMapping(value="/showMySelf",method=RequestMethod.POST)
 	@AuthMethod
-	public String showMySelf(Model model,HttpSession session) {
-		User user = (User)session.getAttribute("loginUser");
+	public ModelAndView showMySelf(Model model,HttpSession session) {
+		User user = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		model.addAttribute(user);
 		model.addAttribute("gs",userService.listUserGroups(user.getId()));
 		model.addAttribute("rs",userService.listUserRoles(user.getId()));
-		return "user/showSelf";
+		return new ModelAndView("user/showSelf");
 	}
 	
 	/**
@@ -274,7 +287,7 @@ public class UserController {
 	@RequestMapping(value="/updateSelfUI",method=RequestMethod.POST)
 	@AuthMethod
 	public String updateSelf(Model model,HttpSession session) {
-		User u = (User)session.getAttribute("loginUser");
+		User u = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		model.addAttribute(new UserDto(u));
 		return "user/updateSelf";
 	}
@@ -284,9 +297,9 @@ public class UserController {
 	 */
 	@RequestMapping(value="/updateSelf",method=RequestMethod.POST)
 	@AuthMethod
-	public String updateSelf(@Valid UserDto userDto,BindingResult br,Model model,HttpSession session) {
+	public ModelAndView updateSelf(@Valid UserDto userDto,BindingResult br,Model model,HttpSession session) {
 		if(br.hasErrors()) {
-			return "user/updateSelf";
+			return new ModelAndView("user/updateSelf");
 		}
 		User ou = userService.load( userDto.getId() );
 		ou.setNickname( userDto.getNickname() );
@@ -294,8 +307,9 @@ public class UserController {
 		ou.setEmail( userDto.getEmail() );
 		ou.setIcon( userDto.getIcon() );
 		userService.update( ou );
-		session.setAttribute("loginUser", ou);
-		model.addAttribute("success", "个人信息修改成功!");
+		session.setAttribute(Constant.BaseCode.LOGIN_USER, ou);
+		model.addAttribute(Constant.BaseCode.SUCCESS, "个人信息修改成功!");
+		
 		return showMySelf(model,session);
 	}
 	
@@ -319,6 +333,7 @@ public class UserController {
 	 * 返回tree的json格式数据
 	 */
 	@RequestMapping("/userTree/{uid}")
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public @ResponseBody List<ChannelTree> groupTree(@PathVariable int uid) {
 		List<Role> rs = userService.listUserRoles(uid);
 		for(Role r:rs) {
@@ -336,7 +351,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/uploadIcon",method=RequestMethod.POST)
 	public void uploadIcon(HttpSession session,HttpServletResponse resp,MultipartFile ico) {
-		resp.setContentType( "text/plain;charset=utf-8" );
+		resp.setContentType( Constant.CONTENT_TYPE );
 		AjaxObj ao = new AjaxObj();
 		PrintWriter out = null;
 		try {
@@ -345,7 +360,7 @@ public class UserController {
 			String newName = new Date().getTime() + "." + FilenameUtils.getExtension( oldName );//图片的新名称
 			String realPath = session.getServletContext().getRealPath("");
 			//创建临时文件存放的位置
-			String path = realPath + GlobalResult.ICON_PATH + File.separator + "temp" + File.separator;
+			String path = realPath + Constant.UrlConstant.ICON_PATH + File.separator + "temp" + File.separator;
 			File f = new File( path ); 
 			if( !f.exists() ) {
 				f.mkdir();
@@ -353,8 +368,8 @@ public class UserController {
 			IconDto con = new IconDto();
 			con.setNewName( newName ); 
 			con.setOldName( oldName );
-			con.setIconHeight( GlobalResult.ICON_HEIGHT );
-			con.setIconWidth( GlobalResult.ICON_WIDTH );
+			con.setIconHeight( Constant.ICON_HEIGHT );
+			con.setIconWidth( Constant.ICON_WIDTH );
 			//获取上传图片的宽度，高度
 			BufferedImage bi = ImageIO.read(ico.getInputStream());
 			Builder<BufferedImage> b = Thumbnails.of( bi );
@@ -395,18 +410,18 @@ public class UserController {
 		AjaxObj ao = new AjaxObj();
 		try {
 			String path = session.getServletContext().getRealPath("");
-			String tpath = path+GlobalResult.ICON_PATH+File.separator+"temp"+File.separator+newName; //临时存放的路径
+			String tpath = path+Constant.UrlConstant.ICON_PATH+File.separator+"temp"+File.separator+newName; //临时存放的路径
 			File tf = new File(tpath);
 			BufferedImage bi = ImageIO.read(tf);
-			String npath = path+GlobalResult.ICON_PATH+File.separator+newName; //新的存放路径
-			String ttpath = path+GlobalResult.ICON_PATH+File.separator+"thumbnail"+File.separator+newName;//缩略图的路径
+			String npath = path+Constant.UrlConstant.ICON_PATH+File.separator+newName; //新的存放路径
+			String ttpath = path+Constant.UrlConstant.ICON_PATH+File.separator+"thumbnail"+File.separator+newName;//缩略图的路径
 			Builder<BufferedImage> b = Thumbnails.of(bi);
 			//根据坐标切割图片
-			BufferedImage bi2 = b.sourceRegion(x, y, w, h).forceSize(GlobalResult.ICON_WIDTH, GlobalResult.ICON_HEIGHT).asBufferedImage();
+			BufferedImage bi2 = b.sourceRegion(x, y, w, h).forceSize(Constant.ICON_WIDTH, Constant.ICON_HEIGHT).asBufferedImage();
 			//写原图
 			b.toFile(npath);
 			//写缩略图
-			Thumbnails.of(bi2).forceSize( GlobalResult.ICON_WIDTH_THUMBNAIL,GlobalResult.ICON_HEIGHT_THUMBNAIL ).scalingMode( ScalingMode.BILINEAR ).toFile( ttpath );
+			Thumbnails.of(bi2).forceSize( Constant.ICON_WIDTH_THUMBNAIL,Constant.ICON_HEIGHT_THUMBNAIL ).scalingMode( ScalingMode.BILINEAR ).toFile( ttpath );
 			//删除临时图片
 			tf.delete(); 
 			ao.setResult(1);

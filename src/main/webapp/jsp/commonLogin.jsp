@@ -14,7 +14,6 @@
 <link id="style_color" href="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 <script src="${pageContext.servletContext.contextPath }/resources/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

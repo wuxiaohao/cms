@@ -1,13 +1,19 @@
 package org.wxh.basic.filter;
 
-import org.apache.log4j.Logger;
-
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * session监听器
+ * @author wxh
+ *
+ */
 public class CmsSessionListener implements HttpSessionListener {
 	
-	private static final Logger logger = Logger.getLogger(CmsSessionListener.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	
 	@Override
@@ -16,8 +22,8 @@ public class CmsSessionListener implements HttpSessionListener {
 
 	@Override
 	public void sessionDestroyed(HttpSessionEvent event) {
-		CmsSessionContext.removeSession(event.getSession());
-		logger.info("移除了Session:"+event.getSession().getId());
+		CmsSessionContext.removeSession( event.getSession() );
+		logger.info("移除了Session:[{}]",event.getSession().getId());
 	}
 
 }

@@ -5,10 +5,10 @@ package org.wxh.user.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.user.dao.IRoleDao;
 import org.wxh.user.model.Role;
-import org.springframework.stereotype.Repository;
 
 @Repository("roleDao")
 public class RoleDao extends BaseDao<Role> implements IRoleDao {

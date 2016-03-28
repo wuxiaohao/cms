@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.model.CmsLink;
 import org.wxh.index.model.IndexPic;
@@ -40,7 +42,7 @@ import org.wxh.util.PropertiesUtil;
 @Service("indexService")
 public class IndexService implements IIndexService {
 	
-	private static final Logger logger = Logger.getLogger(IndexService.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private String ftlPath;
 	private String outPath;
@@ -81,7 +83,7 @@ public class IndexService implements IIndexService {
 		List<Channel> list = channelService.listTopNavChannel( 9 );
 		Map<String,Object> root = new HashMap<String,Object>();
 		root.put("navs", list);
-		root.put("baseInfo", BaseInfoUtil.getInstacne().read());
+		root.put(Constant.BaseCode.BASE_INFO, BaseInfoUtil.getInstacne().read());
 		String outfile = SystemContext.getRealPath()+outPath+"/top.jsp";
 		util.fprint(root, "/top.ftl", outfile);
 		logger.info("=============重新生成了顶部信息====================");
@@ -90,7 +92,7 @@ public class IndexService implements IIndexService {
 	@Override
 	public void generateBottom() {
 		Map<String,Object> root = new HashMap<String,Object>();
-		root.put("baseInfo", BaseInfoUtil.getInstacne().read());
+		root.put(Constant.BaseCode.BASE_INFO, BaseInfoUtil.getInstacne().read());
 		String outfile = SystemContext.getRealPath()+outPath+"/bottom.jsp";
 		util.fprint(root, "/bottom.ftl", outfile);
 		logger.info("=============重新生成了底部信息====================");

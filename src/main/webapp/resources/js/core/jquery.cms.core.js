@@ -71,7 +71,6 @@
 							parent.showMessage(success,"");
 							parent.refreshTree();  //刷新树
 						} else {
-							//toastr.error("设置排序失败!");
 							var error = "设置排序失败!";
 							parent.showMessage("",error);
 						}

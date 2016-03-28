@@ -1,7 +1,5 @@
 package org.wxh.index.service.impl;
 
-import org.apache.log4j.Logger;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,14 +8,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.index.dao.IIndexPicDao;
 import org.wxh.index.model.IndexPic;
 import org.wxh.index.service.IIndexPicService;
-import org.wxh.index.dao.IIndexPicDao;
 
 @Service("indexPicService")
 public class IndexPicService implements IIndexPicService {
@@ -49,7 +48,7 @@ public class IndexPicService implements IIndexPicService {
 	public void delete(int id) {
 		IndexPic pic = indexPicDao.load(id);
 		String rp = SystemContext.getRealPath();
-		String pp = rp+"/resources/indexPic/"+pic.getNewName();
+		String pp = rp + Constant.UrlConstant.INDEX_PIC_PATH + pic.getNewName();
 		new File(pp).delete();
 		indexPicDao.delete(id);
 	}
@@ -86,13 +85,13 @@ public class IndexPicService implements IIndexPicService {
 	public void cleanNoUseIndexPic(List<String> pics) throws IOException {
 		String rp = SystemContext.getRealPath();
 		//首先删除临时文件夹
-		File temp = new File(rp+"/resources/indexPic/temp");
+		File temp = new File(rp + Constant.UrlConstant.INDEX_PIC_TMP_PATH);
 		FileUtils.deleteDirectory(temp);
-		logger.info(rp+"/resources/indexPic/thumbnail/");
+		logger.info(rp + Constant.UrlConstant.INDEX_PIC_THU_PATH);
 		//其次删除缩略图和首页图片
 		for(String f:pics) {
-			new File(rp+"/resources/indexPic/thumbnail/"+f).delete();
-			new File(rp+"/resources/indexPic/"+f).delete();
+			new File(rp + Constant.UrlConstant.INDEX_PIC_THU_PATH + f).delete();
+			new File(rp + Constant.UrlConstant.INDEX_PIC_PATH + f).delete();
 		}
 	}
 
@@ -107,7 +106,7 @@ public class IndexPicService implements IIndexPicService {
 	@Override
 	public void savePic(String newName, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath + GlobalResult.FILE_PATH + File.separator;//新闻图片存放的位置
+		String path = realPath + Constant.UrlConstant.FILE_PATH + File.separator;//新闻图片存放的位置
 		//创建临时文件存放的位置
 		File fp = new File( path ); 
 		if( !fp.exists() ) fp.mkdirs();

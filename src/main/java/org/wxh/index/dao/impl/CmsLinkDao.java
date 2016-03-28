@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.index.dao.ICmsLinkDao;
@@ -19,10 +20,10 @@ public class CmsLinkDao extends BaseDao<CmsLink> implements ICmsLinkDao {
 	 */
 	public CmsLink add(CmsLink cl) {
 		Map<String,Integer> m = this.getMinAndMaxPos();
-		if(m.get("max")==null) {
+		if(m.get(Constant.BaseCode.MAX)==null) {
 			cl.setPos(1);
 		} else {
-			cl.setPos(m.get("max")+1);
+			cl.setPos(m.get(Constant.BaseCode.MAX)+1);
 		}
 		this.getSession().save(cl);
 		return cl;
@@ -70,8 +71,8 @@ public class CmsLinkDao extends BaseDao<CmsLink> implements ICmsLinkDao {
 		String hql = "select max(pos),min(pos) from CmsLink";
 		Object[] objs = (Object[])this.getSession().createQuery(hql).uniqueResult();
 		Map<String,Integer> m = new HashMap<String,Integer>();
-		m.put("min", (Integer)objs[1]);
-		m.put("max", (Integer)objs[0]);
+		m.put(Constant.BaseCode.MIN, (Integer)objs[1]);
+		m.put(Constant.BaseCode.MAX, (Integer)objs[0]);
 		return m;
 	}
 

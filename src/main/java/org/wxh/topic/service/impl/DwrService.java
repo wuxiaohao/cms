@@ -24,30 +24,6 @@ public class DwrService implements IDwrService{
 	@Autowired
 	private IIndexService indexService;
 
-	public IAttachmentService getAttachmentService() {
-		return attachmentService;
-	}
-	public void setAttachmentService(IAttachmentService attachmentService) {
-		this.attachmentService = attachmentService;
-	}
-	public IGroupService getGroupService() {
-		return groupService;
-	}
-	public void setGroupService(IGroupService groupService) {
-		this.groupService = groupService;
-	}
-	public IIndexPicService getIndexPicService() {
-		return indexPicService;
-	}
-	public void setIndexPicService(IIndexPicService indexPicService) {
-		this.indexPicService = indexPicService;
-	}
-	public ICmsLinkService getCmsLinkService() {
-		return cmsLinkService;
-	}
-	public void setCmsLinkService(ICmsLinkService cmsLinkService) {
-		this.cmsLinkService = cmsLinkService;
-	}
 	/**
 	 * 添加GroupChannel对象
 	 * @param group

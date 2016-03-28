@@ -8,7 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
-import org.wxh.index.service.impl.IndexService;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
@@ -40,14 +41,14 @@ import org.wxh.topic.service.IVideoService;
 import org.wxh.util.BaseInfoUtil;
 
 /**
- * 网站的Controller
+ * 前端新闻展示界面的Controller
  * @author wxh
  *
  */
 @Controller
 public class IndexController {
 	
-	private static final Logger logger = Logger.getLogger(IndexService.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private IChannelService channelService;
@@ -73,7 +74,7 @@ public class IndexController {
 	 */
 	@RequestMapping({"/","/index"})
 	public String index(Model model) {
-		model.addAttribute("baseInfo", BaseInfoUtil.getInstacne().read());
+		model.addAttribute(Constant.BaseCode.BASE_INFO, BaseInfoUtil.getInstacne().read());
 		return "index/index";
 	}
 	/**

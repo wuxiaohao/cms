@@ -10,9 +10,9 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
-import org.wxh.util.PinyinUtil;
 import org.wxh.topic.dao.IKeywordDao;
 import org.wxh.topic.model.Keyword;
+import org.wxh.util.PinyinUtil;
 
 @Repository("keywordDao")
 public class KeywordDao extends BaseDao<Keyword> implements IKeywordDao {

@@ -1,18 +1,12 @@
 package org.wxh.topic.dao.impl;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.IPictureTopicDao;
-import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.PictureTopic;
-import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.PictureDto;
-import sun.nio.cs.FastCharsetProvider;
 
 @Repository("pictureTopicDao")
 public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTopicDao{

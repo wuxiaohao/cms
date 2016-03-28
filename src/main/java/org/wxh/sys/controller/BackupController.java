@@ -1,14 +1,15 @@
 package org.wxh.sys.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.user.auth.AuthClass;
+import org.wxh.user.auth.AuthMethod;
 import org.wxh.util.BackupFileUtil;
 
 /**
@@ -17,7 +18,7 @@ import org.wxh.util.BackupFileUtil;
  *
  */
 
-@AuthClass
+@AuthClass("login")
 @Controller
 @RequestMapping("/admin")
 public class BackupController {
@@ -37,6 +38,7 @@ public class BackupController {
 	 * @return
 	 */
 	@RequestMapping(value="/backup/addUI",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String backup() {
 		return "backup/add";
 	}
@@ -46,10 +48,11 @@ public class BackupController {
 	 * @return
 	 */
 	@RequestMapping(value="/backup/add",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String backup(String backupFilename ,Model model) {
 		BackupFileUtil bfu = BackupFileUtil.getInstance(SystemContext.getRealPath());
 		bfu.backup(backupFilename);
-		model.addAttribute("success", "备份成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "备份成功!");
 		return list(model);
 	}
 	/**
@@ -58,6 +61,7 @@ public class BackupController {
 	 * @return
 	 */
 	@RequestMapping(value="/backups")
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String list(Model model) {
 		BackupFileUtil bfu = BackupFileUtil.getInstance(SystemContext.getRealPath());
 		model.addAttribute("backups",bfu.listBackups());
@@ -73,7 +77,7 @@ public class BackupController {
 	public String delete(@PathVariable String name,String type,Model model) {
 		BackupFileUtil bfu = BackupFileUtil.getInstance(SystemContext.getRealPath());
 		bfu.delete(name+"."+type);
-		model.addAttribute("success", "删除成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "删除成功!");
 		return list(model);
 	}
 	/**
@@ -89,7 +93,7 @@ public class BackupController {
 		//indexService.generateTop();
 		//indexService.generateBody();
 		//indexService.generateBottom();
-		model.addAttribute("success", "系统数据已恢复!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "系统数据已恢复!");
 		return list(model);
 	}
 	

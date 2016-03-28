@@ -21,9 +21,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.filter.CmsSessionContext;
 import org.wxh.basic.model.message.user.LoginRequest;
+import org.wxh.basic.util.JsonUtils;
 import org.wxh.user.model.Role;
 import org.wxh.user.model.RoleType;
 import org.wxh.user.model.User;
@@ -52,49 +54,76 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login(HttpServletRequest request,Model model) {
-		String usernamecode=Common.getcookie(request,"cms_cookie_username");
-		model.addAttribute("cms_cookie_username", usernamecode);
+		String usernamecode=Common.getcookie(request,Constant.BaseCode.COOKIE);
+		model.addAttribute(Constant.BaseCode.COOKIE, usernamecode);
 		return "admin/login";
 	}
 	
 	/**
 	 * 处理用户登陆
-	 * @param username
-	 * @param password
-	 * @param checkcode
+	 * @param request
 	 * @param model
+	 * @param req
 	 * @param session
+	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView login(LoginRequest request,Model model,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("admin/blackmain");
-		String cc = (String)session.getAttribute("cc");
-		if(!cc.equals( request.getCheckcode() )) {
-			model.addAttribute("errorCode","验证码出错，请重新输入");
+		
+		if( request.getUsername() == null ) {
+			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(request));
 			mv.setViewName("admin/login");
 			return mv;
 		}
+		if( request.getPassword() == null ) {
+			logger.error("密码为空，请求参数：[{}]",JsonUtils.object2String(request));
+			mv.setViewName("admin/login");
+			return mv;
+		}
+		if( request.getCheckcode() == null ) {
+			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(request));
+			mv.setViewName("admin/login");
+			return mv;
+		}
+		if( request.getUsername() == null ) {
+			logger.error("验证码为空，请求参数：[{}]",JsonUtils.object2String(request));
+			mv.setViewName("admin/login");
+			return mv;
+		}
+		
+		//校验验证码是否正确
+		String cc = (String)session.getAttribute(Constant.BaseCode.CHECK_CODE);
+		if(!cc.equals(request.getCheckcode())) {
+			model.addAttribute(Constant.BaseCode.ERROR_CODE,"验证码出错，请重新输入");
+			mv.setViewName("admin/login");
+			return mv;
+		}
+		
 		try {
 			User loginUser = userService.login( request.getUsername(), request.getPassword());
-			session.setAttribute("loginUser", loginUser);
+			session.setAttribute(Constant.BaseCode.LOGIN_USER, loginUser);
 			List<Role> rs = userService.listUserRoles(loginUser.getId());
 			boolean isAdmin = isRole(rs,RoleType.ROLE_ADMIN);
-			session.setAttribute("isAdmin", isAdmin);
-			if(!isAdmin) {
-				session.setAttribute("allActions", getAllActions(rs, session));
-				session.setAttribute("isAudit", isRole(rs,RoleType.ROLE_AUDIT));
-				session.setAttribute("isPublish", isRole(rs,RoleType.ROLE_PUBLISH));
+			session.setAttribute(Constant.AuthConstant.IS_ADMIN, isAdmin);
+			if( !isAdmin ) {
+				Set<String> actions = getAllActions(rs, session);
+				session.setAttribute(Constant.AuthConstant.ALL_ACTIONS, actions);
+				session.setAttribute(Constant.AuthConstant.IS_AUDIT, isRole(rs,RoleType.ROLE_AUDIT));
+				session.setAttribute(Constant.AuthConstant.IS_PUBLISH, isRole(rs,RoleType.ROLE_PUBLISH));
+				logger.info("用户[{}],所拥有的权限信息：[{}]",new Object[]{loginUser.getUsername(),actions});
 			}
-			session.removeAttribute("cc");
+			session.removeAttribute(Constant.BaseCode.CHECK_CODE);
 			//保存登陆信息
 			CmsSessionContext.addSessoin(session);
 			//记住状态需跳转到单独登陆页面，只需输入密码即可，密码不能保存在cookie里；
-			if( null != request.getRemember() && request.getRemember().equals("true") ){
-				Cookie usercookie = new Cookie( "cms_cookie_username", request.getUsername() );
+			if( null != request.getRemember() && request.getRemember().equals(Constant.TRUE) ){
+				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, request.getUsername() );
 				response.addCookie(usercookie);
+				logger.info("已保存用户[{}]登陆状态",loginUser.getUsername());
 			} else {  //删除Cookie
-				Cookie usercookie = new Cookie( "cms_cookie_username", request.getUsername() );
+				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, request.getUsername() );
 				usercookie.setMaxAge(0);
 				response.addCookie(usercookie);
 			} 
@@ -102,8 +131,9 @@ public class LoginController {
 			return mv;
 		} catch (MyException e) {
 			//登陆失败，返回失败信息
-			logger.error("登陆失败，失败信息:{}",e);
-			model.addAttribute("error",e.getMessage());
+			logger.error("登陆失败，失败信息:[{}]",e.getMessage());
+			//把异常信息返回到客户端
+			model.addAttribute(Constant.BaseCode.ERROR,e.getMessage());
 			mv.setViewName("admin/login");
 			return mv;
 		}
@@ -112,15 +142,24 @@ public class LoginController {
 	
 	/**
 	 * 获取所有能够访问的方法 
+	 * @param rs 角色列表
+	 * @param session
+	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	private Set<String> getAllActions(List<Role> rs,HttpSession session) {
-		Set<String> actions = new HashSet<String>();
-		Map<String,Set<String>> allAuths = (Map<String,Set<String>>)session.getServletContext().getAttribute("allAuths");
-		actions.addAll(allAuths.get("base"));
-		for(Role r:rs) {
-			if(r.getRoleType()==RoleType.ROLE_ADMIN) continue;
-			actions.addAll(allAuths.get(r.getRoleType().name()));
+		Set<String> actions = new HashSet<String>(); //存储可以被访问的方法
+		//获取该系统下的所有需要被权限控制的方法
+		Map<String,Set<String>> allAuths = (Map<String,Set<String>>)session.getServletContext().getAttribute(Constant.AuthConstant.ALL_AUTHS);
+		actions.addAll(allAuths.get( Constant.AuthConstant.AUTH_BASE )); //存入可以被所有角色访问的方法
+		for( Role r : rs ) {
+			if( r.getRoleType() == RoleType.ROLE_ADMIN ) continue;
+			Set<String> auths = allAuths.get( r.getRoleType().name() );
+			if( auths != null ) {
+				actions.addAll( allAuths.get( r.getRoleType().name() ) ); //存入该角色可访问的方法
+			} else {
+				logger.warn( "角色[{}]没有任何权限", JsonUtils.object2String(r) );
+			}
 		}
 		return actions;
 	}
@@ -128,9 +167,9 @@ public class LoginController {
 	
 	/**
 	 * 判断是否有指定的角色
-	 * @param rs
-	 * @param rt
-	 * @return
+	 * @param rs 角色列表
+	 * @param rt 角色类型
+	 * @return true or false
 	 */
 	private boolean isRole(List<Role> rs,RoleType rt) {
 		for(Role r:rs) {
@@ -139,18 +178,23 @@ public class LoginController {
 		return false;
 	}
 	
-	
+	/**
+	 * 获取验证码
+	 * @param resp
+	 * @param session
+	 * @throws IOException
+	 */
 	@RequestMapping("/drawCheckCode")
 	public void drawCheckCode(HttpServletResponse resp,HttpSession session) throws IOException {
 		resp.setContentType("image/jpg");
-		int width = 150;
-		int height = 40;
+		int width = Constant.DRAW_CHECK_CODE_WIDTH;
+		int height = Constant.DRAW_CHECK_CODE_HEIGHT;
 		Captcha c = Captcha.getInstance();
 		c.set(width, height);
 		String checkcode = c.generateCheckcode();
-		session.setAttribute("cc", checkcode);
+		session.setAttribute(Constant.BaseCode.CHECK_CODE, checkcode);
 		OutputStream os = resp.getOutputStream();
-		ImageIO.write(c.generateCheckImg(checkcode), "jpg", os);
+		ImageIO.write(c.generateCheckImg(checkcode), Constant.JPG, os);
 	}
 	
 	/*@RequestMapping("/upload")

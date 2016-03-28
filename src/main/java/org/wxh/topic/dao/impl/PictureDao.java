@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.topic.dao.IPictureDao;
-import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Picture;
-import org.wxh.topic.model.PictureTopic;
 
 @Repository("pictureDao")
 public class PictureDao extends BaseDao<Picture> implements IPictureDao{

@@ -4,9 +4,6 @@ package org.wxh.user.service;
 
 import java.util.List;
 
-
-
-
 import org.wxh.basic.model.Pager;
 import org.wxh.user.model.Group;
 import org.wxh.user.model.Role;
@@ -58,6 +55,13 @@ public interface IUserService {
 	 */
 	public void updatePwd(int uid,String oldPwd,String newPwd);
 	/**
+	 * 更新密码
+	 * @param uid
+	 * @param newPwd
+	 * @return
+	 */
+	public void updatePwdByNewPwd(int uid,String newPwd);
+	/**
 	 * 更新用户的状态
 	 * @param id
 	 */
@@ -74,7 +78,7 @@ public interface IUserService {
 	public User load(int id);
 	/**
 	 * 获取用户的所有角色信息
-	 * @param id
+	 * @param id 用户id
 	 * @return
 	 */
 	public List<Role> listUserRoles(int id);
@@ -93,9 +97,9 @@ public interface IUserService {
 	public List<User> listRoleUsers(int rid);
 	
 	/**
-	 * 用户登陆
-	 * @param username
-	 * @param password
+	 * 用户登陆，校验失败即抛出异常
+	 * @param username 用户名
+	 * @param password 密码
 	 * @return
 	 */
 	public User login(String username,String password);

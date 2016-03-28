@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 public class Test {
 	
-	@MyAnno(world="niuniu")
+	@MyAnno(world={"wxh1","wxh2"})
 	public void output(String hh) {
 		System.out.println(hh);
 	}
@@ -17,13 +17,15 @@ public class Test {
 		Method method = test.getMethod("output", String.class);
 		if(method.isAnnotationPresent(MyAnno.class)) {
 			MyAnno anno = method.getAnnotation(MyAnno.class);
-			System.out.println(anno.hello());
-			System.out.println(anno.world());
-		}
-		Annotation[] annos = method.getAnnotations();
+			String[] str = anno.world();
+			for(String s : str) {
+				System.out.println(s);
+			}
+ 		}
+		/*Annotation[] annos = method.getAnnotations();
 		for(Annotation a : annos) {
-			System.out.println(a.annotationType().getName());
-		}
+			System.out.println(a.annotationType());
+		}*/
 	}
 
 }

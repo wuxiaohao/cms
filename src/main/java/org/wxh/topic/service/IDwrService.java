@@ -1,10 +1,5 @@
 package org.wxh.topic.service;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.wxh.topic.model.Topic;
 
 /**
  * dwr相关的业务类

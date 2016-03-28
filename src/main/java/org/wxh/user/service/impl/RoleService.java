@@ -4,20 +4,8 @@ package org.wxh.user.service.impl;
 
 import java.util.List;
 
-
-
-
-
-
-
-
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.exception.MyException;
 import org.wxh.user.dao.IRoleDao;
 import org.wxh.user.dao.IUserDao;

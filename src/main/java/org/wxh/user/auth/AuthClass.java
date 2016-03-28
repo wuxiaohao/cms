@@ -1,22 +1,26 @@
 package org.wxh.user.auth;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import com.hp.hpl.sparta.Element;
 
 /**
- * 只要在Controller上增加了这个方法的类，都需要进行权限的控制
- * @author Administrator
+ * 是否进行权限控制
+ * <pre>
+ * 说明：
+ * 只有在Controller类上注入该注解，才能进行权限的控制
+ * 1、如果controller的url以/admin开头，但没有注入该注解，则该controller表示为只有超级管理员才能访问
+ * 2、如果controller的url不以/admin开头，但没有注入该注解，则表示可以被所有角色访问
+ * 3、如果controller的url以/admin开头，也注入该注解，则表示可以被权限控制
+ * </pre>
+ * @author wxh
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AuthClass {
 	/**
-	 * 如果value为admin就表示这个类只能超级管理员访问
-	 * 如果value为login表示这个类中的方法，某些可能为相应的角色可以访问
+	 * 说明：
+	 * 1、如果value为admin就表示这个类只能超级管理员访问（默认值）
+	 * 2、如果value为login表示这个类中的方法，某些可能为相应的角色可以访问
 	 * @return
 	 */
 	public String value() default "admin";

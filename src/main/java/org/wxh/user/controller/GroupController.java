@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.topic.model.ChannelTree;
 import org.wxh.user.auth.AuthClass;
@@ -36,19 +37,6 @@ public class GroupController {
 	private IGroupService groupService;
 	@Autowired
 	private IUserService userService;
-	
-	public IGroupService getGroupService() {
-		return groupService;
-	}
-	public void setGroupService(IGroupService groupService) {
-		this.groupService = groupService;
-	}
-	public IUserService getUserService() {
-		return userService;
-	}
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
 	
 	/**
 	 * 用户组列表
@@ -77,7 +65,7 @@ public class GroupController {
 			return "group/add";
 		}
 		groupService.add(group);
-		model.addAttribute("success", "用户组添加成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "用户组添加成功!");
 		return list(model);
 	}
 	
@@ -102,7 +90,7 @@ public class GroupController {
 		ug.setDescr(group.getDescr());
 		ug.setName(group.getName());
 		groupService.update(ug);
-		model.addAttribute("success", "用户组修改成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "用户组修改成功!");
 		return list(model);
 	}
 	
@@ -113,9 +101,9 @@ public class GroupController {
 	public String delete(@PathVariable int id,Model model) {
 		try {
 			groupService.delete(id);
-			model.addAttribute("success", "用户组删除成功!");
+			model.addAttribute(Constant.BaseCode.SUCCESS, "用户组删除成功!");
 		} catch (MyException e) {
-			model.addAttribute("error", e.getMessage());
+			model.addAttribute(Constant.BaseCode.ERROR, e.getMessage());
 		} finally {
 			return list(model);
 		}
@@ -137,7 +125,7 @@ public class GroupController {
 	@RequestMapping(value="/clearUsers/{id}",method=RequestMethod.POST)
 	public String clearGroupUsers(Model model,@PathVariable int id) {
 		groupService.deleteGroupUsers(id);
-		model.addAttribute("success", "已清除该用户组所有用户!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "已清除该用户组所有用户!");
 		return list(model);
 	}
 	

@@ -16,12 +16,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexPicService;
 import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.user.auth.AuthClass;
+import org.wxh.user.auth.AuthMethod;
 import org.wxh.util.BaseInfoUtil;
 
 /**
@@ -32,7 +34,7 @@ import org.wxh.util.BaseInfoUtil;
 
 @RequestMapping("/admin/system")
 @Controller
-@AuthClass
+@AuthClass("login")
 public class SystemController {
 	@Autowired
 	private IAttachmentService attachmentService;
@@ -41,29 +43,12 @@ public class SystemController {
 	@Autowired
 	private IIndexService indexService;
 
-	public IIndexService getIndexService() {
-		return indexService;
-	}
-	public void setIndexService(IIndexService indexService) {
-		this.indexService = indexService;
-	}
-	public IAttachmentService getAttachmentService() {
-		return attachmentService;
-	}
-	public void setAttachmentService(IAttachmentService attachmentService) {
-		this.attachmentService = attachmentService;
-	}
-	public IIndexPicService getIndexPicService() {
-		return indexPicService;
-	}
-	public void setIndexPicService(IIndexPicService indexPicService) {
-		this.indexPicService = indexPicService;
-	}
 	/**
 	 * 显示网站基本信息的界面
 	 * @return
 	 */
 	@RequestMapping("/baseinfo")
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String showBaseInfo(Model model) {
 		return "system/showBaseInfo";
 	}
@@ -75,7 +60,7 @@ public class SystemController {
 	 */
 	@RequestMapping(value="/baseinfo/updateUI",method=RequestMethod.POST)
 	public String updateBaseInfo(HttpSession session,Model model) {
-		model.addAttribute("baseInfo", session.getServletContext().getAttribute("baseInfo"));
+		model.addAttribute(Constant.BaseCode.BASE_INFO, session.getServletContext().getAttribute(Constant.BaseCode.BASE_INFO));
 		return "system/updateBaseInfo";
 	}
 	/**
@@ -91,11 +76,11 @@ public class SystemController {
 			return "system/updateBaseInfo";
 		}
 		BaseInfo bi = BaseInfoUtil.getInstacne().write(baseInfo);
-		session.getServletContext().setAttribute("baseInfo", bi);
+		session.getServletContext().setAttribute(Constant.BaseCode.BASE_INFO, bi);
 		//更新静态页面的首部、底部的信息
 		indexService.generateBottom();
 		indexService.generateTop();
-		model.addAttribute("success", "修改成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "修改成功!");
 		return showBaseInfo(model);
 	}
 	/**
@@ -183,7 +168,7 @@ public class SystemController {
 		} else if(name.equals("pics")) {
 			indexPicService.cleanNoUseIndexPic(listNoUseIndexPic(indexPicService.listAllIndexPicName()));
 		}
-		model.addAttribute("success", "清理完成!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "清理完成!");
 		return listCleans(model);
 	}
 	

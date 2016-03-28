@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.model.Pager;
-import org.wxh.index.model.IndexTopic;
 import org.wxh.topic.dao.IAttachmentDao;
 import org.wxh.topic.dao.IChannelDao;
 import org.wxh.topic.dao.ITopicDao;

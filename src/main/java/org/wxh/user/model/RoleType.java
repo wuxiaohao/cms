@@ -6,7 +6,10 @@ package org.wxh.user.model;
  *
  */
 public enum RoleType{
-	ROLE_ADMIN("管理员"),ROLE_PUBLISH("文章发布员"),ROLE_AUDIT("文章审核员");
+	ROLE_ADMIN("超级管理员"),
+	ROLE_COMMADMIN("普通管理员"),
+	ROLE_PUBLISH("文章发布员"),
+	ROLE_AUDIT("文章审核员");
 	
 	private String name;
 

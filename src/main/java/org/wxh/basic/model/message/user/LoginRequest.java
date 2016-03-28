@@ -1,9 +1,5 @@
 package org.wxh.basic.model.message.user;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.wxh.basic.model.message.Request;
 
 public class LoginRequest extends Request{

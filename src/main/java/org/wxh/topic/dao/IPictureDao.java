@@ -3,9 +3,7 @@ package org.wxh.topic.dao;
 import java.util.List;
 
 import org.wxh.basic.dao.IBaseDao;
-import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Picture;
-import org.wxh.topic.model.PictureTopic;
 
 public interface IPictureDao extends IBaseDao<Picture>{
 	/**

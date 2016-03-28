@@ -1,6 +1,5 @@
 package org.wxh.index.controller;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
@@ -11,12 +10,12 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.Thumbnails.Builder;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,16 +27,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.SystemContext;
-import org.wxh.index.dao.impl.CmsLinkDao;
+import org.wxh.basic.util.JsonUtils;
 import org.wxh.index.model.CmsLink;
 import org.wxh.index.model.dto.CmsLinkDto;
 import org.wxh.index.service.ICmsLinkService;
 import org.wxh.index.service.IIndexService;
-import org.wxh.topic.controller.TopicController;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.user.auth.AuthClass;
+import org.wxh.user.auth.AuthMethod;
 import org.wxh.util.JsonUtil;
 
 /**
@@ -47,11 +46,11 @@ import org.wxh.util.JsonUtil;
  */
 
 @Controller
-@AuthClass
 @RequestMapping("/admin/cmsLink")
+@AuthClass("login")
 public class CmsLinkController {
-	
-	private static final Logger logger = Logger.getLogger(TopicController.class);
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ICmsLinkService cmsLinkService;
@@ -65,12 +64,13 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping("/links")
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String list(Model model,String type,HttpSession session) {
 		model.addAttribute("datas", cmsLinkService.findByType(type));
 		model.addAttribute("types",cmsLinkService.listAllType());
 		Map<String,Integer> m = cmsLinkService.getMinAndMaxPos();
-		model.addAttribute("min", m.get("min"));
-		model.addAttribute("max",m.get("max"));
+		model.addAttribute(Constant.BaseCode.MIN, m.get(Constant.BaseCode.MIN));
+		model.addAttribute(Constant.BaseCode.MAX,m.get(Constant.BaseCode.MAX));
 		model.addAttribute("type",type);
 		return "cmsLink/list";
 	}
@@ -80,6 +80,7 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping(value="/addUI",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String addUI(Model model) {
 		model.addAttribute(new CmsLink());
 		model.addAttribute("types",cmsLinkService.listAllType());
@@ -92,12 +93,13 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String add(@Validated CmsLink cmsLink,BindingResult br,Model model,HttpSession session) {
 		if(br.hasFieldErrors()) {
 			return "cmsLink/add";
 		}
 		cmsLinkService.add(cmsLink);
-		model.addAttribute("success", "超链接添加成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "超链接添加成功!");
 		indexService.generateLink();//重新生成超链接页面
 		return list(model,null,session);
 	}
@@ -109,7 +111,7 @@ public class CmsLinkController {
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.POST)
 	public String delete(@PathVariable int id ,@RequestParam(required=false) String type,Model model,HttpSession session) {
 		cmsLinkService.delete(id);
-		model.addAttribute("success", "超链接删除成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "超链接删除成功!");
 		indexService.generateLink();//重新生成超链接页面
 		return list(model,type,session);
 	}
@@ -120,27 +122,30 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateUI/{id}",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String updateUI(@PathVariable int id,Model model) {
 		model.addAttribute(cmsLinkService.load(id));
 		model.addAttribute("types",cmsLinkService.listAllType());
 		return "cmsLink/update";
 	}
 	/**
-	 * 修改超链接
+	 * 修改超修链接
 	 * @param id
 	 * @param cmsLink
 	 * @param br
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String update(@PathVariable int id,@Validated CmsLink cmsLink,String oldPic,BindingResult br,Model model,HttpSession session) {
 		if(br.hasFieldErrors()) {
+			logger.error("修改超修链接失败，请求参数：[id:{},cmsLink:{},oldPic:{}]",new Object[]{id,JsonUtils.object2String(cmsLink),oldPic});
 			return "cmsLink/update";
 		}
 		if( !oldPic.equals(cmsLink.getPicName()) ) {
 			//删除原来旧的图片
 			String realPath = SystemContext.getRealPath();
-			String path = realPath + GlobalResult.LINK_PATH + File.separator;//新闻图片存放的位置
+			String path = realPath + Constant.UrlConstant.LINK_PATH + File.separator;//新闻图片存放的位置
 			new File( path + oldPic ).delete();
 		}
 		CmsLink tcl = cmsLinkService.load(id);
@@ -152,7 +157,7 @@ public class CmsLinkController {
 		tcl.setUrlId(cmsLink.getUrlId());
 		tcl.setPicName(cmsLink.getPicName());
 		cmsLinkService.update(tcl);
-		model.addAttribute("success", "修改成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "修改成功!");
 		indexService.generateLink();//重新生成超链接页面
 		return list(model,null,session);
 	}
@@ -163,6 +168,7 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public String show(@PathVariable int id,Model model) {
 		model.addAttribute(cmsLinkService.load(id));
 		return "cmsLink/show";
@@ -174,8 +180,9 @@ public class CmsLinkController {
 	 * @param pic
 	 */
 	@RequestMapping(value="/uploadPicLink",method=RequestMethod.POST)
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public void uploadPicLink(HttpSession session,HttpServletResponse resp,MultipartFile pic) {
-		resp.setContentType("text/plain;charset=utf-8");
+		resp.setContentType(Constant.CONTENT_TYPE);
 		AjaxObj ao = new AjaxObj();
 		PrintWriter out = null;
 		try {
@@ -184,7 +191,7 @@ public class CmsLinkController {
 			String newName = new Date().getTime() + "." + FilenameUtils.getExtension(oldName);//图片的新名称
 			String realPath = session.getServletContext().getRealPath("");
 			//创建临时文件存放的位置
-			String path = realPath + GlobalResult.LINK_PATH +File.separator+ "temp"+File.separator;
+			String path = realPath + Constant.UrlConstant.LINK_PATH +File.separator+ "temp"+File.separator;
 			File f = new File( path );
 			if( !f.exists() ) {
 				f.mkdir();
@@ -193,8 +200,8 @@ public class CmsLinkController {
 			dto.setNewName( newName );
 			dto.setOldName( oldName );
 			//超链接图片设定宽度
-			dto.setLinkPicWidth( GlobalResult.LINKPIC_WIDTH );
-			dto.setLinkPicHeight( GlobalResult.LINKPIC_HEIGHT );
+			dto.setLinkPicWidth( Constant.LINKPIC_WIDTH );
+			dto.setLinkPicHeight( Constant.LINKPIC_HEIGHT );
 			//获取上传图片的宽，高
 			BufferedImage bi = ImageIO.read( pic.getInputStream() );
 			Builder<BufferedImage> b = Thumbnails.of( bi );
@@ -211,7 +218,7 @@ public class CmsLinkController {
 			ao.setObj( dto );
 			ao.setResult( 1 );
 		} catch (Exception e) {
-			logger.error( e );
+			logger.error("上传超链接的图片异常，异常信息：[{}]", e.getMessage() );
 			ao.setResult( 0 );
 			ao.setMsg( e.getMessage() );
 		} finally {
@@ -231,17 +238,18 @@ public class CmsLinkController {
 	 * @return
 	 */
 	@RequestMapping( value = "/confirmPic", method = RequestMethod.POST )
+	@AuthMethod(role=Constant.AuthConstant.ROLE_COMMADMIN)
 	public @ResponseBody AjaxObj confirmPic(HttpSession session,int x,int y,int w,int h,String newName) {
 		AjaxObj ao = new AjaxObj();
 		try {
 			String path = session.getServletContext().getRealPath("");
-			String tpath = path + GlobalResult.LINK_PATH +File.separator+ "temp"+File.separator + newName;//临时存放的路径
+			String tpath = path + Constant.UrlConstant.LINK_PATH +File.separator+ "temp"+File.separator + newName;//临时存放的路径
 			File tf = new File( tpath );
 			BufferedImage bi = ImageIO.read( tf );
-			String npath = path + GlobalResult.LINK_PATH + File.separator + newName; //新的存放路径
+			String npath = path + Constant.UrlConstant.LINK_PATH + File.separator + newName; //新的存放路径
 			Builder<BufferedImage> b = Thumbnails.of( bi );
 			//根据坐标切割图片
-			b.sourceRegion(x, y, w, h).forceSize( GlobalResult.LINKPIC_WIDTH, GlobalResult.LINKPIC_HEIGHT ).asBufferedImage();
+			b.sourceRegion(x, y, w, h).forceSize( Constant.LINKPIC_WIDTH, Constant.LINKPIC_HEIGHT ).asBufferedImage();
 			//保存图片
 			b.toFile( npath );
 			//删除临时图片
@@ -251,6 +259,7 @@ public class CmsLinkController {
 			e.printStackTrace();
 			ao.setResult(0);
 			ao.setMsg(e.getMessage());
+			logger.error("处理被剪切后的图片,失败信息：[{}]",e.getMessage());
 		}
 		return ao;
 	}

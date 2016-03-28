@@ -1,20 +1,17 @@
 package org.wxh.topic.service.impl;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
@@ -27,7 +24,7 @@ import org.wxh.user.model.User;
 
 @Service("videoService")
 public class VideoService implements IVideoService{
-	private static final Logger logger = Logger.getLogger(VideoService.class);
+	private static Logger logger = LoggerFactory.getLogger(VideoService.class);
 	
 	@Autowired
 	private IVideoDao videoDao;
@@ -94,13 +91,12 @@ public class VideoService implements IVideoService{
 	 */
 	private void deleteVideo(Video video) {
 		String realPath = SystemContext.getRealPath();//获取绝对路径
-		realPath +=GlobalResult.UPLOAD_VIDEO; //视频的位置
-		logger.info(realPath+video.getVideoName());
+		realPath +=Constant.UrlConstant.UPLOAD_VIDEO; //视频的位置
 		File file = new File(realPath+video.getVideoName());
 		if(file.delete()) {
-			logger.info(file.getName() + "删除了!");
+			logger.info("文件[{}],删除成功！",file.getName());
 		} else {
-			logger.info("删除失败!");
+			logger.info("文件[{}],删除失败！",file.getName());
 		}
 		//删除缩略图
 		new File(realPath+"thumbnail"+file.separator+video.getPicName()).delete();
@@ -111,13 +107,12 @@ public class VideoService implements IVideoService{
 	 */
 	private void deleteVideoOnly(Video video) {
 		String realPath = SystemContext.getRealPath();//获取绝对路径
-		realPath +=GlobalResult.UPLOAD_VIDEO; //视频的位置
-		logger.info(realPath+video.getVideoName());
+		realPath +=Constant.UrlConstant.UPLOAD_VIDEO; //视频的位置
 		File file = new File(realPath+video.getVideoName());
 		if(file.delete()) {
-			logger.info(file.getName() + "删除了!");
+			logger.info("文件[{}],删除成功！",file.getName());
 		} else {
-			logger.info("删除失败!");
+			logger.info("文件[{}],删除失败！",file.getName());
 		}
 	}
 	/**
@@ -126,13 +121,12 @@ public class VideoService implements IVideoService{
 	 */
 	private void deletePicOnly(Video video) {
 		String realPath = SystemContext.getRealPath();//获取绝对路径
-		realPath +=GlobalResult.UPLOAD_VIDEO + "thumbnail/"; //视频缩略图的位置
-		logger.info(realPath+video.getVideoName());
+		realPath +=Constant.UrlConstant.UPLOAD_VIDEO + "thumbnail/"; //视频缩略图的位置
 		File file = new File(realPath+video.getPicName());
 		if(file.delete()) {
-			logger.info(file.getName() + "删除了!");
+			logger.info("文件[{}],删除成功！",file.getName());
 		} else {
-			logger.info("删除失败!");
+			logger.info("文件[{}],删除失败！",file.getName());
 		}
 	}
 
@@ -162,22 +156,20 @@ public class VideoService implements IVideoService{
 
 	private void addFile(Video v, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath+GlobalResult.UPLOAD_VIDEO;
+		String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO;
 		File fp = new File(path);
 		if(!fp.exists()) fp.mkdirs();
 		path = path+v.getVideoName();
-		logger.info(path);
 		FileUtils.copyInputStreamToFile(is, new File(path));
 	}
 
 	@Override
 	public void addPic(String picName, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail"+File.separator;//新闻图片存放的位置
+		String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO + "thumbnail"+File.separator;//新闻图片存放的位置
 		File fp = new File(path);
 		if(!fp.exists()) fp.mkdirs();
 		path = path+picName;
-		logger.info(path);
 		FileUtils.copyInputStreamToFile(is, new File(path));
 	}
 

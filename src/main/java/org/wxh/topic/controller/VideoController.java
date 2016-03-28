@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.common.Constant;
+import org.wxh.basic.common.Constant.UrlConstant;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
 import org.wxh.topic.model.ChannelType;
@@ -28,6 +29,8 @@ import org.wxh.topic.model.Video;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IVideoService;
+import org.wxh.user.auth.AuthClass;
+import org.wxh.user.auth.AuthMethod;
 import org.wxh.user.model.User;
 import org.wxh.util.JsonUtil;
 
@@ -38,6 +41,7 @@ import org.wxh.util.JsonUtil;
  */
 @Controller
 @RequestMapping("/admin/video")
+@AuthClass("login")
 public class VideoController {
 	private static final Logger logger = Logger.getLogger(VideoController.class);
 	
@@ -55,14 +59,14 @@ public class VideoController {
 			SystemContext.setSort("v.createDate"); 
 		}
 		SystemContext.setOrder("desc");
-		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
-		if(isAdmin) { //如果是超级管理员，则返回所有
+		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
+		if ( isAdmin ) { //如果是超级管理员，则返回所有
 			model.addAttribute("datas",videoService.find(cid, con, status));
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有视频新闻栏目
 		} else {
-			User loginUser = (User)session.getAttribute("loginUser");
+			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", videoService.find(loginUser.getId(),cid, con, status));
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
@@ -82,6 +86,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping("/audits")
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String auditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
 		initList(con, cid, model, session,1);
 		return "video/list";
@@ -95,6 +100,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping("/unaudits")
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String unauditList(@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Model model,HttpSession session) {
 		initList(con, cid, model, session,0);
 		return "video/list";
@@ -108,16 +114,17 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping("/changeStatus/{id}")
+	@AuthMethod( role = Constant.AuthConstant.ROLE_AUDIT )
 	public String changeStatus(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
-		User loginUser = (User)session.getAttribute("loginUser");
+		User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		videoService.updateStatus(id,loginUser);
 		Video v = videoService.load(id);
 		indexService.generateBody();//重新生成首页body
 		if(status==0) {
-			model.addAttribute("success", "发布成功!");
+			model.addAttribute(Constant.BaseCode.SUCCESS, "发布成功!");
 			return unauditList(con,cid,model,session);
 		} else {
-			model.addAttribute("success", "已取消发布!");
+			model.addAttribute(Constant.BaseCode.SUCCESS, "已取消发布!");
 			return auditList(con,cid,model,session);
 		}
 	}
@@ -128,14 +135,15 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addUI", method = RequestMethod.POST)
+	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
 	public String add(Model model,HttpSession session) {
 		Video v = new Video();
 		model.addAttribute("video",v);
-		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
+		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
 		if(isAdmin) { //如果是超级管理员
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有视频新闻栏目
 		} else {
-			User loginUser = (User)session.getAttribute("loginUser");
+			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.VIDEO_NEW.ordinal()));//返回该用户可以操作的视频新闻栏目
 		}
 		return "video/add";
@@ -150,15 +158,16 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method = RequestMethod.POST)
+	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
 	public String add(Video video,int cid,BindingResult br,HttpSession session,Model model) {
-		User loginUser = (User) session.getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		if(video.getStatus() == 1) { //如果视频要立刻发布
 			video.setPublishDate(new Date()); //设置发布时间
 			video.setAuditor(loginUser.getNickname()); //设置发布人
 		}
 		videoService.add(video,cid,loginUser);
 		indexService.generateBody();//重新生成首页body
-		model.addAttribute("success", "添加视频新闻成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "添加视频新闻成功!");
 		return auditList(null,null,model,session);
 	}
 	/**
@@ -172,10 +181,11 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{id}" ,method = RequestMethod.POST)
+	@AuthMethod(role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT })
 	public String delete(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
 		Video v = videoService.load(id);
 		videoService.delete(id);
-		model.addAttribute("success","视频新闻删除成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS,"视频新闻删除成功!");
 		indexService.generateBody();//重新生成首页body
 		if(status==0) {
 			return unauditList(con, cid, model, session);
@@ -191,15 +201,16 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateUI/{id}",method=RequestMethod.POST)
+	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
 	public String update(@PathVariable int id,Model model,HttpSession session) {
 		Video v = videoService.load(id);
 		model.addAttribute("video",v);
 		//返回相应的栏目
-		boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
+		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
 		if(isAdmin) { //如果是超级管理员
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有视频新闻栏目
 		} else {
-			User loginUser = (User)session.getAttribute("loginUser");
+			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.VIDEO_NEW.ordinal()));//返回该用户可以操作的视频新闻栏目
 		}
 		return "video/update";
@@ -214,11 +225,12 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
+	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
 	public String update(@PathVariable int id,Video video,int cid,HttpSession session,Model model) {
 		Video vOld = videoService.load(id);
-		video.getVideo(vOld,(User)session.getAttribute("loginUser"));
+		video.getVideo(vOld,(User)session.getAttribute(Constant.BaseCode.LOGIN_USER));
 		videoService.update(video,vOld,cid);
-		model.addAttribute("success", "修改视频新闻成功!");
+		model.addAttribute(Constant.BaseCode.SUCCESS, "修改视频新闻成功!");
 		indexService.generateBody();//重新生成首页body
 		return auditList(null, null, model, session);
 	}
@@ -229,10 +241,11 @@ public class VideoController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
+	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
 	public void upload(MultipartFile attach,HttpServletResponse resp) throws IOException {
 		AjaxObj ao = null;
 		try {
-			resp.setContentType("text/plain;charset=utf-8");
+			resp.setContentType(Constant.CONTENT_TYPE);
 			Video v = new Video();
 			String ext = FilenameUtils.getExtension(attach.getOriginalFilename());//获取文件后缀
 			logger.info(ext);
@@ -240,7 +253,7 @@ public class VideoController {
 			v.setSize(attach.getSize());
 			videoService.addVideo(v,attach.getInputStream());
 			String realPath = SystemContext.getRealPath();
-			String path = realPath+GlobalResult.UPLOAD_VIDEO + "/" + v.getVideoName();
+			String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO + "/" + v.getVideoName();
 			//截图视频图片
 			String picName = processImg(path);
 			v.setPicName(picName);
@@ -256,11 +269,11 @@ public class VideoController {
 	 * @param resp
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/uploadPic",method=RequestMethod.POST)
-	/*public void uploadPic(MultipartFile attachPic,HttpServletResponse resp) throws IOException {
+	/*@RequestMapping(value="/uploadPic",method=RequestMethod.POST)
+	public void uploadPic(MultipartFile attachPic,HttpServletResponse resp) throws IOException {
 		AjaxObj ao = null;
 		try {
-			resp.setContentType("text/plain;charset=utf-8");
+			resp.setContentType(Constant.CONTENT_TYPE);
 			String ext = FilenameUtils.getExtension(attachPic.getOriginalFilename());//获取文件后缀
 			logger.info(ext);
 			String picName =String.valueOf(new Date().getTime()+"."+ext);
@@ -288,7 +301,7 @@ public class VideoController {
 			}
 			String realPath = SystemContext.getRealPath();
 			String ffmpeg_path = prop.getProperty("ffmpeg_path");//注意这里，一定要有这个插件啊
-			String PicPath = realPath+GlobalResult.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
+			String PicPath = realPath+UrlConstant.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
 			File fp = new File(PicPath);
 			if( !fp.exists() ) fp.mkdirs();//如果目录不存在则创建目录
 			String picName = String.valueOf(new Date().getTime() + ".jpg" );
@@ -309,7 +322,7 @@ public class VideoController {
 			ProcessBuilder builder = new ProcessBuilder();
 			builder.command(commands);
 			builder.start();
-			System.out.println("截取成功");
+			logger.info("视频截取成功！");
 			return picName;
 		} catch (IOException e1) {
 			e1.printStackTrace();

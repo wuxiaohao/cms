@@ -14,13 +14,6 @@ import org.wxh.topic.service.IKeywordService;
 public class KeywordService implements IKeywordService {
 	@Autowired
 	private IKeywordDao keywordDao;
-	
-	public IKeywordDao getKeywordDao() {
-		return keywordDao;
-	}
-	public void setKeywordDao(IKeywordDao keywordDao) {
-		this.keywordDao = keywordDao;
-	}
 
 	@Override
 	public void addOrUpdate(String name) {

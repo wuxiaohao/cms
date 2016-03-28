@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.index.dao.IIndexPicDao;
@@ -62,8 +63,8 @@ public class IndexPicDao extends BaseDao<IndexPic> implements IIndexPicDao {
 		String hql = "select max(pos),min(pos) from IndexPic";
 		Object[] obj = (Object[])this.getSession().createQuery(hql).uniqueResult();
 		Map<String,Integer> mm = new HashMap<String,Integer>();
-		mm.put("max", (Integer)obj[0]);
-		mm.put("min", (Integer)obj[1]);
+		mm.put(Constant.BaseCode.MAX, (Integer)obj[0]);
+		mm.put(Constant.BaseCode.MIN, (Integer)obj[1]);
 		return mm;
 	}
 

@@ -2,13 +2,13 @@ package org.wxh.topic.dao.impl;
 
 import java.util.List;
 
-import org.wxh.basic.common.GlobalResult;
+import org.springframework.stereotype.Repository;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.topic.dao.IChannelDao;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelTree;
 import org.wxh.topic.model.ChannelType;
-import org.springframework.stereotype.Repository;
 
 /**
  * 栏目的dao
@@ -22,7 +22,7 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	 * 初始化树
 	 */
 	public static void initTreeNode(List<ChannelTree> cts) {
-		cts.add(0,new ChannelTree(GlobalResult.ROOT_ID,GlobalResult.ROOT_NAME,-1));//设置根目录
+		cts.add(0,new ChannelTree(Constant.ROOT_ID,Constant.ROOT_NAME,-1));//设置根目录
 		for(ChannelTree ct:cts) {  
 			if(ct.getPid()==null)ct.setPid(0);  //如果没有父节点，则设置父节点为0
 		}
@@ -53,7 +53,7 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	}
 	@Override
 	public List<ChannelTree> generateTree() {
-		String sql = "select id,name,pid from t_channel c where c.type!="+ChannelType.IMG_NEW.ordinal()+" order by orders";
+		String sql = "select id,name,pid from t_channel c where c.type!="+ChannelType.IMG_NEW.ordinal()+" and c.type!="+ChannelType.VIDEO_NEW.ordinal()+" order by orders";
 		List<ChannelTree> cts = this.listBySql(sql, ChannelTree.class, false);
 		initTreeNode(cts);	//初始化树
 		return cts;
@@ -99,7 +99,7 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	}
 	@Override
 	public List<Channel> listPublishChannel() {
-		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal();
+		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal() + " and c.type!="+ChannelType.VIDEO_NEW.ordinal();
 		return this.list(hql);
 	}
 	@Override
@@ -114,7 +114,7 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	public List<Channel> listPublishChannelByUid(int uid) {
 		String sql = "select distinct c.id as id,c.name as name from t_group_channel gc "
 				+ "left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id) "
-				+ "where ug.u_id=? and c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal();
+				+ "where ug.u_id=? and c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal() + " and c.type !="+ChannelType.VIDEO_NEW.ordinal();
 		List<Channel> cts = this.listBySql(sql,uid,Channel.class, false);
 		return cts;
 	}

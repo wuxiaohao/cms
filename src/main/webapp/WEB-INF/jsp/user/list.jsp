@@ -27,6 +27,17 @@
 			});			
 			$("#addmodel").modal();
 		});
+		//修改密码
+		$("#setPwd").click(function(){
+			var selectedIds = $('input[title=check]:checked');//获取被选中的checkbox
+			if(selectedIds.length != 1) {
+				toastr.error("请选中其中一行!");
+				return false;
+			}
+			var username = selectedIds.attr("username");
+			$("#setPwd").attr("href","admin/user/updatePwdAllUI?id="+selectedIds.val()+"&username="+username);
+		});
+		
 	});
 </script>
 </head>
@@ -76,6 +87,7 @@
 				<div class="table-toolbar">
 					<div class="btn-group">
 						<a class="btn green-meadow ajaxify" href="admin/user/addUI">新增用户&nbsp;<i class="fa fa-plus"></i></a>
+						<a class="btn btn-info ajaxify" href="javascript:void(0);" id="setPwd">修改密码&nbsp;<i class="fa fa-edit"></i></a>
 						<a href="javascript:void(0);" id="showTree" class="btn red">查询栏目&nbsp;<i class="fa fa-search"></i></a>
 					</div>
 				</div>
@@ -96,7 +108,7 @@
 						<c:forEach items="${datas.datas }" var="user">
 							<tr>
 								<td style="text-align:center">
-									<input type="checkbox" class="checkboxes" title="check" value="${user.id }" />
+									<input type="checkbox" class="checkboxes" title="check" value="${user.id }" username="${user.username}" />
 								</td>
 								<td>
 									<a href="admin/user/${user.id }" class="ajaxify">${user.username }</a>

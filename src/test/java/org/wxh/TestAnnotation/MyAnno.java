@@ -8,6 +8,6 @@ public @interface MyAnno {
 
 	String hello() default "wxh";		
 	
-	String world();
+	String[] world();
 	
 }

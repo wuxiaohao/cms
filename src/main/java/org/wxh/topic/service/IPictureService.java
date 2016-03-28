@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Picture;
 
 /**

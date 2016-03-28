@@ -26,7 +26,7 @@ $(function(){
 				iconHeight = ao.obj.iconHeight; //头像高度
 				imgWidth = ao.obj.imgWidth; //上传的临时图片宽度
 				imgHeight = ao.obj.imgHeight; //上传的临时图片高度
-				$("#headImg").parent().after("<div class='col-md-2' id='pc'><div style='border:3px solid #AAAAAA;width:"+iconWidth+"px;height:"+iconHeight+"px;overflow:hidden;'><img id='preview' src='"+ctx+"/resources/userIcon/temp/"+newName+"'/></div></div>");
+				$("#headImg").before("<div id='pc' style='border:3px solid #AAAAAA;width:"+iconWidth+"px;height:"+iconHeight+"px;overflow:hidden;'><img id='preview' src='"+ctx+"/resources/userIcon/temp/"+newName+"'/></div><br/>");
 				$("#hei").show();
 				$("#headImg img").Jcrop({
 					aspectRatio:1,

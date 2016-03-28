@@ -1,18 +1,18 @@
 package org.wxh.user.service.impl;
 
-
-
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.model.Pager;
-import org.wxh.util.SecurityUtil;
+import org.wxh.basic.util.JsonUtils;
 import org.wxh.user.dao.IGroupDao;
 import org.wxh.user.dao.IRoleDao;
 import org.wxh.user.dao.IUserDao;
@@ -20,9 +20,13 @@ import org.wxh.user.model.Group;
 import org.wxh.user.model.Role;
 import org.wxh.user.model.User;
 import org.wxh.user.service.IUserService;
+import org.wxh.util.SecurityUtil;
 
 @Service("userService")
 public class UserService implements IUserService {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private IUserDao userDao;
 	@Autowired
@@ -58,14 +62,20 @@ public class UserService implements IUserService {
 	private void addUserRole(User user,int rid) {
 		//1、检查角色对象是否存在，如果不存在，就抛出异常
 		Role role = roleDao.load(rid);
-		if(role==null) throw new CmsException("要添加的用户角色不存在");
+		if(role==null) {
+			logger.error("要添加的角色不存在，请求参数：[user:{},rid:{}]",new Object[]{JsonUtils.object2String(user),rid});
+			throw new CmsException("要添加的用户角色不存在");
+		}
 		//2、检查用户角色对象是否已经存在，如果存在，就不添加
 		userDao.addUserRole(user, role);
 	}
 	
 	private void addUserGroup(User user,int gid) {
 		Group group = groupDao.load(gid);
-		if(group==null) throw new CmsException("要添加用户的组对象不存在");
+		if(group==null) {
+			logger.error("要添加的角色不存在，请求参数：[user:{},gid:{}]",new Object[]{JsonUtils.object2String(user),gid});
+			throw new CmsException("要添加用户的组对象不存在");
+		}
 		userDao.addUserGroup(user, group);
 	}
 
@@ -75,6 +85,7 @@ public class UserService implements IUserService {
 		try {
 			user.setPassword(SecurityUtil.md5(user.getUsername(),user.getPassword())); //MD5密码加密
 		} catch (NoSuchAlgorithmException e) {
+			logger.error("密码加密失败，请求参数：[user:{},rids:{},gids:{}]",new Object[]{JsonUtils.object2String(user),rids.toString(),gids.toString()});
 			throw new CmsException("密码加密失败:"+e.getMessage());
 		}
 		userDao.add(user);
@@ -183,15 +194,23 @@ public class UserService implements IUserService {
 	@Override
 	public User login(String username, String password) {
 		User user = userDao.loadByUsername(username);
-		if(user==null) throw new MyException("用户名或者密码不正确");
+		if(user==null) {
+			logger.error("用户名或者密码不正确，请求参数：[username:{},password:{}]", new Object[]{username, password});
+			throw new MyException("用户名或者密码不正确");
+		}
 		try {
 			if(!SecurityUtil.md5(username,password).equals(user.getPassword())) {
+				logger.error("用户名或者密码不正确，请求参数：[username:{},password:{}]", new Object[]{username, password});
 				throw new MyException("用户名或者密码不正确");
 			}
 		} catch (NoSuchAlgorithmException e) {
+			logger.error("密码加密失败，请求参数：[username:{},password:{}]", new Object[]{username, password});
 			throw new MyException("密码加密失败:"+e.getMessage());
 		}
-		if(user.getStatus()==0) throw new MyException("用户已经停用，请与管理员联系");
+		if(user.getStatus()==0) {
+			logger.error("用户已经停用，请求参数：[username:{},password:{}]", new Object[]{username, password});
+			throw new MyException("用户已经停用，请与管理员联系");
+		}
 		return user;
 	}
 	@Override
@@ -212,4 +231,15 @@ public class UserService implements IUserService {
 		}
 	}
 
+	@Override
+	public void updatePwdByNewPwd(int uid,String newPwd) {
+		try {
+			User user = userDao.load(uid);
+			user.setPassword(SecurityUtil.md5(user.getUsername(),newPwd));
+			userDao.update(user);
+		} catch (NoSuchAlgorithmException e) {
+			logger.error("修改密码异常，异常信息：[{}]",e.getMessage());
+		}
+	}
+	
 }

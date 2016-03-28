@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.ITopicDao;
-import org.wxh.topic.model.ChannelTree;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 

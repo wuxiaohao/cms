@@ -1,23 +1,16 @@
 package org.wxh.topic.service.impl;
 
-import org.apache.log4j.Logger;
-
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Positions;
-import net.coobird.thumbnailator.Thumbnails.Builder;
-
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wxh.basic.common.GlobalResult;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.Pager;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.topic.dao.IAttachmentDao;
@@ -27,7 +20,7 @@ import org.wxh.topic.service.IAttachmentService;
 @Service("attachmentService")
 public class AttachmentService implements IAttachmentService {
 	
-	private static final Logger logger = Logger.getLogger(AttachmentService.class);
+	private static Logger logger = LoggerFactory.getLogger(AttachmentService.class);
 	
 	@Autowired
 	private IAttachmentDao attachmentDao;
@@ -41,18 +34,17 @@ public class AttachmentService implements IAttachmentService {
 	
 	public static void deleteAttachFiles(Attachment a) {
 		String realPath = SystemContext.getRealPath(); //文件的绝对路径
-		realPath +=GlobalResult.UPLOAD_PATH; //附件的位置
-		logger.info(realPath+a.getNewName());
+		realPath +=Constant.UrlConstant.UPLOAD_PATH; //附件的位置
 		File file = new File(realPath+a.getNewName()); 
 		//删除文件
 		if(file.delete()) {
-			logger.info(file.getName() + " 删除了!");
+			logger.info("文件[{}],删除成功！",file.getName());
 		} else {
-			logger.info("删除失败!");
+			logger.info("文件[{}],删除失败！",file.getName());
 		}
 		//如果附件是图片，则还要删除该图片的缩略图
 		if(a.getIsImg() == 1){
-			new File(realPath+"thumbnail"+File.separator+file.getName()).delete();
+			new File(realPath + "thumbnail" + File.separator + file.getName()).delete();
 		}
 	}
 	
@@ -70,7 +62,7 @@ public class AttachmentService implements IAttachmentService {
 	private void addFile(Attachment a,InputStream is) throws IOException {
 		//进行文件的存储
 		String realPath = SystemContext.getRealPath();
-		String path = realPath+GlobalResult.UPLOAD_PATH;//附件存放的位置
+		String path = realPath+Constant.UrlConstant.UPLOAD_PATH;//附件存放的位置
 		//String thumbPath = path+"thumbnail/"; //缩略图存放的位置
 		File fp = new File(path);
 		//File tfp = new File(thumbPath);

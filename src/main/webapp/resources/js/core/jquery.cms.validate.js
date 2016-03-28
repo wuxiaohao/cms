@@ -26,7 +26,7 @@
 			},
 			nickname:{
 				required: true,
-				minlength: 3,
+				minlength: 2,
 				maxlength: 10
 			},
 			password:"required",
@@ -66,7 +66,7 @@
 			},
 			nickname:{
 				required: "显示名称不能为空",
-				minlength: "显示名称长度不能小于3个字符",
+				minlength: "显示名称长度不能小于2个字符",
 				maxlength: "显示名称长度不能大于10个字符",
 			},
 			password:"密码不能为空",

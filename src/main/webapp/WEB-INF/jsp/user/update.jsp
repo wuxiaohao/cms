@@ -66,21 +66,6 @@
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<%-- <div class="form-group form-md-line-input has-info">
-							<label class="col-md-2 control-label" for="form_control_1">密码</label>
-							<div class="col-md-6">
-								<input type="password" name="password" id="password" class="form-control" id="form_control_1" />
-								<sf:errors cssClass="errorContainer" path="password"/>
-								<div class="form-control-focus"></div>
-							</div>
-						</div>
-						<div class="form-group form-md-line-input has-info">
-							<label class="col-md-2 control-label" for="form_control_1">确认密码</label>
-							<div class="col-md-6">
-								<input type="password" id="confirmPwd" name="confirmPwd" class="form-control" id="form_control_1" />
-								<div class="form-control-focus"></div>
-							</div>
-						</div> --%>
 						<div class="form-group form-md-line-input has-info">
 							<label class="col-md-2 control-label" for="form_control_1">联系电话</label>
 							<div class="col-md-6">

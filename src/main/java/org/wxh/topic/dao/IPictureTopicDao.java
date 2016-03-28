@@ -1,12 +1,8 @@
 package org.wxh.topic.dao;
 
-import java.util.List;
-
 import org.wxh.basic.dao.IBaseDao;
 import org.wxh.basic.model.Pager;
-import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.PictureTopic;
-import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.PictureDto;
 
 public interface IPictureTopicDao extends IBaseDao<PictureTopic>{

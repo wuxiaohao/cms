@@ -4,20 +4,23 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * 用来确定哪些方法由哪些角色访问
- * 属性有一个role：
- * 如果role的值为base表示这个方法可以被所有的登录用户访问（不设置默认为base）
- * 如果为ROLE_PUBLISH表示只能为文章发布人员访问
- * 如果某个方法中没有加入AuthMethod就表示该方法只能被管理员所访问
- * @author Administrator
+ * 该注解用来确定哪些方法由哪些角色访问(需要配合@AuthClass使用)
+ * <pre>
+ * 说明：(属性只有一个role)
+ * 1、如果role的值为base表示这个方法可以被所有的登录用户访问（不设置默认为base）
+ * 2、如果为ROLE_PUBLISH表示只能为文章发布人员访问，以此类推
+ * 3、如果类上注入@AuthClass，而方法中没有@AuthMethod注解，则意味着该方法只能由超级管理员访问
+ * 4、如果类上没有注入@AuthClass，则该注解无效
+ * </pre>
+ * @author wxh
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AuthMethod {
-	public String role() default "base";
+	
+	public String[] role() default "base";
+
 }
-
-
 
 /**
  * java中四个元注解说明：

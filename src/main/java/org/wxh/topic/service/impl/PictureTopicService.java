@@ -13,10 +13,8 @@ import org.wxh.topic.dao.IPictureTopicDao;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.Picture;
 import org.wxh.topic.model.PictureTopic;
-import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.PictureDto;
 import org.wxh.topic.service.IPictureTopicService;
-import org.wxh.user.dao.IUserDao;
 import org.wxh.user.model.User;
 
 @Service("pictureTopicService")

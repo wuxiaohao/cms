@@ -4,6 +4,7 @@ package org.wxh.user.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
 import org.wxh.topic.dao.impl.ChannelDao;
@@ -13,7 +14,6 @@ import org.wxh.topic.model.ChannelType;
 import org.wxh.user.dao.IGroupDao;
 import org.wxh.user.model.Group;
 import org.wxh.user.model.GroupChannel;
-import org.springframework.stereotype.Repository;
 
 @Repository("groupDao")
 public class GroupDao extends BaseDao<Group> implements IGroupDao {
@@ -80,7 +80,7 @@ public class GroupDao extends BaseDao<Group> implements IGroupDao {
 	public List<ChannelTree> generateUserChannelTree(int uid) {
 		String sql = "select distinct c.id as id,c.name as name,c.pid as pid from " +
 				"t_group_channel gc left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id)" +
-				"where ug.u_id=? and c.type!="+ChannelType.IMG_NEW.ordinal();
+				"where ug.u_id=? and c.type!="+ChannelType.IMG_NEW.ordinal()+" and c.type!="+ChannelType.VIDEO_NEW.ordinal();
 		List<ChannelTree> cts = this.listBySql(sql,uid,ChannelTree.class, false);
 		ChannelDao.initTreeNode(cts);
 		return cts;
