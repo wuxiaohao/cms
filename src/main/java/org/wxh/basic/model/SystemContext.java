@@ -22,7 +22,9 @@ public class SystemContext {
 	 * 列表的排序方式
 	 */
 	private static ThreadLocal<String> order = new ThreadLocal<String>();
-	
+	/**
+	 * 绝对路径
+	 */
 	private static ThreadLocal<String> realPath = new ThreadLocal<String>();
 	
 	
