@@ -33,6 +33,11 @@ import org.wxh.user.service.IUserService;
 import org.wxh.util.Captcha;
 import org.wxh.util.Common;
 
+/**
+ * 用户登录Controller
+ * @author wxh
+ *
+ */
 @Controller
 public class LoginController {
 	
@@ -109,6 +114,7 @@ public class LoginController {
 			session.setAttribute(Constant.AuthConstant.IS_ADMIN, isAdmin);
 			if( !isAdmin ) {
 				Set<String> actions = getAllActions(rs, session);
+				Set<Integer> channelActions = userService.listChannelByUserId(loginUser.getId());
 				session.setAttribute(Constant.AuthConstant.ALL_ACTIONS, actions);
 				session.setAttribute(Constant.AuthConstant.IS_AUDIT, isRole(rs,RoleType.ROLE_AUDIT));
 				session.setAttribute(Constant.AuthConstant.IS_PUBLISH, isRole(rs,RoleType.ROLE_PUBLISH));
@@ -164,7 +170,6 @@ public class LoginController {
 		return actions;
 	}
 	
-	
 	/**
 	 * 判断是否有指定的角色
 	 * @param rs 角色列表
@@ -186,7 +191,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/drawCheckCode")
 	public void drawCheckCode(HttpServletResponse resp,HttpSession session) throws IOException {
-		resp.setContentType("image/jpg");
+		resp.setContentType(Constant.CONTENT_TYPE_IMG);
 		int width = Constant.DRAW_CHECK_CODE_WIDTH;
 		int height = Constant.DRAW_CHECK_CODE_HEIGHT;
 		Captcha c = Captcha.getInstance();

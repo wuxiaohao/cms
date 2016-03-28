@@ -3,6 +3,7 @@ package org.wxh.user.service;
 
 
 import java.util.List;
+import java.util.Set;
 
 import org.wxh.basic.model.Pager;
 import org.wxh.user.model.Group;
@@ -103,4 +104,10 @@ public interface IUserService {
 	 * @return
 	 */
 	public User login(String username,String password);
+	/**
+	 * 获取某个用户所能够管理的栏目
+	 * @param id 用户id
+	 * @return
+	 */
+	public Set<Integer> listChannelByUserId(int id);
 }

@@ -3,6 +3,7 @@ package org.wxh.user.service.impl;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
@@ -34,7 +35,6 @@ public class UserService implements IUserService {
 	private IRoleDao roleDao;
 	@Autowired
 	private IGroupDao groupDao;
-	
 
 	public IUserDao getUserDao() {
 		return userDao;
@@ -241,6 +241,11 @@ public class UserService implements IUserService {
 		} catch (NoSuchAlgorithmException e) {
 			logger.error("修改密码异常，异常信息：[{}]",e.getMessage());
 		}
+	}
+
+	@Override
+	public Set<Integer> listChannelByUserId(int id) {
+		return null;
 	}
 	
 }

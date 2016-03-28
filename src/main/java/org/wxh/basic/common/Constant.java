@@ -5,7 +5,7 @@ import java.io.File;
 import org.wxh.basic.model.SystemContext;
 
 /**
- * 常量
+ * 常量集
  * @author wxh
  *
  */
@@ -42,7 +42,11 @@ public interface Constant {
 	public final static String JPG= "jpg";
 	/**utf-8字符编码*/
 	public static final String CONTENT_TYPE = "text/plain;charset=utf-8";
+	/**图片编码*/
+	public static final String CONTENT_TYPE_IMG = "image/jpg";
+	/**假*/
 	public static final String FALSE = "false";
+	/**真*/
 	public static final String TRUE = "true";
 	/**是（1）*/
 	public static final int YES = 1;

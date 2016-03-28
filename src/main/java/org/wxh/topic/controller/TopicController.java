@@ -84,7 +84,7 @@ public class TopicController {
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel());//返回所有文章栏目
-		} else {	//如果不是超级管理员，则返回该用户所有的文章
+		} else {	//如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
 			SystemContext.removeOrder();

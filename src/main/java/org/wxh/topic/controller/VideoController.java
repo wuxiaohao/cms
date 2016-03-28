@@ -67,7 +67,7 @@ public class VideoController {
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有视频新闻栏目
-		} else {
+		} else {  //如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", videoService.find(loginUser.getId(),cid, con, status));
 			SystemContext.removeOrder();

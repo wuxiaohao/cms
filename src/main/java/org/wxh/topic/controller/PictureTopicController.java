@@ -65,7 +65,7 @@ public class PictureTopicController {
 			SystemContext.removeOrder();
 			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.IMG_NEW.ordinal()));//返回所有新闻图片栏目
-		} else {
+		} else {  //如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", pictureTopicService.find(loginUser.getId(),cid, con, status));
 			SystemContext.removeOrder();
