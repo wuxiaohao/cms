@@ -29,6 +29,7 @@ import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.ChannelTree;
+import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.model.dto.AttachmentDto;
@@ -72,26 +73,22 @@ public class TopicController {
 	private final static List<String> imgTypes = Arrays.asList("jpg","jpeg","gif","png");
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if(status == Constant.YES){ //如果是获取已发布文章的列表，则按发布时间排序
+		if ( status == Constant.YES ) { //如果是获取已发布文章的列表，则按发布时间排序
 			SystemContext.setSort("t.publishDate"); 
 		} else { //如果是获取未发布文章的列表，则按创建时间排序
 			SystemContext.setSort("t.createDate"); 
 		}
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
-		if(isAdmin) { //如果是超级管理员，则返回所有的文章
+		if ( isAdmin ) { //如果是超级管理员，则返回所有的文章
 			model.addAttribute("datas",topicService.find(cid, con, status));
-			SystemContext.removeOrder();
-			SystemContext.removeSort();
-			model.addAttribute("cs",channelService.listPublishChannel());//返回所有文章栏目
+			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.TOPIC_LIST.ordinal()));//返回所有文章栏目
 		} else {	//如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
-			SystemContext.removeOrder();
-			SystemContext.removeSort();
-			model.addAttribute("cs",channelService.listPublishChannelByUid(loginUser.getId()));//返回该用户可以操作的文章栏目
+			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.TOPIC_LIST.ordinal()));//返回该用户可以操作的文章栏目
 		}
-		if(con==null) con="";
+		if ( con == null ) con = "";
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);

@@ -1,8 +1,8 @@
 package org.wxh.basic.model.message.user;
 
-import org.wxh.basic.model.message.Request;
+import org.wxh.basic.model.message.Vo;
 
-public class UserRequest extends Request{
+public class UserVo extends Vo{
 	
 	/**用户id*/
 	private int id;

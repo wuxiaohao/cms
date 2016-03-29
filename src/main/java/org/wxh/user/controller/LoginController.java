@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.filter.CmsSessionContext;
-import org.wxh.basic.model.message.user.LoginRequest;
+import org.wxh.basic.model.message.user.LoginVo;
 import org.wxh.basic.util.JsonUtils;
 import org.wxh.user.model.Role;
 import org.wxh.user.model.RoleType;
@@ -74,53 +74,50 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView login(LoginRequest request,Model model,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
+	public ModelAndView login(LoginVo vo,Model model,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("admin/blackmain");
 		
-		if( request.getUsername() == null ) {
-			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(request));
+		if( vo.getUsername() == null ) {
+			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(vo));
 			mv.setViewName("admin/login");
 			return mv;
 		}
-		if( request.getPassword() == null ) {
-			logger.error("密码为空，请求参数：[{}]",JsonUtils.object2String(request));
+		if( vo.getPassword() == null ) {
+			logger.error("密码为空，请求参数：[{}]",JsonUtils.object2String(vo));
 			mv.setViewName("admin/login");
 			return mv;
 		}
-		if( request.getCheckcode() == null ) {
-			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(request));
+		if( vo.getCheckcode() == null ) {
+			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(vo));
 			mv.setViewName("admin/login");
 			return mv;
 		}
-		if( request.getUsername() == null ) {
-			logger.error("验证码为空，请求参数：[{}]",JsonUtils.object2String(request));
+		if( vo.getUsername() == null ) {
+			logger.error("验证码为空，请求参数：[{}]",JsonUtils.object2String(vo));
 			mv.setViewName("admin/login");
 			return mv;
 		}
 		
 		//校验验证码是否正确
 		String cc = (String)session.getAttribute(Constant.BaseCode.CHECK_CODE);
-		if(!cc.equals(request.getCheckcode())) {
+		if(!cc.equals(vo.getCheckcode())) {
 			model.addAttribute(Constant.BaseCode.ERROR_CODE,"验证码出错，请重新输入");
 			mv.setViewName("admin/login");
 			return mv;
 		}
 		
 		try {
-			User loginUser = userService.login( request.getUsername(), request.getPassword());
+			User loginUser = userService.login( vo.getUsername(), vo.getPassword());
 			session.setAttribute(Constant.BaseCode.LOGIN_USER, loginUser);
 			List<Role> rs = userService.listUserRoles(loginUser.getId());
 			boolean isAdmin = isRole(rs,RoleType.ROLE_ADMIN);
 			session.setAttribute(Constant.AuthConstant.IS_ADMIN, isAdmin);
 			if( !isAdmin ) {
 				Set<String> actions = getAllActions(rs, session);
-				Set<Integer> channelActions = userService.listChannelByUserId(loginUser.getId());
 				session.setAttribute(Constant.AuthConstant.ALL_ACTIONS, actions);
-				session.setAttribute(Constant.AuthConstant.ALL_CHANNEL_ACTIONS, channelActions);
 				session.setAttribute(Constant.AuthConstant.IS_AUDIT, isRole(rs,RoleType.ROLE_AUDIT));
 				session.setAttribute(Constant.AuthConstant.IS_PUBLISH, isRole(rs,RoleType.ROLE_PUBLISH));
 				logger.info("用户[{}],所拥有的权限信息：[method:{},size:{}]", new Object[]{loginUser.getUsername(),actions,actions.size()});
-				logger.info("用户[{}],所能管理的栏目信息：[channelIds:{},size:{}]", new Object[]{loginUser.getUsername(),channelActions,channelActions.size()});
 			} else {
 				logger.info("用户[{}],为超级管理员角色，拥有系统所有权限", loginUser.getUsername());
 			}
@@ -128,12 +125,12 @@ public class LoginController {
 			//保存登陆信息
 			CmsSessionContext.addSessoin(session);
 			//记住状态需跳转到单独登陆页面，只需输入密码即可，密码不能保存在cookie里；
-			if( null != request.getRemember() && request.getRemember().equals(Constant.TRUE) ){
-				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, request.getUsername() );
+			if( null != vo.getRemember() && vo.getRemember().equals(Constant.TRUE) ){
+				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, vo.getUsername() );
 				response.addCookie(usercookie);
 				logger.info("已保存用户[{}]登陆状态",loginUser.getUsername());
 			} else {  //删除Cookie
-				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, request.getUsername() );
+				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, vo.getUsername() );
 				usercookie.setMaxAge(Constant.NO);
 				response.addCookie(usercookie);
 			} 

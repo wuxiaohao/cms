@@ -95,27 +95,15 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 	@Override
 	public List<Channel> listPublishChannel(int type) {
 		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type="+type;
+		//return this.getSession().createQuery(hql).setParameter(0, type).list();
 		return this.list(hql);
 	}
 	@Override
-	public List<Channel> listPublishChannel() {
-		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal() + " and c.type!="+ChannelType.VIDEO_NEW.ordinal();
-		return this.list(hql);
-	}
-	@Override
-	public List<Channel> listPublishChannelByUid(int uid,int type) {
+	public List<Channel> listPublishChannel(int uid,int type) {
 		String sql = "select distinct c.id as id,c.name as name from t_group_channel gc "
 				+ "left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id) "
 				+ "where ug.u_id=? and c.status=0 and c.type=?";
 		List<Channel> cts = this.listBySql(sql,new Object[]{uid,type},Channel.class, false);
-		return cts;
-	}
-	@Override
-	public List<Channel> listPublishChannelByUid(int uid) {
-		String sql = "select distinct c.id as id,c.name as name from t_group_channel gc "
-				+ "left join t_channel c on(gc.c_id=c.id) left join t_user_group ug on(ug.g_id=gc.g_id) "
-				+ "where ug.u_id=? and c.status=0 and c.type!="+ChannelType.IMG_NEW.ordinal() + " and c.type !="+ChannelType.VIDEO_NEW.ordinal();
-		List<Channel> cts = this.listBySql(sql,uid,Channel.class, false);
 		return cts;
 	}
 	@Override

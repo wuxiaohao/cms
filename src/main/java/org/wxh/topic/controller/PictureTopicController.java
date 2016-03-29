@@ -53,26 +53,22 @@ public class PictureTopicController {
 	private IChannelService channelService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if(status == Constant.YES){ //如果是获取已发布文章的列表，则按发布时间排序
+		if ( status == Constant.YES ) { //如果是获取已发布文章的列表，则按发布时间排序
 			SystemContext.setSort("t.publishDate"); 
 		} else { //如果是获取未发布文章的列表，则按创建时间排序
 			SystemContext.setSort("t.createDate"); 
 		}
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
-		if(isAdmin) { //如果是超级管理员，则返回所有的文章
+		if ( isAdmin ) { //如果是超级管理员，则返回所有的文章
 			model.addAttribute("datas",pictureTopicService.find(cid, con, status));
-			SystemContext.removeOrder();
-			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.IMG_NEW.ordinal()));//返回所有新闻图片栏目
 		} else {  //如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", pictureTopicService.find(loginUser.getId(),cid, con, status));
-			SystemContext.removeOrder();
-			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.IMG_NEW.ordinal()));//返回该用户可以操作的新闻图片栏目
 		}
-		if(con==null) con="";
+		if ( con == null ) con = "";
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);

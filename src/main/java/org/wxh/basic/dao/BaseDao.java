@@ -480,6 +480,8 @@ public class BaseDao<T> implements IBaseDao<T> {
 			if(!"desc".equals(order)) hql+=" asc";
 			else hql+=" desc";
 		}
+		SystemContext.removeOrder();
+		SystemContext.removeSort();
 		return hql;
 	}
 	

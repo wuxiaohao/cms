@@ -56,33 +56,22 @@ public class VideoController {
 	private IIndexService indexService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		Set<Integer> allchannels = null;
-		if(status == Constant.YES) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
+		if ( status == Constant.YES ) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
 			SystemContext.setSort("v.publishDate"); 
 		} else { //如果是获取未发布视频新闻的列表，则按创建时间排序
 			SystemContext.setSort("v.createDate"); 
 		}
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
-		if(isAdmin == false) {
-			//获取该用户所能管理的所有栏目
-			allchannels = (Set<Integer>) session.getAttribute(Constant.AuthConstant.ALL_CHANNEL_ACTIONS);
-		}
-		/*videoService.find(isAdmin,allchannels,cid,con,status);
-		channelService.listPublishChannel(isAdmin,allchannels,ChannelType.VIDEO_NEW.ordinal());*/
 		if ( isAdmin ) { //如果是超级管理员，则返回所有
 			model.addAttribute("datas",videoService.find(cid, con, status));
-			SystemContext.removeOrder();
-			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有视频新闻栏目
 		} else {  //如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 			model.addAttribute("datas", videoService.find(loginUser.getId(),cid, con, status));
-			SystemContext.removeOrder();
-			SystemContext.removeSort();
 			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.VIDEO_NEW.ordinal()));//返回该用户可以操作的视频新闻栏目
 		}
-		if(con==null) con="";
+		if ( con == null ) con = "";
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);

@@ -26,8 +26,7 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	@Override
 	public Pager<Topic> find(Integer uid, Integer cid, String title,
 			Integer status) {
-		String hql = getTopicSelect()+" from Topic t where 1=1 and t.channel.type!=" +ChannelType.IMG_NEW.ordinal() 
-																	+ "and t.channel.type!=" + ChannelType.VIDEO_NEW.ordinal();
+		String hql = getTopicSelect()+" from Topic t where 1=1 and t.channel.type=" +ChannelType.TOPIC_LIST.ordinal();
 		if(status!=null) {
 			hql+=" and t.status="+status;
 		}

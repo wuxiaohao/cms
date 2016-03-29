@@ -72,22 +72,11 @@ public interface IChannelService {
 	 */
 	public List<Channel> listPublishChannel(int type);
 	/**
-	 * 获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
-	 * @return
-	 */
-	public List<Channel> listPublishChannel();
-	/**
 	 * 根据用户id获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
-	 * @param uid
+	 * @param uid 用户Id
 	 * @return
 	 */
 	public List<Channel> listPublishChannel(int uid,int type);
-	/**
-	 * 根据用户id获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
-	 * @param uid
-	 * @return
-	 */
-	public List<Channel> listPublishChannelByUid(int uid);
 	/**
 	 * 获取指定数量的顶部导航栏目，栏目的状态必须为已经启用
 	 * @param num 数量 

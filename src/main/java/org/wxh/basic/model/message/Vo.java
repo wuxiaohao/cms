@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author wuxiaohao
  *
  */
-public class Message implements Serializable{
+public class Vo implements Serializable{
 
 	private String serialNo;
 	

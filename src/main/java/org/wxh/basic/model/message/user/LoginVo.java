@@ -1,8 +1,8 @@
 package org.wxh.basic.model.message.user;
 
-import org.wxh.basic.model.message.Request;
+import org.wxh.basic.model.message.Vo;
 
-public class LoginRequest extends Request{
+public class LoginVo extends Vo{
 	
 	/**用户名*/
 	public String username;
