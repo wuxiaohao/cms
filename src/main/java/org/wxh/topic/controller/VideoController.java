@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -55,6 +56,7 @@ public class VideoController {
 	private IIndexService indexService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
+		Set<Integer> allchannels = null;
 		if(status == Constant.YES) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
 			SystemContext.setSort("v.publishDate"); 
 		} else { //如果是获取未发布视频新闻的列表，则按创建时间排序
@@ -62,6 +64,12 @@ public class VideoController {
 		}
 		SystemContext.setOrder("desc");
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
+		if(isAdmin == false) {
+			//获取该用户所能管理的所有栏目
+			allchannels = (Set<Integer>) session.getAttribute(Constant.AuthConstant.ALL_CHANNEL_ACTIONS);
+		}
+		/*videoService.find(isAdmin,allchannels,cid,con,status);
+		channelService.listPublishChannel(isAdmin,allchannels,ChannelType.VIDEO_NEW.ordinal());*/
 		if ( isAdmin ) { //如果是超级管理员，则返回所有
 			model.addAttribute("datas",videoService.find(cid, con, status));
 			SystemContext.removeOrder();
@@ -81,8 +89,8 @@ public class VideoController {
 	}
 	/**
 	 * 显示已经发布的视频新闻
-	 * @param con 视频新闻标题
-	 * @param cid
+	 * @param con 视频新闻标题关键字
+	 * @param cid 视频新闻栏目
 	 * @param model
 	 * @param session
 	 * @return
@@ -95,8 +103,8 @@ public class VideoController {
 	}
 	/**
 	 * 显示没有发布的视频新闻
-	 * @param con 视频新闻标题
-	 * @param cid
+	 * @param con 视频新闻标题关键字
+	 * @param cid 视频新闻栏目
 	 * @param model
 	 * @param session
 	 * @return

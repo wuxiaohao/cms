@@ -2,6 +2,8 @@ package org.wxh.user.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.wxh.basic.filter.CmsSessionContext;
@@ -11,6 +13,8 @@ import org.wxh.user.auth.AuthMethod;
 @Controller
 @AuthClass("/login")
 public class AdminController {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	/**
 	 * 访问首页

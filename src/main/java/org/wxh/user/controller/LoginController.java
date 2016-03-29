@@ -116,9 +116,13 @@ public class LoginController {
 				Set<String> actions = getAllActions(rs, session);
 				Set<Integer> channelActions = userService.listChannelByUserId(loginUser.getId());
 				session.setAttribute(Constant.AuthConstant.ALL_ACTIONS, actions);
+				session.setAttribute(Constant.AuthConstant.ALL_CHANNEL_ACTIONS, channelActions);
 				session.setAttribute(Constant.AuthConstant.IS_AUDIT, isRole(rs,RoleType.ROLE_AUDIT));
 				session.setAttribute(Constant.AuthConstant.IS_PUBLISH, isRole(rs,RoleType.ROLE_PUBLISH));
-				logger.info("用户[{}],所拥有的权限信息：[{}]",new Object[]{loginUser.getUsername(),actions});
+				logger.info("用户[{}],所拥有的权限信息：[method:{},size:{}]", new Object[]{loginUser.getUsername(),actions,actions.size()});
+				logger.info("用户[{}],所能管理的栏目信息：[channelIds:{},size:{}]", new Object[]{loginUser.getUsername(),channelActions,channelActions.size()});
+			} else {
+				logger.info("用户[{}],为超级管理员角色，拥有系统所有权限", loginUser.getUsername());
 			}
 			session.removeAttribute(Constant.BaseCode.CHECK_CODE);
 			//保存登陆信息
@@ -133,7 +137,7 @@ public class LoginController {
 				usercookie.setMaxAge(Constant.NO);
 				response.addCookie(usercookie);
 			} 
-			
+			logger.info("用户[{}]已成功登录系统！",loginUser.getUsername());
 			return mv;
 		} catch (MyException e) {
 			//登陆失败，返回失败信息

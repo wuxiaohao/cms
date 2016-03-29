@@ -5,7 +5,7 @@ import java.io.File;
 import org.wxh.basic.model.SystemContext;
 
 /**
- * 常量集
+ * 常量集、String池
  * @author wxh
  *
  */
@@ -67,6 +67,8 @@ public interface Constant {
 		public static final String ROLE_COMMADMIN = "ROLE_COMMADMIN";
 		/**能够被当前用户访问的所有权限信息*/
 		public static final String ALL_ACTIONS = "allActions";
+		/**能够被当前用户访问的所有栏目信息*/
+		public static final String ALL_CHANNEL_ACTIONS = "allChannelActions";
 		/**是否是文章审核人*/
 		public static final String IS_AUDIT = "isAudit";
 		/**是否是文章发布人*/

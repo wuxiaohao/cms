@@ -118,4 +118,13 @@ public interface IUserDao extends IBaseDao<User>{
 	 * @param gid
 	 */
 	public void deleteUserGroup(int uid,int gid);
+	/**
+	 * 获取某个用户所能够管理的栏目
+	 * @param uid 用户id
+	 * @return
+	 */
+	public List<Integer> listChannelByUserId(int uid);
+	
+	
+	
 }

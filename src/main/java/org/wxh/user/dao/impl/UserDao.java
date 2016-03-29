@@ -20,7 +20,6 @@ import org.wxh.user.model.UserRole;
 @Repository("userDao")
 public class UserDao extends BaseDao<User> implements IUserDao {
 
-
 	@Override
 	public List<Role> listUserRoles(int userId) {
 		String hql = "select ur.role from UserRole ur where ur.user.id=?";
@@ -130,6 +129,12 @@ public class UserDao extends BaseDao<User> implements IUserDao {
 	public void deleteUserGroup(int uid, int gid) {
 		String hql = "delete UserGroup ug where ug.user.id=? and ug.group.id=?";
 		this.updateByHql(hql, new Object[]{uid,gid});
+	}
+
+	@Override
+	public List<Integer> listChannelByUserId(int uid) {
+		String sql = "SELECT gc.c_id FROM t_user_group ug JOIN t_group_channel gc ON ug.g_id = gc.g_id WHERE ug.u_id=?";
+		return this.getSession().createSQLQuery(sql).setParameter(0, uid).list();
 	}
 
 }

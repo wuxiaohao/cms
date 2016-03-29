@@ -98,7 +98,7 @@ public class TopicController {
 	}
 	/**
 	 * 显示已经发布的文章
-	 * @param con 文章标题
+	 * @param con 文章标题关键字
 	 * @param cid 文章栏目
 	 * @param model
 	 * @param session
@@ -117,8 +117,8 @@ public class TopicController {
 	}
 	/**
 	 * 显示没有发布的文章
-	 * @param con
-	 * @param cid
+	 * @param con 文章标题关键字
+	 * @param cid 文章栏目
 	 * @param model
 	 * @param session
 	 * @return

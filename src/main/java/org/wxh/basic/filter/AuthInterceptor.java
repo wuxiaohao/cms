@@ -44,7 +44,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		User user = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		//如果用户没登陆，则重定向到登陆页面
 		if( user == null ) {
-			logger.error("用户未登陆，用户信息：[{}]",JsonUtils.object2String(user));
+			logger.error("用户未登陆，已被系统拦截，用户信息：[{}]",JsonUtils.object2String(user));
 			response.sendRedirect( request.getContextPath() + "/login" );
 			return false;
 		} else {

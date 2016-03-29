@@ -106,8 +106,8 @@ public interface IUserService {
 	public User login(String username,String password);
 	/**
 	 * 获取某个用户所能够管理的栏目
-	 * @param id 用户id
+	 * @param uid 用户id
 	 * @return
 	 */
-	public Set<Integer> listChannelByUserId(int id);
+	public Set<Integer> listChannelByUserId(int uid);
 }

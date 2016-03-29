@@ -80,8 +80,8 @@ public class PictureTopicController {
 	
 	/**
 	 * 显示已经发布的新闻图片
-	 * @param con 新闻图片标题
-	 * @param cid 
+	 * @param con 新闻图片标题关键字
+	 * @param cid 新闻图片栏目
 	 * @param model
 	 * @param session
 	 * @return
@@ -94,8 +94,8 @@ public class PictureTopicController {
 	}
 	/**
 	 * 显示没有发布的新闻图片
-	 * @param con 新闻图片标题
-	 * @param cid
+	 * @param con 新闻图片标题关键字
+	 * @param cid 新闻图片栏目
 	 * @param model
 	 * @param session
 	 * @return

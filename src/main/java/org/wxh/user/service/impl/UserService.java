@@ -2,6 +2,7 @@ package org.wxh.user.service.impl;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -244,8 +245,9 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Set<Integer> listChannelByUserId(int id) {
-		return null;
+	public Set<Integer> listChannelByUserId(int uid) {
+		List<Integer> list = userDao.listChannelByUserId(uid);
+		return new HashSet<Integer>(list);
 	}
 	
 }
