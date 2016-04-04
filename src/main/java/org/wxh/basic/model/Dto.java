@@ -1,4 +1,4 @@
-package org.wxh.basic.model.message;
+package org.wxh.basic.model;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author wuxiaohao
  *
  */
-public class Vo implements Serializable{
+public class Dto implements Serializable{
 
 	private String serialNo;
 	

@@ -121,7 +121,7 @@ public class VideoService implements IVideoService{
 	 */
 	private void deletePicOnly(Video video) {
 		String realPath = SystemContext.getRealPath();//获取绝对路径
-		realPath +=Constant.UrlConstant.UPLOAD_VIDEO + "thumbnail/"; //视频缩略图的位置
+		realPath +=Constant.UrlConstant.UPLOAD_VIDEO_THUM; //视频缩略图的位置
 		File file = new File(realPath+video.getPicName());
 		if(file.delete()) {
 			logger.info("文件[{}],删除成功！",file.getName());
@@ -166,7 +166,7 @@ public class VideoService implements IVideoService{
 	@Override
 	public void addPic(String picName, InputStream is) throws IOException {
 		String realPath = SystemContext.getRealPath();
-		String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO + "thumbnail"+File.separator;//新闻图片存放的位置
+		String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO_THUM;//新闻图片存放的位置
 		File fp = new File(path);
 		if(!fp.exists()) fp.mkdirs();
 		path = path+picName;

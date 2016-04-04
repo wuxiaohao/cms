@@ -90,12 +90,19 @@ public interface Constant {
 		public final static String UPLOAD_PICTURE = File.separator + "resources" + File.separator + "picTopic" + File.separator;
 		/**视频新闻的视频路径*/
 		public final static String UPLOAD_VIDEO = File.separator + "resources" + File.separator + "video" + File.separator;
+		public final static String UPLOAD_VIDEO_THUM = UPLOAD_VIDEO + "thumbnail"+File.separator;
 		/**首页图片的路径*/
-		public final static String FILE_PATH = File.separator + "resources" + File.separator + "indexPic";
+		public final static String FILE_PATH = File.separator + "resources" + File.separator + "indexPic" + File.separator;
 		/**用户头像的路径*/
-		public final static String ICON_PATH = File.separator + "resources" + File.separator + "userIcon";
+		public final static String ICON_PATH = File.separator + "resources" + File.separator + "userIcon" + File.separator;
+		/**用户头像临时路径*/
+		public final static String ICON_PATH_TEMP = ICON_PATH + "temp" + File.separator;
+		/**用户头像缩略图路径*/
+		public final static String ICON_PATH_THUM = ICON_PATH + "thumbnail" + File.separator;
 		/**友情链接图片的路径*/
-		public final static String LINK_PATH = File.separator + "resources" + File.separator + "linkPic";
+		public final static String LINK_PATH = File.separator + "resources" + File.separator + "linkPic" + File.separator;
+		/**友情链接临时图片的路径*/
+		public final static String LINK_PATH_TEMP = LINK_PATH + "temp" + File.separator;
 		/**首页宣传图片的路径*/
 		public final static String INDEX_PIC_PATH = File.separator + "resources" + File.separator + "indexPic" + File.separator;
 		/**首页宣传图片的缩略图路径*/

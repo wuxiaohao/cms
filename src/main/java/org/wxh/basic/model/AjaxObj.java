@@ -1,4 +1,4 @@
-package org.wxh.topic.model.dto;
+package org.wxh.basic.model;
 
 
 /**

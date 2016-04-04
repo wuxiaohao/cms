@@ -1,6 +1,8 @@
 package org.wxh.index.model.dto;
 
-public class CmsLinkDto {
+import org.wxh.basic.model.Dto;
+
+public class CmsLinkDto extends Dto{
 	/**
 	 * 新文件名
 	 */

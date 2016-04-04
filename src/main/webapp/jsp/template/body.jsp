@@ -1,40 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="container">
-		<div class="content_top row-fluid">
+		<div class="content_top row-fluid clearfix">
 		<div class='span12' id="myCarousel">
 			<div class="carousel slide" id="carousel-405390">
 				<ol class="carousel-indicators">
 						<li class="active" data-slide-to="0" data-target="#carousel-405390"></li>
 						<li data-slide-to="1" data-target="#carousel-405390"></li>
 						<li data-slide-to="2" data-target="#carousel-405390"></li>
-						<li data-slide-to="3" data-target="#carousel-405390"></li>
-						<li data-slide-to="4" data-target="#carousel-405390"></li>
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active">
-								<a href="topic/38" title="heheheh1">
+								<a href="topic/38" title="林有能教授以别开生面的方式与现场听">
 									<img alt="1456414624505.jpg" src="<%=request.getContextPath()%>/resources/upload/1456414624505.jpg" />
 								</a>
-									<h5 class="carousel-title">heheheh1</h5>
+									<h5 class="carousel-title">林有能教授以别开生面的方式与现场听</h5>
 							</div>
 							<div class="item">
 								<a href="topic/37" title="test01">
 									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1456414649514.jpg" />
 								</a>
 									<h5 class="carousel-title">test01</h5>
-							</div>
-							<div class="item">
-								<a href="topic/36" title="你发你违法你问佛问佛份文件而访问肯附件文件呢绯闻绯闻">
-									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1456414668450.jpg" />
-								</a>
-									<h5 class="carousel-title">你发你违法你问佛问佛份文件而访问肯附件文件呢绯闻绯闻</h5>
-							</div>
-							<div class="item">
-								<a href="topic/35" title="test03">
-									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1456414705828.jpg" />
-								</a>
-									<h5 class="carousel-title">test03</h5>
 							</div>
 							<div class="item">
 								<a href="topic/11" title="绯闻绯闻ddd">
@@ -47,7 +33,7 @@
 		</div>
 	</div>
 	
-	<div id="news_content" class="row-fluid">
+	<div id="news_content" class="row-fluid clearfix">
 		<div class="span8 article pull-left">
 			<div class="panel panel-info">
 	<div class="panel-heading clearfix">
@@ -110,7 +96,7 @@
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/17' class="article_link">
-								报错？???fff
+								1992年增设了机械电子工程专业，到199...
 							<span class="date">2015-12-08</span>
 						</a>
 					</dd>
@@ -172,7 +158,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛好烦啊啊啊啊</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">2次</span></p>
+									<span class="pull-right">3次</span></p>
 								</div>
 							</a>
 						</div>
@@ -191,7 +177,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid clearfix">
 		<div class='span12' id="myCarousel">
 			<div class="carousel slide" id="carousel-405391">
 				<ol class="carousel-indicators">
@@ -201,6 +187,11 @@
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active relative">
+						  	 	<a href="channel/59">
+									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
+						  	 	</a>
+							</div>
+							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
 									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415716857.jpg"/>
 						  	 	</a>
@@ -208,11 +199,6 @@
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
 									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415724204.jpg"/>
-						  	 	</a>
-							</div>
-							<div class="item">
-						  	 	<a href="channel/59">
-									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
 						  	 	</a>
 							</div>
 				</div>
@@ -254,43 +240,43 @@
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/38' class="article_link">
-								heheheh1
+								林有能教授以别开生面的方式与现场听
 							<span class="date">2016-02-18</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/34' class="article_link">
-								fwefewfwe1
+								东北工学院进修
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/33' class="article_link">
-								ffffffffffff
+								学习过孙教授主编的教材
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/32' class="article_link">
-								ffff
+								学习过孙教授主编的教材
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/31' class="article_link">
-								fwfwefw1
+								学院的师资力量十分薄弱
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/30' class="article_link">
-								ffff
+								学院发展的最大困境
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/29' class="article_link">
-								fewfew
+								机工系的机械制工艺及设备专
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>

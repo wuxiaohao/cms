@@ -6,11 +6,12 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.wxh.basic.model.Dto;
 import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.PictureTopic;
 import org.wxh.user.model.User;
 
-public class PictureTopicDto {
+public class PictureTopicDto extends Dto{
 	
 	private int id;
 	/**

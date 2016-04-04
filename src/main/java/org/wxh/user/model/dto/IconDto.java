@@ -1,6 +1,8 @@
 package org.wxh.user.model.dto;
 
-public class IconDto {
+import org.wxh.basic.model.Dto;
+
+public class IconDto extends Dto{
 	/**
 	 * 新文件名
 	 */

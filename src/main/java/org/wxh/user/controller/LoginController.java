@@ -24,11 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.filter.CmsSessionContext;
-import org.wxh.basic.model.message.user.LoginVo;
 import org.wxh.basic.util.JsonUtils;
 import org.wxh.user.model.Role;
 import org.wxh.user.model.RoleType;
 import org.wxh.user.model.User;
+import org.wxh.user.model.dto.LoginDto;
 import org.wxh.user.service.IUserService;
 import org.wxh.util.Captcha;
 import org.wxh.util.Common;
@@ -74,40 +74,40 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView login(LoginVo vo,Model model,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
+	public ModelAndView login(LoginDto dto,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("admin/blackmain");
 		
-		if( vo.getUsername() == null ) {
-			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(vo));
+		if( dto.getUsername() == null ) {
+			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(dto));
 			mv.setViewName("admin/login");
 			return mv;
 		}
-		if( vo.getPassword() == null ) {
-			logger.error("密码为空，请求参数：[{}]",JsonUtils.object2String(vo));
+		if( dto.getPassword() == null ) {
+			logger.error("密码为空，请求参数：[{}]",JsonUtils.object2String(dto));
 			mv.setViewName("admin/login");
 			return mv;
 		}
-		if( vo.getCheckcode() == null ) {
-			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(vo));
+		if( dto.getCheckcode() == null ) {
+			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(dto));
 			mv.setViewName("admin/login");
 			return mv;
 		}
-		if( vo.getUsername() == null ) {
-			logger.error("验证码为空，请求参数：[{}]",JsonUtils.object2String(vo));
+		if( dto.getUsername() == null ) {
+			logger.error("验证码为空，请求参数：[{}]",JsonUtils.object2String(dto));
 			mv.setViewName("admin/login");
 			return mv;
 		}
 		
 		//校验验证码是否正确
 		String cc = (String)session.getAttribute(Constant.BaseCode.CHECK_CODE);
-		if(!cc.equals(vo.getCheckcode())) {
-			model.addAttribute(Constant.BaseCode.ERROR_CODE,"验证码出错，请重新输入");
+		if(!cc.equals(dto.getCheckcode())) {
+			mv.addObject(Constant.BaseCode.ERROR_CODE,"验证码出错，请重新输入");
 			mv.setViewName("admin/login");
 			return mv;
 		}
 		
 		try {
-			User loginUser = userService.login( vo.getUsername(), vo.getPassword());
+			User loginUser = userService.login( dto.getUsername(), dto.getPassword());
 			session.setAttribute(Constant.BaseCode.LOGIN_USER, loginUser);
 			List<Role> rs = userService.listUserRoles(loginUser.getId());
 			boolean isAdmin = isRole(rs,RoleType.ROLE_ADMIN);
@@ -125,12 +125,12 @@ public class LoginController {
 			//保存登陆信息
 			CmsSessionContext.addSessoin(session);
 			//记住状态需跳转到单独登陆页面，只需输入密码即可，密码不能保存在cookie里；
-			if( null != vo.getRemember() && vo.getRemember().equals(Constant.TRUE) ){
-				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, vo.getUsername() );
+			if( null != dto.getRemember() && dto.getRemember().equals(Constant.TRUE) ){
+				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, dto.getUsername() );
 				response.addCookie(usercookie);
 				logger.info("已保存用户[{}]登陆状态",loginUser.getUsername());
 			} else {  //删除Cookie
-				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, vo.getUsername() );
+				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, dto.getUsername() );
 				usercookie.setMaxAge(Constant.NO);
 				response.addCookie(usercookie);
 			} 
@@ -140,7 +140,7 @@ public class LoginController {
 			//登陆失败，返回失败信息
 			logger.error("登陆失败，失败信息:[{}]",e.getMessage());
 			//把异常信息返回到客户端
-			model.addAttribute(Constant.BaseCode.ERROR,e.getMessage());
+			mv.addObject(Constant.BaseCode.ERROR,e.getMessage());
 			mv.setViewName("admin/login");
 			return mv;
 		}

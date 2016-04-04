@@ -2,7 +2,9 @@ package org.wxh.topic.model.dto;
 
 import java.util.Date;
 
-public class PictureDto {
+import org.wxh.basic.model.Dto;
+
+public class PictureDto extends Dto{
 	/**
 	 * 组图新闻id
 	 */

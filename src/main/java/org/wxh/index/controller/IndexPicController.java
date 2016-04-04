@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.common.Constant;
+import org.wxh.basic.model.AjaxObj;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.basic.util.JsonUtils;
 import org.wxh.index.model.IndexPic;
@@ -31,7 +32,6 @@ import org.wxh.index.model.dto.IndexPicDto;
 import org.wxh.index.service.IIndexPicService;
 import org.wxh.index.service.IIndexService;
 import org.wxh.sys.model.BaseInfo;
-import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IAttachmentService;
 import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
@@ -145,7 +145,7 @@ public class IndexPicController {
 		if( !oldPic.equals(indexPic.getNewName()) ) {
 			//删除原来旧的图片
 			String realPath = SystemContext.getRealPath();
-			String path = realPath + Constant.UrlConstant.FILE_PATH + File.separator;//新闻图片存放的位置
+			String path = realPath + Constant.UrlConstant.FILE_PATH;//新闻图片存放的位置
 			new File(path+oldPic).delete();
 		}
 		IndexPic tip = indexPicService.load(id);

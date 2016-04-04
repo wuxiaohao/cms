@@ -8,11 +8,12 @@ import java.util.Date;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.wxh.basic.model.Dto;
 import org.wxh.topic.model.Topic;
 import org.wxh.user.model.User;
 
 
-public class TopicDto {
+public class TopicDto extends Dto{
 	/*private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");*/ 
 	private int id;
 	private String title;

@@ -32,8 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
+import org.wxh.basic.model.AjaxObj;
 import org.wxh.topic.model.ChannelTree;
-import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
@@ -360,7 +360,7 @@ public class UserController {
 			String newName = new Date().getTime() + "." + FilenameUtils.getExtension( oldName );//图片的新名称
 			String realPath = session.getServletContext().getRealPath("");
 			//创建临时文件存放的位置
-			String path = realPath + Constant.UrlConstant.ICON_PATH + File.separator + "temp" + File.separator;
+			String path = realPath + Constant.UrlConstant.ICON_PATH_TEMP;
 			File f = new File( path ); 
 			if( !f.exists() ) {
 				f.mkdir();
@@ -410,11 +410,11 @@ public class UserController {
 		AjaxObj ao = new AjaxObj();
 		try {
 			String path = session.getServletContext().getRealPath("");
-			String tpath = path+Constant.UrlConstant.ICON_PATH+File.separator+"temp"+File.separator+newName; //临时存放的路径
+			String tpath = path + Constant.UrlConstant.ICON_PATH_TEMP + newName; //临时存放的路径
 			File tf = new File(tpath);
 			BufferedImage bi = ImageIO.read(tf);
-			String npath = path+Constant.UrlConstant.ICON_PATH+File.separator+newName; //新的存放路径
-			String ttpath = path+Constant.UrlConstant.ICON_PATH+File.separator+"thumbnail"+File.separator+newName;//缩略图的路径
+			String npath = path + Constant.UrlConstant.ICON_PATH + newName; //新的存放路径
+			String ttpath = path + Constant.UrlConstant.ICON_PATH_THUM + newName;//缩略图的路径
 			Builder<BufferedImage> b = Thumbnails.of(bi);
 			//根据坐标切割图片
 			BufferedImage bi2 = b.sourceRegion(x, y, w, h).forceSize(Constant.ICON_WIDTH, Constant.ICON_HEIGHT).asBufferedImage();

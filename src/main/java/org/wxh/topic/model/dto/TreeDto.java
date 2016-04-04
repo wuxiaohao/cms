@@ -1,11 +1,13 @@
 package org.wxh.topic.model.dto;
 
+import org.wxh.basic.model.Dto;
+
 /**
  * 演示异步加载ztree示例用
  * @author wxh
  *
  */
-public class TreeDto {
+public class TreeDto extends Dto{
 	private int id;
 	private String name;
 	private int isParent;

@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.common.Constant;
 import org.wxh.basic.common.Constant.UrlConstant;
+import org.wxh.basic.model.AjaxObj;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Video;
-import org.wxh.topic.model.dto.AjaxObj;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.topic.service.IVideoService;
 import org.wxh.user.auth.AuthClass;
@@ -252,7 +252,7 @@ public class VideoController {
 			v.setSize(attach.getSize());
 			videoService.addVideo(v,attach.getInputStream());
 			String realPath = SystemContext.getRealPath();
-			String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO + "/" + v.getVideoName();
+			String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO + v.getVideoName();
 			//截图视频图片
 			String picName = processImg(path);
 			v.setPicName(picName);
@@ -300,7 +300,7 @@ public class VideoController {
 			}
 			String realPath = SystemContext.getRealPath();
 			String ffmpeg_path = prop.getProperty("ffmpeg_path");//注意这里，一定要有这个插件啊
-			String PicPath = realPath+UrlConstant.UPLOAD_VIDEO + "thumbnail/";//视频截图存放的位置
+			String PicPath = realPath+UrlConstant.UPLOAD_VIDEO_THUM;//视频截图存放的位置
 			File fp = new File(PicPath);
 			if( !fp.exists() ) fp.mkdirs();//如果目录不存在则创建目录
 			String picName = String.valueOf(new Date().getTime() + ".jpg" );

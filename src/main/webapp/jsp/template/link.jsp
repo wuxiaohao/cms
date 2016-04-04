@@ -14,14 +14,14 @@
     <div class="box">
     	<div class="imgstyle">
 	    		<a target="_blank" href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415566524.jpg">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415580217.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
 	    		<a target="_blank" href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415580217.jpg">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415566524.jpg">
 	    		</a>
     	</div>
     </div>

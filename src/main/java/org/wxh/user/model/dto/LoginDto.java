@@ -1,8 +1,8 @@
-package org.wxh.basic.model.message.user;
+package org.wxh.user.model.dto;
 
-import org.wxh.basic.model.message.Vo;
+import org.wxh.basic.model.Dto;
 
-public class LoginVo extends Vo{
+public class LoginDto extends Dto{
 	
 	/**用户名*/
 	public String username;

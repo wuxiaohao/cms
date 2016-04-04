@@ -1,7 +1,9 @@
 package org.wxh.index.model.dto;
 
+import org.wxh.basic.model.Dto;
 
-public class IndexPicDto {
+
+public class IndexPicDto extends Dto{
 	/**
 	 * 新文件名
 	 */

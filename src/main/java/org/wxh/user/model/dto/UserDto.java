@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.wxh.basic.model.Dto;
 import org.wxh.user.model.User;
 
-public class UserDto {
+public class UserDto extends Dto{
 	private int id;
 	/**
 	 * 用户登录名称

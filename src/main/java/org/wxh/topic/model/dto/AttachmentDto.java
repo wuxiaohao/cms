@@ -3,9 +3,10 @@ package org.wxh.topic.model.dto;
 import java.util.Date;
 
 import org.apache.commons.io.FilenameUtils;
+import org.wxh.basic.model.Dto;
 import org.wxh.topic.model.Attachment;
 
-public class AttachmentDto {
+public class AttachmentDto extends Dto{
 	private int id;
 	/**
 	 * 附件上传之后的名称
