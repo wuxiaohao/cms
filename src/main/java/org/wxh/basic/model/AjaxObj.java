@@ -1,12 +1,17 @@
 package org.wxh.basic.model;
 
+import java.io.Serializable;
+
 
 /**
  * 专门用来返回Ajax处理之后结果json数据的对象
  * @author Administrator
  *
  */
-public class AjaxObj {
+public class AjaxObj implements Serializable{
+
+	private static final long serialVersionUID = 595310287226492214L;
+	
 	/**
 	 * 0表示失败
 	 * 1表示成功

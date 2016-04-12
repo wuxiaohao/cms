@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.common.Constant;
+import org.wxh.basic.common.LoginConstant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.filter.CmsSessionContext;
 import org.wxh.basic.util.JsonUtils;
@@ -39,7 +40,7 @@ import org.wxh.util.Common;
  *
  */
 @Controller
-public class LoginController {
+public class LoginController implements LoginConstant {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass()); 
 	
@@ -61,7 +62,7 @@ public class LoginController {
 	public String login(HttpServletRequest request,Model model) {
 		String usernamecode=Common.getcookie(request,Constant.BaseCode.COOKIE);
 		model.addAttribute(Constant.BaseCode.COOKIE, usernamecode);
-		return "admin/login";
+		return LOGIN;
 	}
 	
 	/**
@@ -75,34 +76,39 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView login(LoginDto dto,HttpServletRequest req,HttpSession session,HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("admin/blackmain");
+		ModelAndView mv = new ModelAndView( BLACKMAIN );
 		
 		if( dto.getUsername() == null ) {
 			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(dto));
-			mv.setViewName("admin/login");
+			mv.setViewName( LOGIN );
 			return mv;
 		}
 		if( dto.getPassword() == null ) {
 			logger.error("密码为空，请求参数：[{}]",JsonUtils.object2String(dto));
-			mv.setViewName("admin/login");
+			mv.setViewName( LOGIN );
 			return mv;
 		}
 		if( dto.getCheckcode() == null ) {
 			logger.error("用户名为空，请求参数：[{}]",JsonUtils.object2String(dto));
-			mv.setViewName("admin/login");
+			mv.setViewName( LOGIN );
 			return mv;
 		}
 		if( dto.getUsername() == null ) {
 			logger.error("验证码为空，请求参数：[{}]",JsonUtils.object2String(dto));
-			mv.setViewName("admin/login");
+			mv.setViewName( LOGIN );
 			return mv;
 		}
 		
 		//校验验证码是否正确
 		String cc = (String)session.getAttribute(Constant.BaseCode.CHECK_CODE);
-		if(!cc.equals(dto.getCheckcode())) {
+		if ( cc == null || dto.getCheckcode( ) == null ) {
+			mv.setViewName( LOGIN );
+			return mv;
+		}
+		
+		if (!cc.equals(dto.getCheckcode())) {
 			mv.addObject(Constant.BaseCode.ERROR_CODE,"验证码出错，请重新输入");
-			mv.setViewName("admin/login");
+			mv.setViewName( LOGIN );
 			return mv;
 		}
 		
@@ -141,7 +147,7 @@ public class LoginController {
 			logger.error("登陆失败，失败信息:[{}]",e.getMessage());
 			//把异常信息返回到客户端
 			mv.addObject(Constant.BaseCode.ERROR,e.getMessage());
-			mv.setViewName("admin/login");
+			mv.setViewName( LOGIN );
 			return mv;
 		}
 		
