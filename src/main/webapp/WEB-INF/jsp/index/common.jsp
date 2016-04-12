@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/docs.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/main.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/screen.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/qianduan/css/video.css"/>
 <script src="<%=request.getContextPath() %>/resources/qianduan/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/qianduan/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/qianduan/js/pic_hover.js"></script>

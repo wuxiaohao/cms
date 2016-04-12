@@ -156,8 +156,6 @@ public class IndexController implements IndexConstant{
 	public String showTopic(@PathVariable int tid,Model model) {
 		//获取文章并修改浏览次数
 		Topic t = topicService.load(tid);
-		t.setViewCount(t.getViewCount() + 1);
-		topicService.update(t);
 		TopicDto dto = new TopicDto( t, t.getChannel().getId() );
 		//获取上/下篇文章的id
 		topicService.getPreAndNextTopic( dto );
@@ -187,6 +185,9 @@ public class IndexController implements IndexConstant{
 		//热门文章
 		List<Topic> hotTop = topicService.listTopic();
 		model.addAttribute( HOTTOP, hotTop );
+		//修改浏览次数
+		t.setViewCount(t.getViewCount() + 1);
+		topicService.update(t);
 		return ARTICLE_SHOW;
 	}
 	/**
@@ -198,8 +199,6 @@ public class IndexController implements IndexConstant{
 	@RequestMapping("/imgsNews/{id}")
 	public String showImgsNews(@PathVariable int id,Model model) {
 		PictureTopic top = pictureTopicService.load( id );
-		top.setViewCount( top.getViewCount() +1 );
-		pictureTopicService.update( top );
 		model.addAttribute(TOP, top);
 		//获取导航栏目
 		List<Channel> navs = getNavChannel( top.getChannel() );
@@ -207,6 +206,9 @@ public class IndexController implements IndexConstant{
 		//获取组图
 		List<Picture> imgs = pictureService.listByPicTopic( id );
 		model.addAttribute(IMGS, imgs);
+		//修改浏览次数
+		top.setViewCount( top.getViewCount() +1 );
+		pictureTopicService.update( top );
 		return ARTICLE_PIC_SHOW;
 	}
 	/**
@@ -217,17 +219,18 @@ public class IndexController implements IndexConstant{
 	 */
 	@RequestMapping("/videoNews/{id}")
 	public String showVideo(@PathVariable int id,Model model) {
-		//获取视频信息并修改浏览次数
+		//获取视频信息
 		Video video = videoService.loadCash( id );
-		video.setViewCount( video.getViewCount() + 1 );
 		model.addAttribute(VIDEO, video);
-		videoService.update(video);
 		//获取导航栏目
 		List<Channel> navs = getNavChannel( video.getChannel() );
 		model.addAttribute(NAVS, navs);
 		//获取视频列表
-		/*List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
-		model.addAttribute("vids", vids);*/
+		List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
+		model.addAttribute("vids", vids);
+		//修改浏览次数
+		video.setViewCount( video.getViewCount() + 1 );
+		videoService.update(video);
 		return ARTICLE_VIDEO_SHOW;
 	}
 	/**

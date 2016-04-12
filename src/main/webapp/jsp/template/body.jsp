@@ -114,27 +114,27 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/17" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415349886.jpg" alt="测试1测试1测试1测试1测试1">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356105940.jpg" alt="测试1测试1测试1测试1测试1">
 								<div class="imgtxt clearfix">
 										<p class="title">测试1测试1测试1...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">3次</span></p>
+									<span class="pull-right">8次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/24" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415473501.jpg" alt="大帅锅">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356117783.jpg" alt="大帅锅">
 								<div class="imgtxt clearfix">
 										<p class="title">大帅锅</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">0次</span></p>
+									<span class="pull-right">24次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/23" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415459905.jpg" alt="尼玛">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356126077.jpg" alt="尼玛">
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛</p>
 									<p><span class="pull-left">2016-02-25</span>
@@ -144,7 +144,7 @@
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/22" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415432317.jpg" alt="操谁心">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356143988.jpg" alt="操谁心">
 								<div class="imgtxt clearfix">
 										<p class="title">操谁心</p>
 									<p><span class="pull-left">2016-02-25</span>
@@ -154,17 +154,17 @@
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/21" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415419232.jpg" alt="尼玛好烦啊啊啊啊">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356174603.jpg" alt="尼玛好烦啊啊啊啊">
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛好烦啊啊啊啊</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">3次</span></p>
+									<span class="pull-right">4次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/20" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1456415403136.jpg" alt="wuxiahao">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356226292.jpg" alt="wuxiahao">
 								<div class="imgtxt clearfix">
 										<p class="title">wuxiahao</p>
 									<p><span class="pull-left">2016-02-25</span>

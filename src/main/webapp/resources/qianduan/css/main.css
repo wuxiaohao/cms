@@ -55,7 +55,7 @@ a.article_link:hover {
 .content_top,#news_content{
 	margin-top: 20px;
 }
-#schoolOpen_bg {
+/*#schoolOpen_bg {
 	background: url(../img/xwgk_bg.jpg) no-repeat;
 	height: 91px;
 }
@@ -68,7 +68,7 @@ a.article_link:hover {
 }
 #schoolSum {
 	font-size: 14px;
-}
+}*/
 #data_content {
 	clear: both;
 	margin-top: 20px;
@@ -76,7 +76,7 @@ a.article_link:hover {
 #data_content div.span4 {
 	margin-left: 0px;
 }
-#quickButton {
+/*#quickButton {
 	clear: both;
 	margin-left:-20px;
 	border: 1px solid #898989;
@@ -87,28 +87,9 @@ a.article_link:hover {
 	left: 20px;
 	text-align: center;
 	margin: 10px;
-}
+}*/
 .text-center {
 	text-align: center;
-}
-.footer {
-	margin-top: 8px;
-	height: 80px;
-	background-image: url(../img/dot-pattern-01.png);
-	background-color: #464646;
-	color: #ebebeb;
-}
-.footer .support,
-.copyRight {
-	position: relative;
-	left: 50%;
-	top: 20px;
-	margin-left: -150px;
-	text-align: center;
-	font-size: 10px;
-}
-.footer .copyRight {
-	margin-left: -80px;
 }
 /*********************artical_list.html css***************************/
 .localAddress {
@@ -287,6 +268,8 @@ padding: 15px 12px;
 	padding: 20px;
 	text-align: center;
 	color: #eee;
+	margin-left: -20px;
+	margin-right: -20px;
 }
 
 .tab3 {
@@ -304,7 +287,7 @@ padding: 15px 12px;
 	text-align: center;
 }
 .indexlink h4{border-bottom: 1px solid #ccc;width: 80%;padding: 0px 10px 10px;}
-.indexlink{padding:5px 0; width:100%; margin:0 auto 15px;position: relative;border:solid #ccc 1px;border-radius: 3px;}
+.indexlink{padding:5px 0; width:100%; margin:0 auto 15px;position: relative;border:solid #bce8f1 1px;border-radius: 3px;}
 .indexlink ul{display:none; width:100%; overflow:hidden;}
 ul.dis{display:block;list-style: none;}
 .yqlj{list-style: none;height: 70px;}

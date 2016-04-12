@@ -1,0 +1,7 @@
+ul{list-style: none;}
+.vContainer{width: 1140px;margin: 0 auto;}
+.videoScreen{width: 800px;height: 600px;float: left;}
+.videolist{width:340px;height: 600px;float: right;background: #000;overflow-y: scroll;}
+.videolist li{height: 100px}
+.videolist img{width:135px;height: 50px;margin: 25px;}
+.videolist p{color: #fff;margin: 25px;}

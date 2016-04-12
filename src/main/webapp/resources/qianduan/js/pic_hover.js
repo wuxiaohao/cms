@@ -33,10 +33,16 @@ $(function() {
 	});
 	//导航栏固定
 	$(window).on("scroll", function() {
-	if ($(window).scrollTop() > 1) {
-		$("#top").addClass("topnone")
-	} else {
-		$("#top").removeClass("topnone")
-	}
-});
+		if ($(window).scrollTop() > 1) {
+			$("#top").addClass("topnone")
+		} else {
+			$("#top").removeClass("topnone")
+		}
+	});
+	//视频播放hover
+	$('.videolist li').hover(function() {
+		$(this).css('background', '#5E5E5E').children('a').children('p').css('color', '#fbc91b');
+	}, function() {
+		$(this).css('background', '#000').children('a').children('p').css('color', '#fff');
+	});
 });
