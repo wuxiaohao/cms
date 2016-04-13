@@ -7,7 +7,6 @@
 				<ol class="carousel-indicators">
 						<li class="active" data-slide-to="0" data-target="#carousel-405390"></li>
 						<li data-slide-to="1" data-target="#carousel-405390"></li>
-						<li data-slide-to="2" data-target="#carousel-405390"></li>
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active">
@@ -15,12 +14,6 @@
 									<img alt="1456414624505.jpg" src="<%=request.getContextPath()%>/resources/upload/1456414624505.jpg" />
 								</a>
 									<h5 class="carousel-title">林有能教授以别开生面的方式与现场听</h5>
-							</div>
-							<div class="item">
-								<a href="topic/37" title="test01">
-									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1456414649514.jpg" />
-								</a>
-									<h5 class="carousel-title">test01</h5>
 							</div>
 							<div class="item">
 								<a href="topic/11" title="绯闻绯闻ddd">
@@ -114,11 +107,11 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/17" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356105940.jpg" alt="测试1测试1测试1测试1测试1">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460512531902.jpg" alt="测试1测试1测试1测试1测试1">
 								<div class="imgtxt clearfix">
 										<p class="title">测试1测试1测试1...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">8次</span></p>
+									<span class="pull-right">13次</span></p>
 								</div>
 							</a>
 						</div>
@@ -128,7 +121,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">大帅锅</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">24次</span></p>
+									<span class="pull-right">38次</span></p>
 								</div>
 							</a>
 						</div>
@@ -138,27 +131,27 @@
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">1次</span></p>
+									<span class="pull-right">8次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/22" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356143988.jpg" alt="操谁心">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460512569048.jpg" alt="操谁心">
 								<div class="imgtxt clearfix">
 										<p class="title">操谁心</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">0次</span></p>
+									<span class="pull-right">3次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/21" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356174603.jpg" alt="尼玛好烦啊啊啊啊">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460512594683.jpg" alt="尼玛好烦啊啊啊啊">
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛好烦啊啊啊啊</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">4次</span></p>
+									<span class="pull-right">6次</span></p>
 								</div>
 							</a>
 						</div>
@@ -168,7 +161,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">wuxiahao</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">1次</span></p>
+									<span class="pull-right">10次</span></p>
 								</div>
 							</a>
 						</div>
@@ -187,18 +180,18 @@
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active relative">
+								<a target="_blank" href="<%=request.getContextPath()%>/">
+									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1459097851960.jpg"/>
+						  	 	</a>
+							</div>
+							<div class="item">
+								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
+									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1459045781231.jpg"/>
+						  	 	</a>
+							</div>
+							<div class="item">
 						  	 	<a href="channel/59">
 									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
-						  	 	</a>
-							</div>
-							<div class="item">
-								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415716857.jpg"/>
-						  	 	</a>
-							</div>
-							<div class="item">
-								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1456415724204.jpg"/>
 						  	 	</a>
 							</div>
 				</div>
