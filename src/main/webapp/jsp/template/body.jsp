@@ -111,7 +111,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">测试1测试1测试1...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">13次</span></p>
+									<span class="pull-right">32次</span></p>
 								</div>
 							</a>
 						</div>
@@ -121,7 +121,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">大帅锅</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">38次</span></p>
+									<span class="pull-right">46次</span></p>
 								</div>
 							</a>
 						</div>
@@ -131,7 +131,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">8次</span></p>
+									<span class="pull-right">30次</span></p>
 								</div>
 							</a>
 						</div>
@@ -151,7 +151,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛好烦啊啊啊啊</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">6次</span></p>
+									<span class="pull-right">7次</span></p>
 								</div>
 							</a>
 						</div>
@@ -161,7 +161,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">wuxiahao</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">10次</span></p>
+									<span class="pull-right">12次</span></p>
 								</div>
 							</a>
 						</div>
@@ -181,12 +181,12 @@
 				<div class="carousel-inner">
 							<div class="item active relative">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1459097851960.jpg"/>
+									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1460987234354.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
-									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1459045781231.jpg"/>
+									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1460987240465.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">

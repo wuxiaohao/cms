@@ -19,7 +19,20 @@
 			<time class="post-date pull-left" datetime="" title="<fmt:formatDate value="${top.publishDate }" pattern="yyyy-MM-dd HH:mm:ss"/> ">
 				<fmt:formatDate value="${top.publishDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 			</time>
-			<!-- <span class="pull-right ">分享</span> -->
+			<span class="pull-right ">
+				<!-- JiaThis Button BEGIN -->
+				<div class="jiathis_style">
+					<span class="jiathis_txt">分享到：</span>
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_cqq"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_douban"></a>
+					<a class="jiathis_button_qzone"></a>
+					<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+				</div>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+				<!-- JiaThis Button END -->
+			</span> 
 		</section>
 		<div id="play" class="col-md-12">
 			<ul class="img_ul">
