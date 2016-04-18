@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -40,7 +41,12 @@
 				<c:if test="${datas.total gt 0 }">
 					<c:forEach items="${datas.datas}" var="topic">
 						<a href="<%=request.getContextPath() %>/topic/${topic.id}" class="list-group-item clearfix">
-							${topic.title }
+							<c:if test="${fn:length(topic.title) > '30' }">
+								${fn:substring(topic.title,0,30) }...
+							</c:if>
+							<c:if test="${fn:length(topic.title) <= '30' }">
+								${topic.title }
+							</c:if>
 							<span class="pull-right list_date">
 								<fmt:formatDate value="${topic.publishDate }" pattern="yyyy-MM-dd"/>
 							</span>
