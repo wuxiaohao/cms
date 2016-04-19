@@ -7,6 +7,7 @@
 				<ol class="carousel-indicators">
 						<li class="active" data-slide-to="0" data-target="#carousel-405390"></li>
 						<li data-slide-to="1" data-target="#carousel-405390"></li>
+						<li data-slide-to="2" data-target="#carousel-405390"></li>
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active">
@@ -16,10 +17,16 @@
 									<h5 class="carousel-title">林有能教授以别开生面的方式与现场听</h5>
 							</div>
 							<div class="item">
-								<a href="topic/11" title="绯闻绯闻ddd">
-									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1456414929961.jpg" />
+								<a href="topic/11" title="东莞理工学院城市学院举行最大规模招聘会">
+									<img alt="1-2" src="<%=request.getContextPath()%>/resources/upload/1461088379105.jpg" />
 								</a>
-									<h5 class="carousel-title">绯闻绯闻ddd</h5>
+									<h5 class="carousel-title">东莞理工学院城市学院举行最大规模招聘会</h5>
+							</div>
+							<div class="item">
+								<a href="topic/62" title="test0002">
+									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1461089483005.jpg" />
+								</a>
+									<h5 class="carousel-title">test0002</h5>
 							</div>
 				</div> <a data-slide="prev" href="#carousel-405390" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-405390" class="right carousel-control">›</a>
 			</div>
@@ -106,62 +113,62 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6 col-sm-4 col-xs-6">
+							<a href="<%=request.getContextPath() %>/videoNews/26" class="thumbnail">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461086146427.jpg" alt="fwef">
+								<div class="imgtxt clearfix">
+										<p class="title">fwef</p>
+									<p><span class="pull-left">2016-04-20</span>
+									<span class="pull-right">1次</span></p>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/17" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460512531902.jpg" alt="测试1测试1测试1测试1测试1">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085784012.jpg" alt="测试1测试1测试1测试1测试1">
 								<div class="imgtxt clearfix">
 										<p class="title">测试1测试1测试1...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">32次</span></p>
+									<span class="pull-right">38次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/24" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356117783.jpg" alt="大帅锅">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085793960.jpg" alt="大帅锅">
 								<div class="imgtxt clearfix">
 										<p class="title">大帅锅</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">46次</span></p>
+									<span class="pull-right">38次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/23" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356126077.jpg" alt="尼玛">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085802367.jpg" alt="尼玛">
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">30次</span></p>
+									<span class="pull-right">11次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/22" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460512569048.jpg" alt="操谁心">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085809508.jpg" alt="操谁心">
 								<div class="imgtxt clearfix">
 										<p class="title">操谁心</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">3次</span></p>
+									<span class="pull-right">10次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/21" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460512594683.jpg" alt="尼玛好烦啊啊啊啊">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085817835.jpg" alt="尼玛好烦啊啊啊啊">
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛好烦啊啊啊啊</p>
 									<p><span class="pull-left">2016-02-25</span>
 									<span class="pull-right">7次</span></p>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a href="<%=request.getContextPath() %>/videoNews/20" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1460356226292.jpg" alt="wuxiahao">
-								<div class="imgtxt clearfix">
-										<p class="title">wuxiahao</p>
-									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">12次</span></p>
 								</div>
 							</a>
 						</div>
@@ -181,12 +188,12 @@
 				<div class="carousel-inner">
 							<div class="item active relative">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1460987234354.jpg"/>
+									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083257027.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
-									<img alt="a1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1460987240465.jpg"/>
+									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083275147.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">

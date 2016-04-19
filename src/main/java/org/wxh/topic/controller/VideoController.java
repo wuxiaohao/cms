@@ -34,6 +34,7 @@ import org.wxh.topic.service.IVideoService;
 import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
 import org.wxh.user.model.User;
+import org.wxh.util.FileSizeUtil;
 import org.wxh.util.JsonUtil;
 
 /**
@@ -246,16 +247,26 @@ public class VideoController {
 		try {
 			resp.setContentType(Constant.CONTENT_TYPE);
 			Video v = new Video();
-			String ext = FilenameUtils.getExtension(attach.getOriginalFilename());//获取文件后缀
+			
+			//获取文件后缀
+			String ext = FilenameUtils.getExtension(attach.getOriginalFilename());
 			logger.info(ext);
+			//设置文件唯一名称
 			v.setVideoName(String.valueOf(new Date().getTime()+"."+ext));
-			v.setSize(attach.getSize());
+			
+			//设置视频大小
+			long size = attach.getSize();
+			String sizeStr = FileSizeUtil.convertFileSize(size);
+			v.setSize(sizeStr);
+			
 			videoService.addVideo(v,attach.getInputStream());
 			String realPath = SystemContext.getRealPath();
 			String path = realPath+Constant.UrlConstant.UPLOAD_VIDEO + v.getVideoName();
+			
 			//截图视频图片
 			String picName = processImg(path);
 			v.setPicName(picName);
+			
 			ao = new AjaxObj(Constant.YES,null,v);
 		} catch (IOException e) {
 			ao = new AjaxObj(Constant.NO,e.getMessage());

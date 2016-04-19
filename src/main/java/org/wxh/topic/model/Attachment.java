@@ -38,7 +38,7 @@ public class Attachment {
 	/**
 	 * 附件的大小
 	 */
-	private long size;
+	private String size;
 	/**
 	 * 该附件是否是首页滚动新闻图片
 	 */
@@ -92,13 +92,12 @@ public class Attachment {
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
-	public long getSize() {
+	public String getSize() {
 		return size;
 	}
-	public void setSize(long size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
-	
 	@Column(name="is_index_pic")
 	public int getIsIndexPic() {
 		return isIndexPic;
@@ -135,7 +134,7 @@ public class Attachment {
 	public Attachment() {
 	}
 	public Attachment(int id, String newName, String oldName, String type,
-			String suffix, long size, int isIndexPic, int isImg, int isAttach,int tid,String topicTitle,Date publishDate,String author) {
+			String suffix, String size, int isIndexPic, int isImg, int isAttach,int tid,String topicTitle,Date publishDate,String author) {
 		super();
 		this.id = id;
 		this.newName = newName;
@@ -154,7 +153,7 @@ public class Attachment {
 	}
 	
 	public Attachment(int id, String newName, String oldName, String type,
-			String suffix, long size,int isIndexPic, int isImg, int isAttach) {
+			String suffix, String size,int isIndexPic, int isImg, int isAttach) {
 		super();
 		this.id = id;
 		this.newName = newName;

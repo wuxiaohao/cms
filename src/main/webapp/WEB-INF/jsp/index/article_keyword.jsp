@@ -33,7 +33,7 @@
 		<div class="col-md-8">
 			<div class="channel_title col-md-99">
 				<h4 class="title_line">
-					检索内容:<span style="font-size:16px;color: red">${con }</span>
+					检索关键字:<span style="font-size:16px;color: red">${con }</span>
 				</h4>
 			</div>
 			<div class="row list_right col-md-99 channel_right">

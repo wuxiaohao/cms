@@ -169,8 +169,24 @@
 									</c:if>
 								</td>
 								<td>
-									<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue"><i class="fa fa-edit"></i>&nbsp;更新</a>			
-									<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+									<%-- <a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')" class="btn btn-sm blue"><i class="fa fa-edit"></i>&nbsp;更新</a>			
+									<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="btn btn-sm red delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a> --%>
+									<div class="btn-group">
+										<button class="btn btn-circle blue btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+										选项管理 <i class="fa fa-angle-down"></i>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a href="javascript:openWin('<%=request.getContextPath() %>/admin/topic/update/${t.id}','updateTopic')"><i class="fa fa-edit"></i>&nbsp;更新</a>
+											</li>
+											<li>
+												<a href="admin/topic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+											</li>
+											<li>
+												<a href="topic/${t.id }" target="_blank"><i class="fa fa-eye"></i>&nbsp;预览</a>
+											</li>
+										</ul>
+									</div>
 								</td>
 							</tr>
 						</tbody>

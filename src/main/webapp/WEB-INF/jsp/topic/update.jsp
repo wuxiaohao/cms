@@ -152,7 +152,7 @@
 												${att.oldName }
 											</td>
 											<td>
-												${att.size/1024}K
+												${att.size}
 											</td>
 											<c:if test="${att.isImg eq 1 }">
 												<td><input type='checkbox' value="${att.id }" name='indexPic' class='indexPic' <c:if test="${att.isIndexPic eq 1 }">checked="checked"</c:if>></td>

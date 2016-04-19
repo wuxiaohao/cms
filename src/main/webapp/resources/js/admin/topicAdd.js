@@ -80,7 +80,7 @@ $(function(){
 			node+="<td>普通类型附件</td>";
 		}
 		node+="<td>"+attach.oldName+"</td>";
-		node+="<td>"+Math.round(attach.size/1024)+"K</td>";
+		node+="<td>"+attach.size+"</td>";
 		if(attach.isImg) {
 			node+="<td><input type='checkbox' value='"+attach.id+"' name='indexPic' class='indexPic' width="+attach.width+" height="+attach.height+"></td>";
 			node+="<td><input type='radio' value='"+attach.id+"' name='channelPicId'></td>";

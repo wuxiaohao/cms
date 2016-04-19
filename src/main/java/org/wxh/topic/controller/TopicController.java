@@ -42,6 +42,7 @@ import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
 import org.wxh.user.model.User;
 import org.wxh.user.service.IGroupService;
+import org.wxh.util.FileSizeUtil;
 import org.wxh.util.JsonUtil;
 
 /**
@@ -315,7 +316,9 @@ public class TopicController {
 			att.setSuffix(ext);
 			att.setType(attach.getContentType());
 			att.setTopic(null);
-			att.setSize(attach.getSize());
+			long size = attach.getSize();
+			String sizeStr = FileSizeUtil.convertFileSize(size);
+			att.setSize(sizeStr);
 			if(imgTypes.contains(ext)) {
 				att.setIsImg( Constant.YES );
 			} else { 

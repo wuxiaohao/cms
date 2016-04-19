@@ -21,20 +21,7 @@
 				<time class="post-date pull-left" datetime="" title="<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd HH:mm:ss"/> ">
 					<fmt:formatDate value="${video.publishDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</time>
-				<span class="pull-right ">
-					<!-- JiaThis Button BEGIN -->
-					<div class="jiathis_style">
-						<span class="jiathis_txt">分享到：</span>
-						<a class="jiathis_button_weixin"></a>
-						<a class="jiathis_button_cqq"></a>
-						<a class="jiathis_button_tsina"></a>
-						<a class="jiathis_button_douban"></a>
-						<a class="jiathis_button_qzone"></a>
-						<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-					</div>
-					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-					<!-- JiaThis Button END -->
-				</span> 
+				<!-- <span class="pull-right ">分享</span>  -->
 			</section>
 		</header>
 	</div>
@@ -62,7 +49,29 @@
 				</c:forEach>
 			</ul>
 		</div>	
+		<div class="clearfix">
+			<!-- 多说评论框 start -->
+				<div class="ds-thread" data-thread-key="${vid.id }" data-title="${vid.title }" 
+						data-url="<%=request.getContextPath() %>/videoNews/${vid.id}"></div>
+			<!-- 多说评论框 end -->
+		</div>
 	</div>
 	<jsp:include page="/jsp/template/bottom.jsp"/>
 </body>
+<!-- JiaThis Button BEGIN -->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?move=0" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"testwxh"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
 </html>

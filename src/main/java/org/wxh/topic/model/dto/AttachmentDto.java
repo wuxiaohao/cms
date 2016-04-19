@@ -27,7 +27,7 @@ public class AttachmentDto extends Dto{
 	/**
 	 * 附件的大小
 	 */
-	private long size;
+	private String size;
 	/**
 	 * 该附件是否是首页滚动新闻图片
 	 */
@@ -94,10 +94,10 @@ public class AttachmentDto extends Dto{
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
-	public long getSize() {
+	public String getSize() {
 		return size;
 	}
-	public void setSize(long size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 	public int getIsIndexPic() {

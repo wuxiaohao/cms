@@ -30,7 +30,7 @@ public class Video {
 	 * 视频的大小
 	 */
 	@Column(name="pv_size")
-	private long size;
+	private String size;
 	/**
 	 * 视频上传之后的名称
 	 */
@@ -92,7 +92,7 @@ public class Video {
 	public Video() {
 		super();
 	}
-	public Video(int id, String title, long size,Date publishDate, Date createDate, String author, String cname,String auditor, int status,int viewCount) {
+	public Video(int id, String title, String size,Date publishDate, Date createDate, String author, String cname,String auditor, int status,int viewCount) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -139,10 +139,10 @@ public class Video {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public long getSize() {
+	public String getSize() {
 		return size;
 	}
-	public void setSize(long size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 	public String getVideoName() {

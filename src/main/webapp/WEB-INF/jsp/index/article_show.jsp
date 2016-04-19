@@ -46,28 +46,17 @@
 							<i class="fa fa-folder-open-o "></i>
 							<c:if test="${hasKey }">
 								<c:forEach items="${kwst }" var="k">
-									<a href="<%=request.getContextPath() %>/keyword/${k}">${k }</a>,
+									<a href="<%=request.getContextPath() %>/keyword/${k}">${k }</a>&nbsp;&nbsp;、
 								</c:forEach>
 							</c:if>
 						</div>
 					</div>
 				</article>
 				<div class="about-author clearfix">
-					<div class="widget ">
-						<h4 class="title ">文章附件</h4>
-						<div class="content community ">
-							<p>
-								<c:if test="${!hasAtts}">该文章没有附件</c:if>
-								<c:if test="${hasAtts }">
-									<c:forEach items="${atts }" var="att">
-										<a href="<%=request.getContextPath()%>/resources/upload/${att.newName}">
-										<i class="fa fa-comments "></i>${att.oldName }
-										</a>
-									</c:forEach>
-								</c:if>
-							</p>
-						</div>
-					</div>
+					<!-- 多说评论框 start -->
+						<div class="ds-thread" data-thread-key="${topic.id }" data-title="${topic.title }" 
+								data-url="<%=request.getContextPath() %>/topic/${topic.id}"></div>
+					<!-- 多说评论框 end -->
 				</div>
 				<div class="prev-next-wrap clearfix ">
 					<c:if test="${!empty(topic.preId) }">
@@ -99,9 +88,38 @@
 						</c:if>
 					</c:forEach>
 				</div>
+				<div class="widget ">
+					<h4 class="title ">文章附件</h4>
+					<div class="content community ">
+						<p>
+							<c:if test="${!hasAtts}">该文章没有附件</c:if>
+							<c:if test="${hasAtts }">
+								<c:forEach items="${atts }" var="att">
+									<a href="<%=request.getContextPath()%>/resources/upload/${att.newName}">
+									<i class="fa fa-comments "></i>${att.oldName }
+									</a>
+									；
+								</c:forEach>
+							</c:if>
+						</p>
+					</div>
+				</div>
 			</aside>
 		</div>
 	</div>
 	<jsp:include page="/jsp/template/bottom.jsp"/>
 </body>
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"testwxh"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
 </html>

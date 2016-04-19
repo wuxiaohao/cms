@@ -161,21 +161,21 @@
 								<td>
 									<c:if test="${t.status eq 0 }">
 										<span style="color: red">未发布&nbsp;</span>
-										<a href="admin/picTopic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm blue ajaxify delete">发布</a>
+										<a href="admin/picTopic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm purple ajaxify delete">发布</a>
 									</c:if>
 									<c:if test="${t.status eq 1 }">
 										<span>已发布&nbsp;</span>
-										<a href="admin/picTopic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm blue ajaxify delete">取消发布</a>
+										<a href="admin/picTopic/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm purple ajaxify delete">取消发布</a>
 									</c:if>
 								</td>
 								<td>
 									<div class="btn-group">
-										<button class="btn btn-circle grey-cascade btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+										<button class="btn btn-circle blue btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
 										选项管理 <i class="fa fa-angle-down"></i>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a href="admin/picTopic/updateUI/${t.id}" class=" ajaxify"><i class="fa fa-edit"></i>&nbsp;更新</a>
+												<a href="admin/picTopic/updateUI/${t.id}" class="ajaxify"><i class="fa fa-edit"></i>&nbsp;更新</a>
 											</li>
 											<li>
 												<a href="admin/picTopic/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>

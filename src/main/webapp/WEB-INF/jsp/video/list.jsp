@@ -103,24 +103,24 @@
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="28%" align="center">标题</td>
+							<td width="25%" align="center">标题</td>
 							<c:if test="${status eq 0}">
-							<td>作者</td>
+							<td width="10%">作者</td>
 							</c:if>
 							<c:if test="${status eq 1}">
-							<td>发布人</td>
+							<td width="10%">发布人</td>
 							</c:if>
-							<td>浏览量</td>
-							<td>所属频道</td>
-							<td>视频大小</td>
+							<td width="7%">浏览量</td>
+							<td width="8%">所属频道</td>
+							<td width="8%">视频大小</td>
 							<c:if test="${status eq 0}">
-							<td>创建时间</td>
+							<td width="16%">创建时间</td>
 							</c:if>
 							<c:if test="${status eq 1}">
-							<td>发布时间</td>
+							<td width="16%">发布时间</td>
 							</c:if>
-							<td width="140">状态</td>
-							<td width="120">操作</td>
+							<td width="16%">状态</td>
+							<td>操作</td>
 						</tr>
 					</thead>
 					<c:forEach items="${datas.datas }" var="t">
@@ -146,7 +146,7 @@
 								</c:if>
 								<td>${t.viewCount }</td>
 								<td>${t.cname }</td>
-								<td>${t.size/1024}K</td>
+								<td>${t.size}</td>
 								<c:if test="${status eq 0}">
 								<td><c:out value="${fn:substring(t.createDate,0,19) }" /></td>
 								</c:if>
@@ -156,21 +156,21 @@
 								<td>
 									<c:if test="${t.status eq 0 }">
 										<span style="color: red">未发布&nbsp;</span>
-										<a href="admin/video/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm blue ajaxify delete">发布</a>
+										<a href="admin/video/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm purple ajaxify delete">发布</a>
 									</c:if>
 									<c:if test="${t.status eq 1 }">
 										<span>已发布&nbsp;</span>
-										<a href="admin/video/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm blue ajaxify delete">取消发布</a>
+										<a href="admin/video/changeStatus/${t.id }?status=${t.status}&con=${con}&cid=${cid }" class="btn btn-circle btn-sm purple ajaxify delete">取消发布</a>
 									</c:if>
 								</td>
 								<td>
 									<div class="btn-group">
-										<button class="btn btn-circle grey-cascade btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+										<button class="btn btn-circle blue btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
 										选项管理 <i class="fa fa-angle-down"></i>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a href="admin/video/updateUI/${t.id}" class=" ajaxify"><i class="fa fa-edit"></i>&nbsp;更新</a>
+												<a href="admin/video/updateUI/${t.id}" class="ajaxify"><i class="fa fa-edit"></i>&nbsp;更新</a>
 											</li>
 											<li>
 												<a href="admin/video/delete/${t.id }?status=${t.status}&con=${con}&cid=${cid }" title="${user.id }" class="delete ajaxify"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
