@@ -27,6 +27,7 @@ import org.wxh.basic.common.Constant.UrlConstant;
 import org.wxh.basic.model.AjaxObj;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
+import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Video;
 import org.wxh.topic.service.IChannelService;
@@ -57,26 +58,60 @@ public class VideoController {
 	private IIndexService indexService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if ( status == Constant.YES ) {  //如果是获取已发布视频新闻的列表，则按发布时间排序
-			SystemContext.setSort("v.publishDate"); 
-		} else { //如果是获取未发布视频新闻的列表，则按创建时间排序
-			SystemContext.setSort("v.createDate"); 
-		}
-		SystemContext.setOrder("desc");
+
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
-		if ( isAdmin ) { //如果是超级管理员，则返回所有
+		
+		if ( isAdmin ) { 
+			//TODO 如果是超级管理员，则返回所有的文章
+			setOrderAndSort( status );
 			model.addAttribute("datas",videoService.find(cid, con, status));
-			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有视频新闻栏目
-		} else {  //如果不是超级管理员，则返回该用户能管理的所有文章
+			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.VIDEO_NEW.ordinal()));//返回所有文章栏目
+			
+		} else {	
+			//TODO 如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
-			model.addAttribute("datas", videoService.find(loginUser.getId(),cid, con, status));
-			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.VIDEO_NEW.ordinal()));//返回该用户可以操作的视频新闻栏目
+			
+			//获取该用户可以操作的文章栏目
+			List<Channel> channels = channelService.listPublishChannel(loginUser.getId(),ChannelType.VIDEO_NEW.ordinal());
+			model.addAttribute("cs",channels);
+			if ( channels == null || channels.size() == 0 ) {
+				//该用户无操作任何栏目的权限
+				return ;
+			}
+			if ( cid == null || cid < 0 ) {
+				cid = channels.get( 0 ).getId( );
+			}
+
+			setOrderAndSort( status );
+			
+			//是否是审核员角色
+			boolean isAudit = (boolean) session.getAttribute( Constant.AuthConstant.IS_AUDIT );
+			if ( isAudit )
+				model.addAttribute("datas", videoService.find( null, cid, con, status ) );
+			else
+				model.addAttribute("datas", videoService.find( loginUser.getId(), cid, con, status ) );
+			
 		}
 		if ( con == null ) con = "";
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);
 	}
+	
+	/**
+	 * 根据状态设置排序
+	 * @param status
+	 */
+	@SuppressWarnings("unused")
+	private void setOrderAndSort(Integer status) {
+		if ( status == Constant.YES ) { //如果是获取已发布文章的列表，则按发布时间排序
+			SystemContext.setSort("v.publishDate"); 
+		} else { //如果是获取未发布文章的列表，则按创建时间排序
+			SystemContext.setSort("v.createDate"); 
+		}
+		SystemContext.setOrder("desc");
+	}
+	
 	/**
 	 * 显示已经发布的视频新闻
 	 * @param con 视频新闻标题关键字
@@ -135,7 +170,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addUI", method = RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String add(Model model,HttpSession session) {
 		Video v = new Video();
 		model.addAttribute("video",v);
@@ -158,7 +193,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method = RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String add(Video video,int cid,BindingResult br,HttpSession session,Model model) {
 		User loginUser = (User) session.getAttribute(Constant.BaseCode.LOGIN_USER);
 		if(video.getStatus() == Constant.YES) { //如果视频要立刻发布
@@ -181,7 +216,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{id}" ,method = RequestMethod.POST)
-	@AuthMethod(role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT })
+	@AuthMethod(role = { Constant.AuthConstant.ROLE_AUDIT })
 	public String delete(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
 		Video v = videoService.load(id);
 		videoService.delete(id);
@@ -201,7 +236,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateUI/{id}",method=RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String update(@PathVariable int id,Model model,HttpSession session) {
 		Video v = videoService.load(id);
 		model.addAttribute("video",v);
@@ -225,7 +260,7 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String update(@PathVariable int id,Video video,int cid,HttpSession session,Model model) {
 		Video vOld = videoService.load(id);
 		video.getVideo(vOld,(User)session.getAttribute(Constant.BaseCode.LOGIN_USER));
@@ -241,7 +276,7 @@ public class VideoController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public void upload(MultipartFile attach,HttpServletResponse resp) throws IOException {
 		AjaxObj ao = null;
 		try {

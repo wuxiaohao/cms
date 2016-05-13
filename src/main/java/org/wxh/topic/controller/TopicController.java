@@ -29,6 +29,7 @@ import org.wxh.basic.model.AjaxObj;
 import org.wxh.basic.model.SystemContext;
 import org.wxh.index.service.IIndexService;
 import org.wxh.topic.model.Attachment;
+import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelTree;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
@@ -74,26 +75,61 @@ public class TopicController {
 	private final static List<String> imgTypes = Arrays.asList("jpg","jpeg","gif","png");
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
-		if ( status == Constant.YES ) { //如果是获取已发布文章的列表，则按发布时间排序
-			SystemContext.setSort("t.publishDate"); 
-		} else { //如果是获取未发布文章的列表，则按创建时间排序
-			SystemContext.setSort("t.createDate"); 
-		}
-		SystemContext.setOrder("desc");
+		
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
-		if ( isAdmin ) { //如果是超级管理员，则返回所有的文章
+		
+		if ( isAdmin ) { 
+			//TODO 如果是超级管理员，则返回所有的文章
+			setOrderAndSort( status );
 			model.addAttribute("datas",topicService.find(cid, con, status));
 			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.TOPIC_LIST.ordinal()));//返回所有文章栏目
-		} else {	//如果不是超级管理员，则返回该用户能管理的所有文章
+			
+		} else {	
+			//TODO 如果不是超级管理员，则返回该用户能管理的所有文章
 			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
-			model.addAttribute("datas", topicService.find(loginUser.getId(),cid, con, status));
-			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.TOPIC_LIST.ordinal()));//返回该用户可以操作的文章栏目
+			
+			//获取该用户可以操作的文章栏目
+			List<Channel> channels = channelService.listPublishChannel(loginUser.getId(),ChannelType.TOPIC_LIST.ordinal());
+			model.addAttribute("cs",channels);
+			if ( channels == null || channels.size() == 0 ) {
+				//该用户无操作任何栏目的权限
+				return ;
+			}
+			if ( cid == null || cid < 0 ) {
+				cid = channels.get( 0 ).getId( );
+			}
+
+			setOrderAndSort( status );
+			
+			//是否是审核员角色
+			boolean isAudit = (boolean) session.getAttribute( Constant.AuthConstant.IS_AUDIT );
+			if ( isAudit )
+				model.addAttribute("datas", topicService.find( null, cid, con, status ) );
+			else
+				model.addAttribute("datas", topicService.find( loginUser.getId(), cid, con, status ) );
+			
 		}
 		if ( con == null ) con = "";
 		model.addAttribute("con",con);
 		model.addAttribute("cid",cid);
 		model.addAttribute("status",status);
 	}
+	
+	
+	/**
+	 * 根据状态设置排序
+	 * @param status
+	 */
+	@SuppressWarnings("unused")
+	private void setOrderAndSort(Integer status) {
+		if ( status == Constant.YES ) { //如果是获取已发布文章的列表，则按发布时间排序
+			SystemContext.setSort("t.publishDate"); 
+		} else { //如果是获取未发布文章的列表，则按创建时间排序
+			SystemContext.setSort("t.createDate"); 
+		}
+		SystemContext.setOrder("desc");
+	}
+	
 	/**
 	 * 显示已经发布的文章
 	 * @param con 文章标题关键字
@@ -163,7 +199,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{id}" ,method = RequestMethod.POST)
-	@AuthMethod(role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT })
+	@AuthMethod(role = {Constant.AuthConstant.ROLE_AUDIT })
 	public String delete(@PathVariable int id,@RequestParam(required=false) String con,@RequestParam(required=false) Integer cid,Integer status,Model model,HttpSession session) {
 		Topic t = topicService.load(id);
 		topicService.delete(id);
@@ -183,7 +219,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.GET)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String add(Model model) {
 		Topic t = new Topic();
 		TopicDto td = new TopicDto(t);
@@ -200,7 +236,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String add(@Validated TopicDto topicDto,BindingResult br,String[]aks,Integer[] aids,HttpSession session) {
 		if(br.hasErrors()) {
 			return "topic/add";
@@ -216,7 +252,7 @@ public class TopicController {
 		}
 		t.setKeyword(keys.toString());
 		topicService.add(t, topicDto.getCid(), loginUser,aids);
-		if(topicDto.getStatus()==Constant.YES&&topicService.isUpdateIndex(topicDto.getCid())) {
+		if(topicDto.getStatus()==Constant.YES && topicService.isUpdateIndex(topicDto.getCid())) {
 			indexService.generateBody();//重新生成首页
 		}
 		return "redirect:/jsp/common/addSucByTopic.jsp";
@@ -228,7 +264,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.GET)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String update(@PathVariable int id,Model model) {
 		Topic t = topicService.load(id);
 		String keyword = t.getKeyword();
@@ -251,7 +287,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	@AuthMethod(role = Constant.AuthConstant.ROLE_PUBLISH)
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public String update(@PathVariable int id,@Validated TopicDto topicDto,BindingResult br,String[]aks,Integer[] aids,HttpSession session) {
 		if(br.hasErrors()) {
 			return "topic/update";
@@ -289,7 +325,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value="/searchKeyword")
-	@AuthMethod( role=Constant.AuthConstant.ROLE_PUBLISH )
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public @ResponseBody List<String> searchKeyword(String term) {
 		return keywordService.listKeywordStringByCon(term);
 	}
@@ -302,7 +338,7 @@ public class TopicController {
 	//返回的是json类型的值，而uploadify只能接受字符串。所以不能用@ResponseBody返回json数据
 	//这里用HttpServletResponse来返回字符串形式的json对象
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
-	@AuthMethod( role = Constant.AuthConstant.ROLE_PUBLISH )
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public void upload(MultipartFile attach,HttpServletResponse resp) throws IOException {
 		resp.setContentType( Constant.CONTENT_TYPE );
 		AjaxObj ao = new AjaxObj();
@@ -376,7 +412,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping("/treeAll")
-	@AuthMethod( role = Constant.AuthConstant.ROLE_PUBLISH )
+	@AuthMethod( role = { Constant.AuthConstant.ROLE_PUBLISH, Constant.AuthConstant.ROLE_AUDIT } )
 	public @ResponseBody List<ChannelTree> tree(HttpSession session) {
 		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
 		User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);

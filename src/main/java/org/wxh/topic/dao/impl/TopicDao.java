@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.wxh.basic.dao.BaseDao;
 import org.wxh.basic.model.Pager;
+import org.wxh.basic.util.StringUtils;
 import org.wxh.topic.dao.ITopicDao;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
@@ -118,6 +119,5 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 		List<Integer> list = this.getSession().createSQLQuery( sql ).setParameter(0, cid).setParameter(1, publishDate).list();
 		return list.isEmpty() || list == null ? null : list.get(0);
 	}
-
 	
 }

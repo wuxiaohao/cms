@@ -46,13 +46,19 @@
 		<nav id="bs-navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/40" class="ti">校园之窗</a>
+						<a href="<%=request.getContextPath()%>/channel/43" class="ti">城院概况</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/channel/40" class="ti">校园视野</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/58" class="ti">校园动态</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/50" class="ti">党团工作</a>
+						<a href="<%=request.getContextPath()%>/channel/59" class="ti">图说城院</a>
+					</li>
+					<li>
+						<a href="http://rsc.ccdgut.edu.cn/newslist.php?catid=5" class="ti">人才招聘</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/53" class="ti">城院要闻</a>
@@ -64,13 +70,7 @@
 						<a href="<%=request.getContextPath()%>/channel/39" class="ti">高教视野</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/55" class="ti">学科资源</a>
-					</li>
-					<li>
-						<a href="<%=request.getContextPath()%>/channel/59" class="ti">图说天下</a>
-					</li>
-					<li>
-						<a href="<%=request.getContextPath()%>/channel/57" class="ti">人文校园</a>
+						<a href="<%=request.getContextPath()%>/channel/57" class="ti">新闻资讯</a>
 					</li>
 			</ul>
 		</nav>

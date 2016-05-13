@@ -128,7 +128,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">测试1测试1测试1...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">38次</span></p>
+									<span class="pull-right">40次</span></p>
 								</div>
 							</a>
 						</div>
@@ -138,7 +138,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">大帅锅</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">39次</span></p>
+									<span class="pull-right">40次</span></p>
 								</div>
 							</a>
 						</div>

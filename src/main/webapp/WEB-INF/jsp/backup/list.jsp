@@ -86,7 +86,7 @@ $(function(){
 						<c:forEach items="${backups }" var="b">
 							<tr>
 								<td>${b.name }</td>
-								<td>${b.size }K</td>
+								<td>${b.size }</td>
 								<td><fmt:formatDate value="${b.time }" pattern="yyyy-MM-dd HH:mm"/></td>
 								<td>
 									${b.filetype }

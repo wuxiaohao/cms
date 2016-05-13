@@ -78,7 +78,8 @@ public class BackupFileUtil {
 		for(File f:fs) {
 			bf = new BackupFile();
 			bf.setName(f.getName());
-			bf.setSize((int)(f.length()/1024));
+			String sizeStr = FileSizeUtil.convertFileSize(f.length());
+			bf.setSize(sizeStr);
 			bf.setTime(new Date(f.lastModified()));
 			bf.setFiletype(f.getName().substring(f.getName().lastIndexOf(".")+1));
 			bs.add(bf);
@@ -133,6 +134,7 @@ public class BackupFileUtil {
 			String fp = realPath+File.separator+backupFile+File.separator+name;
 			TarAndGzipUtil tagu = TarAndGzipUtil.getInstance();
 			tagu.unTarFile(new File(fp), realPath+File.separator+backupFile);
+			
 			//2、拷贝并且覆盖相应的文件夹
 			for(String f:backupFiles) {
 				//先删除原有的文件夹

@@ -15,6 +15,7 @@ import org.wxh.topic.dao.IChannelDao;
 import org.wxh.topic.dao.ITopicDao;
 import org.wxh.topic.model.Attachment;
 import org.wxh.topic.model.Channel;
+import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Topic;
 import org.wxh.topic.model.dto.TopicDto;
 import org.wxh.topic.service.ITopicService;

@@ -31,8 +31,7 @@ public class CmsSessionContext {
 	}
 	
 	public static void removeSession(HttpSession session) {
-		User user = (User) session.getAttribute(Constant.BaseCode.LOGIN_USER);
-		logger.info("已移除用户:[{}]的登录状态",user.getUsername());
+		logger.info("已移除用户:[{}]的登录状态",session.getId());
 		ctx.remove(session.getId());
 	}
 	

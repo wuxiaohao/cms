@@ -2,6 +2,7 @@ package org.wxh.topic.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wxh.basic.common.Constant;
 import org.wxh.basic.model.AjaxObj;
 import org.wxh.basic.model.SystemContext;
+import org.wxh.topic.model.Channel;
 import org.wxh.topic.model.ChannelType;
 import org.wxh.topic.model.Picture;
 import org.wxh.topic.model.PictureTopic;
@@ -53,25 +55,58 @@ public class PictureTopicController {
 	private IChannelService channelService;
 	
 	private void initList(String con,Integer cid,Model model,HttpSession session,Integer status) {
+		
+		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
+		
+		if ( isAdmin ) { 
+			//TODO 如果是超级管理员，则返回所有的文章
+			setOrderAndSort( status );
+			model.addAttribute("datas",pictureTopicService.find(cid, con, status));
+			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.IMG_NEW.ordinal()));//返回所有文章栏目
+			
+		} else {	
+			//TODO 如果不是超级管理员，则返回该用户能管理的所有文章
+			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
+			
+			//获取该用户可以操作的文章栏目
+			List<Channel> channels = channelService.listPublishChannel(loginUser.getId(),ChannelType.IMG_NEW.ordinal());
+			model.addAttribute("cs",channels);
+			if ( channels == null || channels.size() == 0 ) {
+				//该用户无操作任何栏目的权限
+				return ;
+			}
+			if ( cid == null || cid < 0 ) {
+				cid = channels.get( 0 ).getId( );
+			}
+
+			setOrderAndSort( status );
+			
+			//是否是审核员角色
+			boolean isAudit = (boolean) session.getAttribute( Constant.AuthConstant.IS_AUDIT );
+			if ( isAudit )
+				model.addAttribute("datas", pictureTopicService.find( null, cid, con, status ) );
+			else
+				model.addAttribute("datas", pictureTopicService.find( loginUser.getId(), cid, con, status ) );
+			
+		}
+		if ( con == null ) con = "";
+		model.addAttribute("con",con);
+		model.addAttribute("cid",cid);
+		model.addAttribute("status",status);
+	}
+	
+	/**
+	 * 根据状态设置排序
+	 * @param status
+	 */
+	@SuppressWarnings("unused")
+	private void setOrderAndSort(Integer status) {
 		if ( status == Constant.YES ) { //如果是获取已发布文章的列表，则按发布时间排序
 			SystemContext.setSort("t.publishDate"); 
 		} else { //如果是获取未发布文章的列表，则按创建时间排序
 			SystemContext.setSort("t.createDate"); 
 		}
 		SystemContext.setOrder("desc");
-		boolean isAdmin = (Boolean)session.getAttribute(Constant.AuthConstant.IS_ADMIN);
-		if ( isAdmin ) { //如果是超级管理员，则返回所有的文章
-			model.addAttribute("datas",pictureTopicService.find(cid, con, status));
-			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.IMG_NEW.ordinal()));//返回所有新闻图片栏目
-		} else {  //如果不是超级管理员，则返回该用户能管理的所有文章
-			User loginUser = (User)session.getAttribute(Constant.BaseCode.LOGIN_USER);
-			model.addAttribute("datas", pictureTopicService.find(loginUser.getId(),cid, con, status));
-			model.addAttribute("cs",channelService.listPublishChannel(loginUser.getId(),ChannelType.IMG_NEW.ordinal()));//返回该用户可以操作的新闻图片栏目
-		}
-		if ( con == null ) con = "";
-		model.addAttribute("con",con);
-		model.addAttribute("cid",cid);
-		model.addAttribute("status",status);
 	}
 	
 	/**

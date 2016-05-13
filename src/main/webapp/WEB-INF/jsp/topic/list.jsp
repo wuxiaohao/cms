@@ -83,11 +83,11 @@
 			</div>
 			<div class="portlet-body">
 				<div class="note note-success" style="height: 60px">
-					<p style="float: left;"><font size="3">标题</font></p>
-					<div class="col-md-2 c">
+					<p style="float: left;"><font size="3">标题关键字</font></p>
+					<div class="col-md-4 c">
 						<input type="text" name="con" id="con" value="${con}" class="form-control" />
 					</div>
-					<div class="col-md-2 c">
+					<div class="col-md-4 c">
 						<select name="cid" id="cid" class="bs-select form-control">
 							<option value="0">请选择栏目</option>
 							<c:forEach items="${cs }" var="c">

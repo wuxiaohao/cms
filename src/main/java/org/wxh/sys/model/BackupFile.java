@@ -20,7 +20,7 @@ public class BackupFile implements Comparable<BackupFile>{
 	/**
 	 * 备份的文件的大小
 	 */
-	private int size;
+	private String size;
 	/**
 	 * 备份的文件类型
 	 */
@@ -37,10 +37,10 @@ public class BackupFile implements Comparable<BackupFile>{
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 	public String getFiletype() {

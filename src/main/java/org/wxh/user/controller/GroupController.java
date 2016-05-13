@@ -105,9 +105,8 @@ public class GroupController {
 			model.addAttribute(Constant.BaseCode.SUCCESS, "用户组删除成功!");
 		} catch (MyException e) {
 			model.addAttribute(Constant.BaseCode.ERROR, e.getMessage());
-		} finally {
-			return list(model);
-		}
+		} 
+		return list(model);
 	}
 	
 	/**
