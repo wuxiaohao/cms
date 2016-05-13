@@ -45,8 +45,22 @@ public class UserDto extends Dto{
 	 * 头像图片名称
 	 */
 	private String icon;
+	/**
+	 * 旧的头像图片名称
+	 */
+	private String oldIcon;
 	
 	
+	public String getOldIcon() {
+		return oldIcon;
+	}
+
+
+	public void setOldIcon(String oldIcon) {
+		this.oldIcon = oldIcon;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -159,6 +173,7 @@ public class UserDto extends Dto{
 		this.setStatus(user.getStatus());
 		this.setUsername(user.getUsername());
 		this.setIcon(user.getIcon());
+		this.setOldIcon(user.getIcon());
 	}
 	public UserDto(User user,Integer[] roleIds,Integer[] groupIds) {
 		this.setEmail(user.getEmail());

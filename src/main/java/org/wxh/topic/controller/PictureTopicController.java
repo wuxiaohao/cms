@@ -223,7 +223,7 @@ public class PictureTopicController {
 		return "picTopic/update";
 	}
 	/**
-	 *  修改组图新闻信息
+	 * 修改组图新闻信息
 	 * @param id
 	 * @param topicDto
 	 * @param br

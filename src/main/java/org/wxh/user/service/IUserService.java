@@ -110,4 +110,9 @@ public interface IUserService {
 	 * @return
 	 */
 	public Set<Integer> listChannelByUserId(int uid);
+	/**
+	 * 删除用户头像图片
+	 * @param oldIcon
+	 */
+	public void deleteIcon(String oldIcon);
 }

@@ -13,7 +13,7 @@
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<li class="start">
-					<a class="ajaxify start" href="layout_ajax_content_1.html">
+					<a class="ajaxify start" href="<%=request.getContextPath()%>/admin/user/showMySelf">
 					<i class="icon-home"></i>
 					<span class="title">首页</span>
 					</a>
@@ -40,7 +40,7 @@
 				<li>
 					<a href="javascript:;">
 					<i class="icon-folder"></i>
-					<span class="title">组织机构管理</span>
+					<span class="title">用户管理</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">

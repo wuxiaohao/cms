@@ -118,7 +118,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">fwef</p>
 									<p><span class="pull-left">2016-04-20</span>
-									<span class="pull-right">1次</span></p>
+									<span class="pull-right">4次</span></p>
 								</div>
 							</a>
 						</div>
@@ -138,7 +138,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">大帅锅</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">38次</span></p>
+									<span class="pull-right">39次</span></p>
 								</div>
 							</a>
 						</div>
@@ -158,7 +158,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">操谁心</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">10次</span></p>
+									<span class="pull-right">12次</span></p>
 								</div>
 							</a>
 						</div>
@@ -168,7 +168,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">尼玛好烦啊啊啊啊</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">7次</span></p>
+									<span class="pull-right">9次</span></p>
 								</div>
 							</a>
 						</div>
@@ -187,6 +187,11 @@
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active relative">
+						  	 	<a href="channel/59">
+									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
+						  	 	</a>
+							</div>
+							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
 									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083257027.jpg"/>
 						  	 	</a>
@@ -194,11 +199,6 @@
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
 									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083275147.jpg"/>
-						  	 	</a>
-							</div>
-							<div class="item">
-						  	 	<a href="channel/59">
-									<img alt="711.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1457182521872.jpg"/>
 						  	 	</a>
 							</div>
 				</div>

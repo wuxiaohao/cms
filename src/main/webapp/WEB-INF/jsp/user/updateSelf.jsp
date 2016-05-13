@@ -56,6 +56,7 @@
 					<sf:hidden path="username"/>
 					<sf:hidden path="password"/>
 					<sf:hidden path="icon" id="icon" />
+					<sf:hidden path="oldIcon" />
 					<div class="form-body">
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">头像</label>

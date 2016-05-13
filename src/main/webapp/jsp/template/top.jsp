@@ -49,25 +49,25 @@
 						<a href="<%=request.getContextPath()%>/channel/40" class="ti">校园之窗</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/46" class="ti">城院文化</a>
+						<a href="<%=request.getContextPath()%>/channel/58" class="ti">校园动态</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/59" class="ti">图说天下</a>
-					</li>
-					<li>
-						<a href="<%=request.getContextPath()%>/channel/39" class="ti">高教视野</a>
+						<a href="<%=request.getContextPath()%>/channel/50" class="ti">党团工作</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/53" class="ti">城院要闻</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/41" class="ti">教育科研</a>
+						<a href="<%=request.getContextPath()%>/channel/46" class="ti">城院文化</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/channel/39" class="ti">高教视野</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/55" class="ti">学科资源</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/58" class="ti">校园动态</a>
+						<a href="<%=request.getContextPath()%>/channel/59" class="ti">图说天下</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/57" class="ti">人文校园</a>

@@ -114,7 +114,8 @@ public class BackupFileUtil {
 			e.printStackTrace();
 		} finally {
 			try {
-				FileUtils.deleteDirectory(new File(bp)); //删除目标文件夹
+				//删除目标文件夹
+				FileUtils.deleteDirectory(new File(bp)); 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

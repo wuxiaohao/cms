@@ -1,5 +1,6 @@
 package org.wxh.user.service.impl;
 
+import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.CmsException;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.model.Pager;
+import org.wxh.basic.model.SystemContext;
 import org.wxh.basic.util.JsonUtils;
 import org.wxh.user.dao.IGroupDao;
 import org.wxh.user.dao.IRoleDao;
@@ -248,6 +250,26 @@ public class UserService implements IUserService {
 	public Set<Integer> listChannelByUserId(int uid) {
 		List<Integer> list = userDao.listChannelByUserId(uid);
 		return new HashSet<Integer>(list);
+	}
+
+	@Override
+	public void deleteIcon(String oldIcon) {
+		String IconPath = SystemContext.getRealPath() + Constant.UrlConstant.ICON_PATH + oldIcon ;
+		String thubIconPath = SystemContext.getRealPath() + Constant.UrlConstant.ICON_PATH_THUM + oldIcon ;
+		File iconf = new File( IconPath );
+		File iconft = new File( thubIconPath ); 
+		//TODO 1、删除头像图片
+		if ( iconf.delete( ) ) {
+			logger.info("头像图片[{}],删除成功！",oldIcon);
+		} else {
+			logger.info("头像图片[{}],删除失败！",oldIcon);
+		}
+		//TODO 2、删除头像缩略图
+		if ( iconft.delete( ) ) {
+			logger.info("头像缩略图片[{}],删除成功！", oldIcon);
+		} else {
+			logger.info("头像缩略图片[{}],删除失败！", oldIcon);
+		}
 	}
 	
 }

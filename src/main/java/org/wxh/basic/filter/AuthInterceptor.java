@@ -55,7 +55,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				//不是超级管理人员，就需要判断是否有权限访问某些功能
 				Set<String> actions = (Set<String>)session.getAttribute(Constant.AuthConstant.ALL_ACTIONS);  //得到该用户能访问的所有方法名称
 				if(!actions.contains( resource_url )) {
-					logger.error( "没有权限访问:[{}]，用户信息：[{}]", new Object[]{resource_url,JsonUtils.object2String(user)} );
+					//logger.error( "没有权限访问:[{}]，用户信息：[{}]", new Object[]{resource_url,JsonUtils.object2String(user)} );
+					logger.error( "没有权限访问:[{}]", resource_url );
 					throw new CmsException("没有权限访问该功能");
 				}
 			}

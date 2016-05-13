@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.wxh.basic.common.Constant;
 import org.wxh.basic.exception.MyException;
 import org.wxh.basic.model.AjaxObj;
+import org.wxh.basic.util.StringUtils;
 import org.wxh.topic.model.ChannelTree;
 import org.wxh.topic.service.IChannelService;
 import org.wxh.user.auth.AuthClass;
@@ -301,12 +302,22 @@ public class UserController {
 		if(br.hasErrors()) {
 			return new ModelAndView("user/updateSelf");
 		}
+		//TODO 1.更新个人信息
 		User ou = userService.load( userDto.getId() );
 		ou.setNickname( userDto.getNickname() );
 		ou.setPhone( userDto.getPhone() );
 		ou.setEmail( userDto.getEmail() );
 		ou.setIcon( userDto.getIcon() );
 		userService.update( ou );
+		
+		String newIcon = userDto.getIcon();
+		String oldIcon = userDto.getOldIcon();
+		if ( !StringUtils.isEmpty( newIcon ) && !StringUtils.isEmpty( oldIcon ) 
+				&& !newIcon.equals(oldIcon) ) {
+			//TODO 2.删除旧的头像图片
+			userService.deleteIcon( oldIcon );
+		}
+		
 		session.setAttribute(Constant.BaseCode.LOGIN_USER, ou);
 		model.addAttribute(Constant.BaseCode.SUCCESS, "个人信息修改成功!");
 		
@@ -350,6 +361,7 @@ public class UserController {
 	 * @param ico
 	 */
 	@RequestMapping(value="/uploadIcon",method=RequestMethod.POST)
+	@AuthMethod
 	public void uploadIcon(HttpSession session,HttpServletResponse resp,MultipartFile ico) {
 		resp.setContentType( Constant.CONTENT_TYPE );
 		AjaxObj ao = new AjaxObj();
@@ -406,6 +418,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/confirmPic",method=RequestMethod.POST)
+	@AuthMethod
 	public @ResponseBody AjaxObj confirmPic(HttpSession session,int x,int y,int w,int h,String newName) {
 		AjaxObj ao = new AjaxObj();
 		try {

@@ -118,7 +118,7 @@ public interface Constant {
 		public static final String ERROR = "error";
 		/**返回失败代码标识符*/
 		public static final String ERROR_CODE = "errorCode";
-		/**登录用户标*/
+		/**登录用户标识*/
 		public static final String LOGIN_USER = "loginUser";
 		/**生成的验证码*/
 		public static final String CHECK_CODE = "cc";

@@ -93,7 +93,7 @@ $(function(){
 								</td>
 								<td>
 									<a href="admin/delete/${b.name }?type=${b.filetype}"  class="btn btn-sm red ajaxify delete">删除</a>
-									<a href="admin/resume/${b.name}?type=${b.filetype}" class="btn btn-sm blue ajaxify resumeDatabase">恢复数据库</a>
+									<a href="admin/resume/${b.name}?type=${b.filetype}" class="btn btn-sm blue ajaxify resumeDatabase">数据恢复</a>
 								&nbsp;
 								</td>
 							</tr>

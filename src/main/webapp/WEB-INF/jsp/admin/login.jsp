@@ -25,7 +25,7 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<a href="index.html">
-	<img src="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/img/logo-big.png" alt=""/>
+	<img src="${pageContext.servletContext.contextPath }/resources/assets/admin/layout/img/logo-big.jpg" alt=""/>
 	</a>
 </div>
 <!-- END LOGO -->
