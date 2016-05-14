@@ -29,9 +29,9 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 			Integer status) {
 		StringBuilder hql = new StringBuilder();
 		if ( cid == null || cid < 0 ) {
-			hql.append( getTopicSelect()+" from Topic t where 1=1 and t.channel.type="
+			hql.append( getTopicSelect()+" from Topic t where 1=1 and (t.channel.type="
 					+ ChannelType.TOPIC_LIST.ordinal() + " or t.channel.type="
-					+ ChannelType.TOPIC_CONTENT.ordinal() );
+					+ ChannelType.TOPIC_CONTENT.ordinal() + ")" );
 		} else {
 			hql.append( getTopicSelect()+" from Topic t where 1=1 " );
 		}

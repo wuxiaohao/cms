@@ -131,8 +131,7 @@
 										<Td>文件名缩略图</Td>
 										<td width="150">文件名</td>
 										<td>文件大小</td>
-										<td>主页图片</td>
-										<td>栏目图片</td>
+										<td>滚动图片</td>
 										<td>附件信息</td>
 										<td width="190">操作</td>
 										</tr>
@@ -156,10 +155,8 @@
 											</td>
 											<c:if test="${att.isImg eq 1 }">
 												<td><input type='checkbox' value="${att.id }" name='indexPic' class='indexPic' <c:if test="${att.isIndexPic eq 1 }">checked="checked"</c:if>></td>
-												<td><input type='radio' value="${att.id }" name='channelPicId' <c:if test="${att.id eq topicDto.channelPicId }"> checked="checked"</c:if>></td>
 											</c:if>
 											<c:if test="${att.isImg ne 1 }">
-												<td>&nbsp;</td>
 												<td>&nbsp;</td>
 											</c:if>
 											<td><input type='checkbox' value="${att.id }" name='isAttach' class='isAttach' <c:if test="${att.isAttach eq 1 }">checked="checked"</c:if>></td>

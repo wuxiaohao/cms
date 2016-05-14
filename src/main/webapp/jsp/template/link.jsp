@@ -28,7 +28,7 @@
     <div class="box">
     	<div class="imgstyle">
 	    		<a target="_blank" href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415604018.jpg">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1463228740528.jpg">
 	    		</a>
     	</div>
     </div>

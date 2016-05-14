@@ -83,9 +83,8 @@ $(function(){
 		node+="<td>"+attach.size+"</td>";
 		if(attach.isImg) {
 			node+="<td><input type='checkbox' value='"+attach.id+"' name='indexPic' class='indexPic' width="+attach.width+" height="+attach.height+"></td>";
-			node+="<td><input type='radio' value='"+attach.id+"' name='channelPicId'></td>";
 		} else {
-			node+="<td>&nbsp;</td><td>&nbsp;</td>";
+			node+="<td>&nbsp;</td>";
 		}
 		node+="<td><input type='checkbox' value='"+attach.id+"' name='isAttach' class='isAttach'>" +
 				"<input type='hidden' name='aids' value='"+attach.id+"'/></td>";

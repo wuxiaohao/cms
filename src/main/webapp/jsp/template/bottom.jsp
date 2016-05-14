@@ -3,7 +3,7 @@
     
 <footer id="footer">
 	<div class="container">
-		<span>城市学院计信系12软工城院新闻网研发</span>
+		<span>城市学院计信系12软工大豪研发</span>
 		<br />
 		<span>城院新闻网</span>
 		<br />

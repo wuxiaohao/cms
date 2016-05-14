@@ -88,6 +88,7 @@ public class DwrService implements IDwrService{
 	public void updatePicPos(int id, int oldPos, int newPos) {
 		try {
 			indexPicService.updatePos(id, oldPos, newPos);
+			indexService.generateBody();//重新生成首页
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,7 +98,7 @@ public class DwrService implements IDwrService{
 	public void updateLinkPos(int id, int oldPos, int newPos) {
 		try {
 			cmsLinkService.updatePos(id, oldPos, newPos);
-			indexService.generateLink();
+			indexService.generateLink();//重新生成首页
 		} catch (Exception e) {
 			
 		}

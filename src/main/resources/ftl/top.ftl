@@ -11,9 +11,9 @@
 					</div>
 					<div class="pull-right header_right">
 						<ol class="breadcrumb header_nav">
-							<li><a href="http://csxy.dgut.edu.cn">城院首页</a></li>
-							<li><a href="<%=request.getContextPath()%>/login">后台管理</a></li>
-							<li><a href="#">部门新闻</a></li>
+							<li><a href="http://csxy.dgut.edu.cn">城院官网</a></li>
+							<li><a href="<%=request.getContextPath()%>/login">后台CMS</a></li>
+							<li><a href="/cms/channel/43">城院概况</a></li>
 							<li><a href="mailto:${baseInfo.email}">联系我们</a></li>
 						</ol>
 						<div class="input-group clearfix">

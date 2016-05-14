@@ -3,7 +3,7 @@
     
 <footer id="footer">
 	<div class="container">
-		<span>城市学院计信系12软工${baseInfo.name}研发</span>
+		<span>城市学院计信系12软工大豪研发</span>
 		<br />
 		<span>${baseInfo.name}</span>
 		<br />

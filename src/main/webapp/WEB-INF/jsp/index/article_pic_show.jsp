@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>${baseInfo.name } -- ${channel.name}</title>
+<title>${baseInfo.name } -- ${top.title}</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/qianduan/css/pic_show.css" />
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/qianduan/js/jquery.SuperSlide.2.1.1.js"></script>
 <%@ include file="common.jsp" %> 

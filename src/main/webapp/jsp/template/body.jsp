@@ -11,10 +11,10 @@
 				</ol>
 				<div class="carousel-inner">
 							<div class="item active">
-								<a href="topic/38" title="林有能教授以别开生面的方式与现场听">
+								<a href="topic/38" title="我院与加拿大昆特仑理工大学签署合作框架协议">
 									<img alt="1456414624505.jpg" src="<%=request.getContextPath()%>/resources/upload/1456414624505.jpg" />
 								</a>
-									<h5 class="carousel-title">林有能教授以别开生面的方式与现场听</h5>
+									<h5 class="carousel-title">我院与加拿大昆特仑理工大学签署合作框架协议</h5>
 							</div>
 							<div class="item">
 								<a href="topic/11" title="东莞理工学院城市学院举行最大规模招聘会">
@@ -54,49 +54,49 @@
 		<dl class="article_list">
 					<dd class="clearfix">
 						<a href='topic/41' class="article_link">
-								当时的广东工学院有三个系：机工系、电工系、...
+								哈德斯菲尔德大学再访我院
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/42' class="article_link">
-								当时的广东工学院有三个系：机工系、电工系、...
+								我校承办的”影像长安”传媒大奖赛圆满落幕
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/43' class="article_link">
-								书的时候，就学习过孙教授主编的教材，对他由...
+								“高建杯”篮球赛在莞城校区拉开帷幕
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/44' class="article_link">
-								书的时候，就学习过孙教授主编的教材，对他由...
+								妇委会为优秀女教职工过别样“母亲节”
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/45' class="article_link">
-								呆就是50年。“我是1964年入校，当时的...
+								莞城校区举行“庆祝五四，畅谈高建”师生座谈...
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/40' class="article_link">
-								反反复复反复反反复复反复反复反复反复反复反...
+								我院与美国中西州立大学签署合作框架协议
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/39' class="article_link">
-								上世纪60年代，王文光怀揣着一腔青春热血的...
+								英国安格利亚鲁斯金大学国际处主任Jacqu...
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/36' class="article_link">
-								你发你违法你问佛问佛份文件而访问肯附件文件...
+								关于组织学生参加暑期赴台湾高校
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
@@ -114,19 +114,19 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/26" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461086146427.jpg" alt="fwef">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461086146427.jpg" alt="2014年9月15日新闻在线">
 								<div class="imgtxt clearfix">
-										<p class="title">fwef</p>
+										<p class="title">2014年9月15...</p>
 									<p><span class="pull-left">2016-04-20</span>
-									<span class="pull-right">5次</span></p>
+									<span class="pull-right">6次</span></p>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/17" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085784012.jpg" alt="测试1测试1测试1测试1测试1">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085784012.jpg" alt="视频教程">
 								<div class="imgtxt clearfix">
-										<p class="title">测试1测试1测试1...</p>
+										<p class="title">视频教程</p>
 									<p><span class="pull-left">2016-02-25</span>
 									<span class="pull-right">40次</span></p>
 								</div>
@@ -134,9 +134,9 @@
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/24" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085793960.jpg" alt="大帅锅">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085793960.jpg" alt="2014年7月15日新闻在线">
 								<div class="imgtxt clearfix">
-										<p class="title">大帅锅</p>
+										<p class="title">2014年7月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
 									<span class="pull-right">40次</span></p>
 								</div>
@@ -144,9 +144,9 @@
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/23" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085802367.jpg" alt="尼玛">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085802367.jpg" alt="2012年3月15日新闻在线">
 								<div class="imgtxt clearfix">
-										<p class="title">尼玛</p>
+										<p class="title">2012年3月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
 									<span class="pull-right">11次</span></p>
 								</div>
@@ -154,9 +154,9 @@
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/22" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085809508.jpg" alt="操谁心">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085809508.jpg" alt="2016年3月15日新闻在线">
 								<div class="imgtxt clearfix">
-										<p class="title">操谁心</p>
+										<p class="title">2016年3月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
 									<span class="pull-right">12次</span></p>
 								</div>
@@ -164,9 +164,9 @@
 						</div>
 						<div class="col-md-6 col-sm-4 col-xs-6">
 							<a href="<%=request.getContextPath() %>/videoNews/21" class="thumbnail">
-								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085817835.jpg" alt="尼玛好烦啊啊啊啊">
+								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1461085817835.jpg" alt="2015年3月15日新闻在线">
 								<div class="imgtxt clearfix">
-										<p class="title">尼玛好烦啊啊啊啊</p>
+										<p class="title">2015年3月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
 									<span class="pull-right">9次</span></p>
 								</div>
@@ -192,8 +192,8 @@
 						  	 	</a>
 							</div>
 							<div class="item">
-								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
-									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083275147.jpg"/>
+						  	 	<a href="">
+									<img alt="psb_副本.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1463229104338.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">
@@ -218,7 +218,7 @@
 		<div>
 			<img src="<%=request.getContextPath()%>/resources/qianduan/img/news_top2.jpg" class="topNews_img" />
 					<a href='topic/48' class="topNews_title">
-							调研，学习了不少知识，为授课积累了一些经验...
+							我校对外授课积累了一些经验
 					</a>
 					<p class="topNews_content">
 								划的专家，具有学术权威性；三是孙健教授有科研成果和重大的科研项目，并且与国外的大学有很好的合作关系。因此，我们通过开会研究...
@@ -228,7 +228,7 @@
 		<dl class="article_list">
 					<dd class="clearfix">
 						<a href='topic/49' class="article_link">
-								很多教师离开了学校，学院的师资力量十分薄弱...
+								社保知识进校园
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
@@ -240,31 +240,31 @@
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/38' class="article_link">
-								林有能教授以别开生面的方式与现场听
+								我院与加拿大昆特仑理工大学签署合作框架协议...
 							<span class="date">2016-02-18</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/34' class="article_link">
-								东北工学院进修
+								前往东北工学院进修
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/33' class="article_link">
-								学习过孙教授主编的教材
+								我院与台湾明新科技大学签署学术交流合作意向...
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/32' class="article_link">
-								学习过孙教授主编的教材
+								关于劳动节放假安排的通知
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/31' class="article_link">
-								学院的师资力量十分薄弱
+								关于印发《召开第二届教职工代表大会暨工会会...
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
@@ -294,7 +294,7 @@
 		<div>
 			<img src="<%=request.getContextPath()%>/resources/qianduan/img/news_top3.jpg" class="topNews_img" />
 					<a href='topic/56' class="topNews_title">
-							绯闻绯闻访问发为废物
+							发挥“智能制造创新中心”作用 实现共赢
 					</a>
 					<p class="topNews_content">
 								学生新闻中心积极开展各项校园文化活动，每年举办“大学生微报大赛”、“我为广工大代言”、“摄影大赛”、“万人读校报”等大型活...
@@ -304,7 +304,7 @@
 		<dl class="article_list">
 					<dd class="clearfix">
 						<a href='topic/57' class="article_link">
-								绯闻绯闻访问绯闻绯闻访问
+								我院召开2016年就业创业工作会议
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
@@ -316,43 +316,43 @@
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/46' class="article_link">
-								机集成制造系统）技术专家，也是国家“863...
+								电子工程学院志愿者走进图书馆，倡导文明阅读...
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/50' class="article_link">
-								非常重视和支持。学院积极招揽了郑德涛、陈新...
+								学院积极招揽了郑德涛、陈新、王成
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/51' class="article_link">
-								非常重视和支持。学院积极招揽了郑德涛、陈新...
+								我校与西门子共建“智能制造创新中心”
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/52' class="article_link">
-								心打动孙教授，调动工作也是一波三折，从19...
+								我院举办东莞三校“原点思维与口才”联赛
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/53' class="article_link">
-								士，魏昕到华南理工大学读博士，高伟强、姜丽...
+								校党校举办党风廉政教育专题党课
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/55' class="article_link">
-								绯闻绯闻访问绯闻绯闻访问
+								市高建工作领导小组办公室召开工作会议
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/54' class="article_link">
-								访问方法反反复复凤飞飞
+								学校召开行政领导班子换届考核工作大会
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>
