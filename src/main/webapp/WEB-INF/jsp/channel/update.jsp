@@ -18,7 +18,7 @@
 			<div class="portlet-title">
 				<div class="caption font-green">
 					<i class="icon-pin font-green"></i>
-					<span class="caption-subject bold uppercase"> 更新[${channel.name}]栏目</span>
+					<span class="caption-subject bold uppercase"> 更新【${channel.name}】栏目</span>
 				</div>
 			</div>
 			<div class="portlet-body form">
@@ -48,7 +48,7 @@
 								<div class="form-control-focus"></div>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input has-success">
+						<%-- <div class="form-group form-md-line-input has-success">
 							<label class="col-md-2 control-label" for="form_control_1">是否指定链接</label>
 							<div class="col-md-6">
 								<div class="md-radio-inline">
@@ -90,7 +90,7 @@
 									</c:if>
 								</div>
 							</div>
-						</div>
+						</div> --%>
 						<%-- <div class="form-group form-md-line-input has-success">
 							<label class="col-md-2 control-label" for="form_control_1">是否在首页显示</label>
 							<div class="col-md-6">
@@ -139,7 +139,7 @@
 							<div class="col-md-6">
 								<div class="md-radio-inline">
 									<c:if test="${channel.recommend == 0 }">
-									<div class="md-radio has-success">
+									<div class="md-radio has-error">
 										<input type="radio" id="radio59" name="recommend" value="0" class="md-radiobtn" checked>
 										<label for="radio59">
 										<span></span>
@@ -147,7 +147,7 @@
 										<span class="box"></span>
 										不推荐 </label>
 									</div>
-									<div class="md-radio has-success">
+									<div class="md-radio has-error">
 										<input type="radio" id="radio60" name="recommend" value="1" class="md-radiobtn">
 										<label for="radio60">
 										<span></span>
@@ -157,7 +157,7 @@
 									</div>
 									</c:if>
 									<c:if test="${channel.recommend == 1 }">
-									<div class="md-radio has-success">
+									<div class="md-radio has-error">
 										<input type="radio" id="radio59" name="recommend" value="0" class="md-radiobtn">
 										<label for="radio59">
 										<span></span>
@@ -165,7 +165,7 @@
 										<span class="box"></span>
 										不推荐 </label>
 									</div>
-									<div class="md-radio has-success">
+									<div class="md-radio has-error">
 										<input type="radio" id="radio60" name="recommend" value="1" class="md-radiobtn" checked>
 										<label for="radio60">
 										<span></span>

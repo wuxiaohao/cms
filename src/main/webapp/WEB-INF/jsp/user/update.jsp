@@ -47,7 +47,7 @@
 			<div class="portlet-title">
 				<div class="caption font-blue">
 					<i class="icon-pin font-blue"></i>
-					<span class="caption-subject bold"> 修改用户${userDto.username}信息：</span>
+					<span class="caption-subject bold"> 修改用户【${userDto.username}】信息：</span>
 				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>

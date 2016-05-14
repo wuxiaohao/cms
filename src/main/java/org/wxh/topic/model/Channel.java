@@ -32,7 +32,7 @@ public class Channel implements java.io.Serializable{
 	/**
 	 * 栏目是否是自定义链接，0表示否，1表示是
 	 */
-	private int customLink;
+	private int customLink = 0;
 	/**
 	 * 自定义链接的地址
 	 */

@@ -58,10 +58,10 @@
 						<a href="<%=request.getContextPath()%>/channel/58" class="ti">校园动态</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/channel/59" class="ti">图说城院</a>
+						<a href="http://rsc.ccdgut.edu.cn/newslist.php?catid=5" class="ti">人才招聘</a>
 					</li>
 					<li>
-						<a href="http://rsc.ccdgut.edu.cn/newslist.php?catid=5" class="ti">人才招聘</a>
+						<a href="<%=request.getContextPath()%>/channel/59" class="ti">图说城院</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/53" class="ti">城院要闻</a>

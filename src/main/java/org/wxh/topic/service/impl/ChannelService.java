@@ -52,6 +52,12 @@ public class ChannelService implements IChannelService {
 			Integer navOrder = channelDao.getMaxIsTopNav();
 			channel.setNavOrder(navOrder+1);
 		}
+		
+		//如果customLinkUrl不为空，则设置为指定链接的栏目
+		if ( !channel.getCustomLinkUrl().trim().isEmpty() ) {
+			channel.setCustomLink( Constant.YES );
+		}
+		
 		channelDao.add(channel);
 	}
 
@@ -61,6 +67,7 @@ public class ChannelService implements IChannelService {
 			Integer navOrder = channelDao.getMaxIsTopNav();
 			channel.setNavOrder(navOrder+1);
 		}
+		
 		channelDao.update(channel);
 	}
 

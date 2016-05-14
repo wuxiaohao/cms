@@ -206,10 +206,11 @@ public class ChannelController {
 			return "channel/update";
 		}
 		Channel tc = channelService.load(id);
+		
 		int oldIsTopNav = tc.getIsTopNav(); //原来是否为导航栏目
 		int pid = 0;
 		if(tc.getParent()!=null) pid = tc.getParent().getId();
-		tc.setCustomLink(channel.getCustomLink());
+		
 		tc.setCustomLinkUrl(channel.getCustomLinkUrl());
 		tc.setIsIndex(channel.getIsIndex());
 		tc.setIsTopNav(channel.getIsTopNav());
@@ -217,6 +218,12 @@ public class ChannelController {
 		tc.setRecommend(channel.getRecommend());
 		tc.setStatus(channel.getStatus());
 		tc.setType(channel.getType());
+		//如果customLinkUrl不为空，则设置为指定链接的栏目
+		if ( !channel.getCustomLinkUrl().trim().isEmpty() ) 
+			tc.setCustomLink( Constant.YES );
+		else
+			tc.setCustomLink( Constant.NO );
+		
 		channelService.update(tc,oldIsTopNav);
 		indexService.generateTop(); //重新生成静态页面的顶部
 		model.addAttribute(Constant.BaseCode.SUCCESS, "栏目更新成功!");	
