@@ -51,8 +51,8 @@
 		</div>	
 		<div class="clearfix">
 			<!-- 多说评论框 start -->
-				<div class="ds-thread" data-thread-key="${vid.id }" data-title="${vid.title }" 
-						data-url="<%=request.getContextPath() %>/videoNews/${vid.id}"></div>
+				<div class="ds-thread" data-thread-key="${video.id }" data-title="${video.title }" 
+						data-url="<%=request.getContextPath() %>/videoNews/${video.id}"></div>
 			<!-- 多说评论框 end -->
 		</div>
 	</div>
