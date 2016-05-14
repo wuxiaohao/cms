@@ -93,10 +93,18 @@ public class ChannelDao extends BaseDao<Channel> implements IChannelDao {
 		}
 	};
 	@Override
-	public List<Channel> listPublishChannel(int type) {
-		String hql = "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type="+type;
+	public List<Channel> listPublishChannel(int...type) {
+		
+		StringBuilder hql = new StringBuilder();
+		hql.append( "select new Channel(c.id,c.name) from Channel c where c.status=0 and c.type=" + type[0] );
+		if ( type.length > 1 ) {
+			for ( int i = 1, len = type.length ;i < len ; i++ ) {
+				hql.append(" or c.type=" + type[i] ) ;
+			} 
+		} 
+		
 		//return this.getSession().createQuery(hql).setParameter(0, type).list();
-		return this.list(hql);
+		return this.list( hql.toString( ) );
 	}
 	@Override
 	public List<Channel> listPublishChannel(int uid,int type) {

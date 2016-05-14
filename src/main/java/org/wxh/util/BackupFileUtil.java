@@ -146,9 +146,9 @@ public class BackupFileUtil {
 				FileUtils.copyDirectory(new File(src), dfd);
 			}
 			//3、恢复数据库
-			MySQLUtil msu = MySQLUtil.getInstance();
+			/*MySQLUtil msu = MySQLUtil.getInstance();
 			msu.setCfg(DATABASE_NAME, op, database, username, password);
-			msu.resume();
+			msu.resume();*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

@@ -118,8 +118,7 @@
 			},
 			callback:{
 				onAsyncSuccess:function(){
-					if(opts.mine.expandAll)
-						t.expandAll(true);
+					t.expandAll(true);
 				}
 			}
 		},opts||{});

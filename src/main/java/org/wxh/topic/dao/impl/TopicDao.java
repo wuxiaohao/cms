@@ -27,20 +27,28 @@ public class TopicDao extends BaseDao<Topic> implements ITopicDao {
 	@Override
 	public Pager<Topic> find(Integer uid, Integer cid, String title,
 			Integer status) {
-		String hql = getTopicSelect()+" from Topic t where 1=1 and t.channel.type=" +ChannelType.TOPIC_LIST.ordinal();
+		StringBuilder hql = new StringBuilder();
+		if ( cid == null || cid < 0 ) {
+			hql.append( getTopicSelect()+" from Topic t where 1=1 and t.channel.type="
+					+ ChannelType.TOPIC_LIST.ordinal() + " or t.channel.type="
+					+ ChannelType.TOPIC_CONTENT.ordinal() );
+		} else {
+			hql.append( getTopicSelect()+" from Topic t where 1=1 " );
+		}
+		
 		if(status!=null) {
-			hql+=" and t.status="+status;
+			hql.append( " and t.status=" + status );
 		}
 		if(title!=null&&!title.equals("")) {
-			hql+=" and t.title like '%"+title+"%'";
+			hql.append( " and t.title like '%" + title + "%'" );
 		}
  		if(uid!=null&&uid>0) {
-			hql+=" and t.user.id="+uid;
+ 			hql.append( " and t.user.id=" + uid );
 		}
 		if(cid!=null&&cid>0) {
-			hql+=" and t.channel.id="+cid;
+			hql.append( " and t.channel.id=" + cid );
 		}
-		return this.find(hql);
+		return this.find( hql.toString() );
 	}
 
 	@Override

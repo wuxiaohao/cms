@@ -57,7 +57,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				if(!actions.contains( resource_url )) {
 					//logger.error( "没有权限访问:[{}]，用户信息：[{}]", new Object[]{resource_url,JsonUtils.object2String(user)} );
 					logger.error( "没有权限访问:[{}]", resource_url );
-					throw new CmsException("没有权限访问该功能");
+					throw new CmsException("sorry，您没有权限访问该功能！");
 				}
 			}
 		}

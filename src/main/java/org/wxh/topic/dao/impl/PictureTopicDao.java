@@ -19,20 +19,21 @@ public class PictureTopicDao extends BaseDao<PictureTopic> implements IPictureTo
 	@Override
 	public Pager<PictureTopic> find(Integer uid, Integer cid, String title,
 			Integer status) {
-		String hql = getPictureTopicSelect()+" from PictureTopic t where 1=1 and t.channel.type="+ChannelType.IMG_NEW.ordinal();
+		StringBuilder hql = new StringBuilder();
+		hql.append( getPictureTopicSelect()+" from PictureTopic t where 1=1 and t.channel.type="+ChannelType.IMG_NEW.ordinal() );
 		if(status!=null) {
-			hql+=" and t.status="+status;
+			hql.append( " and t.status=" + status );
 		}
 		if(title!=null&&!title.equals("")) {
-			hql+=" and t.title like '%"+title+"%'";
+			hql.append( " and t.title like '%" + title + "%'" );
 		}
  		if(uid!=null&&uid>0) {
-			hql+=" and t.user.id="+uid;
+ 			hql.append( " and t.user.id=" + uid );
 		}
 		if(cid!=null&&cid>0) {
-			hql+=" and t.channel.id="+cid;
+			hql.append( " and t.channel.id=" + cid );
 		}
-		return this.find(hql);
+		return this.find( hql.toString() );
 	}
 	
 	private String getPictureTopicSelect() {

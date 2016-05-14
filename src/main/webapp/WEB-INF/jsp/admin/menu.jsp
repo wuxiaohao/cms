@@ -145,11 +145,11 @@
 							<i class="icon-wallet"></i>
 							网站数据备份</a>
 						</li>
-						<li>
+						<%-- <li>
 							<a class="ajaxify" href="<%=request.getContextPath() %>/admin/system/cleans">
 							<i class="icon-wallet"></i>
 							垃圾文件清理</a>
-						</li>
+						</li> --%>
 					</ul>
 				</li>
 			</ul>

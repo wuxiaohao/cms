@@ -49,6 +49,9 @@
 						<a href="<%=request.getContextPath()%>/channel/43" class="ti">城院概况</a>
 					</li>
 					<li>
+						<a href="<%=request.getContextPath()%>/channel/41" class="ti">教育科研</a>
+					</li>
+					<li>
 						<a href="<%=request.getContextPath()%>/channel/40" class="ti">校园视野</a>
 					</li>
 					<li>
@@ -68,9 +71,6 @@
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/channel/39" class="ti">高教视野</a>
-					</li>
-					<li>
-						<a href="<%=request.getContextPath()%>/channel/57" class="ti">新闻资讯</a>
 					</li>
 			</ul>
 		</nav>

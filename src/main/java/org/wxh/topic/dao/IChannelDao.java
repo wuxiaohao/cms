@@ -58,7 +58,7 @@ public interface IChannelDao extends IBaseDao<Channel> {
 	 * 所有的可以发布文章的栏目，栏目的状态必须为启用状态
 	 * @return
 	 */
-	public List<Channel> listPublishChannel(int type);
+	public List<Channel> listPublishChannel(int...type);
 	/**
 	 * 根据用户id获取所有的可以发布文章的栏目，栏目的状态必须为启用状态
 	 * @param uid

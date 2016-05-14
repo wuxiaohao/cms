@@ -123,7 +123,7 @@ public class IndexController implements IndexConstant{
 		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
 			Topic topic = topicService.loadLastedTopicByColumn( cid );
 			String url = "/topic/" + topic.getId();
-			return new ModelAndView("redirect:"+url);  
+			return new ModelAndView( "redirect:" + url );  
 		} else if ( c.getType() == ChannelType.IMG_NEW ) { //如果是组图新闻列表
 			SystemContext.setPageSize( 8 );
 			Pager<PictureDto> pics = pictureTopicService.findPicTopByCid(cid);//获取组图新闻的封面列表
@@ -140,7 +140,7 @@ public class IndexController implements IndexConstant{
 			SystemContext.setSort( TPUBLISHDATE );
 			SystemContext.setOrder( DESC );
 			Pager<Topic> page = topicService.find( c.getId(),null,1 );
-			mv.addObject( DATAS , topicService.find( c.getId(),null,1 ) );
+			mv.addObject( DATAS , page );
 			mv.setViewName( ARTICLE_LIST );
 		}	
 		return mv;

@@ -9,9 +9,11 @@
 <body>
 <div id="container">
 	<div id = "error">
-		<span>出现错误啦！</span>
-		<div id="message"><span class="errorContainer">${exception.message }</span></div>
-		<div id="upPage"><a class="ajaxify" href="<%=request.getContextPath()%>/admin/user/showMySelf">返回首页</a></div>
+		<img src="${pageContext.servletContext.contextPath }/resources/img/ErrorLogo.jpg">
+		<div style="text-align: center;color: red;font-size: 18px">
+			<span>${exception.message }</span>
+			<a class="ajaxify" href="<%=request.getContextPath()%>/admin/user/showMySelf">返回首页</a>
+		</div>
 	</div>
 </div>
 </body>

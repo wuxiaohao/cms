@@ -20,20 +20,20 @@ public class VideoDao extends BaseDao<Video> implements IVideoDao{
 	@Override
 	public Pager<Video> find(Integer uid, Integer cid, String title,Integer status) {
 		StringBuilder hql = new StringBuilder();
-		hql.append(getVideoSelect()+" from Video v where 1=1 and v.channel.type="+ChannelType.VIDEO_NEW.ordinal());
+		hql.append( getVideoSelect()+" from Video v where 1=1 and v.channel.type="+ChannelType.VIDEO_NEW.ordinal() );
 		if(status != null) {
-			hql.append(" and v.status="+status);
+			hql.append(" and v.status=" + status);
 		}
 		if(title != null) {
-			hql.append(" and v.title like '%"+title+"%'");
+			hql.append(" and v.title like '%" + title + "%'");
 		}
 		if(uid != null && uid > 0) {
-			hql.append(" and v.user.id="+uid);
+			hql.append(" and v.user.id=" + uid);
 		}
 		if(cid != null && cid > 0) {
-			hql.append(" and v.channel.id="+cid);
+			hql.append(" and v.channel.id=" + cid);
 		}
-		return this.find(hql.toString());
+		return this.find( hql.toString() );
 	}
 	
 	private String getVideoSelect() {

@@ -82,7 +82,9 @@ public class TopicController {
 			//TODO 如果是超级管理员，则返回所有的文章
 			setOrderAndSort( status );
 			model.addAttribute("datas",topicService.find(cid, con, status));
-			model.addAttribute("cs",channelService.listPublishChannel(ChannelType.TOPIC_LIST.ordinal()));//返回所有文章栏目
+			//返回所有文章栏目
+			int type[] = { ChannelType.TOPIC_LIST.ordinal(), ChannelType.TOPIC_CONTENT.ordinal() };
+			model.addAttribute("cs",channelService.listPublishChannel( type ) );
 			
 		} else {	
 			//TODO 如果不是超级管理员，则返回该用户能管理的所有文章

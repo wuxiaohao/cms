@@ -117,7 +117,7 @@ public class ChannelService implements IChannelService {
 		channelDao.updateTopNavSort(ids);
 	}
 	@Override
-	public List<Channel> listPublishChannel(int type) {
+	public List<Channel> listPublishChannel(int...type) {
 		return channelDao.listPublishChannel(type);
 	}
 	@Override

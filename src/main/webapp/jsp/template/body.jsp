@@ -23,10 +23,10 @@
 									<h5 class="carousel-title">东莞理工学院城市学院举行最大规模招聘会</h5>
 							</div>
 							<div class="item">
-								<a href="topic/62" title="test0002">
+								<a href="topic/62" title="乐活青春，从心开始">
 									<img alt="1-3" src="<%=request.getContextPath()%>/resources/upload/1461089483005.jpg" />
 								</a>
-									<h5 class="carousel-title">test0002</h5>
+									<h5 class="carousel-title">乐活青春，从心开始</h5>
 							</div>
 				</div> <a data-slide="prev" href="#carousel-405390" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-405390" class="right carousel-control">›</a>
 			</div>
@@ -43,15 +43,21 @@
 	<div class="panel-body">
 		<div>
 			<img src="<%=request.getContextPath()%>/resources/qianduan/img/news_top1.jpg" class="topNews_img" />
-					<a href='topic/41' class="topNews_title">
-							当时的广东工学院有三个系：机工系、电工系、...
+					<a href='topic/68' class="topNews_title">
+							我院与沙角部队联合举办庆祝海军成立67周年...
 					</a>
 					<p class="topNews_content">
-								学科建设不仅需要领军人物，还需要年富力强的年轻教师，学校对年轻人才的引进也非常重视和支持。学院积极招揽了郑德涛、陈新、王成...
-							<a href="topic/41">[全文]</a></p>
+								晚会在歌舞《为祖国干杯》激越豪迈的旋律中谢幕，再次唱出了华夏儿女的爱国情怀。
+							<a href="topic/68">[全文]</a></p>
 					<hr>
 		</div>
 		<dl class="article_list">
+					<dd class="clearfix">
+						<a href='topic/41' class="article_link">
+								当时的广东工学院有三个系：机工系、电工系、...
+							<span class="date">2016-02-19</span>
+						</a>
+					</dd>
 					<dd class="clearfix">
 						<a href='topic/42' class="article_link">
 								当时的广东工学院有三个系：机工系、电工系、...
@@ -94,12 +100,6 @@
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
-					<dd class="clearfix">
-						<a href='topic/17' class="article_link">
-								1992年增设了机械电子工程专业，到199...
-							<span class="date">2015-12-08</span>
-						</a>
-					</dd>
 		</dl>
 	</div>
 			</div>
@@ -118,7 +118,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">fwef</p>
 									<p><span class="pull-left">2016-04-20</span>
-									<span class="pull-right">4次</span></p>
+									<span class="pull-right">5次</span></p>
 								</div>
 							</a>
 						</div>
@@ -192,13 +192,13 @@
 						  	 	</a>
 							</div>
 							<div class="item">
-								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083257027.jpg"/>
+								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
+									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083275147.jpg"/>
 						  	 	</a>
 							</div>
 							<div class="item">
-								<a target="_blank" href="<%=request.getContextPath()%>/http://www.baidu.com">
-									<img alt="b1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083275147.jpg"/>
+								<a target="_blank" href="<%=request.getContextPath()%>/">
+									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083257027.jpg"/>
 						  	 	</a>
 							</div>
 				</div>
@@ -211,7 +211,7 @@
 			<div class="span6 article">
 				<div class="panel panel-info">
 	<div class="panel-heading clearfix">
-		<h3 class="panel-title fl">高教视点</h3>
+		<h3 class="panel-title fl">国际交流</h3>
 		<a href="channel/48" class="fr">更多 >></a>
 	</div>
 	<div class="panel-body">
@@ -310,7 +310,7 @@
 					</dd>
 					<dd class="clearfix">
 						<a href='topic/58' class="article_link">
-								访问绯闻绯闻访问发为废物
+								我院学生参与东莞电视台“母亲节”专题节目录...
 							<span class="date">2016-02-19</span>
 						</a>
 					</dd>

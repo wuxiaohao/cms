@@ -7,6 +7,8 @@ package org.wxh.topic.model;
  */
 
 public enum ChannelType {
+	
+	//TOPIC_IMG("图片文章栏目")已弃用
 	NAV_CHANNEL("导航栏目"),TOPIC_LIST("新闻列表栏目"),
 	TOPIC_CONTENT("新闻内容栏目"),TOPIC_IMG("图片文章栏目"),IMG_NEW("组图新闻栏目"),VIDEO_NEW("视频新闻栏目");
 	
