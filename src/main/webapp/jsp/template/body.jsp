@@ -123,7 +123,7 @@
 								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/1463321212652.jpg" alt="平安银行母亲节活动">
 								<div class="imgtxt clearfix">
 										<p class="title">平安银行母亲节活动...</p>
-									<p><span class="pull-left">2016-04-20</span>
+									<p><span class="pull-left">2016-05-15</span>
 									<span class="pull-right">14次</span></p>
 								</div>
 							</a>
@@ -164,7 +164,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">2012年9月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">20次</span></p>
+									<span class="pull-right">21次</span></p>
 								</div>
 							</a>
 						</div>

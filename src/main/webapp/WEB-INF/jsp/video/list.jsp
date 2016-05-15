@@ -110,7 +110,7 @@
 							<c:if test="${status eq 1}">
 							<td width="11%">发布人</td>
 							</c:if>
-							<td width="9%">浏览量</td>
+							<td width="8%">浏览量</td>
 							<td width="11%">所属频道</td>
 							<td width="11%">视频大小</td>
 							<c:if test="${status eq 0}">
@@ -144,7 +144,7 @@
 								<c:if test="${status eq 1}">
 								<td>${t.auditor}</td>
 								</c:if>
-								<td>${t.viewCount }</td>
+								<td align="center">${t.viewCount }</td>
 								<td>${t.cname }</td>
 								<td>${t.size}</td>
 								<c:if test="${status eq 0}">
