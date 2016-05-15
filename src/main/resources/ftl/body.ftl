@@ -19,7 +19,7 @@
 						<#if newsPic_index == 0>
 							<div class="item active">
 								<a href="topic/${newsPic.topic.id}" title="${newsPic.topic.title}">
-									<img alt="${newsPic.newName}" src="<%=request.getContextPath()%>/resources/upload/${newsPic.newName}" />
+									<img title="${newsPic.topic.title}" alt="${newsPic.newName}" src="<%=request.getContextPath()%>/resources/upload/${newsPic.newName}" />
 								</a>
 								<#if newsPic.topic.title?length gt 37>
 									<h5 class="carousel-title">${newsPic.topic.title[0..32]}...</h5>
@@ -63,7 +63,7 @@
 					<div class="row">
 						<#list vids.videos as video>
 						<div class="col-md-6 col-sm-4 col-xs-6">
-							<a href="<%=request.getContextPath() %>/videoNews/${video.id}" class="thumbnail">
+							<a href="<%=request.getContextPath() %>/videoNews/${video.id}" class="thumbnail" title="${video.title}">
 								<img src="<%=request.getContextPath()%>/resources/video/thumbnail/${video.picName}" alt="${video.title}">
 								<div class="imgtxt clearfix">
 									<#if video.title?length gt 8>
@@ -102,11 +102,11 @@
 								<#--如果是链接到内部-->
 								<#if pic.linkType == 1>
 								<a target="_blank" href="<%=request.getContextPath()%>/${pic.linkUrl}">
-									<img alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
+									<img title="${pic.title}" alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
 						  	 	</a>
 						  	 	<#else>
 						  	 	<a href="${pic.linkUrl}">
-									<img alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
+									<img title="${pic.title}" alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
 						  	 	</a>
 						  	 	</#if>
 							</div>
@@ -115,11 +115,11 @@
 								<#--如果是链接到外部-->
 								<#if pic.linkType == 1>
 								<a target="_blank" href="<%=request.getContextPath()%>/${pic.linkUrl}">
-									<img alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
+									<img title="${pic.title}" alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
 						  	 	</a>
 						  	 	<#else>
 						  	 	<a href="${pic.linkUrl}">
-									<img alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
+									<img title="${pic.title}" alt="${pic.oldName}" src="<%=request.getContextPath()%>/resources/indexPic/${pic.newName}"/>
 						  	 	</a>
 						  	 	</#if>	
 							</div>
@@ -168,7 +168,7 @@
 			<img src="<%=request.getContextPath()%>/resources/qianduan/img/${tupian}" class="topNews_img" />
 			<#list indexTopic.topics as topic>
 				<#if topic_index ==0>
-					<a href='topic/${topic.id}' class="topNews_title">
+					<a title="${topic.title}" href='topic/${topic.id}' class="topNews_title">
 						<#if topic.title?length gt 20>
 							${topic.title[0..20]}...
 						<#else>
@@ -192,7 +192,7 @@
 			<#list indexTopic.topics as topic>
 				<#if topic_index !=0>
 					<dd class="clearfix">
-						<a href='topic/${topic.id}' class="article_link">
+						<a title="${topic.title}" href='topic/${topic.id}' class="article_link">
 							<#if topic.title?length gt 20>
 								${topic.title[0..20]}...
 							<#else>

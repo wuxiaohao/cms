@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
@@ -13,42 +14,42 @@
   <div class="Cont" id="ISL_Cont_1">
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://jxx.ccdgut.edu.cn/">
+	    		<a target="_blank" href="http://jxx.ccdgut.edu.cn/" title="计信系官网">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415626407.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://csxy.dgut.edu.cn/">
+	    		<a target="_blank" href="http://csxy.dgut.edu.cn/" title="城市学院">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415617344.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://www.oschina.net/">
+	    		<a target="_blank" href="http://www.oschina.net/" title="开源中国">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415592887.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="https://www.ppmoney.com/?utm_source=bdpz&utm_medium=brand&utm_term=PPmoney&utm_content=title&utm_campaign=title">
+	    		<a target="_blank" href="https://www.ppmoney.com/?utm_source=bdpz&utm_medium=brand&utm_term=PPmoney&utm_content=title&utm_campaign=title" title="PPmoney">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415646319.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://ice.ccdgut.edu.cn/">
+	    		<a target="_blank" href="http://ice.ccdgut.edu.cn/" title="国际交流">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1463228740528.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://map.ccdgut.edu.cn/">
+	    		<a target="_blank" href="http://map.ccdgut.edu.cn/" title="虚拟校园">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415566524.jpg">
 	    		</a>
     	</div>
