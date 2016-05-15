@@ -100,6 +100,12 @@
 							<span class="date">2016-02-17</span>
 						</a>
 					</dd>
+					<dd class="clearfix">
+						<a href='topic/17' class="article_link">
+								【党委中心组学习】“两学一做”专题学习会
+							<span class="date">2015-12-08</span>
+						</a>
+					</dd>
 		</dl>
 	</div>
 			</div>
@@ -118,7 +124,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">2014年9月15...</p>
 									<p><span class="pull-left">2016-04-20</span>
-									<span class="pull-right">6次</span></p>
+									<span class="pull-right">10次</span></p>
 								</div>
 							</a>
 						</div>
@@ -128,7 +134,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">视频教程</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">40次</span></p>
+									<span class="pull-right">43次</span></p>
 								</div>
 							</a>
 						</div>
@@ -138,7 +144,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">2014年7月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">40次</span></p>
+									<span class="pull-right">41次</span></p>
 								</div>
 							</a>
 						</div>
@@ -148,7 +154,7 @@
 								<div class="imgtxt clearfix">
 										<p class="title">2012年3月15...</p>
 									<p><span class="pull-left">2016-02-25</span>
-									<span class="pull-right">11次</span></p>
+									<span class="pull-right">12次</span></p>
 								</div>
 							</a>
 						</div>
@@ -198,7 +204,7 @@
 							</div>
 							<div class="item">
 								<a target="_blank" href="<%=request.getContextPath()%>/">
-									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1461083257027.jpg"/>
+									<img alt="c1.jpg" src="<%=request.getContextPath()%>/resources/indexPic/1463314086365.jpg"/>
 						  	 	</a>
 							</div>
 				</div>

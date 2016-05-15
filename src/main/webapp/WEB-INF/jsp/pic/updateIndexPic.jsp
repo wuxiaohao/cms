@@ -70,7 +70,7 @@
 							<label class="col-md-2 control-label" for="form_control_1">图片标题</label>
 							<div class="col-md-6">
 								<sf:input path="title" class="form-control"/>
-								<input type="hidden" id="newName" name="newName">
+								<sf:hidden path="newName" id="newName"/>
 								<input type="hidden" name="oldPic" value="${indexPic.newName }">
 								<div class="form-control-focus"></div>
 							</div>

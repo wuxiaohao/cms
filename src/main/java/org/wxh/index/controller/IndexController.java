@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,11 +91,22 @@ public class IndexController implements IndexConstant{
 	@RequestMapping("/channel/{cid}")
 	public ModelAndView showChannel(@PathVariable int cid,HttpServletResponse resp,HttpServletRequest req) throws IOException {
 		ModelAndView mv = new ModelAndView();
-		//1、获取当前栏目及父栏目
+		Channel pc = null;
+		
+		//TODO 1、获取当前栏目
 		Channel c = channelService.load( cid );
+		if ( c == null ) {
+			mv.setViewName( ERROR );
+			return mv;
+		}
+		if ( c.getCustomLink() == Constant.YES ) {  //如果是外链接
+			mv.setViewName( "redirect:" + c.getCustomLinkUrl() );
+			return mv;
+		}
+		
+		//TODO 2、获取父栏目
 		List<Channel> navs = getNavChannel( c );
 		mv.addObject(NAVS,navs); //传递：导航栏目
-		Channel pc = null;
 		//如果是导航栏目
 		if( c.getType() == ChannelType.NAV_CHANNEL ) {  
 			pc = c; //自己就是父栏目
@@ -103,7 +115,8 @@ public class IndexController implements IndexConstant{
 		} else {
 			pc = c.getParent();  //获取父栏目
 		} 
-		//2、获取当前栏目下的父栏目列表
+		
+		//TODO 3、获取当前栏目下的父栏目列表
 		List<Channel> cs = null;
 		String cname = "";
 		if( pc == null ) {
@@ -116,10 +129,12 @@ public class IndexController implements IndexConstant{
 		mv.addObject( CS, cs );
 		mv.addObject( CNAME, cname ); //传递：父栏目的名称
 		mv.addObject( CHANNEL, c ); //传递：当前栏目
-		//3、获取关键字
+		
+		//TODO 4、获取关键字
 		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
 		mv.addObject( KWS, kws );
-		//4、获取新闻列表
+		
+		//TODO 5、获取新闻列表
 		if ( c.getType() == ChannelType.TOPIC_CONTENT ) {  //如果是文章内容栏目,直接跳转显示文章内容
 			Topic topic = topicService.loadLastedTopicByColumn( cid );
 			String url = "/topic/" + topic.getId();
@@ -154,16 +169,22 @@ public class IndexController implements IndexConstant{
 	 */
 	@RequestMapping("/topic/{tid}")
 	public String showTopic(@PathVariable int tid,Model model) {
-		//获取文章并修改浏览次数
+		//TODO 获取文章并修改浏览次数
 		Topic t = topicService.load(tid);
+		if ( t == null ) {
+			 return ERROR;
+		}
+		
+		//TODO 获取上/下篇文章的id
 		TopicDto dto = new TopicDto( t, t.getChannel().getId() );
-		//获取上/下篇文章的id
 		topicService.getPreAndNextTopic( dto );
 		model.addAttribute(TOPIC, dto);
-		//获取导航栏目
+		
+		//TODO 获取导航栏目
 		List<Channel> navs = getNavChannel( t.getChannel() );
 		model.addAttribute(NAVS, navs);
-		//获取文章关键字
+		
+		//TODO 获取文章关键字
 		String keywords = t.getKeyword();
 		if(keywords==null||"".equals(keywords.trim())||"\\|".equals(keywords.trim())) {
 			model.addAttribute(HASKEY, false);
@@ -179,15 +200,19 @@ public class IndexController implements IndexConstant{
 		} else {
 			model.addAttribute(HASATTS,false);
 		}
-		//获取标签云关键字
+		
+		//TODO 获取标签云关键字
 		List<Keyword> kws = keywordService.getMaxTimesKeyword( 18 );
 		model.addAttribute( KWS, kws );
-		//热门文章
+		
+		//TODO 热门文章
 		List<Topic> hotTop = topicService.listTopic();
 		model.addAttribute( HOTTOP, hotTop );
-		//修改浏览次数
+		
+		//TODO 修改浏览次数
 		t.setViewCount(t.getViewCount() + 1);
 		topicService.update(t);
+		
 		return ARTICLE_SHOW;
 	}
 	/**
@@ -198,17 +223,26 @@ public class IndexController implements IndexConstant{
 	 */
 	@RequestMapping("/imgsNews/{id}")
 	public String showImgsNews(@PathVariable int id,Model model) {
+		
+		//TODO 获取组图
 		PictureTopic top = pictureTopicService.load( id );
+		if ( top == null ) {
+			return ERROR;
+		}
 		model.addAttribute(TOP, top);
-		//获取导航栏目
+		
+		//TODO 获取导航栏目
 		List<Channel> navs = getNavChannel( top.getChannel() );
 		model.addAttribute(NAVS, navs);
-		//获取组图
+		
+		//TODO 获取组图
 		List<Picture> imgs = pictureService.listByPicTopic( id );
 		model.addAttribute(IMGS, imgs);
-		//修改浏览次数
+		
+		//TODO 修改浏览次数
 		top.setViewCount( top.getViewCount() +1 );
 		pictureTopicService.update( top );
+		
 		return ARTICLE_PIC_SHOW;
 	}
 	/**
@@ -219,18 +253,25 @@ public class IndexController implements IndexConstant{
 	 */
 	@RequestMapping("/videoNews/{id}")
 	public String showVideo(@PathVariable int id,Model model) {
-		//获取视频信息
+		//TODO 获取视频信息
 		Video video = videoService.loadCash( id );
+		if ( video == null ) {
+			return ERROR;
+		}
 		model.addAttribute(VIDEO, video);
-		//获取导航栏目
+		
+		//TODO 获取导航栏目
 		List<Channel> navs = getNavChannel( video.getChannel() );
 		model.addAttribute(NAVS, navs);
-		//获取视频列表
+		
+		//TODO 获取视频列表
 		List<Video> vids = videoService.listVideoByNum(video.getChannel().getId(), 8);
 		model.addAttribute("vids", vids);
-		//修改浏览次数
+		
+		//TODO 修改浏览次数
 		video.setViewCount( video.getViewCount() + 1 );
 		videoService.update(video);
+		
 		return ARTICLE_VIDEO_SHOW;
 	}
 	/**

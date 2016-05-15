@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -110,18 +111,29 @@ $(function(){
 					<thead>
 						<tr>
 							<th width="15%">缩略图</th>
-							<th width="20%">图片标题</th>
+							<th width="15%">图片标题</th>
 							<th>状态</th>
-							<th width="8%">链接类型</th>
+							<th width="10%">链接类型</th>
 							<th width="30%">位置</th>
-							<th width="12%">用户操作</th>
+							<th width="15%">用户操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${datas.datas }" var="pic">
 							<tr>
 								<td><img width="150" height="60" src='<%=request.getContextPath()%>/resources/indexPic/${pic.newName}'/></td>
-								<td><a href="admin/pic/indexPic/${pic.id }" class="ajaxify">${pic.title }</a></td>
+								<td>
+									<c:choose>
+										<c:when test="${fn:length(pic.title)>6 }">
+											<a href="admin/pic/indexPic/${pic.id }" class="ajaxify" title="${pic.title }">
+												<c:out value="${fn:substring(pic.title, 0, 6)}" />...
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="admin/pic/indexPic/${pic.id }" class="ajaxify" title="${pic.title }">${pic.title }</a>
+										</c:otherwise>
+									</c:choose>		
+								</td>
 								<td>
 									<c:if test="${pic.status eq 0}">
 										<span style="color: red">停用</span>

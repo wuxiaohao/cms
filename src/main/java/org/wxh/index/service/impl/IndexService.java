@@ -102,7 +102,8 @@ public class IndexService implements IIndexService {
 	public void generateBody() {
 		Map<String,Object> root = new HashMap<String,Object>();
 		Map<String,IndexTopic> topics = new HashMap<String, IndexTopic>();
-		//1、获取所有的首页栏目
+		
+		//TODO 1、获取所有的首页栏目
 		//加载indexChannel.properties文件
 		Properties prop = PropertiesUtil.getInstance().load("indexChannel");
 		Enumeration en = prop.propertyNames();
@@ -120,15 +121,18 @@ public class IndexService implements IIndexService {
 			topics.put( key ,it );
 		}
 		root.put("ts", topics);
-		//2、更新宣传图片(没排序)
+		
+		//TODO 2、更新宣传图片(没排序)
 		BaseInfo bi = BaseInfoUtil.getInstacne().read();
 		int picnum = bi.getIndexPicNumber(); 
 		List<IndexPic> pics = indexPicService.listIndexPicByNum( picnum );
 		root.put("pics", pics);  //硬编码。数量应该可配置
-		//3、更新新闻滚动图片(没排序)
+		
+		//TODO 3、更新新闻滚动图片(没排序)
 		List<Attachment> newsPics = attachmentService.listAttachmentByIndexPic( 5 );
 		root.put( "newsPics" ,newsPics );//硬编码。数量应该可配置
-		//4、更新视频新闻栏目
+		
+		//TODO 4、更新视频新闻栏目
 		List<Video> v = videoService.listVideoByNum( 60 ,6 );//硬编码。栏目id和数量应该可配置
 		Channel channel = channelService.load( 60 );
 		IndexVideo vids = new IndexVideo();
@@ -136,9 +140,12 @@ public class IndexService implements IIndexService {
 		vids.setCname( channel.getName() );
 		vids.setVideos( v );
 		root.put( "vids" ,vids );
+		
+		//TODO 5、生成静态body页面
 		String outfile = SystemContext.getRealPath() + outPath + "/body.jsp";
 		util.fprint( root ,"/body.ftl" ,outfile );
 		logger.info( "=============重新生成了body信息====================" );
+		
 	}
 
 	/**

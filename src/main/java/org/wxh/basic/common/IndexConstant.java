@@ -2,6 +2,8 @@ package org.wxh.basic.common;
 
 public interface IndexConstant {
 	
+	String ERROR = "error/404";
+	
 	String INDEX = "index/index";
 	String NAVS = "navs";
 	String CS = "cs";

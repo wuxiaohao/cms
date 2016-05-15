@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -124,21 +125,45 @@ $(function(){
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<th width="15%">标题</th>
+							<th width="12%">标题</th>
 							<th width="10%">缩略图</th>
-							<th width="20%">超链接</th>
-							<th>类型</th>
-							<th width="8%">打开方式</th>
-							<th width="30%">位置</th>
-							<th width="13%">用户操作</th>
+							<th width="13%">超链接</th>
+							<th width="7%">类型</th>
+							<th width="9%">打开方式</th>
+							<th width="35%">位置</th>
+							<th width="14%">用户操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${datas.datas }" var="cl">
 							<tr>
-								<td><a href="admin/cmsLink/${cl.id }" class="ajaxify">${cl.title }</a></td>
-								<td><img width="120" height="40" src='<%=request.getContextPath()%>/resources/linkPic/${cl.picName}'/></td>
-								<td><a href="${cl.url }" target="_blank">${cl.url }</a></td>
+								<td>
+									<c:choose>
+										<c:when test="${fn:length(cl.title)>5 }">
+											<a href="admin/cmsLink/${cl.id }" class="ajaxify" title="${cl.title }">
+												<c:out value="${fn:substring(cl.title, 0, 5)}" />...
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="admin/cmsLink/${cl.id }" class="ajaxify" title="${cl.title }">${cl.title }</a>
+										</c:otherwise>
+									</c:choose>												
+								</td>
+								<td>
+									<img width="120" height="40" src='<%=request.getContextPath()%>/resources/linkPic/${cl.picName}'/>
+								</td>
+								<td>
+									<c:choose>
+										<c:when test="${fn:length(cl.url)>20 }">
+											<a href="${cl.url }" target="_blank" title="${cl.url }">
+												<c:out value="${fn:substring(cl.url, 0, 20)}" />...
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="${cl.url }" target="_blank" title="${cl.url }">${cl.url }</a>
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${cl.type }</td>
 								<td>
 									<c:if test="${cl.newWin eq 0}">本窗口</c:if>

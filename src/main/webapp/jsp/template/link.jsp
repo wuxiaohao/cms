@@ -13,42 +13,42 @@
   <div class="Cont" id="ISL_Cont_1">
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415592887.jpg">
-	    		</a>
-    	</div>
-    </div>
-    <div class="box">
-    	<div class="imgstyle">
-	    		<a href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415646319.jpg">
-	    		</a>
-    	</div>
-    </div>
-    <div class="box">
-    	<div class="imgstyle">
-	    		<a target="_blank" href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1463228740528.jpg">
-	    		</a>
-    	</div>
-    </div>
-    <div class="box">
-    	<div class="imgstyle">
-	    		<a target="_blank" href="http://www.baidu.com">
-	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415617344.jpg">
-	    		</a>
-    	</div>
-    </div>
-    <div class="box">
-    	<div class="imgstyle">
-	    		<a target="_blank" href="http://www.baidu.com">
+	    		<a target="_blank" href="http://jxx.ccdgut.edu.cn/">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415626407.jpg">
 	    		</a>
     	</div>
     </div>
     <div class="box">
     	<div class="imgstyle">
-	    		<a target="_blank" href="http://www.baidu.com">
+	    		<a target="_blank" href="http://csxy.dgut.edu.cn/">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415617344.jpg">
+	    		</a>
+    	</div>
+    </div>
+    <div class="box">
+    	<div class="imgstyle">
+	    		<a target="_blank" href="http://www.oschina.net/">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415592887.jpg">
+	    		</a>
+    	</div>
+    </div>
+    <div class="box">
+    	<div class="imgstyle">
+	    		<a target="_blank" href="https://www.ppmoney.com/?utm_source=bdpz&utm_medium=brand&utm_term=PPmoney&utm_content=title&utm_campaign=title">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415646319.jpg">
+	    		</a>
+    	</div>
+    </div>
+    <div class="box">
+    	<div class="imgstyle">
+	    		<a target="_blank" href="http://ice.ccdgut.edu.cn/">
+	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1463228740528.jpg">
+	    		</a>
+    	</div>
+    </div>
+    <div class="box">
+    	<div class="imgstyle">
+	    		<a target="_blank" href="http://map.ccdgut.edu.cn/">
 	    			<img border="0" src="<%=request.getContextPath()%>/resources/linkPic/1456415566524.jpg">
 	    		</a>
     	</div>

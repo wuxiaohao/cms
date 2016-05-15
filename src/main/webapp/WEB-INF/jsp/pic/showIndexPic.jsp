@@ -55,7 +55,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<div class="col-md-9">
-									<img width="1000" height="190" src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
+									<img width="950" height="190" src="<%=request.getContextPath() %>/resources/indexPic/${indexPic.newName}"/>
 								</div>
 							</div>
 						</div>

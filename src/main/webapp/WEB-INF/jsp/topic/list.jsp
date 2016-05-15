@@ -107,23 +107,23 @@
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="25%" align="center">文章标题</td>
+							<td width="23%" align="center">文章标题</td>
 							<c:if test="${status eq 0}">
-							<td>作者</td>
+							<td width="11%">作者</td>
 							</c:if>
 							<c:if test="${status eq 1}">
-							<td>发布人</td>
+							<td width="11%">发布人</td>
 							</c:if>
-							<td>是否推荐</td>
-							<td>所属频道</td>
+							<td width="11%">是否推荐</td>
+							<td width="11%">所属频道</td>
 							<c:if test="${status eq 0}">
-							<td>创建时间</td>
+							<td width="20%">创建时间</td>
 							</c:if>
 							<c:if test="${status eq 1}">
-							<td>发布时间</td>
+							<td width="20%">发布时间</td>
 							</c:if>
-							<td width="140">状态</td>
-							<td width="150">操作</td>
+							<td width="17%">状态</td>
+							<td width="7%">操作</td>
 						</tr>
 					</thead>
 					<c:forEach items="${datas.datas }" var="t">
@@ -132,8 +132,8 @@
 								<td>
 									<a href="admin/topic/${t.id }" class="ajaxify" >
 									<c:choose>
-										<c:when test="${fn:length(t.title)> 13 }">
-											<c:out value="${fn:substring(t.title, 0, 13)}..." />  
+										<c:when test="${fn:length(t.title)> 11 }">
+											<c:out value="${fn:substring(t.title, 0, 11)}..." />  
 										</c:when>
 										<c:otherwise>
 											<c:out value="${t.title }"></c:out>

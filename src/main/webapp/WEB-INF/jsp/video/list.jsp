@@ -103,24 +103,24 @@
 				<table class="table table-striped table-hover table-bordered" id="sample_1">
 					<thead>
 						<tr>
-							<td width="25%" align="center">标题</td>
+							<td width="20%" align="center">标题</td>
 							<c:if test="${status eq 0}">
-							<td width="10%">作者</td>
+							<td width="11%">作者</td>
 							</c:if>
 							<c:if test="${status eq 1}">
-							<td width="10%">发布人</td>
+							<td width="11%">发布人</td>
 							</c:if>
-							<td width="7%">浏览量</td>
-							<td width="8%">所属频道</td>
-							<td width="8%">视频大小</td>
+							<td width="9%">浏览量</td>
+							<td width="11%">所属频道</td>
+							<td width="11%">视频大小</td>
 							<c:if test="${status eq 0}">
-							<td width="16%">创建时间</td>
+							<td width="20%">创建时间</td>
 							</c:if>
 							<c:if test="${status eq 1}">
-							<td width="16%">发布时间</td>
+							<td width="20%">发布时间</td>
 							</c:if>
-							<td width="16%">状态</td>
-							<td>操作</td>
+							<td width="17%">状态</td>
+							<td width="2%">操作</td>
 						</tr>
 					</thead>
 					<c:forEach items="${datas.datas }" var="t">
@@ -129,8 +129,8 @@
 								<td>
 									<a href="admin/video/updateUI/${t.id}" class="ajaxify">
 									<c:choose>
-										<c:when test="${fn:length(t.title)> 18 }">
-											<c:out value="${fn:substring(t.title, 0, 17)}..." />  
+										<c:when test="${fn:length(t.title)> 11 }">
+											<c:out value="${fn:substring(t.title, 0, 11)}..." />  
 										</c:when>
 										<c:otherwise>
 											<c:out value="${t.title }"></c:out>
