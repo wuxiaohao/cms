@@ -45,6 +45,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if($("#messageByTopic").val() == "1"){
 			 $("#messageByTopic").val("");
 			 $("#wenzhang").click();
+		} else {
+			$("#shouye").click();
 		}	
 	});
 	

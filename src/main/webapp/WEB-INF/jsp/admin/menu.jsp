@@ -13,7 +13,7 @@
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<li class="start">
-					<a class="ajaxify start" href="<%=request.getContextPath()%>/admin/user/showMySelf">
+					<a id="shouye" class="ajaxify start" href="<%=request.getContextPath()%>/admin/user/showMySelf">
 					<i class="icon-home"></i>
 					<span class="title">首页</span>
 					</a>

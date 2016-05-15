@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.wxh.basic.common.Constant;
 import org.wxh.basic.filter.CmsSessionContext;
 import org.wxh.user.auth.AuthClass;
 import org.wxh.user.auth.AuthMethod;
@@ -22,8 +25,10 @@ public class AdminController {
 	 */
 	@RequestMapping("/admin")
 	@AuthMethod
-	public String index(){
-		return "admin/index";
+	public ModelAndView index() {
+		
+		return new ModelAndView( "admin/index" );
+		
 	}
 	
 	/**

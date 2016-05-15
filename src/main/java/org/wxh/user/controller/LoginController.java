@@ -118,7 +118,7 @@ public class LoginController implements LoginConstant {
 			List<Role> rs = userService.listUserRoles(loginUser.getId());
 			boolean isAdmin = isRole(rs,RoleType.ROLE_ADMIN);
 			session.setAttribute(Constant.AuthConstant.IS_ADMIN, isAdmin);
-			if( !isAdmin ) {
+			if ( !isAdmin ) {
 				Set<String> actions = getAllActions(rs, session);
 				session.setAttribute(Constant.AuthConstant.ALL_ACTIONS, actions);
 				session.setAttribute(Constant.AuthConstant.IS_AUDIT, isRole(rs,RoleType.ROLE_AUDIT));
@@ -131,7 +131,7 @@ public class LoginController implements LoginConstant {
 			//保存登陆信息
 			CmsSessionContext.addSessoin(session);
 			//记住状态需跳转到单独登陆页面，只需输入密码即可，密码不能保存在cookie里；
-			if( null != dto.getRemember() && dto.getRemember().equals(Constant.TRUE) ){
+			if ( null != dto.getRemember() && dto.getRemember().equals(Constant.TRUE) ) {
 				Cookie usercookie = new Cookie( Constant.BaseCode.COOKIE, dto.getUsername() );
 				response.addCookie(usercookie);
 				logger.info("已保存用户[{}]登陆状态",loginUser.getUsername());
@@ -140,7 +140,8 @@ public class LoginController implements LoginConstant {
 				usercookie.setMaxAge(Constant.NO);
 				response.addCookie(usercookie);
 			} 
-			logger.info("用户[{}]已成功登录系统！",loginUser.getUsername());
+			
+			logger.info( "用户[{}]已成功登录系统！", loginUser.getUsername() );
 			return mv;
 		} catch (MyException e) {
 			//登陆失败，返回失败信息

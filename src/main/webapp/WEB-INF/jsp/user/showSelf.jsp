@@ -46,7 +46,7 @@
 			<div class="portlet-title">
 				<div class="caption font-green">
 					<i class="icon-settings font-green"></i>
-					<span class="caption-subject bold"> 【${user.username }】的个人信息</span>
+					<span class="caption-subject bold"> 【${user.nickname }】的个人信息</span>
 				</div>
 				<div class="actions">
 					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="全屏浏览"></a>

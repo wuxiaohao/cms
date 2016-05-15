@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <script type="text/javascript">
-window.location.href="${pageContext.servletContext.contextPath }/admin";//这是直接在当前页跳转
+	window.location.href="${pageContext.servletContext.contextPath }/admin";//这是直接在当前页跳转
 </script>
   </head>
   
